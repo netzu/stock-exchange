@@ -69,10 +69,6 @@ public class StockTicker {
 	
 	public void extractStockdata(String[] extractedStockDataFromOneDay) throws ParseException {	
 		
-		if (extractedStockDataFromOneDay.length != 7) {
-			//log.info("YOLO: " + extractedStockDataFromOneDay[0] + ", " + extractedStockDataFromOneDay[1] + ", volume: " + extractedStockDataFromOneDay[6]);
-		}
-		
 		setStockName(extractedStockDataFromOneDay[0]);
 		setDate(DateTime.parse(extractedStockDataFromOneDay[1], dateFormater));
 		setOpen(Double.parseDouble(extractedStockDataFromOneDay[2]));
@@ -83,10 +79,12 @@ public class StockTicker {
 	}
 	
 	public void extractStockdata(ResultSet resultOfQuery) throws ParseException, SQLException {	
-		setStockName(resultOfQuery.getString("ticker"));
-		DateTime dt = new DateTime(resultOfQuery.getDate("date"));
 		
+		setStockName(resultOfQuery.getString("ticker"));
+		
+		DateTime dt = new DateTime(resultOfQuery.getDate("date"));		
 		setDate(dt);
+		
 		setOpen(resultOfQuery.getDouble("open"));
 		setHigh(resultOfQuery.getDouble("high"));
 		setLow(resultOfQuery.getDouble("low"));
@@ -103,6 +101,19 @@ public class StockTicker {
 		System.out.print(getClose()+", ");
 		System.out.println(getVolumen());
 		
+	}
+	
+	public static StockTicker copy(final StockTicker source) {
+		StockTicker copy = new StockTicker();
+		
+		copy.setClose(source.getClose());
+		copy.setDate(new DateTime(source.getDate()));
+		copy.setHigh(source.getHigh());
+		copy.setLow(source.getLow());
+		copy.setOpen(source.getOpen());
+		copy.setStockName(new String(source.getStockName()));
+		copy.setVolumen(source.getVolumen());
+		return copy;
 	}
 
 }

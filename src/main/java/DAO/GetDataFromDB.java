@@ -42,13 +42,14 @@ public class GetDataFromDB {
 	
 	public StockTickerCollection getAllDataForStockTicker(String stockTickerName) throws SQLException, ParseException{
 		StockTickerCollection stockCollectionForTicker = new StockTickerCollection();
-		StockTicker stockDataFromOneDay = new StockTicker();
+		
 		
 		PreparedStatement statement = connection.prepareStatement(SELECT_ALL_DATA_FOR_TICKER);
 		statement.setString(1, stockTickerName);
 		ResultSet resultOfQuery = statement.executeQuery(); 
 		
 		while(resultOfQuery.next()){
+			StockTicker stockDataFromOneDay = new StockTicker();
 			stockDataFromOneDay.extractStockdata(resultOfQuery);
 			stockCollectionForTicker.add(stockDataFromOneDay);
 		}

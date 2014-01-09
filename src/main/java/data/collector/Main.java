@@ -19,8 +19,8 @@ public class Main {
 	private static org.apache.log4j.Logger log = Logger.getLogger(Main.class);
 	
 	public static void main(final String[] args) throws ClassNotFoundException, SQLException, ParseException{
-		DateTime start = new DateTime(); 
-		log.info(start.now());
+		//DateTime start = new DateTime(); 
+		//log.info(start.now());
 		
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
@@ -47,7 +47,7 @@ public class Main {
 			connection.close();	
 		}
 			
-		log.info(start.now());
+		//log.info(start.now());
 	}
 	
 }
