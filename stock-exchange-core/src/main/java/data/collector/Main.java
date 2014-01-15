@@ -8,7 +8,7 @@ import java.text.ParseException;
 import org.joda.time.DateTime;
 import org.apache.log4j.Logger;
 
-import sources.storage.FilesCollectionFromCentralStorage;
+import sources.storage.MetastockFilesCollection;
 import DAO.DBConnection;
 import DAO.UpdateDBWithFreshnestData;
 import configuration.ApplicationContext;
@@ -28,7 +28,7 @@ public class Main {
 			StockTickerCollection stockList = new StockTickerCollection();
 			DataFileReader dataReader = new DataFileReader();
 
-			FilesCollectionFromCentralStorage allFilesInFolder = new FilesCollectionFromCentralStorage(
+			MetastockFilesCollection allFilesInFolder = new MetastockFilesCollection(
 					propertiesInstance);
 
 			for (final File tickerFile : allFilesInFolder.getListOfFiles()) {

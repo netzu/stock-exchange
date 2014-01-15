@@ -10,6 +10,11 @@ public class StockExchangeProperties {
 	private static final String USER = "db_connection.user";
 	private static final String PASSWORD = "db_connection.password";
 	private static final String STORAGE = "file.central_storage_of_files";
+	private static final String LINK_TO_METASTOCK_DATA = "metastock.link";
+	private static final String DIR_FOR_METASTOCK_ZIPPED = "metastock.download_dir";
+	private static final String METASTOCK_FILE_NAME = "metastock.file_name";
+	private static final String METASTOCK_UNZIP_DIR = "metastock.dir_unzipped_files";
+	
 	
 	private final Properties properties;
 	
@@ -24,8 +29,24 @@ public class StockExchangeProperties {
 		
 	}
 	
-	public String getDBDriver() {
-		
+	public String getMetastockUnzipDir(){
+		return this.properties.getProperty(METASTOCK_UNZIP_DIR);
+	}
+	
+	
+	public String getMetastockFileName(){
+		return this.properties.getProperty(METASTOCK_FILE_NAME);
+	}
+	
+	public String getLinkToMetastock(){
+		return this.properties.getProperty(LINK_TO_METASTOCK_DATA);
+	}
+	
+	public String getDirOfZippedMetastock(){
+		return this.properties.getProperty(DIR_FOR_METASTOCK_ZIPPED);
+	}
+	
+	public String getDBDriver() {		
 		return this.properties.getProperty(DRIVER);
 	}
 	
