@@ -12,14 +12,11 @@ import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
-import org.quartz.SimpleScheduleBuilder;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
 
-public class app {
-	private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDataDecopresser.class);
+public class Application {
+	private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDataDecompressor.class);
 	
 	public static void main( String[] args ) throws SchedulerException
     { 		
@@ -33,18 +30,20 @@ public class app {
 		log.info("1");
 		
 		CronTrigger t = newTrigger().withIdentity("name", "group")
-			    .withSchedule(cronSchedule("0/5 * * * * ?").inTimeZone(TimeZone.getDefault()))
+			    .withSchedule(cronSchedule("0 5 21 ? * MON-FRI"))
+                .startNow()
 			    .build();
 
 //		Trigger t = newTrigger().withIdentity("triger").withSchedule(
 //				cronSchedule("0 1 21 * * ?")).forJob(jd).startNow().build();
 	
-//		MetastockDataDecopresser decompresser = new MetastockDataDecopresser();
+//		MetastockDataDecompressor decompresser = new MetastockDataDecompressor();
 //		MetastockDataDownloader downloader = new MetastockDataDownloader();
 //		scheduler.getContext().put("downloader", downloader);
 //		scheduler.getContext().put("decompresser", decompresser);
 
 		scheduler.scheduleJob(jd, t);
+        scheduler.start();
 		log.info("2");
 
     }

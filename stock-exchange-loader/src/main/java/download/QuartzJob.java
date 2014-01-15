@@ -16,24 +16,22 @@ public class QuartzJob implements Job {
 			LOGGER.error("AAAAAAA");
 			
 //			MetastockDataDownloader downloader = (MetastockDataDownloader)context.getScheduler().getContext().get("downloader");
-//			MetastockDataDecopresser decompresser = (MetastockDataDecopresser)context.getScheduler().getContext().get("decompresser");
+//			MetastockDataDecompressor decompresser = (MetastockDataDecompressor)context.getScheduler().getContext().get("decompresser");
 			
 			JobDataMap data = context.getMergedJobDataMap();
 
 			
 			MetastockDataDownloader downloader = new MetastockDataDownloader();
-			MetastockDataDecopresser decompresser = new MetastockDataDecopresser();
+			MetastockDataDecompressor decompresser = new MetastockDataDecompressor();
 			
 			downloader.downloadData();
 			decompresser.UnZipMetastockData();
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
+			LOGGER.error("Error occured when refreshing data",e);
+	    }
 		
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }

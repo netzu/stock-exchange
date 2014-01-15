@@ -1,26 +1,18 @@
 package download;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Date;
+import configuration.ApplicationContext;
+import configuration.StockExchangeProperties;
+import org.apache.log4j.Logger;
+
+import java.io.*;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.apache.log4j.Logger;
-
-import DAO.UpdateDBWithFreshnestData;
-import configuration.ApplicationContext;
-import configuration.StockExchangeProperties;
-
-public class MetastockDataDecopresser {
+public class MetastockDataDecompressor {
 	
 	static StockExchangeProperties properties= ApplicationContext.getPropertiesInstance();
-	private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDataDecopresser.class);
+	private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDataDecompressor.class);
 	
 	private static final void copyInputStream(InputStream in, OutputStream out)
 			  throws IOException
