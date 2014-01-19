@@ -6,10 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import org.apache.log4j.Logger;
-import org.jfree.util.Log;
 
-import configuration.ApplicationContext;
-import data.collector.Main;
 import data.collector.StockTicker;
 import data.collector.StockTickerCollection;
 
