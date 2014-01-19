@@ -5,12 +5,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import org.joda.time.DateTime;
+import DAO.StockDataInsert;
 import org.apache.log4j.Logger;
 
 import sources.storage.MetastockFilesCollection;
 import DAO.DBConnection;
-import DAO.UpdateDBWithFreshnestData;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
 
@@ -35,7 +34,7 @@ public class Main {
 				stockList = dataReader.getStockTickerCollection(tickerFile);
 				log.info(tickerFile.getName());
 
-				UpdateDBWithFreshnestData upToDateStockDataDb = new UpdateDBWithFreshnestData(
+				StockDataInsert upToDateStockDataDb = new StockDataInsert(
 						connection);
 
 				upToDateStockDataDb
