@@ -7,9 +7,11 @@ import java.util.Properties;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
+import org.apache.log4j.Logger;
 
 public class DBConnection {
-	
+	private static final Logger LOGGER = Logger.getLogger(DBConnection.class);
+
 	public Connection getConnection(StockExchangeProperties properites) {		
 		try {  
             Class.forName(properites.getDBDriver());  
@@ -19,8 +21,7 @@ public class DBConnection {
 
 	    	} 
 	    catch (Exception e) {  
-            e.printStackTrace();  
-            System.out.println("It doesn't work... I'm not connected :(");
+            LOGGER.error("It doesn't work... I'm not connected :(", e);
             throw new IllegalStateException(e);
 	    }
 	    
