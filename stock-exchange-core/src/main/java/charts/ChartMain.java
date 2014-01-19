@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import DAO.StockDataSelect;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -19,7 +20,6 @@ import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.RefineryUtilities;
 
 import DAO.DBConnection;
-import DAO.GetDataFromDB;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
 import data.collector.StockTickerCollection;
@@ -78,10 +78,10 @@ public class ChartMain extends ApplicationFrame{
 		
 		StockTickerCollection collection = new StockTickerCollection();
 		
-		GetDataFromDB data;
+		StockDataSelect data;
 		
 			try {
-				data = new GetDataFromDB(connection);
+				data = new StockDataSelect(connection);
 				collection = data.getAllDataForStockTicker("LENA");
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();

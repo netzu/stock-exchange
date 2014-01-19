@@ -46,7 +46,7 @@ public class StockDataInsert {
     }
 
     private boolean checkIfNotDuplicateInformation(StockTicker stockDataFromOneDay) throws ClassNotFoundException, SQLException, ParseException {
-        GetDataFromDB stock = new GetDataFromDB(connection);
+        StockDataSelect stock = new StockDataSelect(connection);
         StockTicker dataForStocktickerFromOneDay = stock.getDataForStocktickerFromOneDay(stockDataFromOneDay.getStockName(), stockDataFromOneDay.getDate());
 
         return null == dataForStocktickerFromOneDay;

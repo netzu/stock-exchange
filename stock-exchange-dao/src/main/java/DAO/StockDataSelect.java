@@ -14,7 +14,7 @@ import org.joda.time.format.DateTimeFormatter;
 import data.collector.StockTicker;
 import data.collector.StockTickerCollection;
 
-public class GetDataFromDB {
+public class StockDataSelect {
 	
 	private static final String GET_ALL_TICKERS_NAMES = "SELECT DISTINCT(ticker) FROM Daily_Stock_Info;";
 	private static final String SELECT_ALL_DATA_FOR_TICKER = "SELECT * FROM Daily_Stock_Info WHERE ticker = ?";
@@ -22,7 +22,7 @@ public class GetDataFromDB {
 	
 	private Connection connection;
 	
-	public GetDataFromDB(final Connection connection) throws ClassNotFoundException, SQLException{
+	public StockDataSelect(final Connection connection) throws ClassNotFoundException, SQLException{
 		this.connection = connection;
 	}
 	
