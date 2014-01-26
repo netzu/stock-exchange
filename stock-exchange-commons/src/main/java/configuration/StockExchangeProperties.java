@@ -9,6 +9,8 @@ public class StockExchangeProperties {
 	private static final String URL = "db_connection.url";
 	private static final String USER = "db_connection.user";
 	private static final String PASSWORD = "db_connection.password";
+	private static final String PATH_TO_METASTOCK_DB = "db_connection.path";
+	private static final String NAME_FOR_METASTOCK_DB = "db_connection.name";
 	private static final String STORAGE = "file.central_storage_of_files";
 	private static final String LINK_TO_METASTOCK_DATA = "metastock.link";
 	private static final String DIR_FOR_METASTOCK_ZIPPED = "metastock.download_dir";
@@ -27,6 +29,14 @@ public class StockExchangeProperties {
 			throw new IllegalStateException(e);
 		}
 		
+	}
+	
+	public String getNameForMEtastockDB(){
+		return this.properties.getProperty(NAME_FOR_METASTOCK_DB);
+	}
+	
+	public String getPathToMetastockDB(){
+		return this.properties.getProperty(PATH_TO_METASTOCK_DB);
 	}
 	
 	public String getMetastockUnzipDir(){

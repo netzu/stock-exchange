@@ -59,45 +59,5 @@ public class MetastockDataDecompressor {
 	    }
 	  }
 	}
-	
-	/*public void UnZipMetastockData(){
 
-		try {
-			ZipFile zipFile = new ZipFile(properties.getDirOfZippedMetastock() + properties.getMetastockFileName());
-			
-			Enumeration entries = zipFile.entries();
-			
-			while (entries.hasMoreElements()) {
-				ZipEntry zipEntry = (ZipEntry) entries.nextElement();
-				String name = zipEntry.getName();
-				
-				System.out.printf("name: %-20s | size: %6d\n", name, zipEntry.getSize());
-
-				File file = new File(properties.getMetastockUnzipDir() + name);
-				if (name.endsWith("/")) {
-					file.mkdir();
-					continue;
-				}
-
-				File parent = file.getParentFile();
-				if (parent != null) {
-					parent.mkdirs();
-				}
-
-				InputStream is = zipFile.getInputStream(zipEntry);
-				FileOutputStream fos = new FileOutputStream(file);
-				byte[] bytes = new byte[1024];
-				int length;
-				while ((length = is.read(bytes)) >= 0) {
-					fos.write(bytes, 0, length);
-				}
-				is.close();
-				fos.close();
-
-			}
-			zipFile.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
 

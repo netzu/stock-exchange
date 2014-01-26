@@ -15,7 +15,7 @@ import configuration.StockExchangeProperties;
 public class MetastockDataDownloader {
 	
 		static StockExchangeProperties properties= ApplicationContext.getPropertiesInstance();
-		private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDataDecompressor.class);
+		private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDataDownloader.class);
         
 	    private HttpURLConnection establishedConnection(){
 	    	URL url = null; 

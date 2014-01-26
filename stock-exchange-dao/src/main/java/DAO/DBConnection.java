@@ -16,12 +16,12 @@ public class DBConnection {
 		try {  
             Class.forName(properites.getDBDriver());  
             Connection connection = DriverManager.getConnection(properites.getDBUrl(), properites.getDBUser(), properites.getDBPassword());  
-            System.out.println("It WORKS. I'm connected!");
+            //System.out.println("Creating connection to MetastockDB");
             return connection;
 
 	    	} 
 	    catch (Exception e) {  
-            LOGGER.error("It doesn't work... I'm not connected :(", e);
+            LOGGER.error("Cannot create connection to MetastockDB :(", e);
             throw new IllegalStateException(e);
 	    }
 	    
