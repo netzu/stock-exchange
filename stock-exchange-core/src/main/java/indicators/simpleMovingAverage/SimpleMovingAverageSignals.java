@@ -1,6 +1,8 @@
 package indicators.simpleMovingAverage;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
@@ -32,7 +34,7 @@ public class SimpleMovingAverageSignals {
 	private ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
 	
 	
-	private void simpleBuy(ArrayList<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+	private void simpleBuy(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
 		double previousClose;
 		double currentClose;
 		double previousAverage;
@@ -54,7 +56,7 @@ public class SimpleMovingAverageSignals {
 		
 	}
 	
-	private void simpleSell(ArrayList<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+	private void simpleSell(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
 		double previousClose;
 		double currentClose;
 		double previousAverage;
@@ -75,25 +77,18 @@ public class SimpleMovingAverageSignals {
 		}		
 	}
 	
-	public void generateSimpleSignals(ArrayList<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+	public void generateSimpleSignals(final List<SimpleMovingAverageData> averageCollection, final StockTickerHistory stockCollection){
 		simpleBuy(averageCollection, stockCollection);
 		simpleSell(averageCollection, stockCollection);	
 	}
 	
-	public ArrayList<DateTime> getBuySignal() {
-		return buySignal;
+	public List<DateTime> getBuySignal() {
+		return Collections.unmodifiableList(buySignal);
 	}
 
-	public void setBuySignal(ArrayList<DateTime> buySignal) {
-		this.buySignal = buySignal;
-	}
 
-	public ArrayList<DateTime> getSellSignal() {
-		return sellSignal;
-	}
-
-	public void setSellSignal(ArrayList<DateTime> sellSignal) {
-		this.sellSignal = sellSignal;
+	public List<DateTime> getSellSignal() {
+		return Collections.unmodifiableList(sellSignal);
 	}
 
 

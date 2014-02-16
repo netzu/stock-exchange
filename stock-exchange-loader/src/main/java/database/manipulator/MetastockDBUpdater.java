@@ -3,6 +3,7 @@ package database.manipulator;
 import DAO.DBConnection;
 import DAO.StockDataInsert;
 import configuration.StockExchangeProperties;
+import data.DataFileReader;
 import data.collector.StockTickerHistory;
 import org.apache.log4j.Logger;
 
