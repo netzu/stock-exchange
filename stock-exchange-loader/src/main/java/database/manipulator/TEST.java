@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import DAO.DBConnection;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import data.collector.StockTickerCollection;
+import data.collector.StockTickerHistory;
 
 public class TEST {
 	
@@ -23,21 +23,18 @@ public class TEST {
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
 		try {
-			StockTickerCollection stockList = new StockTickerCollection();
+			StockTickerHistory stockList = new StockTickerHistory();
 			DataFileReader dataReader = new DataFileReader();
 
-			MetastockFilesCollection allFilesInFolder = new MetastockFilesCollection(
-					propertiesInstance);
+			MetastockFilesCollection allFilesInFolder = new MetastockFilesCollection(propertiesInstance);
 
 			for (final File tickerFile : allFilesInFolder.getListOfFiles()) {
 				stockList = dataReader.getStockTickerCollection(tickerFile);
 				log.info(tickerFile.getName());
 
-				StockDataInsert upToDateStockDataDb = new StockDataInsert(
-						connection);
+				StockDataInsert upToDateStockDataDb = new StockDataInsert(connection);
 
-				upToDateStockDataDb
-						.insertStockTickerDataCollectionWithoutDuplicates(stockList);
+				upToDateStockDataDb.insertStockTickerDataCollectionWithoutDuplicates(stockList);
 
 			}
 			log.info("DONE");

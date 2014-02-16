@@ -12,12 +12,12 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import data.collector.StockTicker;
-import data.collector.StockTickerCollection;
+import data.collector.StockTickerHistory;
 
 public class StockDataSelect {
 	
 	private static final String GET_ALL_TICKERS_NAMES = "SELECT DISTINCT(ticker) FROM Daily_Stock_Info;";
-	private static final String SELECT_ALL_DATA_FOR_TICKER = "SELECT * FROM Daily_Stock_Info WHERE ticker = ?";
+	private static final String SELECT_ALL_DATA_FOR_TICKER = "SELECT * FROM Daily_Stock_Info WHERE ticker = ? order by date asc";
 	private static final String SELECT_DATA_FOR_TICKER_FROM_CERTAIN_DAY = "SELECT * FROM Daily_Stock_Info WHERE ticker = ? AND date = ?";
 	
 	private Connection connection;
@@ -40,8 +40,8 @@ public class StockDataSelect {
 		return results;
 	}
 	
-	public StockTickerCollection getAllDataForStockTicker(String stockTickerName) throws SQLException, ParseException{
-		StockTickerCollection stockCollectionForTicker = new StockTickerCollection();
+	public StockTickerHistory getAllDataForStockTicker(String stockTickerName) throws SQLException, ParseException{
+		StockTickerHistory stockCollectionForTicker = new StockTickerHistory();
 		
 		
 		PreparedStatement statement = connection.prepareStatement(SELECT_ALL_DATA_FOR_TICKER);

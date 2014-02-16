@@ -1,0 +1,100 @@
+package indicators.simpleMovingAverage;
+
+import java.util.ArrayList;
+
+import org.joda.time.DateTime;
+
+import data.collector.StockTickerHistory;
+
+/*
+ * 
+ * Istnieją trzy sposoby interpretacji wskazań średnich kroczących:
+ * 
+ * 1. Pierwszy z nich (przedstawiony na wykresie wyżej) polega na obserwacji punktów przecięcia średniej kroczącej przez wykres kursu. Jeżeli wykres kursu 
+ * przecina od góry nierosnącą linię średniej kroczącej, jest to sygnał do sprzedaży (S). Gdy zaś wykres kursu przecina od dołu niemalejącą średnią kroczącą, 
+ * jest to sygnał kupna (K). Należy jednak pamiętać o uwadze zamieszczonej wyżej i dotyczącej odpowiedniego ustawienia parametru średniej kroczącej. Sygnały 
+ * generowane przez średnie są tym mocniejsze, im dłużej linia średniej była ustabilizowana w pozycji zbliżonej do horyzontalnej przed wygenerowaniem sygnału.
+ * 
+ * 2.Drugi sposób (patrz powyższy wykres) polega na zastosowaniu dwóch lub trzech średnich kroczących o różnych parametrach (np. 15-sesyjna i 45 sesyjna lub 
+ * 15-sesyjna, 30-sesyjna i 45-sesyjna) i obserwacji punktów przecięcia tych średnich przez wykres kursu. Jeśli wykres kursu przecina od dołu niemalejące średnie, 
+ * jest to mocny sygnał kupna (K), zaś gdy kurs przebija od góry nierosnące średnie jest to mocny sygnał sprzedaży (S)
+ * 
+ * 3. Ostatnim sposobem jest obserwacja przecinania się samych średnich (wykres powyżej). W tym przypadku przecięcie od dołu niemalejącej 'dłuższej' średniej 
+ * (np. 30-sesyjnej i/lub 45-sesyjnej) przez 'krótszą' średnią (np. 15-sesyjną) daje mocny sygnał do zakupu (K). Analogicznie, przecięcie od góry nierosnącej 
+ * 'dłuższej' średniej przez 'krótszą' średnią daje mocny sygnał sprzedaży (S). Należy jednak pamiętać, że sygnały generowane przy tym sposobie interpretacji są 
+ * często opóźnione i dlatego lepiej nadają się do inwestycji średnio- i długoterminowych
+ * 
+ */
+
+public class SimpleMovingAverageSignals {
+
+	private ArrayList<DateTime> buySignal = new ArrayList<DateTime>();
+	private ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+	
+	
+	private void simpleBuy(ArrayList<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+		double previousClose;
+		double currentClose;
+		double previousAverage;
+		double currentAverage;
+		
+		int startPoint = stockCollection.getStockTickerDataList().size() - averageCollection.size();
+		
+		for(int i=1; i<averageCollection.size(); i++){
+			previousClose = stockCollection.getStockTickerDataList().get(i-1+startPoint).getClose();
+			currentClose = stockCollection.getStockTickerDataList().get(i+startPoint).getClose();
+			
+			previousAverage = averageCollection.get(i-1).getAverage();
+			currentAverage = averageCollection.get(i).getAverage();
+			
+			if((previousClose<currentClose) && (previousAverage<=currentAverage) && (previousClose <currentAverage) && (currentAverage<currentClose)) {
+				buySignal.add(averageCollection.get(i).getDate());
+			}
+		}
+		
+	}
+	
+	private void simpleSell(ArrayList<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+		double previousClose;
+		double currentClose;
+		double previousAverage;
+		double currentAverage;
+		
+		int startPoint = stockCollection.getStockTickerDataList().size() - averageCollection.size();
+		
+		for(int i=1; i<averageCollection.size(); i++){
+			previousClose = stockCollection.getStockTickerDataList().get(i-1+startPoint).getClose();
+			currentClose = stockCollection.getStockTickerDataList().get(i+startPoint).getClose();
+			
+			previousAverage = averageCollection.get(i-1).getAverage();
+			currentAverage = averageCollection.get(i).getAverage();
+			
+			if((previousClose>currentClose) && (previousAverage>=currentAverage) && (previousClose>=currentAverage) && (currentAverage>=currentClose)) {
+				sellSignal.add(averageCollection.get(i).getDate());
+			}
+		}		
+	}
+	
+	public void generateSimpleSignals(ArrayList<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+		simpleBuy(averageCollection, stockCollection);
+		simpleSell(averageCollection, stockCollection);	
+	}
+	
+	public ArrayList<DateTime> getBuySignal() {
+		return buySignal;
+	}
+
+	public void setBuySignal(ArrayList<DateTime> buySignal) {
+		this.buySignal = buySignal;
+	}
+
+	public ArrayList<DateTime> getSellSignal() {
+		return sellSignal;
+	}
+
+	public void setSellSignal(ArrayList<DateTime> sellSignal) {
+		this.sellSignal = sellSignal;
+	}
+
+
+}

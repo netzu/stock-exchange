@@ -4,7 +4,7 @@ import DAO.DBConnection;
 import DAO.StockDataSelect;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import data.collector.StockTickerCollection;
+import data.collector.StockTickerHistory;
 import org.apache.log4j.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -28,7 +28,7 @@ public class ChartMain extends ApplicationFrame {
 
     private static final Logger LOGGER = Logger.getLogger(ChartMain.class);
 
-    public ChartMain(final String windowName, StockTickerCollection collection) {
+    public ChartMain(final String windowName, StockTickerHistory collection) {
         super(windowName);
 
         LinearChart series = new LinearChart();
@@ -78,7 +78,7 @@ public class ChartMain extends ApplicationFrame {
         StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
         final Connection connection = new DBConnection().getConnection(propertiesInstance);
 
-        StockTickerCollection collection = new StockTickerCollection();
+        StockTickerHistory collection = new StockTickerHistory();
 
         StockDataSelect data;
 

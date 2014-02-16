@@ -1,9 +1,9 @@
 package data.collector.manipulator;
 
-import data.collector.StockTickerCollection;
+import data.collector.StockTickerHistory;
 
 public interface StockTickerCollectionManipulator {
 
-	StockTickerCollection manipulate(final StockTickerCollection input);
+	StockTickerHistory manipulate(final StockTickerHistory input);
 	
 }

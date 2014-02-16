@@ -11,7 +11,7 @@ import DAO.DBConnection;
 import DAO.StockDataInsert;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import data.collector.StockTickerCollection;
+import data.collector.StockTickerHistory;
 
 public class MetastockDBUpdater {
 	
@@ -26,7 +26,7 @@ public class MetastockDBUpdater {
 		propertiesInstance.getDBUrl();
 		
 		try {
-			StockTickerCollection stockList = new StockTickerCollection();
+			StockTickerHistory stockList = new StockTickerHistory();
 			DataFileReader dataReader = new DataFileReader();
 
 			MetastockFilesCollection allFilesInFolder = new MetastockFilesCollection(

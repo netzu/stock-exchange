@@ -8,12 +8,12 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.time.TimeSeriesDataItem;
 
 import data.collector.StockTicker;
-import data.collector.StockTickerCollection;
+import data.collector.StockTickerHistory;
 
 public class LinearChart {
 	
 	
-	public TimeSeriesCollection linearChartDailyData(final StockTickerCollection tickerCollection){
+	public TimeSeriesCollection linearChartDailyData(final StockTickerHistory tickerCollection){
 		ArrayList<StockTicker> stockTickerDataList = tickerCollection.getStockTickerDataList();
 
 		if (stockTickerDataList.isEmpty()) {
@@ -33,7 +33,7 @@ public class LinearChart {
 		return dataset;
 	}
 	
-	public TimeSeriesCollection linearChartWeeklyData(final StockTickerCollection tickerCollection){
+	public TimeSeriesCollection linearChartWeeklyData(final StockTickerHistory tickerCollection){
 		ArrayList<StockTicker> stockTickerDataList = tickerCollection.getStockTickerDataList();
 		
 		if (stockTickerDataList.isEmpty()) {
@@ -54,7 +54,7 @@ public class LinearChart {
 	}
 	
 	
-	public TimeSeriesCollection linearChartMonthlyData(final StockTickerCollection tickerCollection){
+	public TimeSeriesCollection linearChartMonthlyData(final StockTickerHistory tickerCollection){
 		return null;
 	}
 	

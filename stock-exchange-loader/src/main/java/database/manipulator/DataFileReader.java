@@ -8,13 +8,13 @@ import java.text.ParseException;
 
 import configuration.StockExchangeProperties;
 import data.collector.StockTicker;
-import data.collector.StockTickerCollection;
+import data.collector.StockTickerHistory;
 
 public class DataFileReader {
 
 	
-	private StockTickerCollection readStockData(final File tickerFile) throws ParseException {
-		StockTickerCollection stockTickerCollection = new StockTickerCollection();
+	private StockTickerHistory readStockData(final File tickerFile) throws ParseException {
+		StockTickerHistory stockTickerCollection = new StockTickerHistory();
 		
 		try {
 			FileReader stockDataReader = new FileReader(tickerFile);
@@ -43,7 +43,7 @@ public class DataFileReader {
 		return stockTickerCollection;
 	}
 
-	public StockTickerCollection getStockTickerCollection(final File tickerFile) throws ParseException {
+	public StockTickerHistory getStockTickerCollection(final File tickerFile) throws ParseException {
 		return readStockData(tickerFile);
 	}
 }

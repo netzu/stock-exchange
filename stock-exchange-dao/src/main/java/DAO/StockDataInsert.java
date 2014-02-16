@@ -1,7 +1,7 @@
 package DAO;
 
 import data.collector.StockTicker;
-import data.collector.StockTickerCollection;
+import data.collector.StockTickerHistory;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -21,7 +21,7 @@ public class StockDataInsert {
         this.connection = connection;
     }
 
-    public void insertStockTickerDataCollectionWithoutDuplicates(StockTickerCollection stockTickerCollection) throws SQLException, ClassNotFoundException, ParseException {
+    public void insertStockTickerDataCollectionWithoutDuplicates(StockTickerHistory stockTickerCollection) throws SQLException, ClassNotFoundException, ParseException {
 
         int collectionSize = stockTickerCollection.getStockTickerDataList().size();
 

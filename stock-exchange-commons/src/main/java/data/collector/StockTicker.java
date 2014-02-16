@@ -92,15 +92,10 @@ public class StockTicker {
 		setVolumen(resultOfQuery.getDouble("volumen"));
 	}
 	
-	public void printStockTickerData(){
-		System.out.print(getStockName()+ ", ");
-		System.out.print(getDate()+ ", ");
-		System.out.print(getOpen()+", ");
-		System.out.print(getHigh()+", ");
-		System.out.print(getLow()+", ");
-		System.out.print(getClose()+", ");
-		System.out.println(getVolumen());
-		
+	public void printStockTickerData(){		
+		String data = new String(getStockName()+ ", " + getDate() + ", "+ getOpen()+", "+getHigh()+", "+getLow()+", "+getClose()+", "+getVolumen());
+		log.info("Stock, Date, Opne, High, Low, Close, volumen");
+		log.info(data);
 	}
 	
 	public static StockTicker copy(final StockTicker source) {

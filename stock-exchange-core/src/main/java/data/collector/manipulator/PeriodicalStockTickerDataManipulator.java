@@ -3,16 +3,16 @@ package data.collector.manipulator;
 import java.util.ArrayList;
 
 import data.collector.StockTicker;
-import data.collector.StockTickerCollection;
+import data.collector.StockTickerHistory;
 
 public abstract class PeriodicalStockTickerDataManipulator implements StockTickerCollectionManipulator {
 
 	
-	public StockTickerCollection manipulate(final StockTickerCollection input) {
+	public StockTickerHistory manipulate(final StockTickerHistory input) {
 		ArrayList<StockTicker>  dailyCollection = input.getStockTickerDataList();
 		
 		if (dailyCollection.isEmpty()) {
-			return new StockTickerCollection();
+			return new StockTickerHistory();
 		}
 		
 		StockTicker aggragatedData = StockTicker.copy(dailyCollection.get(0));
@@ -30,7 +30,7 @@ public abstract class PeriodicalStockTickerDataManipulator implements StockTicke
 			}			
 		}
 		
-		StockTickerCollection result = new StockTickerCollection();
+		StockTickerHistory result = new StockTickerHistory();
 		result.setStockTickerDataList(aggregator);
 		
 		return result;
