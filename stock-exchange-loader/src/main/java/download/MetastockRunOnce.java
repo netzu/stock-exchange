@@ -17,7 +17,7 @@ public class MetastockRunOnce {
 	private static org.apache.log4j.Logger  LOGGER = Logger.getLogger(MetastockRunOnce.class);
 	
 	public static void main(final String[] args){
-Connection connection= null;
+    Connection connection= null;
 		
 		try {			
 			StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
@@ -27,7 +27,7 @@ Connection connection= null;
 			
 			MetastockDataDownloader downloader = new MetastockDataDownloader();
 			MetastockDataDecompressor decompresser = new MetastockDataDecompressor();
-			MetastockDBUpdater recentdata = new MetastockDBUpdater();
+			MetastockDBUpdater recentdata = new MetastockDBUpdater(propertiesInstance);
 						
 			metastockDBCreator.CreateIfNotExist();
 			downloader.downloadData();

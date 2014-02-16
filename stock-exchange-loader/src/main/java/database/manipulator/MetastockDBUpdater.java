@@ -1,36 +1,38 @@
 package database.manipulator;
 
+import DAO.DBConnection;
+import DAO.StockDataInsert;
+import configuration.StockExchangeProperties;
+import data.collector.StockTickerHistory;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import org.apache.log4j.Logger;
-
-import DAO.DBConnection;
-import DAO.StockDataInsert;
-import configuration.ApplicationContext;
-import configuration.StockExchangeProperties;
-import data.collector.StockTickerHistory;
-
 public class MetastockDBUpdater {
-	
-	private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDBUpdater.class);
+
+    private final StockExchangeProperties properties;
+
+    public MetastockDBUpdater(final StockExchangeProperties stockExchangeProperties) {
+        properties = stockExchangeProperties;
+    }
+
+	private static final Logger log = Logger.getLogger(MetastockDBUpdater.class);
 
 	public void refresh() throws ParseException, ClassNotFoundException, SQLException{
 		
 		log.info("Updating DB with Metastock freshnesst info");
 		
-		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();		
-		final Connection connection = new DBConnection().getConnection(propertiesInstance);
-		propertiesInstance.getDBUrl();
-		
+		final Connection connection = new DBConnection().getConnection(this.properties);
+
 		try {
 			StockTickerHistory stockList = new StockTickerHistory();
 			DataFileReader dataReader = new DataFileReader();
 
 			MetastockFilesCollection allFilesInFolder = new MetastockFilesCollection(
-					propertiesInstance);
+					this.properties);
 
 			for (final File tickerFile : allFilesInFolder.getListOfFiles()) {
 				stockList = dataReader.getStockTickerCollection(tickerFile);
