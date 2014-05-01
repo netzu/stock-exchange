@@ -12,7 +12,12 @@ public class WilliamsRData {
 	 
 
 	private void EquationForWilliamsPercentage(){
-		williamsR = ((highestHigh-currentClose)/(highestHigh - lowestLow)) * -100;
+		if(highestHigh==lowestLow){
+			//throw new IllegalStateException("Divided by 0. Highest is equal to Lowes in WilliamR calculation");
+			williamsR = 0.0;
+		}else{		
+			williamsR = ((highestHigh-currentClose)/(highestHigh - lowestLow)) * -100;
+		}
 	}
 	
 	public void CallculateWilliamsRValue(){

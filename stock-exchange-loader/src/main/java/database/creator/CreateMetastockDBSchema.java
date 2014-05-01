@@ -35,9 +35,9 @@ public class CreateMetastockDBSchema {
 			statement = connection.prepareStatement(CREATE_METASTOCK_TABLE);
 			resultOfQuery = statement.executeUpdate();
 			
-			log.info("Daily_Stock_Info TABLE has been created");
+			log.trace("Daily_Stock_Info TABLE has been created");
 		} catch (SQLException e) {
-			log.info("Could not create MetastockDB");
+			log.trace("Could not create MetastockDB");
 			throw new IllegalStateException(e);
 		}
     }

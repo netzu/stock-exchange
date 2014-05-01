@@ -1,0 +1,5 @@
+05 Apr 2014 22:26:06,574 - INFO [main] DAO.DBConnection.getConnection(DBConnection.java:19) Connecting to MetastockDB
+06 Apr 2014 15:17:47,403 - INFO [main] DAO.DBConnection.getConnection(DBConnection.java:19) Connecting to MetastockDB
+06 Apr 2014 15:18:51,258 - INFO [main] DAO.DBConnection.getConnection(DBConnection.java:19) Connecting to MetastockDB
+06 Apr 2014 15:29:29,192 - INFO [main] DAO.DBConnection.getConnection(DBConnection.java:19) Connecting to MetastockDB
+06 Apr 2014 18:04:58,454 - INFO [main] DAO.DBConnection.getConnection(DBConnection.java:19) Connecting to MetastockDB

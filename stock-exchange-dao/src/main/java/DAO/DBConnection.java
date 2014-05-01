@@ -16,7 +16,7 @@ public class DBConnection {
 		try {  
             Class.forName(properites.getDBDriver());  
             Connection connection = DriverManager.getConnection(properites.getDBUrl(), properites.getDBUser(), properites.getDBPassword());  
-            //System.out.println("Creating connection to MetastockDB");
+            LOGGER.info("Connecting to MetastockDB");
             return connection;
 
 	    	} 

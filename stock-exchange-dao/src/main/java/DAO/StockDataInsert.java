@@ -30,10 +30,6 @@ public class StockDataInsert {
 
 
             if (checkIfNotDuplicateInformation(forStockDataFromOneDay) == true) {
-//                log.info("Dodaje do bazy: " +
-//                        forStockDataFromOneDay.getStockName() + ", " +
-//                        forStockDataFromOneDay.getDate() + ", " +
-//                        forStockDataFromOneDay.getVolumen());
                 PreparedStatement insertDataStatement = prepareStatment(forStockDataFromOneDay);
                 executeStatment(insertDataStatement);
             } else

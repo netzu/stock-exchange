@@ -1,6 +1,6 @@
 package indicators.simpleMovingAverage;
 
-import indicators.williamsR.WilliamsRCollectionForTicker;
+
 
 /*
  * 
@@ -19,13 +19,11 @@ import org.apache.log4j.Logger;
 import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
 
-public class SimpleMovingAverageIndicator {
-	
-	ArrayList<SimpleMovingAverageData> average = new ArrayList<SimpleMovingAverageData>();
-	
-	private static org.apache.log4j.Logger log = Logger.getLogger(WilliamsRCollectionForTicker.class);
-	
-	public void calculateSimpleMovingAverage(int period, StockTickerHistory tickerCollection){
+public class SimpleMovingAverageIndicator {	
+		
+	public static ArrayList<SimpleMovingAverageData> calculateSimpleMovingAverage(int period, StockTickerHistory tickerCollection){
+		
+		ArrayList<SimpleMovingAverageData> average = new ArrayList<SimpleMovingAverageData>();
 		
 		for(int i=0; i<tickerCollection.getStockTickerDataList().size()-period+1; i++){
 			
@@ -34,9 +32,11 @@ public class SimpleMovingAverageIndicator {
 			
 			average.add(averageFromPeriod(subList));			
 		}
+		
+		return average;
 	}
 	
-	private SimpleMovingAverageData averageFromPeriod(ArrayList <StockTicker> subList){
+	private static SimpleMovingAverageData averageFromPeriod(ArrayList <StockTicker> subList){
 		
 		SimpleMovingAverageData averageFromPeriod = new SimpleMovingAverageData();
 		
@@ -49,17 +49,5 @@ public class SimpleMovingAverageIndicator {
 		
 		return averageFromPeriod;
 	}
-	
-	
-	
-	public ArrayList<SimpleMovingAverageData> getAverage() {
-		return average;
-	}
 
-	public void printToLog(){
-		for(int i=0; i<average.size();i++){
-			String string = new  String(this.average.get(i).getDate() + ", " + this.average.get(i).getAverage());
-			log.info(string);
-		}
-	}
 }

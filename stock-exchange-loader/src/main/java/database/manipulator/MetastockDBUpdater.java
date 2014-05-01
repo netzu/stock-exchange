@@ -46,7 +46,7 @@ public class MetastockDBUpdater {
 						.insertStockTickerDataCollectionWithoutDuplicates(stockList);
 
 			}
-			log.info("Metastock Database has been reffreshed. ENJOY and WIN !");
+			log.info("Metastock Database has been refreshed. ENJOY and WIN !");
 		} finally {
 			connection.close();	
 		}

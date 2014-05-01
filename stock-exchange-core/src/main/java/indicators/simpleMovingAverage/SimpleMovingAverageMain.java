@@ -3,6 +3,9 @@ package indicators.simpleMovingAverage;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+
+import org.joda.time.DateTime;
 
 import DAO.DBConnection;
 import DAO.StockDataSelect;
@@ -17,17 +20,15 @@ public class SimpleMovingAverageMain {
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
 		
-		StockTickerHistory stockCollectionForTicker = new StockTickerHistory();
-		
 		StockDataSelect ticker = new StockDataSelect(connection);
-		stockCollectionForTicker = ticker.getAllDataForStockTicker("LENA");
+		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker("LENA");
 		
-		SimpleMovingAverageIndicator simpleMovingAverageIndicator = new SimpleMovingAverageIndicator();
-		simpleMovingAverageIndicator.calculateSimpleMovingAverage(13, stockCollectionForTicker);
-		//simpleMovingAverageIndicator.printToLog();
+		ArrayList<SimpleMovingAverageData> simpleMovingAverageData = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(13, stockCollectionForTicker);
 		
 		SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
-		signals.generateSimpleSignals(simpleMovingAverageIndicator.getAverage(), stockCollectionForTicker);
+		
+		ArrayList<DateTime> buySignals = signals.simpleBuy(simpleMovingAverageData, stockCollectionForTicker);
+		ArrayList<DateTime> sellSignals = signals.simpleSell(simpleMovingAverageData, stockCollectionForTicker);
 		
 		System.out.print("Koniec");
 	}

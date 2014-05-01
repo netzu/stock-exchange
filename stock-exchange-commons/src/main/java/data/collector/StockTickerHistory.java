@@ -2,6 +2,8 @@ package data.collector;
 
 import java.util.ArrayList;
 
+import org.joda.time.DateTime;
+
 public class StockTickerHistory {
 	private ArrayList <StockTicker> stockTickerDataList = new ArrayList<StockTicker>();
 
@@ -22,9 +24,27 @@ public class StockTickerHistory {
 		
 		for(int i = from; i<to; i++){
 			subList.add(stockTickerDataList.get(i));
-			//stockTickerDataList.get(i).printStockTickerData();
-			//System.out.println(stockTickerDataList.get(i).getDate());
 		}
 		return subList;
+	}
+	
+	public StockTicker findStockByDate(DateTime date){
+	
+		if(stockTickerDataList.isEmpty()){
+			throw new IllegalStateException("Empty Stock Ticker Collection");
+		}
+		
+		if(date==null){
+			throw new IllegalArgumentException("Date is null!");
+		}
+		 
+		for(int i=0; i<this.stockTickerDataList.size();i++){
+			DateTime current = stockTickerDataList.get(i).getDate();
+			
+			if(current.equals(date)){
+				return stockTickerDataList.get(i);
+			}
+		}
+		return null;
 	}
 }
