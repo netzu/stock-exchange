@@ -16,8 +16,6 @@ public class StockExchangeProperties {
 	private static final String DIR_FOR_METASTOCK_ZIPPED = "metastock.download_dir";
 	private static final String METASTOCK_FILE_NAME = "metastock.file_name";
 	private static final String METASTOCK_UNZIP_DIR = "metastock.dir_unzipped_files";
-	public static String NOTHING = "";
-	public static String NOTHINNG = "";
 	
 	private final Properties properties;
 	
