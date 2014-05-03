@@ -38,10 +38,6 @@
 		      <targetTests>
 		        <param>indicators.ComplexMovingAverageTest*</param>
 		      </targetTests>
-		      <mutators>
-				<mutator>CONDITIONALS_BOUNDARY</mutator>
-				<mutator>MATH</mutator>
-			  </mutators>
 		    </configuration>
 		  </plugin>
 			
