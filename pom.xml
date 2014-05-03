@@ -30,7 +30,7 @@
 		<plugin>
 		    <groupId>org.pitest</groupId>
 		    <artifactId>pitest-maven</artifactId>
-		    <version>LATEST</version>
+		    <version>0.31</version>
 		    <configuration>
 		      <targetClasses>
 		        <param>indicators.ComplexMovingAverage*</param>
@@ -38,6 +38,10 @@
 		      <targetTests>
 		        <param>indicators.ComplexMovingAverageTest*</param>
 		      </targetTests>
+		      <outputFormats>
+                 <outputFormat>XML</outputFormat>
+                 <outputFormat>HTML</outputFormat>
+              </outputFormats>
 		    </configuration>
 		  </plugin>
 			
