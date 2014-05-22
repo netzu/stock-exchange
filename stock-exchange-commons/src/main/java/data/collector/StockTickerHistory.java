@@ -1,13 +1,14 @@
 package data.collector;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
 public class StockTickerHistory {
-	private ArrayList <StockTicker> stockTickerDataList = new ArrayList<StockTicker>();
+	private List<StockTicker> stockTickerDataList = new ArrayList<StockTicker>();
 
-	public ArrayList<StockTicker> getStockTickerDataList() {
+	public List<StockTicker> getStockTickerDataList() {
 		return stockTickerDataList;
 	}
 

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
-import org.quartz.JobDataMap;
 
 import DAO.DBConnection;
 import configuration.ApplicationContext;
@@ -31,9 +30,9 @@ public class MetastockRunOnce {
 			MetastockDataUnziper decompresser = new MetastockDataUnziper();
 			MetastockDBUpdater recentdata = new MetastockDBUpdater(propertiesInstance);
 						
-			metastockDBCreator.CreateIfNotExist();
+			metastockDBCreator.createIfNotExist();
 			downloader.downloadData();
-			decompresser.UnZipMetastockData();
+			decompresser.unZipMetastockData();
 			recentdata.refresh();
 			
 		} catch (Exception e) {

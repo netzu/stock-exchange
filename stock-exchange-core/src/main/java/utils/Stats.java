@@ -53,8 +53,9 @@ public class Stats {
         double variance = 0;
         double average = average(list);
  
-        for (int i=0; i<list.size(); i++)
+        for (int i=0; i<list.size(); i++){
         	variance = variance + Math.pow((list.get(i) - average), 2);
+        }
         
         variance = variance/list.size();
         

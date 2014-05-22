@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -26,8 +27,8 @@ public class StockDataSelect {
 		this.connection = connection;
 	}
 	
-	public ArrayList<String> getAllStockTickerNames() throws SQLException{
-		ArrayList<String> results = new ArrayList<String>();
+	public List<String> getAllStockTickerNames() throws SQLException{
+		List<String> results = new ArrayList<String>();
 		
 		PreparedStatement statement = connection.prepareStatement(GET_ALL_TICKERS_NAMES);
 		ResultSet resultOfQuery = statement.executeQuery();

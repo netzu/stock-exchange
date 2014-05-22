@@ -1,15 +1,10 @@
 package database.creator;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
-
-import configuration.ApplicationContext;
-import configuration.StockExchangeProperties;
 
 /*
  * Creates schema of DB with data from stock market
@@ -30,7 +25,7 @@ public class CreateMetastockDBSchema {
         this.connection = connection;
     }
     
-    private void CreateTableIfNotExist(){
+    private void createTableIfNotExist(){
     	PreparedStatement statement = null;
     	int resultOfQuery;
     	
@@ -45,7 +40,7 @@ public class CreateMetastockDBSchema {
 		}
     }
     
-    private void CreateIndexIfNotExist(){
+    private void createIndexIfNotExist(){
     	PreparedStatement statement;
     	int resultOfQuery;
     	
@@ -60,8 +55,8 @@ public class CreateMetastockDBSchema {
 		}
     }    
 
-    public void CreateIfNotExist(){
-        	CreateTableIfNotExist();
-        	CreateIndexIfNotExist();
+    public void createIfNotExist(){
+        	createTableIfNotExist();
+        	createIndexIfNotExist();
     }
 }

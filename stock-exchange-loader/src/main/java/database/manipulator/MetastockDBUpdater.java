@@ -20,11 +20,11 @@ public class MetastockDBUpdater {
         properties = stockExchangeProperties;
     }
 
-	private static final Logger log = Logger.getLogger(MetastockDBUpdater.class);
+	private static final Logger LOGGER = Logger.getLogger(MetastockDBUpdater.class);
 
 	public void refresh() throws ParseException, ClassNotFoundException, SQLException{
 		
-		log.info("Updating DB with Metastock freshnesst info");
+		LOGGER.info("Updating DB with Metastock freshnesst info");
 		
 		final Connection connection = new DBConnection().getConnection(this.properties);
 
@@ -37,7 +37,7 @@ public class MetastockDBUpdater {
 
 			for (final File tickerFile : allFilesInFolder.getListOfFiles()) {
 				stockList = dataReader.getStockTickerCollection(tickerFile);
-				log.info("Updated DB with " + tickerFile.getName());
+				LOGGER.info("Updated DB with " + tickerFile.getName());
 
 				StockDataInsert upToDateStockDataDb = new StockDataInsert(
 						connection);
@@ -46,7 +46,7 @@ public class MetastockDBUpdater {
 						.insertStockTickerDataCollectionWithoutDuplicates(stockList);
 
 			}
-			log.info("Metastock Database has been refreshed. ENJOY and WIN !");
+			LOGGER.info("Metastock Database has been refreshed. ENJOY and WIN !");
 		} finally {
 			connection.close();	
 		}

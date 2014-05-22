@@ -11,7 +11,7 @@ import java.util.zip.ZipFile;
 
 public class MetastockDataUnziper {
 	
-	static StockExchangeProperties properties= ApplicationContext.getPropertiesInstance();
+	private static StockExchangeProperties properties= ApplicationContext.getPropertiesInstance();
 	private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDataUnziper.class);
 	
 	private static final void copyInputStream(InputStream in, OutputStream out)
@@ -20,14 +20,15 @@ public class MetastockDataUnziper {
 			    byte[] buffer = new byte[1024];
 			    int len;
 
-			    while((len = in.read(buffer)) >= 0)
+			    while((len = in.read(buffer)) >= 0){
 			      out.write(buffer, 0, len);
+			    }
 
 			    in.close();
 			    out.close();
 			  }
 	
-	public void UnZipMetastockData(){
+	public void unZipMetastockData(){
 		Enumeration entries;
 	    ZipFile zipFile;
 
@@ -46,7 +47,6 @@ public class MetastockDataUnziper {
 	          continue;
 	        }
 
-	        //System.out.println("Extracting file: " + entry.getName());
 	        copyInputStream(zipFile.getInputStream(entry),
 	           new BufferedOutputStream(new FileOutputStream(properties.getMetastockUnzipDir() + entry.getName())));
 	      }

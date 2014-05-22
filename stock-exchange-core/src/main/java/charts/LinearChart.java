@@ -1,6 +1,7 @@
 package charts;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
@@ -14,7 +15,7 @@ public class LinearChart {
 	
 	
 	public TimeSeriesCollection linearChartDailyData(final StockTickerHistory tickerCollection){
-		ArrayList<StockTicker> stockTickerDataList = tickerCollection.getStockTickerDataList();
+		List<StockTicker> stockTickerDataList = tickerCollection.getStockTickerDataList();
 
 		if (stockTickerDataList.isEmpty()) {
 			return null;
@@ -34,7 +35,7 @@ public class LinearChart {
 	}
 	
 	public TimeSeriesCollection linearChartWeeklyData(final StockTickerHistory tickerCollection){
-		ArrayList<StockTicker> stockTickerDataList = tickerCollection.getStockTickerDataList();
+		List<StockTicker> stockTickerDataList = tickerCollection.getStockTickerDataList();
 		
 		if (stockTickerDataList.isEmpty()) {
 			return null;

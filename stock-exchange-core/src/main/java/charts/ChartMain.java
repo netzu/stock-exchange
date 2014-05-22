@@ -26,7 +26,9 @@ import java.text.SimpleDateFormat;
 
 public class ChartMain extends ApplicationFrame {
 
-    private static final Logger LOGGER = Logger.getLogger(ChartMain.class);
+	private static final long serialVersionUID = 4408158464159618354L;
+	
+	private static final Logger LOGGER = Logger.getLogger(ChartMain.class);
 
     public ChartMain(final String windowName, StockTickerHistory collection) {
         super(windowName);

@@ -1,6 +1,6 @@
 package utils;
 
-import indicators.simpleMovingAverage.SimpleMovingAverageData;
+import indicators.moving_average.simple.SimpleMovingAverageData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,20 +12,18 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.html.HTMLEditorKit.Parser;
-
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import buySignalTest.BuySingalStatistics;
-import buySignalTest.ProfitsFromSignal;
+import buy.signal.test.BuySingalStatistics;
+import buy.signal.test.ProfitsFromSignal;
 import data.DataFileReader;
 import data.collector.StockTickerHistory;
 
 public class MocksForTests {
 	
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
+	private DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 	
     public List<SimpleMovingAverageData> getAverageData(final String path) throws IOException {
 
@@ -75,14 +73,14 @@ public class MocksForTests {
     	return buysignal;
     }
     
-    public ArrayList<Boolean> getCorrectSignals(final String path) throws IOException{
+    public List<Boolean> getCorrectSignals(final String path) throws IOException{
     	
     	final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
     	final BufferedReader reader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 
     	String line = null;
     	
-    	ArrayList<Boolean> correctSignals = new ArrayList<Boolean>();
+    	List<Boolean> correctSignals = new ArrayList<Boolean>();
     	
     	while ((line = reader.readLine()) != null) {
   
@@ -100,14 +98,14 @@ public class MocksForTests {
     	return correctSignals;
     }
     
-    public ArrayList<Double> getGainedPercentag(final String path) throws IOException{
+    public List<Double> getGainedPercentag(final String path) throws IOException{
     	
     	final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
     	final BufferedReader reader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 
     	String line = null;
     	
-    	 ArrayList<Double> correctSignals = new ArrayList<Double>();
+    	List<Double> correctSignals = new ArrayList<Double>();
     	
     	while ((line = reader.readLine()) != null) {
     		correctSignals.add(Double.parseDouble(line));
@@ -122,8 +120,6 @@ public class MocksForTests {
         final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-        final List<SimpleMovingAverageData> result = new ArrayList<SimpleMovingAverageData>();
 
         String line = null;
         
@@ -147,14 +143,10 @@ public class MocksForTests {
     
     public BuySingalStatistics getBuySignalStatistics(final String path) throws IOException{
     	BuySingalStatistics stats = new  BuySingalStatistics();
-    	
-    	List<ProfitsFromSignal> profits = new ArrayList<ProfitsFromSignal>();
-		
+    			
         final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
 
         final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-        final List<SimpleMovingAverageData> result = new ArrayList<SimpleMovingAverageData>();
 
         String line = null;
         

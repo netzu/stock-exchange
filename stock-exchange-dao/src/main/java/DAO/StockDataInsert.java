@@ -2,8 +2,6 @@ package DAO;
 
 import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
-import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -14,8 +12,6 @@ public class StockDataInsert {
             "INSERT INTO Daily_Stock_Info (ticker, date, open, high, low, close, volumen) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
     private Connection connection;
-
-    private static org.apache.log4j.Logger log = Logger.getLogger(StockDataInsert.class);
 
     public StockDataInsert(final Connection connection) throws ClassNotFoundException, SQLException {
         this.connection = connection;
@@ -28,16 +24,18 @@ public class StockDataInsert {
         for (int iterator = 0; iterator < collectionSize; iterator++) {
             StockTicker forStockDataFromOneDay = stockTickerCollection.getStockTickerDataList().get(iterator);
 
+            boolean notDuplicate = checkIfNotDuplicateInformation(forStockDataFromOneDay);
 
-            if (checkIfNotDuplicateInformation(forStockDataFromOneDay) == true) {
+            if (notDuplicate == true) {
                 PreparedStatement insertDataStatement = prepareStatment(forStockDataFromOneDay);
                 executeStatment(insertDataStatement);
-            } else
-                continue;
+            } else{
+                continue;           	
+            }
         }
     }
 
-    public void CloseConnection() throws SQLException {
+    public void closeConnection() throws SQLException {
         connection.close();
     }
 

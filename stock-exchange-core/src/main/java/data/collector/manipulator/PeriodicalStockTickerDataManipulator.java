@@ -1,6 +1,7 @@
 package data.collector.manipulator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
@@ -9,7 +10,7 @@ public abstract class PeriodicalStockTickerDataManipulator implements StockTicke
 
 	
 	public StockTickerHistory manipulate(final StockTickerHistory input) {
-		ArrayList<StockTicker>  dailyCollection = input.getStockTickerDataList();
+		List<StockTicker>  dailyCollection = input.getStockTickerDataList();
 		
 		if (dailyCollection.isEmpty()) {
 			return new StockTickerHistory();

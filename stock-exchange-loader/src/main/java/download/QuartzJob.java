@@ -39,9 +39,9 @@ public class QuartzJob implements Job {
 			MetastockDataUnziper decompresser = new MetastockDataUnziper();
 			MetastockDBUpdater recentdata = new MetastockDBUpdater(propertiesInstance);
 						
-			metastockDBCreator.CreateIfNotExist();
+			metastockDBCreator.createIfNotExist();
 			downloader.downloadData();
-			decompresser.UnZipMetastockData();
+			decompresser.unZipMetastockData();
 			recentdata.refresh();
 			
 		} catch (Exception e) {
