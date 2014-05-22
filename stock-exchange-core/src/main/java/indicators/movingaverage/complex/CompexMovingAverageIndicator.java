@@ -1,6 +1,6 @@
-package indicators.moving_average.complex;
+package indicators.movingaverage.complex;
 
-import indicators.moving_average.simple.SimpleMovingAverageIndicator;
+import indicators.movingaverage.simple.SimpleMovingAverageIndicator;
 
 import java.util.Arrays;
 import java.util.List;

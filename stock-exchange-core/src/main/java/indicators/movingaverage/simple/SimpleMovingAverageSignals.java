@@ -1,4 +1,4 @@
-package indicators.moving_average.simple;
+package indicators.movingaverage.simple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class SimpleMovingAverageSignals {
 		double previousAverage;
 		double currentAverage;
 		
-		ArrayList<DateTime> buySignal = new ArrayList<DateTime>();
+		List<DateTime> buySignal = new ArrayList<DateTime>();
 		
 		int startPoint = stockCollection.getStockTickerDataList().size() - averageCollection.size();
 		
@@ -56,13 +56,13 @@ public class SimpleMovingAverageSignals {
 		return buySignal;
 	}
 	
-	public ArrayList<DateTime> simpleSell(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+	public List<DateTime> simpleSell(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
 		double previousClose;
 		double currentClose;
 		double previousAverage;
 		double currentAverage;
 		
-		ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+		List<DateTime> sellSignal = new ArrayList<DateTime>();
 		
 		int startPoint = stockCollection.getStockTickerDataList().size() - averageCollection.size();
 		

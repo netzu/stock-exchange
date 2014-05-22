@@ -6,13 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 
-import configuration.StockExchangeProperties;
 import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
 
 public class DataFileReader {
 
-	
 	private StockTickerHistory readStockData(final File tickerFile) throws ParseException {
 		StockTickerHistory stockTickerCollection = new StockTickerHistory();
 		

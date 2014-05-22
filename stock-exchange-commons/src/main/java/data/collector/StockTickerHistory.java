@@ -2,7 +2,6 @@ package data.collector;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.joda.time.DateTime;
 
 public class StockTickerHistory {
@@ -12,7 +11,7 @@ public class StockTickerHistory {
 		return stockTickerDataList;
 	}
 
-	public void setStockTickerDataList(ArrayList<StockTicker> stockTickerDataList) {
+	public void setStockTickerDataList(List<StockTicker> stockTickerDataList) {
 		this.stockTickerDataList = stockTickerDataList;
 	}
 
@@ -20,8 +19,8 @@ public class StockTickerHistory {
 		this.stockTickerDataList.add(dailyStock);		
 	}
 	
-	public ArrayList <StockTicker> subListOfCollection(int from, int to){
-		ArrayList <StockTicker> subList = new ArrayList<StockTicker>();
+	public List <StockTicker> subListOfCollection(int from, int to){
+		List <StockTicker> subList = new ArrayList<StockTicker>();
 		
 		for(int i = from; i<to; i++){
 			subList.add(stockTickerDataList.get(i));

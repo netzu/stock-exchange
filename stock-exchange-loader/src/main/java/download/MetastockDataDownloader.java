@@ -14,6 +14,7 @@ import configuration.StockExchangeProperties;
 
 public class MetastockDataDownloader {
 	
+		private static final int BUFFER_SIZE = 1024;
 		private static StockExchangeProperties properties= ApplicationContext.getPropertiesInstance();
 		private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDataDownloader.class);
         
@@ -38,7 +39,7 @@ public class MetastockDataDownloader {
 	    		InputStream in = connection.getInputStream();	    		
 	    			    		
 	    		FileOutputStream out = new FileOutputStream(properties.getDirOfZippedMetastock() + properties.getMetastockFileName());
-	    		startStreamingFile(in, out, 1024);
+	    		startStreamingFile(in, out, BUFFER_SIZE);
 	    		
 	    		log.info("The " + properties.getMetastockFileName() + " file has been saved in this location: " + properties.getDirOfZippedMetastock());
 	    		out.close();

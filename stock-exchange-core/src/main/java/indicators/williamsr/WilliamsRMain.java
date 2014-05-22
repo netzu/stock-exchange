@@ -1,4 +1,4 @@
-package indicators.williams_r;
+package indicators.williamsr;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -7,14 +7,17 @@ import java.util.List;
 
 import buy.signal.test.BuySignalTester;
 import buy.signal.test.ProfitsFromSignal;
-import DAO.DBConnection;
-import DAO.StockDataSelect;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
+import dao.DBConnection;
+import dao.StockDataSelect;
 import data.collector.StockTickerHistory;
 
 public class WilliamsRMain {
 	
+	private static final int DAY_TO_TEST = 21;
+	private static final int WILLIAMS_PERIOD = 14;
+
 	public static void main( String[] args ) throws ClassNotFoundException, SQLException, ParseException{
     	
     	StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
@@ -27,13 +30,13 @@ public class WilliamsRMain {
 		stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
 		
 		WilliamsRIndicator wiRIndicator = new WilliamsRIndicator();
-		wiRIndicator.calculateWilliamsR(14, stockCollectionForTicker);
+		wiRIndicator.calculateWilliamsR(WILLIAMS_PERIOD, stockCollectionForTicker);
 						
 		WilliamsRSignals signal = new WilliamsRSignals();
 		
 		
 		BuySignalTester test = new BuySignalTester();
-		List <List<ProfitsFromSignal>> results = test.calculateProfitsForTicker(signal.buySignals(wiRIndicator.calculateWilliamsR(14, stockCollectionForTicker)), stockCollectionForTicker, 21);
+		List <List<ProfitsFromSignal>> results = test.calculateProfitsForTicker(signal.buySignals(wiRIndicator.calculateWilliamsR(WILLIAMS_PERIOD, stockCollectionForTicker)), stockCollectionForTicker, DAY_TO_TEST);
 		results.isEmpty();		
 				
 		System.out.print("KONIEC!");

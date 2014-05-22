@@ -1,12 +1,12 @@
-package indicators.moving_average.complex;
+package indicators.movingaverage.complex;
 
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import indicators.moving_average.complex.AverageData;
-import indicators.moving_average.complex.ComplexMovingAverageSignals;
-import indicators.moving_average.simple.SimpleMovingAverageData;
-import indicators.moving_average.simple.SimpleMovingAverageSignals;
+import indicators.movingaverage.complex.AverageData;
+import indicators.movingaverage.complex.ComplexMovingAverageSignals;
+import indicators.movingaverage.simple.SimpleMovingAverageData;
+import indicators.movingaverage.simple.SimpleMovingAverageSignals;
 
 import java.io.IOException;
 import java.text.ParseException;

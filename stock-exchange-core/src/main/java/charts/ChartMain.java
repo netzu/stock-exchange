@@ -1,9 +1,9 @@
 package charts;
 
-import DAO.DBConnection;
-import DAO.StockDataSelect;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
+import dao.DBConnection;
+import dao.StockDataSelect;
 import data.collector.StockTickerHistory;
 import org.apache.log4j.Logger;
 import org.jfree.chart.ChartFactory;
@@ -26,6 +26,13 @@ import java.text.SimpleDateFormat;
 
 public class ChartMain extends ApplicationFrame {
 
+	private static final int HIGHT = 270;
+	private static final int WIDTH = 500;
+	private static final double RIGHT = 5.0;
+	private static final double BOTTOM = 5.0;
+	private static final double LEFT = 5.0;
+	private static final double TOP = 5.0;
+
 	private static final long serialVersionUID = 4408158464159618354L;
 	
 	private static final Logger LOGGER = Logger.getLogger(ChartMain.class);
@@ -38,20 +45,20 @@ public class ChartMain extends ApplicationFrame {
 
         JFreeChart chart = createChart(dataset);
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        chartPanel.setPreferredSize(new java.awt.Dimension(WIDTH, HIGHT));
         chartPanel.setMouseZoomable(true, false);
         setContentPane(chartPanel);
     }
 
     private static JFreeChart createChart(XYDataset dataset) {
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
-                null, // title
-                null, // x-axis label
-                null, // y-axis label
-                dataset, // data
-                true, // create legend?
-                true, // generate tooltips?
-                false // generate URLs?
+                null,
+                null,
+                null,
+                dataset,
+                true,
+                true,
+                false
         );
 
         chart.setBackgroundPaint(Color.white);
@@ -60,7 +67,7 @@ public class ChartMain extends ApplicationFrame {
         plot.setBackgroundPaint(Color.white);
         plot.setDomainGridlinePaint(Color.gray);
         plot.setRangeGridlinePaint(Color.gray);
-        plot.setAxisOffset(new RectangleInsets(5.0, 5.0, 5.0, 5.0));
+        plot.setAxisOffset(new RectangleInsets(TOP, LEFT, BOTTOM, RIGHT));
         plot.setDomainCrosshairVisible(true);
         plot.setRangeCrosshairVisible(true);
 

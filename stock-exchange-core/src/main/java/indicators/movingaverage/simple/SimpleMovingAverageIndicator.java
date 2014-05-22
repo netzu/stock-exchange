@@ -1,4 +1,4 @@
-package indicators.moving_average.simple;
+package indicators.movingaverage.simple;
 
 
 
@@ -34,7 +34,7 @@ public class SimpleMovingAverageIndicator {
 		
 		for(int i=0; i<tickerCollection.getStockTickerDataList().size()-period+1; i++){
 			
-			ArrayList <StockTicker> subList = new ArrayList<StockTicker>();
+			List <StockTicker> subList = new ArrayList<StockTicker>();
 			subList = tickerCollection.subListOfCollection(i, i+period);
 			
 			average.add(averageFromPeriod(subList));			
@@ -49,7 +49,7 @@ public class SimpleMovingAverageIndicator {
 	 * @param subList - a sublist for which the simple moving average need to be calculated
 	 * @return
 	 */
-	private static SimpleMovingAverageData averageFromPeriod(ArrayList <StockTicker> subList){
+	private static SimpleMovingAverageData averageFromPeriod(List <StockTicker> subList){
 		
 		SimpleMovingAverageData averageFromPeriod = new SimpleMovingAverageData();
 		

@@ -11,13 +11,14 @@ import java.util.zip.ZipFile;
 
 public class MetastockDataUnziper {
 	
+	private static final int BUFFER_SIZE = 1024;
 	private static StockExchangeProperties properties= ApplicationContext.getPropertiesInstance();
 	private static org.apache.log4j.Logger log = Logger.getLogger(MetastockDataUnziper.class);
 	
 	private static final void copyInputStream(InputStream in, OutputStream out)
 			  throws IOException
 			  {
-			    byte[] buffer = new byte[1024];
+			    byte[] buffer = new byte[BUFFER_SIZE];
 			    int len;
 
 			    while((len = in.read(buffer)) >= 0){

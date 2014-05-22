@@ -1,4 +1,4 @@
-package indicators.moving_average.simple;
+package indicators.movingaverage.simple;
 
 import static org.junit.Assert.*;
 import data.collector.StockTickerHistory;
@@ -9,8 +9,8 @@ import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 import utils.MocksForTests;
-import indicators.moving_average.simple.SimpleMovingAverageData;
-import indicators.moving_average.simple.SimpleMovingAverageSignals;
+import indicators.movingaverage.simple.SimpleMovingAverageData;
+import indicators.movingaverage.simple.SimpleMovingAverageSignals;
 
 import java.io.*;
 import java.text.ParseException;
@@ -40,7 +40,7 @@ public class SimpleMovingAverageSignalsTest {
        
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -58,7 +58,7 @@ public class SimpleMovingAverageSignalsTest {
 
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -76,7 +76,7 @@ public class SimpleMovingAverageSignalsTest {
 
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -96,7 +96,7 @@ public class SimpleMovingAverageSignalsTest {
 
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -114,7 +114,7 @@ public class SimpleMovingAverageSignalsTest {
 
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -134,7 +134,7 @@ public class SimpleMovingAverageSignalsTest {
 
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -152,7 +152,7 @@ public class SimpleMovingAverageSignalsTest {
 
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -171,7 +171,7 @@ public class SimpleMovingAverageSignalsTest {
 
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -189,7 +189,7 @@ public class SimpleMovingAverageSignalsTest {
 
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -207,7 +207,7 @@ public class SimpleMovingAverageSignalsTest {
 
         SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
         
-        ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
         sellSignal = signals.simpleSell(averageData, history);
@@ -227,7 +227,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -250,7 +250,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -274,7 +274,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -299,7 +299,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -321,7 +321,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -345,7 +345,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -364,7 +364,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -382,7 +382,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -400,7 +400,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -418,7 +418,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -436,7 +436,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -454,7 +454,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -472,7 +472,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -490,7 +490,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -508,7 +508,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -526,7 +526,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -548,7 +548,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -566,7 +566,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -584,7 +584,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -602,7 +602,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -620,7 +620,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -638,7 +638,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -656,7 +656,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -674,7 +674,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -692,7 +692,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -710,7 +710,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -728,7 +728,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -747,7 +747,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -765,7 +765,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -783,7 +783,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -801,7 +801,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -819,7 +819,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -837,7 +837,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -855,7 +855,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);
@@ -877,7 +877,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        
-       ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+       List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
        sellSignal = signals.simpleSell(averageData, history);

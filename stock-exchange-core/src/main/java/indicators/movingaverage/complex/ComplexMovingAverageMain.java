@@ -1,19 +1,23 @@
-package indicators.moving_average.complex;
+package indicators.movingaverage.complex;
 
-import indicators.moving_average.simple.SimpleMovingAverageSignals;
+import indicators.movingaverage.simple.SimpleMovingAverageSignals;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
-import DAO.DBConnection;
-import DAO.StockDataSelect;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
+import dao.DBConnection;
+import dao.StockDataSelect;
 import data.collector.StockTickerHistory;
 
 public class ComplexMovingAverageMain {
+
+	private static final int PERIOD_FOR_THIRD_AVERAGE = 25;
+	private static final int PERIOD_FOR_SECOND_AVERAGE = 20;
+	private static final int PERIOD_FOR_FIRST_AVERAGE = 15;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
 		
@@ -27,7 +31,7 @@ public class ComplexMovingAverageMain {
 		stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
 		
 		CompexMovingAverageIndicator complexMovingAverageIndicator = new CompexMovingAverageIndicator();
-		List<AverageData> averageResults = complexMovingAverageIndicator.calculateComplexMovingAverage(15, 20, 25, stockCollectionForTicker);	
+		List<AverageData> averageResults = complexMovingAverageIndicator.calculateComplexMovingAverage(PERIOD_FOR_FIRST_AVERAGE, PERIOD_FOR_SECOND_AVERAGE, PERIOD_FOR_THIRD_AVERAGE, stockCollectionForTicker);	
 		
 		//something is totally wrong here
 		SimpleMovingAverageSignals averageSignals = new SimpleMovingAverageSignals();

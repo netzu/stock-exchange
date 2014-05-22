@@ -27,7 +27,6 @@ public class StockExchangeProperties {
 		} catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
-		
 	}
 	
 	public String getNameForMEtastockDB(){
@@ -41,7 +40,6 @@ public class StockExchangeProperties {
 	public String getMetastockUnzipDir(){
 		return this.properties.getProperty(METASTOCK_UNZIP_DIR);
 	}
-	
 	
 	public String getMetastockFileName(){
 		return this.properties.getProperty(METASTOCK_FILE_NAME);
@@ -76,5 +74,4 @@ public class StockExchangeProperties {
 		
 		return storageLocation;
 	}
-	
 }

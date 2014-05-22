@@ -1,6 +1,7 @@
-package indicators.williams_r;
+package indicators.williamsr;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.joda.time.DateTime;
 
@@ -96,7 +97,7 @@ public class WilliamsRIndicator {
 		ArrayList<WilliamsRData> williamsR = new ArrayList<WilliamsRData>();
 		
 		for (int i = 0; i<(tickercollection.getStockTickerDataList().size() - period +1); i++){
-			ArrayList <StockTicker> subList = tickercollection.subListOfCollection(i, i + period);
+			List <StockTicker> subList = tickercollection.subListOfCollection(i, i + period);
 			subListFromGivenPeriod.setStockTickerDataList(subList);
 			
 			williamsR.add(calculateSinglewilliamsR(subListFromGivenPeriod));

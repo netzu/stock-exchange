@@ -1,6 +1,10 @@
-package indicators.williams_r;
+package indicators.williamsr;
 
 import static org.junit.Assert.assertTrue;
+
+import indicators.williamsr.WilliamsRCalculationException;
+import indicators.williamsr.WilliamsRData;
+import indicators.williamsr.WilliamsRIndicator;
 
 import java.text.ParseException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package indicators.williams_r;
+package indicators.williamsr;
 
 import org.joda.time.DateTime;
 

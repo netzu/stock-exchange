@@ -1,6 +1,6 @@
 package utils;
 
-import indicators.moving_average.simple.SimpleMovingAverageData;
+import indicators.movingaverage.simple.SimpleMovingAverageData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,6 +23,18 @@ import data.collector.StockTickerHistory;
 
 public class MocksForTests {
 	
+	private static final int COUNT_POSITIVE_INDEX = 11;
+	private static final int COUNT_NEGATIVE_INDEX = 10;
+	private static final int POSITIVE_PROFITS_INDEX = 9;
+	private static final int NEGATIVE_PROFITS_INDEX = 8;
+	private static final int MAX_INDEX = 7;
+	private static final int MIN_INDEX = 6;
+	private static final int VARIANCE_INDEX = 5;
+	private static final int MEDIAN_INDEX = 4;
+	private static final int STAND_DEV_INDEX = 3;
+	private static final int AVERAGE_INDEX = 2;
+	private static final int PERCENTAGE_SUM_INDEX = 1;
+	private static final int PROFITS_SUM_INDEX = 0;
 	private DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 	
     public List<SimpleMovingAverageData> getAverageData(final String path) throws IOException {
@@ -153,18 +165,18 @@ public class MocksForTests {
         while ((line = reader.readLine()) != null) {
         	String[] splitData = line.split(",");
         	
-        	stats.setSumOfProfits(Double.parseDouble(splitData[0]));
-        	stats.setSumOfPercentage(Double.parseDouble(splitData[1]));
-        	stats.setAverage(Double.parseDouble(splitData[2]));        	
-        	stats.setStandardDeviation(Double.parseDouble(splitData[3]));
-        	stats.setMedian(Double.parseDouble(splitData[4]));
-        	stats.setVariance(Double.parseDouble(splitData[5]));
-        	stats.setMin(Double.parseDouble(splitData[6]));
-        	stats.setMax(Double.parseDouble(splitData[7]));
-        	stats.setSumNegativeProfits(Double.parseDouble(splitData[8]));
-        	stats.setSumPositiveProfits(Double.parseDouble(splitData[9]));
-        	stats.setCountNegativeProfits(Double.parseDouble(splitData[10]));
-        	stats.setCountPositiveProfits(Double.parseDouble(splitData[11]));
+        	stats.setSumOfProfits(Double.parseDouble(splitData[PROFITS_SUM_INDEX]));
+        	stats.setSumOfPercentage(Double.parseDouble(splitData[PERCENTAGE_SUM_INDEX]));
+        	stats.setAverage(Double.parseDouble(splitData[AVERAGE_INDEX]));        	
+        	stats.setStandardDeviation(Double.parseDouble(splitData[STAND_DEV_INDEX]));
+        	stats.setMedian(Double.parseDouble(splitData[MEDIAN_INDEX]));
+        	stats.setVariance(Double.parseDouble(splitData[VARIANCE_INDEX]));
+        	stats.setMin(Double.parseDouble(splitData[MIN_INDEX]));
+        	stats.setMax(Double.parseDouble(splitData[MAX_INDEX]));
+        	stats.setSumNegativeProfits(Double.parseDouble(splitData[NEGATIVE_PROFITS_INDEX]));
+        	stats.setSumPositiveProfits(Double.parseDouble(splitData[POSITIVE_PROFITS_INDEX]));
+        	stats.setCountNegativeProfits(Double.parseDouble(splitData[COUNT_NEGATIVE_INDEX]));
+        	stats.setCountPositiveProfits(Double.parseDouble(splitData[COUNT_POSITIVE_INDEX]));
         }
     	
 		return stats;    	

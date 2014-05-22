@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import DAO.DBConnection;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
+import dao.DBConnection;
 import database.creator.CreateMetastockDBSchema;
 import database.manipulator.MetastockDBUpdater;
 import download.MetastockDataUnziper;

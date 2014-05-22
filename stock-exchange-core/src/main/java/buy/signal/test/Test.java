@@ -1,8 +1,8 @@
 package buy.signal.test;
 
-import indicators.williams_r.WilliamsRData;
-import indicators.williams_r.WilliamsRIndicator;
-import indicators.williams_r.WilliamsRSignals;
+import indicators.williamsr.WilliamsRData;
+import indicators.williamsr.WilliamsRIndicator;
+import indicators.williamsr.WilliamsRSignals;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -15,13 +15,16 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
-import DAO.DBConnection;
-import DAO.StockDataSelect;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
+import dao.DBConnection;
+import dao.StockDataSelect;
 import data.collector.StockTickerHistory;
 
 public class Test {
+
+	private static final int WILLIAMS_PERIOD = 14;
+	private static final int NUMBER_OF_DAYS_TO_TEST = 30;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException, FileNotFoundException, UnsupportedEncodingException {
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
@@ -34,7 +37,7 @@ public class Test {
 		stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
 		
 		WilliamsRIndicator wiRIndicator = new WilliamsRIndicator();
-		ArrayList<WilliamsRData> collection = wiRIndicator.calculateWilliamsR(14, stockCollectionForTicker);
+		ArrayList<WilliamsRData> collection = wiRIndicator.calculateWilliamsR(WILLIAMS_PERIOD, stockCollectionForTicker);
 						
 		WilliamsRSignals signal = new WilliamsRSignals();
 		List<DateTime> buySignlaList = signal.buySignals(collection);
@@ -53,9 +56,9 @@ public class Test {
 		
 		//ticker| nr of test days | day | T/F | percentage | value
 		for(int i=0; i<buySignlaList.size();i++){
-			List<Boolean> daysWithPositiveResults = testOfBuySignalEffectiveness.daysWithPositiveResults(30, buySignlaList.get(i), stockCollectionForTicker);
-			List<Double> percentageGainPerDay = testOfBuySignalEffectiveness.percentageGainPerDay(30, buySignlaList.get(i), stockCollectionForTicker);
-			double[] valueGainPerDay = testOfBuySignalEffectiveness.valueGainPerDay(30, buySignlaList.get(i), stockCollectionForTicker);
+			List<Boolean> daysWithPositiveResults = testOfBuySignalEffectiveness.daysWithPositiveResults(NUMBER_OF_DAYS_TO_TEST, buySignlaList.get(i), stockCollectionForTicker);
+			List<Double> percentageGainPerDay = testOfBuySignalEffectiveness.percentageGainPerDay(NUMBER_OF_DAYS_TO_TEST, buySignlaList.get(i), stockCollectionForTicker);
+			double[] valueGainPerDay = testOfBuySignalEffectiveness.valueGainPerDay(NUMBER_OF_DAYS_TO_TEST, buySignlaList.get(i), stockCollectionForTicker);
 			
 			for(int j=0; j<daysWithPositiveResults.size(); j++){
 				stingForPositiveResults = tickerName + ";" + daysWithPositiveResults.size() + ";" + j + ";" + daysWithPositiveResults.get(j);
@@ -64,7 +67,6 @@ public class Test {
 				stringForPercentage = tickerName + ";" + daysWithPositiveResults.size() + ";" + j + ";" + percentageGainPerDay.get(j) + ";" + valueGainPerDay[j];
 				positiveResults.println(stringForPercentage);
 			}
-			
 			
 			positiveResults.println();
 			percentageGained.println();

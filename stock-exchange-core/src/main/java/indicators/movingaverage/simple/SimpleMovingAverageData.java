@@ -1,4 +1,4 @@
-package indicators.moving_average.simple;
+package indicators.movingaverage.simple;
 
 import org.joda.time.DateTime;
 

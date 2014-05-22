@@ -1,4 +1,4 @@
-package indicators.williams_r;
+package indicators.williamsr;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,16 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 public class WilliamsRSignals {
-	private int revaluation = -80;   //wyprzedane
-	private int undervaluation = -20;	//wykupione
+	//wyprzedane
+	private static final int UNDERVALUATION_THRESHOLD = -20;
+	//wykupione
+	private static final int REVALUATION_TRESHOLD = -80;
+	
+	private int revaluation = REVALUATION_TRESHOLD;
+	private int undervaluation = UNDERVALUATION_THRESHOLD;
 
 	
-	public List<DateTime> buySignals(ArrayList<WilliamsRData> collection) {
+	public List<DateTime> buySignals(List<WilliamsRData> collection) {
 		
 		double previousCloseSignal = collection.get(0).getWilliamsR();
 		double currentCloseSignal = collection.get(1).getWilliamsR();
@@ -30,7 +35,7 @@ public class WilliamsRSignals {
 		return buySignal;
 	}
 	
-	public List<DateTime> sellSignals(ArrayList<WilliamsRData> collection) {
+	public List<DateTime> sellSignals(List<WilliamsRData> collection) {
 		double previousCloseSignal = collection.get(0).getWilliamsR();
 		double currentCloseSignal = collection.get(1).getWilliamsR();
 		

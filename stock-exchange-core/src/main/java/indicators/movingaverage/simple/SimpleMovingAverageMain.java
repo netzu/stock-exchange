@@ -1,4 +1,4 @@
-package indicators.moving_average.simple;
+package indicators.movingaverage.simple;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -8,13 +8,15 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
-import DAO.DBConnection;
-import DAO.StockDataSelect;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
+import dao.DBConnection;
+import dao.StockDataSelect;
 import data.collector.StockTickerHistory;
 
 public class SimpleMovingAverageMain {
+
+	private static final int PERIOD_FOR_MOVING_AVERAGE = 13;
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
 
@@ -24,12 +26,12 @@ public class SimpleMovingAverageMain {
 		StockDataSelect ticker = new StockDataSelect(connection);
 		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker("LENA");
 		
-		List<SimpleMovingAverageData> simpleMovingAverageData = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(13, stockCollectionForTicker);
+		List<SimpleMovingAverageData> simpleMovingAverageData = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(PERIOD_FOR_MOVING_AVERAGE, stockCollectionForTicker);
 		
 		SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
 		
 		List<DateTime> buySignals = signals.buySignal(simpleMovingAverageData, stockCollectionForTicker);
-		ArrayList<DateTime> sellSignals = signals.simpleSell(simpleMovingAverageData, stockCollectionForTicker);
+		List<DateTime> sellSignals = signals.simpleSell(simpleMovingAverageData, stockCollectionForTicker);
 		
 		buySignals.isEmpty();
 		sellSignals.isEmpty();

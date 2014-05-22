@@ -1,6 +1,5 @@
 package charts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.data.time.Day;

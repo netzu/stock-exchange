@@ -1,21 +1,18 @@
 package download;
 
-import java.nio.channels.IllegalSelectorException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 import org.quartz.Job;
-import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
+import dao.DBConnection;
 import database.creator.CreateMetastockDBSchema;
 import database.manipulator.MetastockDBUpdater;
-import DAO.DBConnection;
-import DAO.StockDataInsert;
 
 public class QuartzJob implements Job {
 
@@ -31,7 +28,7 @@ public class QuartzJob implements Job {
 			StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 			connection = new DBConnection().getConnection(propertiesInstance);
 			
-			JobDataMap data = context.getMergedJobDataMap();
+			context.getMergedJobDataMap();
 						
 			CreateMetastockDBSchema metastockDBCreator = new CreateMetastockDBSchema(connection);
 			
