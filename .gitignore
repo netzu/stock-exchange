@@ -5,3 +5,4 @@ loaderINFOLogger.log
 .settings/
 target/
 sonar-project.properties.txt
+*.log
