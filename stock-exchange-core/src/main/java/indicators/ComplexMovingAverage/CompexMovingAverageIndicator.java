@@ -1,6 +1,5 @@
 package indicators.ComplexMovingAverage;
 
-import indicators.simpleMovingAverage.AverageData;
 import indicators.simpleMovingAverage.SimpleMovingAverageIndicator;
 
 import java.util.Arrays;

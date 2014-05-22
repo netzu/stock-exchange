@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 public class SimpleMovingAverageData {
 	
 	private DateTime date;
-	private double average;
+	private double averageValueFromGivenPeriod;
 	
 	public DateTime getDate() {
 		return date;
@@ -16,11 +16,11 @@ public class SimpleMovingAverageData {
 	}
 	
 	public double getAverage() {
-		return average;
+		return averageValueFromGivenPeriod;
 	}
 	
 	public void setAverage(double average) {
-		this.average = average;
+		this.averageValueFromGivenPeriod = average;
 	}
 	
 }

@@ -1,6 +1,9 @@
 package indicators.williamsR;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.joda.time.DateTime;
 
 import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
@@ -16,32 +19,23 @@ import data.collector.StockTickerHistory;
  Sygnał kupna zostaje wygenerowany, jeśli wskaźnik wpadnie a następnie wzrośnie ponad poziom wyprzedania, natomiast sygnał sprzedaży kiedy wchodzi do strefy 
  wykupienia a następnie spada poniżej poziomu wykupienia.
 
- Szczególnie dobrze zachowuje się, kiedy notowania danego instrumentu poruszają się w trendzie horyzontalnym z dużymi wahaniami cen. Należy jednak wziąć pod uwagę sytuację, kiedy stan wykupienia/wyprzedania rynku może się utrzymywać przez dłuższy okres, dlatego zaleca się używanie innych narzędzi analizy technicznej razem z oscylatorem %R Williamsa.
+ Szczególnie dobrze zachowuje się, kiedy notowania danego instrumentu poruszają się w trendzie horyzontalnym z dużymi wahaniami cen. Należy jednak wziąć pod uwagę sytuację,
+ kiedy stan wykupienia/wyprzedania rynku może się utrzymywać przez dłuższy okres, dlatego zaleca się używanie innych narzędzi analizy technicznej razem z oscylatorem %R Williamsa.
 
  Williams używał wskaźnika opartego na 10 dniach, wartości wskaźnika poniżej -80 uważał za wyprzedanie, wartości powyżej -20 wykupienie.
  */
 
 
 public class WilliamsRIndicator {
-	
-	private WilliamsRCollectionForTicker williamsR;
-	
-	public WilliamsRIndicator() {
-		this.williamsR = new WilliamsRCollectionForTicker();
-	}
-	
-	public WilliamsRCollectionForTicker getWilliamsRCollectionForTicker(){
-		return this.williamsR;
-	}
 
-	private double GetHighestHighFromPeriod(StockTickerHistory stockCollection){
+	private double GetHighestHighFromPeriod(StockTickerHistory subCollection){
 		
-		double highest = stockCollection.getStockTickerDataList().get(0).getHigh();
-		double temporaryHighest  = stockCollection.getStockTickerDataList().get(0).getHigh();
+		double highest = subCollection.getStockTickerDataList().get(0).getHigh();
+		double temporaryHighest  = subCollection.getStockTickerDataList().get(0).getHigh();
 		
-		for(int i = 0; i<stockCollection.getStockTickerDataList().size(); i++){
+		for(int i = 0; i<subCollection.getStockTickerDataList().size(); i++){
 			
-			temporaryHighest = stockCollection.getStockTickerDataList().get(i).getHigh();
+			temporaryHighest = subCollection.getStockTickerDataList().get(i).getHigh();
 			
 			if(highest<temporaryHighest){
 				highest = temporaryHighest; 
@@ -51,14 +45,14 @@ public class WilliamsRIndicator {
 		return highest;
 	}
 	
-	private double GetLowestLowFromPeriod(StockTickerHistory stockCollection){
+	private double GetLowestLowFromPeriod(StockTickerHistory subCollection){
 		
-		double lowest = stockCollection.getStockTickerDataList().get(0).getLow();
-		double temporaryLowest = stockCollection.getStockTickerDataList().get(0).getLow();
+		double lowest = subCollection.getStockTickerDataList().get(0).getLow();
+		double temporaryLowest = subCollection.getStockTickerDataList().get(0).getLow();
 		
-		for(int i = 0; i<stockCollection.getStockTickerDataList().size(); i++){
+		for(int i = 0; i<subCollection.getStockTickerDataList().size(); i++){
 			
-			temporaryLowest = stockCollection.getStockTickerDataList().get(i).getLow();
+			temporaryLowest = subCollection.getStockTickerDataList().get(i).getLow();
 			
 			if(lowest > temporaryLowest){
 				lowest = temporaryLowest; 
@@ -70,34 +64,60 @@ public class WilliamsRIndicator {
 	
 
 	
-	private void addNewWilliamsRData(StockTickerHistory stockCollection){
+	private WilliamsRData calculateSinglewilliamsR(StockTickerHistory subCollection){
 		WilliamsRData data = new WilliamsRData();
 		
-		data.setHighestHigh(GetHighestHighFromPeriod(stockCollection));
-		data.setLowestLow(GetLowestLowFromPeriod(stockCollection));
+		double highest = GetHighestHighFromPeriod(subCollection);
+		double lowest = GetLowestLowFromPeriod(subCollection);
 		
-		int period = stockCollection.getStockTickerDataList().size()-1;
+		int period = subCollection.getStockTickerDataList().size()-1;
 		
-		data.setDate(stockCollection.getStockTickerDataList().get(period).getDate());
-		data.setCurrentClose(stockCollection.getStockTickerDataList().get(period).getClose());
+		DateTime date = subCollection.getStockTickerDataList().get(period).getDate();
+		double curentClose = subCollection.getStockTickerDataList().get(period).getClose();
 		
-		data.CallculateWilliamsRValue();
+		data.setDate(date);
+		data.setWilliamsR(equationForWilliamsPercentage(highest, curentClose, lowest));
 		
-		williamsR.addNewElementToTheList(data);
+		return data;		
 	}
 	
-	public void calculateWilliamsR(int period, StockTickerHistory tickercollection){
-		StockTickerHistory subListFromGivenPeriod = new StockTickerHistory();
+	public ArrayList<WilliamsRData> calculateWilliamsR(int period, StockTickerHistory tickercollection) {
 		
-		for (int i = 0; i<(tickercollection.getStockTickerDataList().size() - period +2); i++){
-			ArrayList <StockTicker> subList = tickercollection.subListOfCollection(i, i + period -1);
+		if(tickercollection.getStockTickerDataList().size()==0){
+			throw new WilliamsRCalculationException("Ticker's history data is empty");
+		}
+		
+		if(period<1){
+			throw new WilliamsRCalculationException("Period must be grather than 0");
+		}
+		
+		if(tickercollection.getStockTickerDataList().size()<period){
+			throw new WilliamsRCalculationException("Size of tickerCollection lowere than period");
+		}
+		
+		StockTickerHistory subListFromGivenPeriod = new StockTickerHistory();
+		ArrayList<WilliamsRData> williamsR = new ArrayList<WilliamsRData>();
+		
+		for (int i = 0; i<(tickercollection.getStockTickerDataList().size() - period +1); i++){
+			ArrayList <StockTicker> subList = tickercollection.subListOfCollection(i, i + period);
 			subListFromGivenPeriod.setStockTickerDataList(subList);
 			
-			addNewWilliamsRData(subListFromGivenPeriod);
+			williamsR.add(calculateSinglewilliamsR(subListFromGivenPeriod));
 		}
+		
+		return williamsR;
 	}
 	
-	public void print(){
-		this.williamsR.printToFile();
+	private double equationForWilliamsPercentage(double highestHigh, double currentClose, double lowestLow){
+		double williamsR; 
+		
+		if(highestHigh==lowestLow){
+			williamsR = 0.0;
+		}else{		
+			williamsR = ((highestHigh-currentClose)/(highestHigh - lowestLow)) * -100;
+		}
+		
+		return williamsR;
+	
 	}
 }

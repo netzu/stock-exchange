@@ -27,8 +27,10 @@ public class SimpleMovingAverageMain {
 		
 		SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
 		
-		ArrayList<DateTime> buySignals = signals.simpleBuy(simpleMovingAverageData, stockCollectionForTicker);
+		ArrayList<DateTime> buySignals = signals.buySignal(simpleMovingAverageData, stockCollectionForTicker);
 		ArrayList<DateTime> sellSignals = signals.simpleSell(simpleMovingAverageData, stockCollectionForTicker);
+		
+		
 		
 		System.out.print("Koniec");
 	}

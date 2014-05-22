@@ -11,6 +11,9 @@ import org.apache.log4j.Logger;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
 
+/*
+ * Creates schema of DB with data from stock market
+ */
 public class CreateMetastockDBSchema {
 	
 	private static final String CREATE_METASTOCK_TABLE = 

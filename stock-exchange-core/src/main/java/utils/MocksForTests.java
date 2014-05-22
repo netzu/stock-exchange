@@ -12,6 +12,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.html.HTMLEditorKit.Parser;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -71,6 +73,47 @@ public class MocksForTests {
     	}
     	
     	return buysignal;
+    }
+    
+    public ArrayList<Boolean> getCorrectSignals(final String path) throws IOException{
+    	
+    	final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+    	final BufferedReader reader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+
+    	String line = null;
+    	
+    	ArrayList<Boolean> correctSignals = new ArrayList<Boolean>();
+    	
+    	while ((line = reader.readLine()) != null) {
+  
+    		if(line.trim().equals("t")){
+    			correctSignals.add(true);
+    		}
+    		else if(line.trim().equals("f")) {
+    			correctSignals.add(false);
+    		}
+    		else{
+    			throw new IllegalStateException("Value in input file is nither t or f");
+    		}
+    	}
+    	
+    	return correctSignals;
+    }
+    
+    public ArrayList<Double> getGainedPercentag(final String path) throws IOException{
+    	
+    	final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+    	final BufferedReader reader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+
+    	String line = null;
+    	
+    	 ArrayList<Double> correctSignals = new ArrayList<Double>();
+    	
+    	while ((line = reader.readLine()) != null) {
+    		correctSignals.add(Double.parseDouble(line));
+     	}
+    	
+    	return correctSignals;
     }
 
     public List<ProfitsFromSignal> getProfitsFromSignal(final String path) throws IOException{
@@ -146,4 +189,5 @@ public class MocksForTests {
 
         return fileReader.getStockTickerCollection(new File(filePath));
     }
+
 }

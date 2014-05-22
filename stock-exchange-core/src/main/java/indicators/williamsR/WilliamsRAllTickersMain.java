@@ -43,11 +43,10 @@ public class WilliamsRAllTickersMain {
 			WilliamsRIndicator wiRIndicator = new WilliamsRIndicator();
 			wiRIndicator.calculateWilliamsR(14, stockCollectionForTicker);		
 					
-			WilliamsRSignals signal = new WilliamsRSignals();
-			signal.generateWilliamsRSignals(wiRIndicator.getWilliamsRCollectionForTicker());
+			WilliamsRSignals signal = new WilliamsRSignals();			
 			
 			BuySignalTester test = new BuySignalTester();
-			List <List<ProfitsFromSignal>> results = test.calculateProfitsForTicker(signal.getBuySignal(), stockCollectionForTicker, 21);
+			List <List<ProfitsFromSignal>> results = test.calculateProfitsForTicker(signal.buySignals(wiRIndicator.calculateWilliamsR(14, stockCollectionForTicker)), stockCollectionForTicker, 21);
 			List <BuySingalStatistics> stats = test.statisticsForTicker(results, 21);
 			
 			for(int j=0; j<stats.size(); j++){

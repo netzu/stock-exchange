@@ -7,53 +7,44 @@ import org.joda.time.DateTime;
 public class WilliamsRSignals {
 	private int revaluation = -80;   //wyprzedane
 	private int undervaluation = -20;	//wykupione
-	
-	private ArrayList<DateTime> buySignal = new ArrayList<DateTime>();
-	private ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
-	
-	public ArrayList<DateTime> getBuySignal() {
-		return buySignal;
-	}
-
-	public ArrayList<DateTime> getSellSignal() {
-		return sellSignal;
-	}
 
 	
-	private void calculateBuysignals(WilliamsRCollectionForTicker collection) {
+	public ArrayList<DateTime> buySignals(ArrayList<WilliamsRData> collection) {
 		
-		double previousCloseSignal = collection.getWilliamsR().get(0).getWilliamsR();
-		double currentCloseSignal = collection.getWilliamsR().get(1).getWilliamsR();
+		double previousCloseSignal = collection.get(0).getWilliamsR();
+		double currentCloseSignal = collection.get(1).getWilliamsR();
+		
+		ArrayList<DateTime> buySignal = new ArrayList<DateTime>();
 				
-		for(int i=1; i<collection.getWilliamsR().size(); i++) {
+		for(int i=1; i<collection.size(); i++) {
 			
-			previousCloseSignal = collection.getWilliamsR().get(i-1).getWilliamsR();
-			currentCloseSignal = collection.getWilliamsR().get(i).getWilliamsR();
+			previousCloseSignal = collection.get(i-1).getWilliamsR();
+			currentCloseSignal = collection.get(i).getWilliamsR();
 						
 			if((previousCloseSignal<=revaluation) && (currentCloseSignal>revaluation)){
-				buySignal.add(collection.getWilliamsR().get(i).getDate());
+				buySignal.add(collection.get(i).getDate());
 			}
-		}		
+		}	
+		
+		return buySignal;
 	}
 	
-	private void calculateSellsignals(WilliamsRCollectionForTicker collection) {
-		double previousCloseSignal = collection.getWilliamsR().get(0).getWilliamsR();
-		double currentCloseSignal = collection.getWilliamsR().get(1).getWilliamsR();
+	public ArrayList<DateTime> sellSignals(ArrayList<WilliamsRData> collection) {
+		double previousCloseSignal = collection.get(0).getWilliamsR();
+		double currentCloseSignal = collection.get(1).getWilliamsR();
 		
-		for(int i=1; i<collection.getWilliamsR().size(); i++) {
+		ArrayList<DateTime> sellSignal = new ArrayList<DateTime>();
+		
+		for(int i=1; i<collection.size(); i++) {
 			
-			previousCloseSignal = collection.getWilliamsR().get(i-1).getWilliamsR();
-			currentCloseSignal = collection.getWilliamsR().get(i).getWilliamsR();
+			previousCloseSignal = collection.get(i-1).getWilliamsR();
+			currentCloseSignal = collection.get(i).getWilliamsR();
 						
 			if((previousCloseSignal>=undervaluation) && (currentCloseSignal<undervaluation)){
-				sellSignal.add(collection.getWilliamsR().get(i).getDate());
+				sellSignal.add(collection.get(i).getDate());
 			}
 		}
+		
+		return sellSignal;
 	}
-	
-	public void generateWilliamsRSignals(WilliamsRCollectionForTicker collection) {
-		calculateBuysignals(collection);
-		calculateSellsignals(collection);
-	}
-
 }

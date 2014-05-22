@@ -30,7 +30,8 @@ import data.collector.StockTickerHistory;
 
 public class SimpleMovingAverageSignals {
 	
-	public ArrayList<DateTime> simpleBuy(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+	public ArrayList<DateTime> buySignal(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+		
 		double previousClose;
 		double currentClose;
 		double previousAverage;

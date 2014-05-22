@@ -1,7 +1,5 @@
 package indicators.ComplexMovingAverage;
 
-import indicators.simpleMovingAverage.AverageData;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -29,7 +27,7 @@ public class ComplexMovingAverageMain {
 		
 		CompexMovingAverageIndicator complexMovingAverageIndicator = new CompexMovingAverageIndicator();
 		List<AverageData> averageResults = complexMovingAverageIndicator.calculateComplexMovingAverage(15, 20, 25, stockCollectionForTicker);
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals(null);
+		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
 		//signals.generateBuySignals(averageResults, stockCollection);
 		
 		//System.out.println(averageResults.);

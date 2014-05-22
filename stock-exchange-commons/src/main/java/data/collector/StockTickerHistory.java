@@ -47,4 +47,32 @@ public class StockTickerHistory {
 		}
 		return null;
 	}
+	
+	public int findStockIndexByDate(DateTime date){
+		
+		int index = -1;
+		
+		if(stockTickerDataList.isEmpty()){
+			throw new IllegalStateException("Empty Stock Ticker Collection");
+		}
+		
+		if(date==null){
+			throw new IllegalArgumentException("Date is null!");
+		}
+		 
+		for(int i=0; i<this.stockTickerDataList.size();i++){
+			DateTime current = stockTickerDataList.get(i).getDate();
+			
+			if(current.equals(date)){
+				index = i;
+				return index;
+			}
+		}
+		
+		if(index==-1){
+			throw new IllegalStateException("Could not find it");
+		}
+		
+		return index;
+	}
 }

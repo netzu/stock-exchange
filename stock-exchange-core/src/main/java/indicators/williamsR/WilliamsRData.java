@@ -2,46 +2,10 @@ package indicators.williamsR;
 
 import org.joda.time.DateTime;
 
-public class WilliamsRData {
-	 private double highestHigh; 
-	 private double lowestLow;
-	 private double currentClose;
-	 
+public class WilliamsRData {	 
 	 private DateTime date;
 	 private double williamsR;
 	 
-
-	private void EquationForWilliamsPercentage(){
-		if(highestHigh==lowestLow){
-			//throw new IllegalStateException("Divided by 0. Highest is equal to Lowes in WilliamR calculation");
-			williamsR = 0.0;
-		}else{		
-			williamsR = ((highestHigh-currentClose)/(highestHigh - lowestLow)) * -100;
-		}
-	}
-	
-	public void CallculateWilliamsRValue(){
-		EquationForWilliamsPercentage();
-	}
-	 
-	public double getHighestHigh() {
-		return highestHigh;
-	}
-	public void setHighestHigh(double highestHigh) {
-		this.highestHigh = highestHigh;
-	}
-	public double getLowestLow() {
-		return lowestLow;
-	}
-	public void setLowestLow(double lowestLow) {
-		this.lowestLow = lowestLow;
-	}
-	public double getCurrentClose() {
-		return currentClose;
-	}
-	public void setCurrentClose(double currentClose) {
-		this.currentClose = currentClose;
-	}
 	public DateTime getDate() {
 		return date;
 	}
