@@ -414,8 +414,8 @@ public class SingleBuysignalEffectivenesTest {
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 			List<Double> currentResults = signalEffectivnes.valueGainPerDay(days, buySignal, collection);
 			
-			result = checkIfListAreEqual(expectedResults, result,
-					currentResults);
+			result = checkIfListAreEqual(expectedResults, result, currentResults);
+			assertTrue(expectedResults.size() == currentResults.size());
 			assertTrue(result);
 		}catch(Exception ex){
 			fail("Exception when not excpected: " + ex.getMessage());
@@ -439,8 +439,8 @@ public class SingleBuysignalEffectivenesTest {
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 			List<Double> currentResults = signalEffectivnes.valueGainPerDay(days, buySignal, collection);
 			
-			result = checkIfListAreEqual(expectedResults, result,
-					currentResults);
+			result = checkIfListAreEqual(expectedResults, result, currentResults);
+			assertTrue(expectedResults.size() == currentResults.size());
 			assertTrue(result);
 		}catch(Exception ex){
 			fail("Exception when not excpected: " + ex.getMessage());
@@ -450,7 +450,7 @@ public class SingleBuysignalEffectivenesTest {
 	@Test
 	public void valueGain_05() throws ParseException, IOException{
 		
-		int days = 10;
+		int days = 5;
 		DateTime buySignal = dateFormater.parseDateTime("20100315");
 		StockTickerHistory collection = new StockTickerHistory();
 		collection = mock.readTickerData(PATH + "valueGain_tickerData_05");
@@ -464,8 +464,8 @@ public class SingleBuysignalEffectivenesTest {
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 			List<Double> currentResults = signalEffectivnes.valueGainPerDay(days, buySignal, collection);
 			
-			result = checkIfListAreEqual(expectedResults, result,
-					currentResults);
+			result = checkIfListAreEqual(expectedResults, result, currentResults);
+			assertTrue(expectedResults.size() == currentResults.size());
 			assertTrue(result);
 		}catch(Exception ex){
 			fail("Exception when not excpected: " + ex.getMessage());

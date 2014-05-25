@@ -80,7 +80,8 @@ public class WilliamsRIndicatorTest {
 
 	@Test
 	public void highestEqualLowest() throws ParseException{
-		StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "highestEqualCurrentClose.mst");
+		
+		StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "highestEqualLowest.mst");
 		int period = 8;
 		
 		WilliamsRIndicator williamsR = new WilliamsRIndicator();		
