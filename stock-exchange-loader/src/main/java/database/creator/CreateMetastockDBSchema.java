@@ -26,12 +26,11 @@ public class CreateMetastockDBSchema {
     }
     
     private void createTableIfNotExist(){
-    	PreparedStatement statement = null;
-    	int resultOfQuery;
     	
 		try {
-			statement = connection.prepareStatement(CREATE_METASTOCK_TABLE);
-			resultOfQuery = statement.executeUpdate();
+			PreparedStatement statement = connection.prepareStatement(CREATE_METASTOCK_TABLE);
+			statement.executeUpdate();
+			statement.close();
 			
 			log.trace("Daily_Stock_Info TABLE has been created");
 		} catch (SQLException e) {
@@ -41,12 +40,11 @@ public class CreateMetastockDBSchema {
     }
     
     private void createIndexIfNotExist(){
-    	PreparedStatement statement;
-    	int resultOfQuery;
-    	
+
     	try {
-			statement = connection.prepareStatement(CREATE_INDEX);
-			resultOfQuery = statement.executeUpdate();
+    		PreparedStatement statement = connection.prepareStatement(CREATE_INDEX);
+    		statement.executeUpdate();
+    		statement.close();
 			
 			log.info("INDEX on Daily_Stock_Info TABLE has been created");
 		} catch (SQLException e) {

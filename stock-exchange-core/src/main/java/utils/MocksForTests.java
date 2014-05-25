@@ -22,7 +22,7 @@ import data.DataFileReader;
 import data.collector.StockTickerHistory;
 
 public class MocksForTests {
-	
+
 	private static final int COUNT_POSITIVE_INDEX = 11;
 	private static final int COUNT_NEGATIVE_INDEX = 10;
 	private static final int POSITIVE_PROFITS_INDEX = 9;
@@ -35,163 +35,169 @@ public class MocksForTests {
 	private static final int AVERAGE_INDEX = 2;
 	private static final int PERCENTAGE_SUM_INDEX = 1;
 	private static final int PROFITS_SUM_INDEX = 0;
-	private DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
-	
-    public List<SimpleMovingAverageData> getAverageData(final String path) throws IOException {
+	private DateTimeFormatter dateFormater = DateTimeFormat
+			.forPattern("yyyyMMdd");
 
-        
-        final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+	public List<SimpleMovingAverageData> getAverageData(final String path) throws IOException {
 
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		final List<SimpleMovingAverageData> result = new ArrayList<SimpleMovingAverageData>();
 
-        final List<SimpleMovingAverageData> result = new ArrayList<SimpleMovingAverageData>();
+		String line = null;
 
-        String line = null;
+		while ((line = reader.readLine()) != null) {
 
-        while ((line = reader.readLine()) != null) {
+			String[] splitData = line.split(",");
 
-            String[] splitData = line.split(",");
+			if (splitData.length != 2) {
+				throw new IllegalStateException(
+						"Wrong data format, expected date<yyyyMMdd>,price<double>");
+			}
 
-            if (splitData.length != 2) {
-                throw new IllegalStateException("Wrong data format, expected date<yyyyMMdd>,price<double>");
-            }
+			SimpleMovingAverageData averageData = new SimpleMovingAverageData();
+			averageData.setAverage(Double.parseDouble(splitData[1]));
+			final DateTime date = dateFormater.parseDateTime(splitData[0]);
+			averageData.setDate(date);
 
-            SimpleMovingAverageData averageData = new SimpleMovingAverageData();
-            averageData.setAverage(Double.parseDouble(splitData[1]));
-            final DateTime date = dateFormater.parseDateTime(splitData[0]);
-            averageData.setDate(date);
+			result.add(averageData);
+		}
 
-            result.add(averageData);
-        }
+		reader.close();
+		return result;
 
-        return result;
+	}
 
-    }
-    
-    public List<DateTime> getBuysignal(final String path) throws IOException{
-    	
-    	List<DateTime> buysignal = new ArrayList<DateTime>();
-    	
-    	final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
-    	final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-    	
-    	String line = null;
-    	
-    	while ((line = reader.readLine()) != null) {
-    		final DateTime date = dateFormater.parseDateTime(line);
-    		buysignal.add(date);
-    	}
-    	
-    	return buysignal;
-    }
-    
-    public List<Boolean> getCorrectSignals(final String path) throws IOException{
-    	
-    	final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
-    	final BufferedReader reader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+	public List<DateTime> getBuysignal(final String path) throws IOException {
 
-    	String line = null;
-    	
-    	List<Boolean> correctSignals = new ArrayList<Boolean>();
-    	
-    	while ((line = reader.readLine()) != null) {
-  
-    		if(line.trim().equals("t")){
-    			correctSignals.add(true);
-    		}
-    		else if(line.trim().equals("f")) {
-    			correctSignals.add(false);
-    		}
-    		else{
-    			throw new IllegalStateException("Value in input file is nither t or f");
-    		}
-    	}
-    	
-    	return correctSignals;
-    }
-    
-    public List<Double> getGainedPercentag(final String path) throws IOException{
-    	
-    	final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
-    	final BufferedReader reader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+		List<DateTime> buySignal = new ArrayList<DateTime>();
 
-    	String line = null;
-    	
-    	List<Double> correctSignals = new ArrayList<Double>();
-    	
-    	while ((line = reader.readLine()) != null) {
-    		correctSignals.add(Double.parseDouble(line));
-     	}
-    	
-    	return correctSignals;
-    }
+		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
-    public List<ProfitsFromSignal> getProfitsFromSignal(final String path) throws IOException{
-    	List<ProfitsFromSignal> profits = new ArrayList<ProfitsFromSignal>();
+		String line = null;
+
+		while ((line = reader.readLine()) != null) {
+			final DateTime date = dateFormater.parseDateTime(line);
+			buySignal.add(date);
+		}
+
+		reader.close();
+
+		return buySignal;
+	}
+
+	public List<Boolean> getCorrectSignals(final String path) throws IOException {
+
+		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+		String line = null;
+
+		List<Boolean> correctSignals = new ArrayList<Boolean>();
+
+		while ((line = reader.readLine()) != null) {
+
+			if (line.trim().equals("t")) {
+				correctSignals.add(true);
+			} else if (line.trim().equals("f")) {
+				correctSignals.add(false);
+			} else {
+				throw new IllegalStateException(
+						"Value in input file is nither t or f");
+			}
+		}
+
+		reader.close();
+		return correctSignals;
+	}
+
+	public List<Double> getGainedPercentag(final String path) throws IOException {
+
+		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+		String line = null;
+
+		List<Double> correctSignals = new ArrayList<Double>();
+
+		while ((line = reader.readLine()) != null) {
+			correctSignals.add(Double.parseDouble(line));
+		}
+
+		reader.close();
+		return correctSignals;
+	}
+
+	public List<ProfitsFromSignal> getProfitsFromSignal(final String path) throws IOException {
 		
-        final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+		List<ProfitsFromSignal> profits = new ArrayList<ProfitsFromSignal>();
 
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
-        String line = null;
-        
-        while ((line = reader.readLine()) != null) {
-        	ProfitsFromSignal profistForOneDay = new ProfitsFromSignal();
+		String line = null;
 
-            String[] splitData = line.split(",");
+		while ((line = reader.readLine()) != null) {
+			ProfitsFromSignal profistForOneDay = new ProfitsFromSignal();
 
-            if (splitData.length != 2) {
-                throw new IllegalStateException("Wrong data format, expected date<yyyyMMdd>,price<double>");
-            }
-            
-            profistForOneDay.setProfit(Double.parseDouble(splitData[0]));
-            profistForOneDay.setProfitInPercentage(Double.parseDouble(splitData[1]));
-            
-            profits.add(profistForOneDay);
-        }
-    	
-    	return profits;    	
-    }
-    
-    public BuySingalStatistics getBuySignalStatistics(final String path) throws IOException{
-    	BuySingalStatistics stats = new  BuySingalStatistics();
-    			
-        final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+			String[] splitData = line.split(",");
 
-        final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+			if (splitData.length != 2) {
+				throw new IllegalStateException(
+						"Wrong data format, expected date<yyyyMMdd>,price<double>");
+			}
 
-        String line = null;
-        
-        while ((line = reader.readLine()) != null) {
-        	String[] splitData = line.split(",");
-        	
-        	stats.setSumOfProfits(Double.parseDouble(splitData[PROFITS_SUM_INDEX]));
-        	stats.setSumOfPercentage(Double.parseDouble(splitData[PERCENTAGE_SUM_INDEX]));
-        	stats.setAverage(Double.parseDouble(splitData[AVERAGE_INDEX]));        	
-        	stats.setStandardDeviation(Double.parseDouble(splitData[STAND_DEV_INDEX]));
-        	stats.setMedian(Double.parseDouble(splitData[MEDIAN_INDEX]));
-        	stats.setVariance(Double.parseDouble(splitData[VARIANCE_INDEX]));
-        	stats.setMin(Double.parseDouble(splitData[MIN_INDEX]));
-        	stats.setMax(Double.parseDouble(splitData[MAX_INDEX]));
-        	stats.setSumNegativeProfits(Double.parseDouble(splitData[NEGATIVE_PROFITS_INDEX]));
-        	stats.setSumPositiveProfits(Double.parseDouble(splitData[POSITIVE_PROFITS_INDEX]));
-        	stats.setCountNegativeProfits(Double.parseDouble(splitData[COUNT_NEGATIVE_INDEX]));
-        	stats.setCountPositiveProfits(Double.parseDouble(splitData[COUNT_POSITIVE_INDEX]));
-        }
-    	
-		return stats;    	
-    }
-    
-    public StockTickerHistory readTickerData(final String path) throws ParseException {
+			profistForOneDay.setProfit(Double.parseDouble(splitData[0]));
+			profistForOneDay.setProfitInPercentage(Double
+					.parseDouble(splitData[1]));
 
+			profits.add(profistForOneDay);
+		}
 
-        URL resource = this.getClass().getClassLoader().getResource(path);
+		reader.close();
 
-        final String filePath = resource.getPath();
+		return profits;
+	}
 
-        DataFileReader fileReader = new DataFileReader();
+	public BuySingalStatistics getBuySignalStatistics(final String path) throws IOException {
+		BuySingalStatistics stats = new BuySingalStatistics();
 
-        return fileReader.getStockTickerCollection(new File(filePath));
-    }
+		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+		String line = null;
+
+		while ((line = reader.readLine()) != null) {
+			String[] splitData = line.split(",");
+
+			stats.setSumOfProfits(Double.parseDouble(splitData[PROFITS_SUM_INDEX]));
+			stats.setSumOfPercentage(Double.parseDouble(splitData[PERCENTAGE_SUM_INDEX]));
+			stats.setAverage(Double.parseDouble(splitData[AVERAGE_INDEX]));
+			stats.setStandardDeviation(Double.parseDouble(splitData[STAND_DEV_INDEX]));
+			stats.setMedian(Double.parseDouble(splitData[MEDIAN_INDEX]));
+			stats.setVariance(Double.parseDouble(splitData[VARIANCE_INDEX]));
+			stats.setMin(Double.parseDouble(splitData[MIN_INDEX]));
+			stats.setMax(Double.parseDouble(splitData[MAX_INDEX]));
+			stats.setSumNegativeProfits(Double.parseDouble(splitData[NEGATIVE_PROFITS_INDEX]));
+			stats.setSumPositiveProfits(Double.parseDouble(splitData[POSITIVE_PROFITS_INDEX]));
+			stats.setCountNegativeProfits(Double.parseDouble(splitData[COUNT_NEGATIVE_INDEX]));
+			stats.setCountPositiveProfits(Double.parseDouble(splitData[COUNT_POSITIVE_INDEX]));
+		}
+
+		reader.close();
+		return stats;
+	}
+
+	public StockTickerHistory readTickerData(final String path) throws ParseException {
+
+		URL resource = this.getClass().getClassLoader().getResource(path);
+
+		final String filePath = resource.getPath();
+
+		DataFileReader fileReader = new DataFileReader();
+
+		return fileReader.getStockTickerCollection(new File(filePath));
+	}
 
 }

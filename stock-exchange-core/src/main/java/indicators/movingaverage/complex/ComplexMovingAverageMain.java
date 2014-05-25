@@ -23,12 +23,11 @@ public class ComplexMovingAverageMain {
 		
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
-		
-		StockTickerHistory stockCollectionForTicker = new StockTickerHistory();
+
 		String tickerName = "LENA";
 		
 		StockDataSelect ticker = new StockDataSelect(connection);
-		stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
+		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
 		
 		CompexMovingAverageIndicator complexMovingAverageIndicator = new CompexMovingAverageIndicator();
 		List<AverageData> averageResults = complexMovingAverageIndicator.calculateComplexMovingAverage(PERIOD_FOR_FIRST_AVERAGE, PERIOD_FOR_SECOND_AVERAGE, PERIOD_FOR_THIRD_AVERAGE, stockCollectionForTicker);	

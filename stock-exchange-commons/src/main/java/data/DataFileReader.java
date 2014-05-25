@@ -11,14 +11,19 @@ import data.collector.StockTickerHistory;
 
 public class DataFileReader {
 
-	private StockTickerHistory readStockData(final File tickerFile) throws ParseException {
+	private StockTickerHistory readStockData(final File tickerFile) throws ParseException, IOException {
 		StockTickerHistory stockTickerCollection = new StockTickerHistory();
+		BufferedReader reader = null;
 		
 		try {
-			FileReader stockDataReader = new FileReader(tickerFile);
-			BufferedReader reader = new BufferedReader(stockDataReader);
+			reader = new BufferedReader(new FileReader(tickerFile));
 			
 			String fileLine = reader.readLine();
+			
+			if(fileLine == null){
+				throw new IllegalStateException("Stock ticker is empty");
+			}
+			
 			String exclude = "<TICKER>,<DTYYYYMMDD>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOL>";
 			
 			if (fileLine.startsWith(exclude)){
@@ -37,11 +42,21 @@ public class DataFileReader {
 			
 		} catch (final IOException ioe) {
 			ioe.printStackTrace();
+		}finally{
+			if (null != reader) {
+				reader.close();
+			}
 		}
 		return stockTickerCollection;
 	}
 
 	public StockTickerHistory getStockTickerCollection(final File tickerFile) throws ParseException {
-		return readStockData(tickerFile);
+		
+		try{
+			StockTickerHistory result = readStockData(tickerFile);
+			return result;
+		}catch(IOException ex){
+			throw new IllegalStateException();
+		}		
 	}
 }

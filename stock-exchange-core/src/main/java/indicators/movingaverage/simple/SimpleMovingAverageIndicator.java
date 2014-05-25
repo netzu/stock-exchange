@@ -42,8 +42,7 @@ public class SimpleMovingAverageIndicator {
 		
 		for(int i=0; i<tickerCollection.getStockTickerDataList().size()-period+1; i++){
 			
-			List <StockTicker> subList = new ArrayList<StockTicker>();
-			subList = tickerCollection.subListOfCollection(i, i+period);
+			List <StockTicker> subList = tickerCollection.subListOfCollection(i, i+period);
 			
 			average.add(averageFromPeriod(subList));			
 		}

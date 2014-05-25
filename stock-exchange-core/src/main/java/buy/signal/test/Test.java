@@ -45,8 +45,7 @@ public class Test {
 		SingleBuySignalEffectiveness testOfBuySignalEffectiveness = new SingleBuySignalEffectiveness();
 		
 		PrintWriter positiveResults = new PrintWriter("D:\\wyniki\\one_signal_results.txt", "UTF-8");
-		String stingForPositiveResults = new String();
-		stingForPositiveResults = "ticker;nr of days;day;T/F";
+		String stingForPositiveResults = "ticker;nr of days;day;T/F";
 		positiveResults.println(stingForPositiveResults);
 		
 		PrintWriter percentageGained = new PrintWriter("D:\\wyniki\\percentage_gain.txt", "UTF-8");

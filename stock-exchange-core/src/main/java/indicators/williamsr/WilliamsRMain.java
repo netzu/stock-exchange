@@ -22,12 +22,11 @@ public class WilliamsRMain {
     	
     	StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
-		
-		StockTickerHistory stockCollectionForTicker = new StockTickerHistory();
+
 		String tickerName = "LENA";
 		
 		StockDataSelect ticker = new StockDataSelect(connection);
-		stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
+		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
 		
 		WilliamsRIndicator wiRIndicator = new WilliamsRIndicator();
 		wiRIndicator.calculateWilliamsR(WILLIAMS_PERIOD, stockCollectionForTicker);

@@ -37,11 +37,10 @@ public class WilliamsRAllTickersMain {
 		
 		for(int i=0; i<listOfTickerNames.size(); i++){
 			
-			StockTickerHistory stockCollectionForTicker = new StockTickerHistory();
 			String tickerName = listOfTickerNames.get(i);
 			
 			StockDataSelect ticker = new StockDataSelect(connection);
-			stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
+			StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
 			WilliamsRIndicator wiRIndicator = new WilliamsRIndicator();
 			wiRIndicator.calculateWilliamsR(WILLIAMS_PERIOD, stockCollectionForTicker);		
 					

@@ -29,14 +29,13 @@ public class MetastockDBUpdater {
 		final Connection connection = new DBConnection().getConnection(this.properties);
 
 		try {
-			StockTickerHistory stockList = new StockTickerHistory();
 			DataFileReader dataReader = new DataFileReader();
 
 			MetastockFilesCollection allFilesInFolder = new MetastockFilesCollection(
 					this.properties);
 
 			for (final File tickerFile : allFilesInFolder.getListOfFiles()) {
-				stockList = dataReader.getStockTickerCollection(tickerFile);
+				StockTickerHistory stockList = dataReader.getStockTickerCollection(tickerFile);
 				LOGGER.info("Updated DB with " + tickerFile.getName());
 
 				StockDataInsert upToDateStockDataDb = new StockDataInsert(
