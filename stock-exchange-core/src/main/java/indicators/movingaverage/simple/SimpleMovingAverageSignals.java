@@ -48,8 +48,9 @@ public class SimpleMovingAverageSignals {
 			currentAverage = averageCollection.get(i).getAverage();
 			
 			if((previousClose<currentClose) && (previousAverage<=currentAverage) 
-			&& (previousClose<previousAverage) && (previousAverage<currentClose)
-			&& (previousClose<currentAverage) && (currentAverage<currentClose)) {
+					&& (previousClose<previousAverage) && (previousAverage<currentClose)
+					&& (previousClose<currentAverage) && (currentAverage<currentClose)) {
+				
 				buySignal.add(averageCollection.get(i).getDate());
 			}
 		}
@@ -73,9 +74,10 @@ public class SimpleMovingAverageSignals {
 			previousAverage = averageCollection.get(i-1).getAverage();
 			currentAverage = averageCollection.get(i).getAverage();
 			
-			if((previousClose>currentClose) && (previousAverage>=currentAverage) 
-			&& (previousAverage>currentClose) && (previousAverage<previousClose)
-			&& (currentAverage>currentClose) && (currentAverage<previousClose)) {
+			if((previousClose>currentClose) && (previousAverage>=currentAverage)
+					&&(previousAverage>currentClose) && (previousAverage<previousClose)
+					&&(currentAverage>currentClose) && (currentAverage<previousClose)) {
+				
 				sellSignal.add(averageCollection.get(i).getDate());
 			}
 		}	

@@ -30,6 +30,14 @@ public class SimpleMovingAverageIndicator {
 	 */
 	public static List<SimpleMovingAverageData> calculateSimpleMovingAverage(int period, StockTickerHistory tickerCollection){
 		
+		if(period == 0){
+			throw new SimpleMovingAverageCalculationException("Simple moving avarage cannot be calculated if period is zero");
+		}
+		
+		if(tickerCollection.getStockTickerDataList().isEmpty()){
+			throw new SimpleMovingAverageCalculationException("Simple moving average cannot be calculated for ticker without now history");
+		}
+		
 		List<SimpleMovingAverageData> average = new ArrayList<SimpleMovingAverageData>();
 		
 		for(int i=0; i<tickerCollection.getStockTickerDataList().size()-period+1; i++){
