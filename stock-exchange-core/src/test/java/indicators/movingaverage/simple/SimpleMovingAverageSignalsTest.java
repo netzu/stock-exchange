@@ -887,6 +887,23 @@ public class SimpleMovingAverageSignalsTest {
        assertTrue(sellSignal.isEmpty());
    }
 
+   //previousClose <= current Close && previousAvr<=CurrentAveage
+   @Test
+   public void Test_046() throws IOException, ParseException {
+	   
+       List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_046_average_data.txt");
+       StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_046_ticker.mst");
+
+       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       List<DateTime> buySignal = new ArrayList<DateTime>();
+       buySignal = signals.buySignal(averageData, history);
+       
+       DateTime dt = dateFormater.parseDateTime("20100419");
+       assertEquals(1, buySignal.size());
+       assertTrue(buySignal.contains(dt));
+      
+       assertFalse(buySignal.isEmpty());
+   }
 }
 
 
