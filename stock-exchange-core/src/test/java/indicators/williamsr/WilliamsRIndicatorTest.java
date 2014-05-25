@@ -21,7 +21,7 @@ import utils.MocksForTests;
 public class WilliamsRIndicatorTest {
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 	
-	final static String PATH_FLAT = new String("indicators/williamsr/");
+	final static String PATH_FLAT = new String("indicators/williams/");
 	
 	MocksForTests mock = new MocksForTests();
 	
