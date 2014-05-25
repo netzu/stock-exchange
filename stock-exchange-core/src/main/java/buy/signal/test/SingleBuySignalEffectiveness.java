@@ -89,18 +89,29 @@ public class SingleBuySignalEffectiveness {
 		return balanceInPercentage;
 	}
 	
-	public double[] valueGainPerDay(int numberOfDays, DateTime buySignals, StockTickerHistory collection){
+	public List<Double> valueGainPerDay(int numberOfDays, DateTime buySignals, StockTickerHistory collection){			
 		
+		if(numberOfDays==0){
+			throw new BuySignalEffectivenessException("Number days in test cannot be 0");
+		}
 		
-		double[] balanceInMoney = new double[numberOfDays];
+		if(collection.getStockTickerDataList().isEmpty()){
+			throw new BuySignalEffectivenessException("Ticker collection cannot be empty");
+		}
+		
+		List<Double> balanceInMoney = new ArrayList<Double>();
 		double priceOfBuy = collection.findStockByDate(buySignals).getClose();
 		int index = collection.findStockIndexByDate(buySignals);
 		
+		if(collection.getStockTickerDataList().size()-index <= numberOfDays){
+			numberOfDays = collection.getStockTickerDataList().size()-index-1;
+		}
+		
 		for(int i=0; i<numberOfDays; i++){	
-			double currentPrice = collection.getStockTickerDataList().get(index+i).getClose();
+			double currentPrice = collection.getStockTickerDataList().get(index+i+1).getClose();
 			double delta = currentPrice - priceOfBuy;
 			
-			balanceInMoney[i] = delta;
+			balanceInMoney.add(delta);
 		}
 		
 		return balanceInMoney;

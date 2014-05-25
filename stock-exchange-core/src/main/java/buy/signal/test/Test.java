@@ -58,13 +58,13 @@ public class Test {
 		for(int i=0; i<buySignlaList.size();i++){
 			List<Boolean> daysWithPositiveResults = testOfBuySignalEffectiveness.daysWithPositiveResults(NUMBER_OF_DAYS_TO_TEST, buySignlaList.get(i), stockCollectionForTicker);
 			List<Double> percentageGainPerDay = testOfBuySignalEffectiveness.percentageGainPerDay(NUMBER_OF_DAYS_TO_TEST, buySignlaList.get(i), stockCollectionForTicker);
-			double[] valueGainPerDay = testOfBuySignalEffectiveness.valueGainPerDay(NUMBER_OF_DAYS_TO_TEST, buySignlaList.get(i), stockCollectionForTicker);
+			List<Double> valueGainPerDay = testOfBuySignalEffectiveness.valueGainPerDay(NUMBER_OF_DAYS_TO_TEST, buySignlaList.get(i), stockCollectionForTicker);
 			
 			for(int j=0; j<daysWithPositiveResults.size(); j++){
 				stingForPositiveResults = tickerName + ";" + daysWithPositiveResults.size() + ";" + j + ";" + daysWithPositiveResults.get(j);
 				positiveResults.println(stingForPositiveResults);
 				
-				stringForPercentage = tickerName + ";" + daysWithPositiveResults.size() + ";" + j + ";" + percentageGainPerDay.get(j) + ";" + valueGainPerDay[j];
+				stringForPercentage = tickerName + ";" + daysWithPositiveResults.size() + ";" + j + ";" + percentageGainPerDay.get(j) + ";" + valueGainPerDay.get(j);
 				positiveResults.println(stringForPercentage);
 			}
 			

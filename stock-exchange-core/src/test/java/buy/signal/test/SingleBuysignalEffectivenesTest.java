@@ -22,6 +22,20 @@ public class SingleBuysignalEffectivenesTest {
 	
 	MocksForTests mock = new MocksForTests();
 	
+	//is checking if list with current results contains the sam evalues on teh same positions as expected results
+	private boolean checkIfListAreEqual(List<Double> expectedResults, boolean result, List<Double> currentResults) {
+		//TBD - zucic wyjatek jak nie sa rowne
+		for(int i=0; i < expectedResults.size(); i++){
+			result = Precision.equalsIncludingNaN(currentResults.get(i), expectedResults.get(i), 0.0001);
+			
+			if(!result){
+				result = false;
+				break;		
+			}
+		}
+		return result;
+	}
+	
 	//input for this method have two true values and one false, the results should be true
 	@Test
 	public void wasSignalCorrect_001() throws IOException{
@@ -200,6 +214,28 @@ public class SingleBuysignalEffectivenesTest {
 		}		
 	}
 	
+	//chech if test correct number of days
+	@Test
+	public void daysWithPositiveResults_06() throws ParseException, IOException{
+		
+		int days = 7;
+		DateTime buySignal = dateFormater.parseDateTime("20100315");
+		StockTickerHistory collection = new StockTickerHistory();
+		collection = mock.readTickerData(PATH + "daysWithPositiveResults_tickerData_06");
+		
+		List<Boolean> expectedResults = new ArrayList<Boolean>();		
+		expectedResults = mock.getCorrectSignals(PATH + "daysWithPositiveResults_expectedResults_06");
+		
+		try{
+			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+			List<Boolean> currentResults = signalEffectivnes.daysWithPositiveResults(days, buySignal, collection);
+			assertTrue(currentResults.equals(expectedResults));
+			assertTrue(currentResults.size() == 7);
+		}catch(Exception ex){
+			fail("Exception when not excpected: " + ex.getMessage());
+		}		
+	}
+	
 	//number of days equal 0, expecting an exception
 	@Test
 	public void percentageGained_01() throws ParseException{
@@ -207,7 +243,7 @@ public class SingleBuysignalEffectivenesTest {
 		int days = 0;
 		DateTime buySignal = dateFormater.parseDateTime("20100315");
 		StockTickerHistory collection = new StockTickerHistory();
-		collection = mock.readTickerData(PATH + "percentageGained_01");
+		collection = mock.readTickerData(PATH + "percentageGained_tickerData_01");
 		
 		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 		String expectedErrorMessage = "Number days in test cannot be 0";
@@ -227,7 +263,7 @@ public class SingleBuysignalEffectivenesTest {
 		int days = 3;
 		DateTime buySignal = dateFormater.parseDateTime("20100315");
 		StockTickerHistory collection = new StockTickerHistory();
-		collection = mock.readTickerData(PATH + "percentageGained_02");
+		collection = mock.readTickerData(PATH + "percentageGained_tickerData_02");
 		
 		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 		String expectedErrorMessage = "Ticker collection cannot be empty";
@@ -258,14 +294,8 @@ public class SingleBuysignalEffectivenesTest {
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 			List<Double> currentResults = signalEffectivnes.percentageGainPerDay(days, buySignal, collection);
 			
-			for(int i=0; i < expectedResults.size(); i++){
-				result = Precision.equalsIncludingNaN(currentResults.get(i), expectedResults.get(i), 0.0001);
-				
-				if(!result){
-					result = false;
-					break;		
-				}
-			}
+			result = checkIfListAreEqual(expectedResults, result, currentResults);
+			
 			assertTrue(result);
 			assertTrue(currentResults.size() == 7);
 		}catch(Exception ex){
@@ -291,42 +321,154 @@ public class SingleBuysignalEffectivenesTest {
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 			List<Double> currentResults = signalEffectivnes.percentageGainPerDay(days, buySignal, collection);
 			
-			for(int i=0; i < expectedResults.size(); i++){
-				result = Precision.equalsIncludingNaN(currentResults.get(i), expectedResults.get(i), 0.0001);
-				
-				if(!result){
-					result = false;
-					break;		
-				}
-			}
+			result = checkIfListAreEqual(expectedResults, result, currentResults);
 			assertTrue(result);
 		}catch(Exception ex){
 			fail("Exception when not excpected: " + ex.getMessage());
 		}		
 	}
 	
-	//buy day in the last day of session
+	//chech if test correct number of days
 	@Test
 	public void percentageGained_05() throws ParseException, IOException{
 		
-		int days = 3;
-		DateTime buySignal = dateFormater.parseDateTime("20100322");
+		int days = 4;
+		DateTime buySignal = dateFormater.parseDateTime("20100315");
 		StockTickerHistory collection = new StockTickerHistory();
 		collection = mock.readTickerData(PATH + "percentageGained_tickerData_05");
 		
 		List<Double> expectedResults = new ArrayList<Double>();		
 		expectedResults = mock.getGainedPercentag(PATH + "percentageGained_ExpectedResults_05");
 		
+		boolean result = false;
+		
 		try{
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 			List<Double> currentResults = signalEffectivnes.percentageGainPerDay(days, buySignal, collection);
-
-			assertTrue(currentResults.isEmpty());
-			assertTrue(expectedResults.equals(currentResults));
 			
+			result = checkIfListAreEqual(expectedResults, result, currentResults);
+			
+			assertTrue(result);
+			assertTrue(expectedResults.size()==currentResults.size());
+			assertTrue(currentResults.size()==days);
 		}catch(Exception ex){
 			fail("Exception when not excpected: " + ex.getMessage());
 		}		
 	}
+
+	//buy day in the last day of session
+	@Test
+	public void valueGain_01() throws ParseException, IOException{
+		
+		int days = 0;
+		DateTime buySignal = dateFormater.parseDateTime("20100315");
+		StockTickerHistory collection = new StockTickerHistory();
+		collection = mock.readTickerData(PATH + "valueGain_tickerData_01");
+		
+		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+		String expectedErrorMessage = "Number days in test cannot be 0";
+		
+		try{
+			signalEffectivnes.valueGainPerDay(days, buySignal, collection);
+			fail("No exception has been found, expected: " + expectedErrorMessage);
+		}catch(BuySignalEffectivenessException ex){
+			assertTrue("Exception message is diffrent that expected. Expected: " + expectedErrorMessage + ". Got: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
+		}	
+	}
 	
+	//stock ticker empty
+	@Test
+	public void valueGain_02() throws ParseException{
+		
+		int days = 3;
+		DateTime buySignal = dateFormater.parseDateTime("20100315");
+		StockTickerHistory collection = new StockTickerHistory();
+		collection = mock.readTickerData(PATH + "valueGain_tickerData_02");
+		
+		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+		String expectedErrorMessage = "Ticker collection cannot be empty";
+		
+		try{
+			signalEffectivnes.valueGainPerDay(days, buySignal, collection);
+			fail("No exception has been found, expected: " + expectedErrorMessage);
+		}catch(BuySignalEffectivenessException ex){
+			assertTrue("Exception message is diffrent that expected. Expected: " + expectedErrorMessage + ". Got: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
+		}
+	}
+	
+	//more days to test than available
+	@Test
+	public void valueGain_03() throws ParseException, IOException{
+		
+		int days = 10;
+		DateTime buySignal = dateFormater.parseDateTime("20100315");
+		StockTickerHistory collection = new StockTickerHistory();
+		collection = mock.readTickerData(PATH + "valueGain_tickerData_03");
+		
+		List<Double> expectedResults = new ArrayList<Double>();		
+		expectedResults = mock.getGainedPercentag(PATH + "valueGain_ExpectedResults_03");
+		
+		boolean result = false;
+		
+		try{
+			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+			List<Double> currentResults = signalEffectivnes.valueGainPerDay(days, buySignal, collection);
+			
+			result = checkIfListAreEqual(expectedResults, result,
+					currentResults);
+			assertTrue(result);
+		}catch(Exception ex){
+			fail("Exception when not excpected: " + ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void valueGain_04() throws ParseException, IOException{
+		
+		int days = 10;
+		DateTime buySignal = dateFormater.parseDateTime("20100315");
+		StockTickerHistory collection = new StockTickerHistory();
+		collection = mock.readTickerData(PATH + "valueGain_tickerData_04");
+		
+		List<Double> expectedResults = new ArrayList<Double>();		
+		expectedResults = mock.getGainedPercentag(PATH + "valueGain_ExpectedResults_04");
+		
+		boolean result = false;
+		
+		try{
+			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+			List<Double> currentResults = signalEffectivnes.valueGainPerDay(days, buySignal, collection);
+			
+			result = checkIfListAreEqual(expectedResults, result,
+					currentResults);
+			assertTrue(result);
+		}catch(Exception ex){
+			fail("Exception when not excpected: " + ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void valueGain_05() throws ParseException, IOException{
+		
+		int days = 10;
+		DateTime buySignal = dateFormater.parseDateTime("20100315");
+		StockTickerHistory collection = new StockTickerHistory();
+		collection = mock.readTickerData(PATH + "valueGain_tickerData_05");
+		
+		List<Double> expectedResults = new ArrayList<Double>();		
+		expectedResults = mock.getGainedPercentag(PATH + "valueGain_ExpectedResults_05");
+		
+		boolean result = false;
+		
+		try{
+			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+			List<Double> currentResults = signalEffectivnes.valueGainPerDay(days, buySignal, collection);
+			
+			result = checkIfListAreEqual(expectedResults, result,
+					currentResults);
+			assertTrue(result);
+		}catch(Exception ex){
+			fail("Exception when not excpected: " + ex.getMessage());
+		}
+	}
 }
