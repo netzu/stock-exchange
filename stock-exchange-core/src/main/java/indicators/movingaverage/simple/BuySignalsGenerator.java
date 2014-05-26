@@ -27,9 +27,8 @@ public class BuySignalsGenerator {
 			previousAverage = averageCollection.get(i-1).getAverage();
 			currentAverage = averageCollection.get(i).getAverage();
 			
-			DecisionChain decisionChain = new DecisionChain();
 			DecissionChainFactory decissionChainFactory = new DecissionChainFactory();
-			decisionChain = decissionChainFactory.createChanForBuy(currentClose, previousAverage, currentAverage, previousClose);
+			DecisionChain decisionChain = decissionChainFactory.createChanForBuy(currentClose, previousAverage, currentAverage, previousClose);
 
 			
 			if(decisionChain.evaluate()) {				

@@ -30,11 +30,10 @@ public class Test {
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
 		
-		StockTickerHistory stockCollectionForTicker = new StockTickerHistory();
+		StockDataSelect ticker = new StockDataSelect(connection);
 		String tickerName = "LENA";
 		
-		StockDataSelect ticker = new StockDataSelect(connection);
-		stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
+		StockTickerHistory stockCollectionForTicker =  ticker.getAllDataForStockTicker(tickerName);
 		
 		WilliamsRIndicator wiRIndicator = new WilliamsRIndicator();
 		ArrayList<WilliamsRData> collection = wiRIndicator.calculateWilliamsR(WILLIAMS_PERIOD, stockCollectionForTicker);
@@ -49,8 +48,7 @@ public class Test {
 		positiveResults.println(stingForPositiveResults);
 		
 		PrintWriter percentageGained = new PrintWriter("D:\\wyniki\\percentage_gain.txt", "UTF-8");
-		String stringForPercentage = new String();
-		stringForPercentage = "ticker;nr of days;day;percentage;value";
+		String stringForPercentage = "ticker;nr of days;day;percentage;value";
 
 		
 		//ticker| nr of test days | day | T/F | percentage | value

@@ -72,6 +72,8 @@ public class StockDataSelect {
 		ResultSet resultOfQuery = statement.executeQuery();
 		
 		if (!resultOfQuery.next()) {
+			resultOfQuery.close();
+			statement.close();
 			return null;
 		}
 		
@@ -95,6 +97,8 @@ public class StockDataSelect {
 		ResultSet resultOfQuery = statement.executeQuery();
 		
 		if (!resultOfQuery.next()) {
+			resultOfQuery.close();
+			statement.close();
 			throw new IllegalStateException("No data when expected");
 		}
 		

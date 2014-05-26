@@ -24,11 +24,10 @@ public class SellSignalsGenerator {
 			currentClose = stockCollection.getStockTickerDataList().get(i+startPoint).getClose();
 			
 			previousAverage = averageCollection.get(i-1).getAverage();
-			currentAverage = averageCollection.get(i).getAverage();
-			
-			DecisionChain decisionChain = new DecisionChain();
+			currentAverage = averageCollection.get(i).getAverage();			
+			 
 			DecissionChainFactory decissionChainFactory = new DecissionChainFactory();
-			decisionChain = decissionChainFactory.createChanForSell(currentClose, previousAverage, currentAverage, previousClose);
+			DecisionChain decisionChain = decissionChainFactory.createChanForSell(currentClose, previousAverage, currentAverage, previousClose);
 			
 			if(decisionChain.evaluate()) {				
 				sellSignal.add(averageCollection.get(i).getDate());
