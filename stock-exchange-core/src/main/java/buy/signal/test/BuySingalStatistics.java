@@ -26,9 +26,7 @@ public class BuySingalStatistics {
 	}
 
 	public String printHeaderToString() {
-		String stats = new String();
-
-		stats = "SumOfProfits;SumOfPercentage;Average;StandardDeviation;Median;Variance;Min;Max;"
+		String stats = "SumOfProfits;SumOfPercentage;Average;StandardDeviation;Median;Variance;Min;Max;"
 				+ "SumNegativeProfits;SumPositiveProfits;CountNegativeProfits;CountPositiveProfits";
 
 		return stats;

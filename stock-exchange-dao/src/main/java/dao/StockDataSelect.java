@@ -38,6 +38,7 @@ public class StockDataSelect {
 			results.add(oneTickerName);	
 		}
 		
+		resultOfQuery.close();
 		statement.close();
 		return results;
 	}
@@ -56,6 +57,7 @@ public class StockDataSelect {
 			stockCollectionForTicker.add(stockDataFromOneDay);
 		}
 		
+		resultOfQuery.close();
 		statement.close();
 		return stockCollectionForTicker;
 	}
@@ -75,6 +77,7 @@ public class StockDataSelect {
 		
 		stockDataFromOneDay.extractStockdata(resultOfQuery);
 		
+		resultOfQuery.close();
 		statement.close();
 		return stockDataFromOneDay;
 	}
@@ -97,6 +100,7 @@ public class StockDataSelect {
 		
 		stockDataFromOneDay.extractStockdata(resultOfQuery);
 		
+		resultOfQuery.close();
 		statement.close();
 		return stockDataFromOneDay;
 	}
