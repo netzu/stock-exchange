@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.ParseException;
 
-import javax.management.RuntimeErrorException;
-
 public class StockDataInsert {
     private static final int VOLUMEN_VALUE = 7;
 	private static final int CLOSE_VALUE = 6;
