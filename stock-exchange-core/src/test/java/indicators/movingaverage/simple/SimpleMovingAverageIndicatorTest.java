@@ -5,10 +5,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
@@ -33,11 +29,9 @@ public class SimpleMovingAverageIndicatorTest {
 	        StockTickerHistory tickerCollection =  mock.readTickerData(PATH_FLAT + "test_001_ticker.mst");
 	        int period = 0;
 	        String expectedErrorMessage = "Simple moving avarage cannot be calculated if period is zero";
-	        
-	        SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
-	        
+	        	        
 	        try{
-	        	indicator.calculateSimpleMovingAverage(period, tickerCollection);
+	        	SimpleMovingAverageIndicator.calculateSimpleMovingAverage(period, tickerCollection);
 	        	fail("No exception has been found, expected: " + expectedErrorMessage);
 	        }catch(SimpleMovingAverageCalculationException ex){
 	        	assertTrue("Exception message is diffrent that expected. Expected: " + expectedErrorMessage + ". Got: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
@@ -54,10 +48,8 @@ public class SimpleMovingAverageIndicatorTest {
 	        int period = 3;
 	        String expectedErrorMessage = "Simple moving average cannot be calculated for ticker without now history";
 	        
-	        SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
-	        
 	        try{
-	        	indicator.calculateSimpleMovingAverage(period, tickerCollection);
+	        	SimpleMovingAverageIndicator.calculateSimpleMovingAverage(period, tickerCollection);
 	        	fail("No exception has been found, expected: " + expectedErrorMessage);
 	        }catch(SimpleMovingAverageCalculationException ex){
 	        	assertTrue("Exception message is diffrent that expected. Expected: " + expectedErrorMessage + ". Got: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));

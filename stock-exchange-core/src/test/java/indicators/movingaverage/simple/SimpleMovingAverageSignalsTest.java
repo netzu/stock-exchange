@@ -42,9 +42,9 @@ public class SimpleMovingAverageSignalsTest {
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+                
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
 
         assertTrue(buySignal.isEmpty());        
         assertTrue(sellSignal.isEmpty());        
@@ -61,8 +61,8 @@ public class SimpleMovingAverageSignalsTest {
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
         
         assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());        
@@ -79,8 +79,8 @@ public class SimpleMovingAverageSignalsTest {
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
         
         assertTrue(buySignal.isEmpty());
         //DateTime date = dateFormater.parseDateTime("20100128");
@@ -99,8 +99,8 @@ public class SimpleMovingAverageSignalsTest {
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
         
         assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
@@ -117,8 +117,8 @@ public class SimpleMovingAverageSignalsTest {
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
         
         assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
@@ -137,8 +137,8 @@ public class SimpleMovingAverageSignalsTest {
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
         
         assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
@@ -155,8 +155,8 @@ public class SimpleMovingAverageSignalsTest {
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
         
         assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
@@ -174,8 +174,8 @@ public class SimpleMovingAverageSignalsTest {
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
         
         assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
@@ -192,8 +192,8 @@ public class SimpleMovingAverageSignalsTest {
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
         
         assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
@@ -210,8 +210,8 @@ public class SimpleMovingAverageSignalsTest {
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
         
-        sellSignal = signals.simpleSell(averageData, history);
-        buySignal = signals.buySignal(averageData, history);
+        sellSignal = signals.getSellSignals(averageData, history);
+        buySignal = signals.getBuySignal(averageData, history);
         
         assertTrue(buySignal.isEmpty());
         //DateTime date = new DateTime("20100330");
@@ -230,8 +230,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        DateTime dt = dateFormater.parseDateTime("20100409");
        
@@ -253,8 +253,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        //DateTime dt = dateFormater.parseDateTime("20100419");
@@ -277,8 +277,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -302,8 +302,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
       
@@ -324,8 +324,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
 
@@ -348,8 +348,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -367,8 +367,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -385,8 +385,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -403,8 +403,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -421,8 +421,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -439,8 +439,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -457,8 +457,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -475,8 +475,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -493,8 +493,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -511,8 +511,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -529,8 +529,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
 
        DateTime dt = dateFormater.parseDateTime("20100409");
        assertFalse(buySignal.isEmpty()); 
@@ -551,8 +551,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -569,8 +569,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -587,8 +587,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -605,8 +605,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -623,8 +623,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);;
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -641,8 +641,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -659,8 +659,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -677,8 +677,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -695,8 +695,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -713,8 +713,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);;
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -731,8 +731,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -750,8 +750,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -768,8 +768,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -786,8 +786,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -804,8 +804,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -822,8 +822,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -840,8 +840,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -858,8 +858,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
       
@@ -880,8 +880,8 @@ public class SimpleMovingAverageSignalsTest {
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
        
-       sellSignal = signals.simpleSell(averageData, history);
-       buySignal = signals.buySignal(averageData, history);
+       sellSignal = signals.getSellSignals(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
@@ -896,7 +896,7 @@ public class SimpleMovingAverageSignalsTest {
 
        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
        List<DateTime> buySignal = new ArrayList<DateTime>();
-       buySignal = signals.buySignal(averageData, history);
+       buySignal = signals.getBuySignal(averageData, history);
        
        DateTime dt = dateFormater.parseDateTime("20100419");
        assertEquals(1, buySignal.size());

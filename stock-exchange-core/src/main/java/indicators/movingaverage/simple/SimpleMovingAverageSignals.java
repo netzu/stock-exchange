@@ -1,6 +1,5 @@
 package indicators.movingaverage.simple;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -29,58 +28,13 @@ import data.collector.StockTickerHistory;
 
 public class SimpleMovingAverageSignals {
 	
-	public List<DateTime> buySignal(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
-		
-		double previousClose;
-		double currentClose;
-		double previousAverage;
-		double currentAverage;
-		
-		List<DateTime> buySignal = new ArrayList<DateTime>();
-		
-		int startPoint = stockCollection.getStockTickerDataList().size() - averageCollection.size();
-		
-		for(int i=1; i<averageCollection.size(); i++){
-			previousClose = stockCollection.getStockTickerDataList().get(i-1+startPoint).getClose();
-			currentClose = stockCollection.getStockTickerDataList().get(i+startPoint).getClose();
-			
-			previousAverage = averageCollection.get(i-1).getAverage();
-			currentAverage = averageCollection.get(i).getAverage();
-			
-			if((previousClose<currentClose) && (previousAverage<=currentAverage) 
-					&& (previousClose<previousAverage) && (previousAverage<currentClose)
-					&& (previousClose<currentAverage) && (currentAverage<currentClose)) {
-				
-				buySignal.add(averageCollection.get(i).getDate());
-			}
-		}
-		return buySignal;
+	public List<DateTime> getBuySignal(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+		BuySignalsGenerator buySignals = new BuySignalsGenerator();
+		return buySignals.generate(averageCollection, stockCollection);
 	}
 	
-	public List<DateTime> simpleSell(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
-		double previousClose;
-		double currentClose;
-		double previousAverage;
-		double currentAverage;
-		
-		List<DateTime> sellSignal = new ArrayList<DateTime>();
-		
-		int startPoint = stockCollection.getStockTickerDataList().size() - averageCollection.size();
-		
-		for(int i=1; i<averageCollection.size(); i++){
-			previousClose = stockCollection.getStockTickerDataList().get(i-1+startPoint).getClose();
-			currentClose = stockCollection.getStockTickerDataList().get(i+startPoint).getClose();
-			
-			previousAverage = averageCollection.get(i-1).getAverage();
-			currentAverage = averageCollection.get(i).getAverage();
-			
-			if((previousClose>currentClose) && (previousAverage>=currentAverage)
-					&&(previousAverage>currentClose) && (previousAverage<previousClose)
-					&&(currentAverage>currentClose) && (currentAverage<previousClose)) {
-				
-				sellSignal.add(averageCollection.get(i).getDate());
-			}
-		}	
-		return sellSignal;
+	public List<DateTime> getSellSignals(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
+		SellSignalsGenerator sellSignals = new SellSignalsGenerator();
+		return sellSignals.generate(averageCollection, stockCollection);
 	}
 }

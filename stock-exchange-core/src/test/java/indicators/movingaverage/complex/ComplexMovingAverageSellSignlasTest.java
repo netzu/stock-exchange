@@ -275,18 +275,18 @@ public class ComplexMovingAverageSellSignlasTest {
 	
 	private void setSellSignalsForFirstPeriod(final DateTime... dateTimes) {
 		ArrayList<DateTime> arrayList = new ArrayList<DateTime>(Arrays.asList(dateTimes));
-		Mockito.when(mockSimpleMovingAverageSignals.simpleSell(simpleMovingAverageDataList1, mockStockTickerHistory)).thenReturn(arrayList);
+		Mockito.when(mockSimpleMovingAverageSignals.getSellSignals(simpleMovingAverageDataList1, mockStockTickerHistory)).thenReturn(arrayList);
 	}
 	
 	
 	private void setSellSignalsForSecondPeriod(final DateTime... dateTimes) {
 		ArrayList<DateTime> arrayList = new ArrayList<DateTime>(Arrays.asList(dateTimes));
-		Mockito.when(mockSimpleMovingAverageSignals.simpleSell(simpleMovingAverageDataList2, mockStockTickerHistory)).thenReturn(arrayList);
+		Mockito.when(mockSimpleMovingAverageSignals.getSellSignals(simpleMovingAverageDataList2, mockStockTickerHistory)).thenReturn(arrayList);
 	}
 	
 	private void setSellSignalsForThirdPeriod(final DateTime... dateTimes) {
 		ArrayList<DateTime> arrayList = new ArrayList<DateTime>(Arrays.asList(dateTimes));
-		Mockito.when(mockSimpleMovingAverageSignals.simpleSell(simpleMovingAverageDataList3, mockStockTickerHistory)).thenReturn(arrayList);
+		Mockito.when(mockSimpleMovingAverageSignals.getSellSignals(simpleMovingAverageDataList3, mockStockTickerHistory)).thenReturn(arrayList);
 	}
 	
 	

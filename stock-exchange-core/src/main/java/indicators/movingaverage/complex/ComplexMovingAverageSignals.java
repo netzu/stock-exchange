@@ -13,9 +13,9 @@ public class ComplexMovingAverageSignals {
 	
 	public List<DateTime> buysignal(final List<AverageData> averageData,  SimpleMovingAverageSignals simpleMovingAverageSignals, StockTickerHistory stockCollection) {
 		
-		List<DateTime> simpleBuy1 = simpleMovingAverageSignals.buySignal(averageData.get(0).getAverageData(), stockCollection);
-		List<DateTime> simpleBuy2 = simpleMovingAverageSignals.buySignal(averageData.get(1).getAverageData(), stockCollection);
-		List<DateTime> simpleBuy3 = simpleMovingAverageSignals.buySignal(averageData.get(2).getAverageData(), stockCollection);
+		List<DateTime> simpleBuy1 = simpleMovingAverageSignals.getBuySignal(averageData.get(0).getAverageData(), stockCollection);
+		List<DateTime> simpleBuy2 = simpleMovingAverageSignals.getBuySignal(averageData.get(1).getAverageData(), stockCollection);
+		List<DateTime> simpleBuy3 = simpleMovingAverageSignals.getBuySignal(averageData.get(2).getAverageData(), stockCollection);
 	
 		final List<DateTime> result = new ArrayList<DateTime>();
 		
@@ -30,9 +30,9 @@ public class ComplexMovingAverageSignals {
 	
 	public List<DateTime> generatSellSignals(final List<AverageData> averageData, SimpleMovingAverageSignals simpleMovingAverageSignals, StockTickerHistory stockCollection) {
 		
-		List<DateTime> simpleSell1 = simpleMovingAverageSignals.simpleSell(averageData.get(0).getAverageData(), stockCollection);
-		List<DateTime> simpleSell2 = simpleMovingAverageSignals.simpleSell(averageData.get(1).getAverageData(), stockCollection);
-		List<DateTime> simpleSell3 = simpleMovingAverageSignals.simpleSell(averageData.get(2).getAverageData(), stockCollection);
+		List<DateTime> simpleSell1 = simpleMovingAverageSignals.getSellSignals(averageData.get(0).getAverageData(), stockCollection);
+		List<DateTime> simpleSell2 = simpleMovingAverageSignals.getSellSignals(averageData.get(1).getAverageData(), stockCollection);
+		List<DateTime> simpleSell3 = simpleMovingAverageSignals.getSellSignals(averageData.get(2).getAverageData(), stockCollection);
 	
 		final List<DateTime> result = new ArrayList<DateTime>();
 		

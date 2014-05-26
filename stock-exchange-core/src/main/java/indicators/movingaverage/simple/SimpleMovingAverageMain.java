@@ -3,7 +3,6 @@ package indicators.movingaverage.simple;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -30,8 +29,8 @@ public class SimpleMovingAverageMain {
 		
 		SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
 		
-		List<DateTime> buySignals = signals.buySignal(simpleMovingAverageData, stockCollectionForTicker);
-		List<DateTime> sellSignals = signals.simpleSell(simpleMovingAverageData, stockCollectionForTicker);
+		List<DateTime> buySignals = signals.getBuySignal(simpleMovingAverageData, stockCollectionForTicker);
+		List<DateTime> sellSignals = signals.getSellSignals(simpleMovingAverageData, stockCollectionForTicker);
 		
 		buySignals.isEmpty();
 		sellSignals.isEmpty();
