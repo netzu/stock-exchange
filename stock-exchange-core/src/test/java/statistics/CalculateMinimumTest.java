@@ -1,4 +1,4 @@
-package utils;
+package statistics;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -10,19 +10,22 @@ import java.util.List;
 import org.apache.commons.math3.util.Precision;
 import org.junit.Test;
 
+import statistics.CalculateMinimum;
+import utils.MocksForTests;
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateMaximumTest {
-	final static String PATH = new String("utils/calculateMaximumResources/");
+public class CalculateMinimumTest {
+
+	final static String PATH = new String("statistics/calculateMinimumResources/");
 	MocksForTests mock = new MocksForTests();
 
 	@Test
 	public void emptyList(){
 		List<Double> entryList = new ArrayList<Double>();
-		String expectedErrorMessage = "Cannot calculate maximum value from empty list";
+		String expectedErrorMessage = "Cannot calculate minimum value from empty list";
 		
 		try{
-			CalculateMaximum.calculate(entryList);
+			CalculateMinimum.calculate(entryList);
 			fail("No exception has been found, expected: " + expectedErrorMessage);
 		}catch(StockExchangeIllegalStateException ex){
 			assertTrue(ex.getMessage().equals(expectedErrorMessage));
@@ -31,14 +34,14 @@ public class CalculateMaximumTest {
 	
 	
 	@Test
-	public void maximumValueFirstOnList() throws IOException{
+	public void minimumValueFirstOnList() throws IOException{
 		List<Double> entryList = new ArrayList<Double>();
-		entryList = mock.getListOfDoubles(PATH + "maximumValueFirstOnList");
+		entryList = mock.getListOfDoubles(PATH + "minimumValueFirstOnList");
 		
-		double expectedResult = 13.67;
+		double expectedResult = -56.33;
 		
 		try{
-			double curretnResult = CalculateMaximum.calculate(entryList);
+			double curretnResult = CalculateMinimum.calculate(entryList);
 			assertTrue("CurrentResult: " + curretnResult + ", ExpectedResult: " + expectedResult, Precision.equalsIncludingNaN(expectedResult, curretnResult, 0.01));
 		}catch(Exception ex){
 			fail("Exception when not expected: " + ex.getMessage());
@@ -46,14 +49,14 @@ public class CalculateMaximumTest {
 	}
 	
 	@Test
-	public void maximumValueLastOnList() throws IOException{
+	public void minimumValueLastOnList() throws IOException{
 		List<Double> entryList = new ArrayList<Double>();
-		entryList = mock.getListOfDoubles(PATH + "maximumValueLastOnList");
+		entryList = mock.getListOfDoubles(PATH + "minimumValueLastOnList");
 		
-		double expectedResult = 42.11;
+		double expectedResult = -15.36;
 		
 		try{
-			double curretnResult = CalculateMaximum.calculate(entryList);
+			double curretnResult = CalculateMinimum.calculate(entryList);
 			assertTrue("CurrentResult: " + curretnResult + ", ExpectedResult: " + expectedResult, Precision.equalsIncludingNaN(expectedResult, curretnResult, 0.01));
 		}catch(Exception ex){
 			fail("Exception when not expected: " + ex.getMessage());
@@ -61,18 +64,17 @@ public class CalculateMaximumTest {
 	}
 	
 	@Test
-	public void twoLocalMaximumOnList() throws IOException{
+	public void twoLocalMinimumsOnList() throws IOException{
 		List<Double> entryList = new ArrayList<Double>();
-		entryList = mock.getListOfDoubles(PATH + "twoLocalMaximumOnList");
+		entryList = mock.getListOfDoubles(PATH + "twoLocalMinimumsOnList");
 		
-		double expectedResult = 65.98;
+		double expectedResult = -0.11;
 		
 		try{
-			double curretnResult = CalculateMaximum.calculate(entryList);
+			double curretnResult = CalculateMinimum.calculate(entryList);
 			assertTrue("CurrentResult: " + curretnResult + ", ExpectedResult: " + expectedResult, Precision.equalsIncludingNaN(expectedResult, curretnResult, 0.01));
 		}catch(Exception ex){
 			fail("Exception when not expected: " + ex.getMessage());
 		}
 	}
-
 }

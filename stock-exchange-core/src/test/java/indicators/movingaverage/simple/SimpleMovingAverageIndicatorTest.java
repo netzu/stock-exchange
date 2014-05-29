@@ -5,12 +5,12 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.text.ParseException;
+
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 import data.collector.StockTickerHistory;
-
 import utils.MocksForTests;
 
 public class SimpleMovingAverageIndicatorTest {

@@ -3,17 +3,17 @@ package buy.signal.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.CalculateAverage;
-import utils.CalculateCountOfNegativeValues;
-import utils.CalculateCountOfPostiveValues;
-import utils.CalculateMaximum;
-import utils.CalculateMedian;
-import utils.CalculateMinimum;
-import utils.CalculateStandardDeviation;
-import utils.CalculateSum;
-import utils.CalculateSumOfNegativeValues;
-import utils.CalculateSumOfPositiveValues;
-import utils.CalculateVariance;
+import statistics.CalculateAverage;
+import statistics.CalculateCountOfNegativeValues;
+import statistics.CalculateCountOfPostiveValues;
+import statistics.CalculateMaximum;
+import statistics.CalculateMedian;
+import statistics.CalculateMinimum;
+import statistics.CalculateStandardDeviation;
+import statistics.CalculateSum;
+import statistics.CalculateSumOfNegativeValues;
+import statistics.CalculateSumOfPositiveValues;
+import statistics.CalculateVariance;
 
 public class BuySignalStatisticsGeneratorPerDay {
 

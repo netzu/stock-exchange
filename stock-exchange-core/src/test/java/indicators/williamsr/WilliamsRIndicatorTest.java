@@ -1,7 +1,6 @@
 package indicators.williamsr;
 
 import static org.junit.Assert.assertTrue;
-
 import indicators.williamsr.WilliamsRCalculationException;
 import indicators.williamsr.WilliamsRData;
 import indicators.williamsr.WilliamsRIndicator;

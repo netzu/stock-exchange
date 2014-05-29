@@ -1,4 +1,4 @@
-package utils;
+package statistics;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -10,11 +10,13 @@ import java.util.List;
 import org.apache.commons.math3.util.Precision;
 import org.junit.Test;
 
+import statistics.CalculateMedian;
+import utils.MocksForTests;
 import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateMedianTest {
 	
-	final static String PATH = new String("utils/calculateMedianResources/");
+	final static String PATH = new String("statistics/calculateMedianResources/");
 	MocksForTests mock = new MocksForTests();
 	
 	@Test

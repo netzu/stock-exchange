@@ -1,4 +1,4 @@
-package utils;
+package statistics;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -9,11 +9,13 @@ import java.util.List;
 
 import org.junit.Test;
 
+import statistics.CalculateCountOfNegativeValues;
+import utils.MocksForTests;
 import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateCountOfNegativeValuesTest {
 
-	final static String PATH = new String("utils/calculateCountOfNegativeValuesResources/");
+	final static String PATH = new String("statistics/calculateCountOfNegativeValuesResources/");
 	MocksForTests mock = new MocksForTests();
 	
 	@Test
