@@ -14,7 +14,7 @@ import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateVarianceTest {
 	
-	final static String PATH = new String("utils/CalculateVarianceResources/");
+	final static String PATH = new String("utils/calculateVarianceResources/");
 	MocksForTests mock = new MocksForTests();
 	
 	@Test

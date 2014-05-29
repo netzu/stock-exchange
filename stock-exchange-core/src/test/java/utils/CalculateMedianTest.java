@@ -14,7 +14,7 @@ import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateMedianTest {
 	
-	final static String PATH = new String("utils/CalculateMedianResources/");
+	final static String PATH = new String("utils/calculateMedianResources/");
 	MocksForTests mock = new MocksForTests();
 	
 	@Test

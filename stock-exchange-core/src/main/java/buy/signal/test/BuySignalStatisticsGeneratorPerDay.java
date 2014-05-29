@@ -7,7 +7,6 @@ import utils.CalculateAverage;
 import utils.CalculateCountOfNegativeValues;
 import utils.CalculateCountOfPostiveValues;
 import utils.CalculateMaximum;
-import utils.CalculateMaximumTest;
 import utils.CalculateMedian;
 import utils.CalculateMinimum;
 import utils.CalculateStandardDeviation;
@@ -149,7 +148,7 @@ public class BuySignalStatisticsGeneratorPerDay {
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return CalculateSumOfPositiveValues.sumPositive(aggregated);
+		return CalculateSumOfPositiveValues.calculate(aggregated);
 	}
 	
 	public int countNegativeProfits(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){

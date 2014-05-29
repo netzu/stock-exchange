@@ -13,7 +13,7 @@ import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateCountOfNegativeValuesTest {
 
-	final static String PATH = new String("utils/CalculateCountOfNegativeValuesResources/");
+	final static String PATH = new String("utils/calculateCountOfNegativeValuesResources/");
 	MocksForTests mock = new MocksForTests();
 	
 	@Test

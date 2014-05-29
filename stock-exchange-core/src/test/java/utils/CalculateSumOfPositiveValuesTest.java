@@ -12,7 +12,7 @@ import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateSumOfPositiveValuesTest {
 	
-	final static String PATH = new String("utils/");
+	final static String PATH = new String("utils/calculateSumOfPositiveValuesResources/");
 	MocksForTests mock = new MocksForTests();
 	
 	@Test
@@ -21,7 +21,7 @@ public class CalculateSumOfPositiveValuesTest {
 		String expectedErrorMessage = "Cannot calculate sum of positive values for empty list";
 		
 		try{
-			CalculateSum.calculate(entryList);
+			CalculateSumOfPositiveValues.calculate(entryList);
 			fail("No exception has been found, expected: " + expectedErrorMessage);
 		}catch(StockExchangeIllegalStateException ex){
 			assertTrue(ex.getMessage().equals(expectedErrorMessage));

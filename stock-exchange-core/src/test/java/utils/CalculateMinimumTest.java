@@ -14,7 +14,7 @@ import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateMinimumTest {
 
-	final static String PATH = new String("utils/CalculateMinimumResources/");
+	final static String PATH = new String("utils/calculateMinimumResources/");
 	MocksForTests mock = new MocksForTests();
 
 	@Test

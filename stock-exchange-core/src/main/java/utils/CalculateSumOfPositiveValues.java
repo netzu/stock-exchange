@@ -5,7 +5,7 @@ import java.util.List;
 import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateSumOfPositiveValues {
-    public static double sumPositive(List<Double> list){
+    public static double calculate(List<Double> list){
     	
     	if(list.isEmpty()){
     		throw new StockExchangeIllegalStateException("Cannot calculate sum of positive values for empty list");
