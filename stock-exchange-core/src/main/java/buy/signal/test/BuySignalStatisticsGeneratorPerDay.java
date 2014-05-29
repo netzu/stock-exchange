@@ -3,6 +3,8 @@ package buy.signal.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.CalculateAverage;
+import utils.CalculateMedian;
 import utils.CalculateSum;
 import utils.Stats;
 
@@ -86,7 +88,7 @@ public class BuySignalStatisticsGeneratorPerDay {
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.average(aggregated);
+		return CalculateAverage.calculate(aggregated);
 	}
 
 	public double calculateStandDev(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){
@@ -100,7 +102,7 @@ public class BuySignalStatisticsGeneratorPerDay {
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.median(aggregated);
+		return CalculateMedian.calculate(aggregated);
 	}
 	
 	public double calculateVarience(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){

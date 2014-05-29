@@ -4,44 +4,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Stats {
-
-
-    
-    
-    public static double average (List<Double> list){
-        double sum = CalculateSum.calculate(list);
-        double average = sum/list.size();
-
-        return average;
-    }
-    
-    
-    public static double median (List<Double> list){
-
-    	if (list.size() == 1) {
-    		return list.get(0);
-    	}
-    	
-    	if(list.size() == 0) {
-    		System.out.println("Brak mediany");
-    		return 0;
-    	}
-    	
-    	Collections.sort(list);
-    	
-        int middle = list.size()/2;
-        
- 
-        if (list.size() % 2 == 1) {
-            return list.get(middle);
-        } else {
-           return (list.get(middle-1) + list.get(middle)) / 2.0;
-        }
-    }
     
     public static double varaince(List<Double> list){
         double variance = 0;
-        double average = average(list);
+        double average = CalculateAverage.calculate(list);
  
         for (int i=0; i<list.size(); i++){
         	variance = variance + Math.pow((list.get(i) - average), 2);

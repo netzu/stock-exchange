@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.util.Precision;
 import org.junit.Test;
 
 import data.collector.StockExchangeIllegalStateException;
@@ -37,7 +38,7 @@ public class CalculateSumTest {
 		
 		try{
 			double currentResults = CalculateSum.calculate(entryList);
-			assertTrue(currentResults == expectedResults);
+			assertTrue("CurrentResult: " + currentResults + ", ExpectedResult: ", Precision.equalsIncludingNaN(expectedResults, currentResults, 0.01));
 		}catch(Exception ex){
 			fail("Exception found when not expecting: " + ex.getMessage());
 		}
@@ -54,7 +55,7 @@ public class CalculateSumTest {
 		try{
 			double currentResults = CalculateSum.calculate(entryList);
 			String errorMessage = "CurrentResults: " + currentResults + ", expectedResults: " + expectedResults;
-			assertTrue(errorMessage, currentResults == expectedResults);
+			assertTrue(errorMessage, Precision.equalsIncludingNaN(expectedResults, currentResults, 0.01));
 		}catch(Exception ex){
 			fail("Exception found when not expecting: " + ex.getMessage());
 		}
