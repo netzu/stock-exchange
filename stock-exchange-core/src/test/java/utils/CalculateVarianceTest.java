@@ -14,7 +14,7 @@ import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateVarianceTest {
 	
-	final static String PATH = new String("utils/");
+	final static String PATH = new String("utils/CalculateVarianceResources/");
 	MocksForTests mock = new MocksForTests();
 	
 	@Test
@@ -35,7 +35,7 @@ public class CalculateVarianceTest {
 		double expectedResult = 0.0000;
 		
 		List<Double> entryList = new ArrayList<Double>();		
-		entryList = mock.getListOfDoubles(PATH + "CalculateVariance_varianceEqualZero");
+		entryList = mock.getListOfDoubles(PATH + "varianceEqualZero");
 		
 		try{
 			double currentResult = CalculateVariance.calculate(entryList);
@@ -50,7 +50,7 @@ public class CalculateVarianceTest {
 		double expectedResult = 24.0196;
 		
 		List<Double> entryList = new ArrayList<Double>();		
-		entryList = mock.getListOfDoubles(PATH + "CalculateVarianceTest_checkCorrectnessOfResults");
+		entryList = mock.getListOfDoubles(PATH + "checkCorrectnessOfResults");
 		
 		try{
 			double currentResult = CalculateVariance.calculate(entryList);

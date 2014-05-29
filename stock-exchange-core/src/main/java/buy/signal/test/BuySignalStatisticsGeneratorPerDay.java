@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.CalculateAverage;
+import utils.CalculateCountOfNegativeValues;
+import utils.CalculateCountOfPostiveValues;
+import utils.CalculateMaximum;
+import utils.CalculateMaximumTest;
 import utils.CalculateMedian;
 import utils.CalculateMinimum;
 import utils.CalculateStandardDeviation;
 import utils.CalculateSum;
+import utils.CalculateSumOfPositiveValues;
 import utils.CalculateVariance;
 import utils.Stats;
 
@@ -130,7 +135,7 @@ public class BuySignalStatisticsGeneratorPerDay {
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.max(aggregated);
+		return CalculateMaximum.calculate(aggregated);
 	}
 	
 	public double sumNegativeProfits(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){
@@ -144,21 +149,21 @@ public class BuySignalStatisticsGeneratorPerDay {
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.sumPositive(aggregated);
+		return CalculateSumOfPositiveValues.sumPositive(aggregated);
 	}
 	
 	public int countNegativeProfits(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.countNegative(aggregated);
+		return CalculateCountOfNegativeValues.calculate(aggregated);
 	}
 	
 	public int countPositiveProfits(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.countPositive(aggregated);
+		return CalculateCountOfPostiveValues.calculate(aggregated);
 	}
 	
 }

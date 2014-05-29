@@ -14,7 +14,7 @@ import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateMedianTest {
 	
-	final static String PATH = new String("utils/");
+	final static String PATH = new String("utils/CalculateMedianResources/");
 	MocksForTests mock = new MocksForTests();
 	
 	@Test
@@ -50,7 +50,7 @@ public class CalculateMedianTest {
 		double expectedResult = 5.98;
 		
 		List<Double> entryList = new ArrayList<Double>();		
-		entryList = mock.getListOfDoubles(PATH + "CalculateMedianTest_oddNumberOfElementsOnList");
+		entryList = mock.getListOfDoubles(PATH + "oddNumberOfElementsOnList");
 		
 		try{
 			double currentResult = CalculateMedian.calculate(entryList);
@@ -65,7 +65,7 @@ public class CalculateMedianTest {
 		double expectedResult = 6.67;
 		
 		List<Double> entryList = new ArrayList<Double>();		
-		entryList = mock.getListOfDoubles(PATH + "CalculateMedianTest_evenNumberOfElementsOnList");
+		entryList = mock.getListOfDoubles(PATH + "evenNumberOfElementsOnList");
 		
 		try{
 			double currentResult = CalculateMedian.calculate(entryList);
@@ -80,7 +80,7 @@ public class CalculateMedianTest {
 		double expectedResult = 984.275;
 		
 		List<Double> entryList = new ArrayList<Double>();		
-		entryList = mock.getListOfDoubles(PATH + "CalculateMedianTest_hugeList");
+		entryList = mock.getListOfDoubles(PATH + "hugeList");
 		
 		try{
 			double currentResult = CalculateMedian.calculate(entryList);
