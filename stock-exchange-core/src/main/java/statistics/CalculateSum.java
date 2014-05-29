@@ -4,7 +4,11 @@ import java.util.List;
 
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateSum {
+public final class CalculateSum {
+	
+	private CalculateSum(){
+		
+	}
     
 	public static double calculate(List<Double> list){
         

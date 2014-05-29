@@ -4,7 +4,12 @@ import java.util.List;
 
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateSumOfPositiveValues {
+public final class CalculateSumOfPositiveValues {
+	
+	private CalculateSumOfPositiveValues(){
+		
+	}
+	
     public static double calculate(List<Double> list){
     	
     	if(list.isEmpty()){

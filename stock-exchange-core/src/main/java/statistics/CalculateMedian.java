@@ -5,7 +5,12 @@ import java.util.List;
 
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateMedian {
+public final class CalculateMedian {
+	
+	private CalculateMedian(){
+		
+	}
+	
     public static double calculate(List<Double> list){
 
     	if (list.size() == 1) {

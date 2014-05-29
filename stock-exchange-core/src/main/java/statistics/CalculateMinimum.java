@@ -4,7 +4,11 @@ import java.util.List;
 
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateMinimum {
+public final class CalculateMinimum {
+	
+	private CalculateMinimum(){
+		
+	}
     
 	public static double calculate(List<Double> list){
 		

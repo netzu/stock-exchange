@@ -4,7 +4,11 @@ import java.util.List;
 
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateVariance {
+public final class CalculateVariance {
+	
+	private CalculateVariance(){
+		
+	}
     
 	public static double calculate(List<Double> list){
 		

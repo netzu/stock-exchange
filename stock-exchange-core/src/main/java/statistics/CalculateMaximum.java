@@ -4,7 +4,11 @@ import java.util.List;
 
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateMaximum{
+public final class CalculateMaximum{
+	
+	private CalculateMaximum(){
+		
+	}
 	
     public static double calculate(List<Double> list){
     	

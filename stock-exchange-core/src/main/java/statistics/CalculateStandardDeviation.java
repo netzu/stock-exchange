@@ -4,7 +4,11 @@ import java.util.List;
 
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateStandardDeviation {
+public final class CalculateStandardDeviation {
+	
+	private CalculateStandardDeviation(){
+		
+	}
 
     public static double calculate(List<Double> list){
     	

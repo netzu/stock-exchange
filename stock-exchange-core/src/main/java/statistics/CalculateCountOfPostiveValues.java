@@ -4,7 +4,11 @@ import java.util.List;
 
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateCountOfPostiveValues {
+public final class CalculateCountOfPostiveValues {
+	
+	private CalculateCountOfPostiveValues(){
+		
+	}
     
 	public static int calculate(List<Double> list){
 		
