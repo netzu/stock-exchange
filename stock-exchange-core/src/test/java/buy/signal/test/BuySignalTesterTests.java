@@ -18,27 +18,26 @@ import buy.signal.test.ProfitsFromSignal;
 import data.collector.StockExchangeIllegalStateException;
 import data.collector.StockTickerHistory;
 
-public class ProfitsFromSignalTest {
+public class BuySignalTesterTests {
 	
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
-	final static String PATH = new String("buySignal/TestProfitsFromSignal/");
+	final static String PATH = new String("buySignal/BuySignalTesterResources/");
 	
 	MocksForTests mock = new MocksForTests();
 	
 	@Test
-	public void noBuySignalHasBeenGenerated() throws ParseException{
+	public void calculateProfitsForOneSignalWhneNoBuySignalHasBeenGenerated() throws ParseException{
 		
 		StockTickerHistory history = mock.readTickerData(PATH + "noBuySignalHasBeenGenerated.mst");
 		DateTime buySignalDate = null;
 		int dayToTest = 5;		
 		
-		List <ProfitsFromSignal> listOfProfits = new ArrayList<ProfitsFromSignal>();
 		BuySignalTester test = new BuySignalTester();
 		
 		String expectedErrorMessage = "Cannot find ticker by date if date is null";
 		
 		try{
-			listOfProfits = test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
+			test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
 			fail("No exception has been found, expected: " + expectedErrorMessage);
 		}catch(StockExchangeIllegalStateException e){
 			assertTrue(e.getMessage().equals(expectedErrorMessage));
@@ -47,7 +46,7 @@ public class ProfitsFromSignalTest {
 	
 
 	@Test
-	public void notExistingBuySignalInTicker() throws ParseException{
+	public void calculateProfitsForOneSignalWhneNotExistingBuySignalInTicker() throws ParseException{
 		
 		StockTickerHistory history = mock.readTickerData(PATH + "notExistingBuySignalInTicker.mst");
 		DateTime buySignalDate = dateFormater.parseDateTime("20100109");
@@ -57,13 +56,12 @@ public class ProfitsFromSignalTest {
 			fail("StockTicker is empty");
 		}
 		
-		List <ProfitsFromSignal> listOfProfits = new ArrayList<ProfitsFromSignal>();
 		BuySignalTester test = new BuySignalTester();
 		
 		String expectedErrorMessage = "Could not find a stock in given day";
 		
 		try{
-			listOfProfits = test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
+			test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
 			fail("No exception has been found, expected: " + expectedErrorMessage);
 		}catch(StockExchangeIllegalStateException e){
 			assertTrue(e.getMessage().equals(expectedErrorMessage));
@@ -71,7 +69,7 @@ public class ProfitsFromSignalTest {
 	}
 	
 	@Test
-	public void moreNumberOfDataInTickerThanDaysToTest() throws ParseException{
+	public void calculateProfitsForOneSignalWhneMoreNumberOfDataInTickerThanDaysToTest() throws ParseException{
 		StockTickerHistory history = mock.readTickerData(PATH + "moreNumberOfDataInTickerThanDaysToTest.mst");
 		DateTime buySignalDate = dateFormater.parseDateTime("20100102");
 		int dayToTest = 5;
@@ -88,7 +86,7 @@ public class ProfitsFromSignalTest {
 	}
 	
 	@Test
-	public void sameNumberOfDaysToTestAsDataInTicker() throws ParseException{
+	public void calculateProfitsForOneSignalWhneSameNumberOfDaysToTestAsDataInTicker() throws ParseException{
 		StockTickerHistory history = mock.readTickerData(PATH + "sameNumberOfDaysToTestAsDataInTicker.mst");
 		DateTime buySignalDate = dateFormater.parseDateTime("20100103");
 		int dayToTest = 5;
@@ -105,7 +103,7 @@ public class ProfitsFromSignalTest {
 	}
 	
 	@Test
-	public void oneMoreNumberOfDaysToTestThanDataInTicker() throws ParseException{
+	public void calculateProfitsForOneSignalWhneOneMoreNumberOfDaysToTestThanDataInTicker() throws ParseException{
 		StockTickerHistory history = mock.readTickerData(PATH + "moreNumberOfDaysToTestThanDataInTicker.mst");
 		DateTime buySignalDate = dateFormater.parseDateTime("20100104");
 		int dayToTest = 5;
@@ -124,37 +122,35 @@ public class ProfitsFromSignalTest {
 	}
 	
 	@Test
-	public void signalToBuyGeneratedLastDay() throws ParseException{
+	public void calculateProfitsForOneSignalWhneSignalToBuyGeneratedLastDay() throws ParseException{
 		StockTickerHistory history = mock.readTickerData(PATH + "moreNumberOfDaysToTestThanDataInTicker.mst");
 		DateTime buySignalDate = dateFormater.parseDateTime("20100108");
 		int dayToTest = 5;
 		int numberOFDaysLessInTicker = 5;
 		int expectedSizeOfTheProfitList = dayToTest-numberOFDaysLessInTicker;
-		
-		List <ProfitsFromSignal> listOfPRofits = new ArrayList<ProfitsFromSignal>();
+
 		BuySignalTester test = new BuySignalTester();
 		
 		try{
-			listOfPRofits = test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
-			assertTrue("Expeted diffrent number of elements, expected " + expectedSizeOfTheProfitList + ", got: " + listOfPRofits.size(),(listOfPRofits.size()==expectedSizeOfTheProfitList));
+			List <ProfitsFromSignal> currentListOfProfits = test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
+			assertTrue("Expeted diffrent number of elements, expected " + expectedSizeOfTheProfitList + ", got: " + currentListOfProfits.size(),(currentListOfProfits.size()==expectedSizeOfTheProfitList));
 		}catch(Exception e){
 			fail("Exception has been thrown when not expected: \"" + e.getMessage() + "\"");
 		}
 	}
 	
 	@Test
-	public void zeroDaysToTestInParameterForOneSignal() throws ParseException{
+	public void calculateProfitsForOneSignalWhenZeroDaysToTestInParameterForOneSignal() throws ParseException{
 		StockTickerHistory history = mock.readTickerData(PATH + "moreNumberOfDaysToTestThanDataInTicker.mst");
 		DateTime buySignalDate = dateFormater.parseDateTime("20100108");
 		int dayToTest = 0;
-		
-		List <ProfitsFromSignal> listOfProfits = new ArrayList<ProfitsFromSignal>();
+
 		BuySignalTester test = new BuySignalTester();
 		
 		String expectedErrorMessage = "Number days to test cannot by 0";
 		
 		try{
-			listOfProfits = test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
+			test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
 			fail("No exception has been found, expected: " + expectedErrorMessage);
 		}catch(IllegalArgumentException e){
 			assertTrue(e.getMessage().equals(expectedErrorMessage));
@@ -162,14 +158,13 @@ public class ProfitsFromSignalTest {
 	}
 	
 	@Test
-	public void emptyBuyList() throws IOException, ParseException{
+	public void calculateProfitsForTickerWhneEmptyBuyList() throws IOException, ParseException{
 		List <List<ProfitsFromSignal>> result = new ArrayList<List<ProfitsFromSignal>>();
 		
 		StockTickerHistory history = mock.readTickerData(PATH + "emptyBuyList.mst");
 		List<DateTime> buySignal = mock.getBuysignal(PATH + "emptyBuyList.txt");
 		int dayToTest = 5;		
-		
-		List <ProfitsFromSignal> listOfProfits = new ArrayList<ProfitsFromSignal>();
+
 		BuySignalTester test = new BuySignalTester();
 
 		
@@ -182,7 +177,7 @@ public class ProfitsFromSignalTest {
 	}
 	
 	@Test
-	public void oneBuySignalForTicker() throws ParseException, IOException{
+	public void calculateProfitsForTickerWhneOneBuySignalForTicker() throws ParseException, IOException{
 		
 		List <List<ProfitsFromSignal>> result = new ArrayList<List<ProfitsFromSignal>>();
 		
@@ -203,7 +198,7 @@ public class ProfitsFromSignalTest {
 	}
 	
 	@Test
-	public void oneBuySignalForTickerGeneratedLastDay() throws ParseException, IOException{
+	public void calculateProfitsForTickerWhneOneBuySignalForTickerGeneratedLastDay() throws ParseException, IOException{
 		
 		List <List<ProfitsFromSignal>> result = new ArrayList<List<ProfitsFromSignal>>();
 		
@@ -223,7 +218,7 @@ public class ProfitsFromSignalTest {
 	}
 	
 	@Test
-	public void multipleBuySignals_01() throws ParseException, IOException{
+	public void calculateProfitsForTickerWhneMultipleBuySignals_01() throws ParseException, IOException{
 		List <List<ProfitsFromSignal>> result = new ArrayList<List<ProfitsFromSignal>>();
 		
 		StockTickerHistory history = mock.readTickerData(PATH + "multipleBuySignals_01.mst");
