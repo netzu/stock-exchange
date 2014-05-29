@@ -13,7 +13,7 @@ import org.junit.Test;
 import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateMaximumTest {
-	final static String PATH = new String("utils/calculateMinimumResources/");
+	final static String PATH = new String("utils/calculateMaximumResources/");
 	MocksForTests mock = new MocksForTests();
 
 	@Test

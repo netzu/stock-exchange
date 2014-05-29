@@ -12,18 +12,18 @@ import org.junit.Test;
 
 import data.collector.StockExchangeIllegalStateException;
 
-public class CalculateSumOfPositiveValuesTest {
+public class CalculateSumOfNegativeValuesTest {
 	
-	final static String PATH = new String("utils/calculateSumOfPositiveValuesResources/");
+	final static String PATH = new String("utils/calculateSumOfNegativeValuesResources/");
 	MocksForTests mock = new MocksForTests();
 	
 	@Test
 	public void emptyList(){
 		List<Double> entryList = new ArrayList<Double>();
-		String expectedErrorMessage = "Cannot calculate sum of positive values for empty list";
+		String expectedErrorMessage = "Cannot calculate sum of negative values from empty list";
 		
 		try{
-			CalculateSumOfPositiveValues.calculate(entryList);
+			CalculateSumOfNegativeValues.calculate(entryList);
 			fail("No exception has been found, expected: " + expectedErrorMessage);
 		}catch(StockExchangeIllegalStateException ex){
 			assertTrue(ex.getMessage().equals(expectedErrorMessage));
@@ -31,18 +31,17 @@ public class CalculateSumOfPositiveValuesTest {
 	}
 	
 	@Test
-	public void severalPositiveValues() throws IOException{
+	public void severalNegativeValues() throws IOException{
 		List<Double> entryList = new ArrayList<Double>();
-		entryList = mock.getListOfDoubles(PATH + "severalPositiveValues");
+		entryList = mock.getListOfDoubles(PATH + "severalNegativeValues");
 		
-		double expectedResult = 32.69;
+		double expectedResult = -128.19;
 		
 		try{
-			double curretnResult = CalculateSumOfPositiveValues.calculate(entryList);
+			double curretnResult = CalculateSumOfNegativeValues.calculate(entryList);
 			assertTrue("CurrentResult: " + curretnResult + ", ExpectedResult: " + expectedResult, Precision.equalsIncludingNaN(expectedResult, curretnResult, 0.01));
 		}catch(Exception ex){
 			fail("Exception when not expected: " + ex.getMessage());
 		}
 	}
-
 }
