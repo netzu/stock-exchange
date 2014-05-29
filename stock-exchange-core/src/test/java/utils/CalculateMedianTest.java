@@ -32,10 +32,10 @@ public class CalculateMedianTest {
 	
 	@Test
 	public void istWithOneElementOnly() throws IOException{
-		double expectedResult = 5;
+		double expectedResult = 5.22;
 		
 		List<Double> entryList = new ArrayList<Double>();		
-		entryList = mock.getListOfDoubles(PATH + "listWithSeveralEntries");
+		entryList.add(expectedResult);
 		
 		try{
 			double currentResult = CalculateMedian.calculate(entryList);

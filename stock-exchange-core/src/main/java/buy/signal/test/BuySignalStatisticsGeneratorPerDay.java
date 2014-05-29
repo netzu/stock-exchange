@@ -5,7 +5,10 @@ import java.util.List;
 
 import utils.CalculateAverage;
 import utils.CalculateMedian;
+import utils.CalculateMinimum;
+import utils.CalculateStandardDeviation;
 import utils.CalculateSum;
+import utils.CalculateVariance;
 import utils.Stats;
 
 public class BuySignalStatisticsGeneratorPerDay {
@@ -95,7 +98,7 @@ public class BuySignalStatisticsGeneratorPerDay {
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.standardDev(aggregated);
+		return CalculateStandardDeviation.calculate(aggregated);
 	}
 	
 	public double calculateMedian(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){
@@ -109,7 +112,7 @@ public class BuySignalStatisticsGeneratorPerDay {
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.varaince(aggregated);
+		return CalculateVariance.calculate(aggregated);
 	}
 	
 	public double calculateMin(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){
@@ -120,7 +123,7 @@ public class BuySignalStatisticsGeneratorPerDay {
 			System.out.println("pusto");
 		}
 		
-		return Stats.min(aggregated);
+		return CalculateMinimum.calculate(aggregated);
 	}
 	
 	public double calculateMax(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){

@@ -2,9 +2,15 @@ package utils;
 
 import java.util.List;
 
+import data.collector.StockExchangeIllegalStateException;
+
 public class CalculateVariance {
     
-	public static double varaince(List<Double> list){
+	public static double calculate(List<Double> list){
+		
+		if(list.isEmpty()){
+			throw new StockExchangeIllegalStateException("Cannot calculate variance for empty list");
+		}
         
 		double variance = 0;
         double average = CalculateAverage.calculate(list);
@@ -17,4 +23,5 @@ public class CalculateVariance {
         
         return variance;
     }
+
 }

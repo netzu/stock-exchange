@@ -1,41 +1,10 @@
 package utils;
 
-import java.util.Collections;
 import java.util.List;
 
-public class Stats {
-    
-    public static double varaince(List<Double> list){
-        double variance = 0;
-        double average = CalculateAverage.calculate(list);
- 
-        for (int i=0; i<list.size(); i++){
-        	variance = variance + Math.pow((list.get(i) - average), 2);
-        }
-        
-        variance = variance/list.size();
-        
-        return variance;
-    }
-    
-    public static double standardDev (List<Double> list){
-        double variance = varaince(list);
-        
-        double deviation = Math.sqrt(variance);
-        
-        return deviation;
-    }
-    
-    public static double min(List<Double> list){
-    	double min = list.get(0);
-    	
-    	for(int i=1; i<list.size(); i++){
-    		if(list.get(i)<min){
-    			min = list.get(i);
-    		}
-    	}
-    	return min;
-    }
+public class Stats {     
+  
+
     
     public static double max(List<Double> list){
     	double max = list.get(0);
