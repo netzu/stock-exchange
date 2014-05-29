@@ -13,6 +13,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
+import data.collector.StockExchangeIllegalStateException;
 import data.collector.StockTickerHistory;
 import utils.MocksForTests;
 
@@ -286,7 +287,7 @@ public class SingleBuysignalEffectivenesTest {
 		collection = mock.readTickerData(PATH + "percentageGained_tickerData_03");
 		
 		List<Double> expectedResults = new ArrayList<Double>();		
-		expectedResults = mock.getGainedPercentag(PATH + "percentageGained_ExpectedResults_03");
+		expectedResults = mock.getListOfDoubles(PATH + "percentageGained_ExpectedResults_03");
 		
 		boolean result = false;
 		
@@ -313,7 +314,7 @@ public class SingleBuysignalEffectivenesTest {
 		collection = mock.readTickerData(PATH + "percentageGained_tickerData_04");
 		
 		List<Double> expectedResults = new ArrayList<Double>();		
-		expectedResults = mock.getGainedPercentag(PATH + "percentageGained_ExpectedResults_04");
+		expectedResults = mock.getListOfDoubles(PATH + "percentageGained_ExpectedResults_04");
 		
 		boolean result = false;
 		
@@ -338,7 +339,7 @@ public class SingleBuysignalEffectivenesTest {
 		collection = mock.readTickerData(PATH + "percentageGained_tickerData_05");
 		
 		List<Double> expectedResults = new ArrayList<Double>();		
-		expectedResults = mock.getGainedPercentag(PATH + "percentageGained_ExpectedResults_05");
+		expectedResults = mock.getListOfDoubles(PATH + "percentageGained_ExpectedResults_05");
 		
 		boolean result = false;
 		
@@ -406,7 +407,7 @@ public class SingleBuysignalEffectivenesTest {
 		collection = mock.readTickerData(PATH + "valueGain_tickerData_03");
 		
 		List<Double> expectedResults = new ArrayList<Double>();		
-		expectedResults = mock.getGainedPercentag(PATH + "valueGain_ExpectedResults_03");
+		expectedResults = mock.getListOfDoubles(PATH + "valueGain_ExpectedResults_03");
 		
 		boolean result = false;
 		
@@ -431,7 +432,7 @@ public class SingleBuysignalEffectivenesTest {
 		collection = mock.readTickerData(PATH + "valueGain_tickerData_04");
 		
 		List<Double> expectedResults = new ArrayList<Double>();		
-		expectedResults = mock.getGainedPercentag(PATH + "valueGain_ExpectedResults_04");
+		expectedResults = mock.getListOfDoubles(PATH + "valueGain_ExpectedResults_04");
 		
 		boolean result = false;
 		
@@ -456,7 +457,7 @@ public class SingleBuysignalEffectivenesTest {
 		collection = mock.readTickerData(PATH + "valueGain_tickerData_05");
 		
 		List<Double> expectedResults = new ArrayList<Double>();		
-		expectedResults = mock.getGainedPercentag(PATH + "valueGain_ExpectedResults_05");
+		expectedResults = mock.getListOfDoubles(PATH + "valueGain_ExpectedResults_05");
 		
 		boolean result = false;
 		
@@ -469,6 +470,94 @@ public class SingleBuysignalEffectivenesTest {
 			assertTrue(result);
 		}catch(Exception ex){
 			fail("Exception when not excpected: " + ex.getMessage());
+		}
+	}
+	
+	
+	/*
+	 * Check if correct percentage is returned when there are days with gain and loose
+	 */
+	@Test
+	public void percentageOfDaysWithPositiveResults_01() throws ParseException, IOException{
+
+		double expectedResults = 28.57;
+		
+		List<Boolean> positiveResults = new ArrayList<Boolean>();		
+		positiveResults = mock.getCorrectSignals(PATH + "percentageOfDaysWithPositiveResults_expectedResults_01");
+
+		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+		
+		try{
+			double currentResult = signalEffectivnes.percentageOfDaysWithPositiveResults(positiveResults);
+			boolean result = Precision.equalsIncludingNaN(expectedResults, currentResult, 0.01);
+			assertTrue(result);
+		}catch(Exception ex){
+			fail("Exception when not excpected: " + ex.getMessage());
+		}
+	}
+	
+	/*
+	 * Check if correct value will be returned if there are days only with loose
+	 */
+	@Test
+	public void percentageOfDaysWithPositiveResults_02() throws ParseException, IOException{
+
+		double expectedResults = 0.00;
+		
+		List<Boolean> positiveResults = new ArrayList<Boolean>();		
+		positiveResults = mock.getCorrectSignals(PATH + "percentageOfDaysWithPositiveResults_expectedResults_02");
+
+		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+		
+		try{
+			double currentResult = signalEffectivnes.percentageOfDaysWithPositiveResults(positiveResults);
+			boolean result = Precision.equalsIncludingNaN(expectedResults, currentResult, 0.01);
+			assertTrue(result);
+		}catch(Exception ex){
+			fail("Exception when not excpected: " + ex.getMessage());
+		}
+	}
+	
+	/*
+	 * Check if correct value will be returned if there are days only with gain
+	 */
+	@Test
+	public void percentageOfDaysWithPositiveResults_03() throws ParseException, IOException{
+
+		double expectedResults = 100.00;
+		
+		List<Boolean> positiveResults = new ArrayList<Boolean>();		
+		positiveResults = mock.getCorrectSignals(PATH + "percentageOfDaysWithPositiveResults_expectedResults_03");
+
+		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+		
+		try{
+			double currentResult = signalEffectivnes.percentageOfDaysWithPositiveResults(positiveResults);
+			boolean result = Precision.equalsIncludingNaN(expectedResults, currentResult, 0.01);
+			assertTrue(result);
+		}catch(Exception ex){
+			fail("Exception when not excpected: " + ex.getMessage());
+		}
+	}
+	
+	/*
+	 * Check if method will correctly behave if array with list of daysWithPositiveResults is empty
+	 */
+	@Test
+	public void percentageOfDaysWithPositiveResults_04() throws ParseException, IOException{
+		
+		List<Boolean> positiveResults = new ArrayList<Boolean>();		
+		positiveResults = mock.getCorrectSignals(PATH + "percentageOfDaysWithPositiveResults_expectedResults_04");
+		
+		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
+		
+		try{		
+			signalEffectivnes.percentageOfDaysWithPositiveResults(positiveResults);
+			
+			fail("Exception was not thrown when expected");
+		}catch(StockExchangeIllegalStateException ex){
+			String expectedErrorMessage = "There is no days with results (empty list passed as a argument) so cannot calculate percentage";
+			assertTrue(expectedErrorMessage.equals(ex.getMessage()));
 		}
 	}
 }

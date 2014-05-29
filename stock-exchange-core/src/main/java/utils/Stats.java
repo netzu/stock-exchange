@@ -5,21 +5,11 @@ import java.util.List;
 
 public class Stats {
 
-    public static double sum (List<Double> list){
-        if (list.size() > 0) {
-            double sum = 0;
- 
-            for (int i=0; i<list.size(); i++) {
-                sum = sum + list.get(i);
-            }
-            return sum;
-        }
-        return 0;
-    }
+
     
     
     public static double average (List<Double> list){
-        double sum = sum(list);
+        double sum = CalculateSum.calculate(list);
         double average = sum/list.size();
 
         return average;

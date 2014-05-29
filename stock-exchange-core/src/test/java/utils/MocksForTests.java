@@ -112,7 +112,7 @@ public class MocksForTests {
 		return correctSignals;
 	}
 
-	public List<Double> getGainedPercentag(final String path) throws IOException {
+	public List<Double> getListOfDoubles(final String path) throws IOException {
 
 		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
 		final BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));

@@ -31,11 +31,11 @@ public class StockTickerHistory {
 	public StockTicker findStockByDate(DateTime date){
 	
 		if(stockTickerDataList.isEmpty()){
-			throw new IllegalStateException("Empty Stock Ticker Collection");
+			throw new StockExchangeIllegalStateException("Cannot find stock by date if ticker's collection is empty");
 		}
 		
 		if(date==null){
-			throw new IllegalArgumentException("Date is null!");
+			throw new StockExchangeIllegalStateException("Cannot find ticker by date if date is null");
 		}
 		 
 		for(int i=0; i<this.stockTickerDataList.size();i++){
@@ -45,7 +45,8 @@ public class StockTickerHistory {
 				return stockTickerDataList.get(i);
 			}
 		}
-		return null;
+		
+		throw new StockExchangeIllegalStateException("Could not find a stock in given day");
 	}
 	
 	public int findStockIndexByDate(DateTime date){

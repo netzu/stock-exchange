@@ -15,6 +15,7 @@ import org.junit.Test;
 import utils.MocksForTests;
 import buy.signal.test.BuySignalTester;
 import buy.signal.test.ProfitsFromSignal;
+import data.collector.StockExchangeIllegalStateException;
 import data.collector.StockTickerHistory;
 
 public class ProfitsFromSignalTest {
@@ -34,12 +35,12 @@ public class ProfitsFromSignalTest {
 		List <ProfitsFromSignal> listOfProfits = new ArrayList<ProfitsFromSignal>();
 		BuySignalTester test = new BuySignalTester();
 		
-		String expectedErrorMessage = "Date is null!";
+		String expectedErrorMessage = "Cannot find ticker by date if date is null";
 		
 		try{
 			listOfProfits = test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
 			fail("No exception has been found, expected: " + expectedErrorMessage);
-		}catch(IllegalArgumentException e){
+		}catch(StockExchangeIllegalStateException e){
 			assertTrue(e.getMessage().equals(expectedErrorMessage));
 		}			
 	}
@@ -59,12 +60,12 @@ public class ProfitsFromSignalTest {
 		List <ProfitsFromSignal> listOfProfits = new ArrayList<ProfitsFromSignal>();
 		BuySignalTester test = new BuySignalTester();
 		
-		String expectedErrorMessage = "No data found for this day " + buySignalDate.getDayOfMonth() + "-" + buySignalDate.getMonthOfYear() + "-" + buySignalDate.getYear() + " in: " + history.getStockTickerDataList().get(0).getStockName();
+		String expectedErrorMessage = "Could not find a stock in given day";
 		
 		try{
 			listOfProfits = test.calculateProfitsForOneSignal(buySignalDate, history, dayToTest);
 			fail("No exception has been found, expected: " + expectedErrorMessage);
-		}catch(IllegalStateException e){
+		}catch(StockExchangeIllegalStateException e){
 			assertTrue(e.getMessage().equals(expectedErrorMessage));
 		}
 	}

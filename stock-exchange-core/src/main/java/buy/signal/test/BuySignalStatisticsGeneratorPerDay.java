@@ -3,6 +3,7 @@ package buy.signal.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.CalculateSum;
 import utils.Stats;
 
 public class BuySignalStatisticsGeneratorPerDay {
@@ -71,14 +72,14 @@ public class BuySignalStatisticsGeneratorPerDay {
 		
 		List <Double> aggregated = getProfitsFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.sum(aggregated);
+		return CalculateSum.calculate(aggregated);
 	}
 	
 	public double calculatePercentage(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){
 		
 		List <Double> aggregated = getPercentageFromOneDay(resultsFromBuySignalForTicker, day);
 		
-		return Stats.sum(aggregated);
+		return CalculateSum.calculate(aggregated);
 	}
 	
 	public double calculateAverage(List <List<ProfitsFromSignal>> resultsFromBuySignalForTicker, int day){

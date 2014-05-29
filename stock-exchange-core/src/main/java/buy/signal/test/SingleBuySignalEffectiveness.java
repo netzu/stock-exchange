@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import data.collector.StockExchangeIllegalStateException;
 import data.collector.StockTickerHistory;
 
 public class SingleBuySignalEffectiveness {
@@ -117,16 +118,21 @@ public class SingleBuySignalEffectiveness {
 		return balanceInMoney;
 	}
 	
-	public double percentageOfDaysWithPositiveResults(boolean[] daysWithPositiveResultsForOneSignal){
+	public double percentageOfDaysWithPositiveResults(List<Boolean> daysWithPositiveResultsForOneSignal){
+		
+		if(daysWithPositiveResultsForOneSignal.isEmpty()){
+			throw new StockExchangeIllegalStateException("There is no days with results (empty list passed as a argument) so cannot calculate percentage" );
+		}
+		
 		int counter = 0;
 		
-		for(int i=0; i<daysWithPositiveResultsForOneSignal.length; i++){
-			if(daysWithPositiveResultsForOneSignal[i]==true){
+		for(int i=0; i<daysWithPositiveResultsForOneSignal.size(); i++){
+			if(daysWithPositiveResultsForOneSignal.get(i)==true){
 				counter++;
 			}
 		}
 		
-		return counter/daysWithPositiveResultsForOneSignal.length*100;
+		return (double) counter/ (double)daysWithPositiveResultsForOneSignal.size()*100.0;
 	}
 
 }

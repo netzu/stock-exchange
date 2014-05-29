@@ -20,10 +20,6 @@ public class BuySignalTester {
 				
 		StockTicker tickerDataFromBuySignal = stockCollectionForTicker.findStockByDate(buySignal);
 		
-		if(tickerDataFromBuySignal==null){
-			throw new IllegalStateException("No data found for this day " + buySignal.getDayOfMonth() + "-" + buySignal.getMonthOfYear() + "-" + buySignal.getYear() + " in: " + stockCollectionForTicker.getStockTickerDataList().get(0).getStockName());
-		}
-		
 		double price = tickerDataFromBuySignal.getClose();
 		
 		int index = stockCollectionForTicker.getStockTickerDataList().indexOf(tickerDataFromBuySignal);
