@@ -3,6 +3,9 @@ package statistics;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,14 @@ public class CalculateSumTest {
 	
 	final static String PATH = new String("statistics/");
 	MocksForTests mock = new MocksForTests();
+	
+	@Test
+	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+		  Constructor<CalculateSum> constructor = CalculateSum.class.getDeclaredConstructor();
+		  assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+		  constructor.setAccessible(true);
+		  constructor.newInstance();
+	}
 	
 	@Test
 	public void emptyList(){
