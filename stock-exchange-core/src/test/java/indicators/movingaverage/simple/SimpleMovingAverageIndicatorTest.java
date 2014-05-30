@@ -73,7 +73,7 @@ public class SimpleMovingAverageIndicatorTest {
 			 List<SimpleMovingAverageData> currentResults = indicator.calculateSimpleMovingAverage(period, tickerCollection);
 			 
 			 assertTrue("Size of current list is wrong, expecting 13 got: " + currentResults.size(), currentResults.size() == 13);
-			 assertTrue("Two lists are not same", currentResults.equals(expectedResults));
+			 assertTrue("Two lists are not same", checkIfEquals(expectedResults, currentResults));
 			 
 		 }catch(Exception ex){
 			 fail("Exception when not expected: " + ex.getMessage());
@@ -90,7 +90,7 @@ public class SimpleMovingAverageIndicatorTest {
 		 try{
 			 SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
 			 List<SimpleMovingAverageData> currentResults = indicator.calculateSimpleMovingAverage(period, tickerCollection);
-			 assertTrue("Two lists are not same", currentResults.equals(expectedResults));			 
+			 assertTrue("Two lists are not same", checkIfEquals(expectedResults, currentResults));			 
 		 }catch(Exception ex){
 			 fail("Exception when not expected: " + ex.getMessage());
 		 }
@@ -109,18 +109,24 @@ public class SimpleMovingAverageIndicatorTest {
 			 int expectedSizeOfList = tickerCollection.getStockTickerDataList().size()-period+1;
 			 
 			 assertTrue("Size of current list is wrong: " + currentResults.size() + ", was expecting: " + expectedSizeOfList, currentResults.size()  == expectedSizeOfList);
-
-			 for(int i=0; i<expectedResults.size(); i++){
-				 if(!Precision.equalsIncludingNaN(expectedResults.get(i).getAverage(), currentResults.get(i).getAverage(), 0.01)){
-					 fail("List with CurrentResults is not same as with expected");
-				 }
-			 }
-			 
-			 assertTrue(true);
+			 assertTrue(checkIfEquals(expectedResults, currentResults));
 			 
 		 }catch(Exception ex){
 			 fail("Exception when not expected: " + ex.getMessage());
 		 }
 	 }
+
+	private boolean checkIfEquals(List<SimpleMovingAverageData> expectedResults, List<SimpleMovingAverageData> currentResults) {
+		try{
+			for(int i=0; i<expectedResults.size(); i++){
+				 if(!Precision.equalsIncludingNaN(expectedResults.get(i).getAverage(), currentResults.get(i).getAverage(), 0.01)){
+					 return false;
+				 }
+			 }
+		}catch(Exception ex){
+			return false;
+		}
+		return true;
+	}
 	 
 }
