@@ -1,5 +1,6 @@
 package utils;
 
+import indicators.movingaverage.complex.AverageData;
 import indicators.movingaverage.simple.SimpleMovingAverageData;
 
 import java.io.BufferedReader;
@@ -197,5 +198,4 @@ public class MocksForTests {
 
 		return fileReader.getStockTickerCollection(new File(filePath));
 	}
-
 }

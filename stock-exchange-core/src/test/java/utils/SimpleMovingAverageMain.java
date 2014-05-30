@@ -28,8 +28,9 @@ public class SimpleMovingAverageMain {
 		
 		StockDataSelect ticker = new StockDataSelect(connection);
 		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker("LENA");
+		SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();    	
 		
-		List<SimpleMovingAverageData> simpleMovingAverageData = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(PERIOD_FOR_MOVING_AVERAGE, stockCollectionForTicker);
+		List<SimpleMovingAverageData> simpleMovingAverageData = indicator.calculateSimpleMovingAverage(PERIOD_FOR_MOVING_AVERAGE, stockCollectionForTicker);
 		
 		SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
 		

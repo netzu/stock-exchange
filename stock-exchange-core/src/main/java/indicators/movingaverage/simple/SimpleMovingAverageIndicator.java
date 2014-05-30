@@ -28,7 +28,7 @@ public class SimpleMovingAverageIndicator {
 	 * @return
 	 * 
 	 */
-	public static List<SimpleMovingAverageData> calculateSimpleMovingAverage(int period, StockTickerHistory tickerCollection){
+	public List<SimpleMovingAverageData> calculateSimpleMovingAverage(int period, StockTickerHistory tickerCollection){
 		
 		if(period == 0){
 			throw new SimpleMovingAverageCalculationException("Simple moving avarage cannot be calculated if period is zero");
