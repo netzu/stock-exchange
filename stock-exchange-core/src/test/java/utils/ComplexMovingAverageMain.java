@@ -1,5 +1,8 @@
-package indicators.movingaverage.complex;
+package utils;
 
+import indicators.movingaverage.complex.AverageData;
+import indicators.movingaverage.complex.CompexMovingAverageIndicator;
+import indicators.movingaverage.complex.ComplexMovingAverageSignals;
 import indicators.movingaverage.simple.SimpleMovingAverageSignals;
 
 import java.sql.Connection;
@@ -19,7 +22,7 @@ public class ComplexMovingAverageMain {
 	private static final int PERIOD_FOR_SECOND_AVERAGE = 20;
 	private static final int PERIOD_FOR_FIRST_AVERAGE = 15;
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
+	public static void test(String[] args) throws ClassNotFoundException, SQLException, ParseException {
 		
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);

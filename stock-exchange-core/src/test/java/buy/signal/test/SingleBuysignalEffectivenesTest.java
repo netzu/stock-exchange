@@ -118,7 +118,7 @@ public class SingleBuysignalEffectivenesTest {
 		int days = 0;
 		DateTime buySignal = dateFormater.parseDateTime("20100315");
 		StockTickerHistory collection = new StockTickerHistory();
-		collection = mock.readTickerData(PATH + "daysWithPositiveResults_tickerData_01");
+		collection = mock.readTickerData(PATH + "daysWithPositiveResults/tickerData_01");
 		
 		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 		String expectedErrorMessage = "Number days in test cannot be 0";
@@ -138,7 +138,7 @@ public class SingleBuysignalEffectivenesTest {
 		int days = 3;
 		DateTime buySignal = dateFormater.parseDateTime("20100315");
 		StockTickerHistory collection = new StockTickerHistory();
-		collection = mock.readTickerData(PATH + "daysWithPositiveResults_tickerData_02");
+		collection = mock.readTickerData(PATH + "daysWithPositiveResults/tickerData_02");
 		
 		SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
 		String expectedErrorMessage = "Ticker collection cannot be empty";
@@ -158,10 +158,10 @@ public class SingleBuysignalEffectivenesTest {
 		int days = 7;
 		DateTime buySignal = dateFormater.parseDateTime("20100315");
 		StockTickerHistory collection = new StockTickerHistory();
-		collection = mock.readTickerData(PATH + "daysWithPositiveResults_tickerData_03");
+		collection = mock.readTickerData(PATH + "daysWithPositiveResults/tickerData_03");
 		
 		List<Boolean> expectedResults = new ArrayList<Boolean>();		
-		expectedResults = mock.getCorrectSignals(PATH + "daysWithPositiveResults_expectedResults_03");
+		expectedResults = mock.getCorrectSignals(PATH + "daysWithPositiveResults/expectedResults_03");
 		
 		try{
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
@@ -179,10 +179,10 @@ public class SingleBuysignalEffectivenesTest {
 		int days = 8;
 		DateTime buySignal = dateFormater.parseDateTime("20100315");
 		StockTickerHistory collection = new StockTickerHistory();
-		collection = mock.readTickerData(PATH + "daysWithPositiveResults_tickerData_04");
+		collection = mock.readTickerData(PATH + "daysWithPositiveResults/tickerData_04");
 		
 		List<Boolean> expectedResults = new ArrayList<Boolean>();		
-		expectedResults = mock.getCorrectSignals(PATH + "daysWithPositiveResults_expectedResults_04");
+		expectedResults = mock.getCorrectSignals(PATH + "daysWithPositiveResults/expectedResults_04");
 		
 		try{
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
@@ -200,10 +200,10 @@ public class SingleBuysignalEffectivenesTest {
 		int days = 3;
 		DateTime buySignal = dateFormater.parseDateTime("20100322");
 		StockTickerHistory collection = new StockTickerHistory();
-		collection = mock.readTickerData(PATH + "daysWithPositiveResults_tickerData_05");
+		collection = mock.readTickerData(PATH + "daysWithPositiveResults/tickerData_05");
 		
 		List<Boolean> expectedResults = new ArrayList<Boolean>();		
-		expectedResults = mock.getCorrectSignals(PATH + "daysWithPositiveResults_expectedResults_05");
+		expectedResults = mock.getCorrectSignals(PATH + "daysWithPositiveResults/expectedResults_05");
 		
 		try{
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();
@@ -222,10 +222,10 @@ public class SingleBuysignalEffectivenesTest {
 		int days = 7;
 		DateTime buySignal = dateFormater.parseDateTime("20100315");
 		StockTickerHistory collection = new StockTickerHistory();
-		collection = mock.readTickerData(PATH + "daysWithPositiveResults_tickerData_06");
+		collection = mock.readTickerData(PATH + "daysWithPositiveResults/tickerData_06");
 		
 		List<Boolean> expectedResults = new ArrayList<Boolean>();		
-		expectedResults = mock.getCorrectSignals(PATH + "daysWithPositiveResults_expectedResults_06");
+		expectedResults = mock.getCorrectSignals(PATH + "daysWithPositiveResults/expectedResults_06");
 		
 		try{
 			SingleBuySignalEffectiveness signalEffectivnes = new SingleBuySignalEffectiveness();

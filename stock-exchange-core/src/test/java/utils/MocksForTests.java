@@ -16,25 +16,23 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import buy.signal.test.BuySingalStatistics;
-import buy.signal.test.ProfitsFromSignal;
 import data.DataFileReader;
 import data.collector.StockTickerHistory;
 
 public class MocksForTests {
 
-	private static final int COUNT_POSITIVE_INDEX = 11;
-	private static final int COUNT_NEGATIVE_INDEX = 10;
-	private static final int POSITIVE_PROFITS_INDEX = 9;
-	private static final int NEGATIVE_PROFITS_INDEX = 8;
-	private static final int MAX_INDEX = 7;
-	private static final int MIN_INDEX = 6;
-	private static final int VARIANCE_INDEX = 5;
-	private static final int MEDIAN_INDEX = 4;
-	private static final int STAND_DEV_INDEX = 3;
-	private static final int AVERAGE_INDEX = 2;
-	private static final int PERCENTAGE_SUM_INDEX = 1;
-	private static final int PROFITS_SUM_INDEX = 0;
+//	private static final int COUNT_POSITIVE_INDEX = 11;
+//	private static final int COUNT_NEGATIVE_INDEX = 10;
+//	private static final int POSITIVE_PROFITS_INDEX = 9;
+//	private static final int NEGATIVE_PROFITS_INDEX = 8;
+//	private static final int MAX_INDEX = 7;
+//	private static final int MIN_INDEX = 6;
+//	private static final int VARIANCE_INDEX = 5;
+//	private static final int MEDIAN_INDEX = 4;
+//	private static final int STAND_DEV_INDEX = 3;
+//	private static final int AVERAGE_INDEX = 2;
+//	private static final int PERCENTAGE_SUM_INDEX = 1;
+//	private static final int PROFITS_SUM_INDEX = 0;
 	private DateTimeFormatter dateFormater = DateTimeFormat
 			.forPattern("yyyyMMdd");
 
@@ -129,65 +127,65 @@ public class MocksForTests {
 		return correctSignals;
 	}
 
-	public List<ProfitsFromSignal> getProfitsFromSignal(final String path) throws IOException {
-		
-		List<ProfitsFromSignal> profits = new ArrayList<ProfitsFromSignal>();
+//	public List<ProfitsFromSignal> getProfitsFromSignal(final String path) throws IOException {
+//		
+//		List<ProfitsFromSignal> profits = new ArrayList<ProfitsFromSignal>();
+//
+//		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+//		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//
+//		String line = null;
+//
+//		while ((line = reader.readLine()) != null) {
+//			ProfitsFromSignal profistForOneDay = new ProfitsFromSignal();
+//
+//			String[] splitData = line.split(",");
+//
+//			if (splitData.length != 2) {
+//				throw new IllegalStateException(
+//						"Wrong data format, expected date<yyyyMMdd>,price<double>");
+//			}
+//
+//			profistForOneDay.setProfit(Double.parseDouble(splitData[0]));
+//			profistForOneDay.setProfitInPercentage(Double
+//					.parseDouble(splitData[1]));
+//
+//			profits.add(profistForOneDay);
+//		}
+//
+//		reader.close();
+//
+//		return profits;
+//	}
 
-		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-		String line = null;
-
-		while ((line = reader.readLine()) != null) {
-			ProfitsFromSignal profistForOneDay = new ProfitsFromSignal();
-
-			String[] splitData = line.split(",");
-
-			if (splitData.length != 2) {
-				throw new IllegalStateException(
-						"Wrong data format, expected date<yyyyMMdd>,price<double>");
-			}
-
-			profistForOneDay.setProfit(Double.parseDouble(splitData[0]));
-			profistForOneDay.setProfitInPercentage(Double
-					.parseDouble(splitData[1]));
-
-			profits.add(profistForOneDay);
-		}
-
-		reader.close();
-
-		return profits;
-	}
-
-	public BuySingalStatistics getBuySignalStatistics(final String path) throws IOException {
-		BuySingalStatistics stats = new BuySingalStatistics();
-
-		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-
-		String line = null;
-
-		while ((line = reader.readLine()) != null) {
-			String[] splitData = line.split(",");
-
-			stats.setSumOfProfits(Double.parseDouble(splitData[PROFITS_SUM_INDEX]));
-			stats.setSumOfPercentage(Double.parseDouble(splitData[PERCENTAGE_SUM_INDEX]));
-			stats.setAverage(Double.parseDouble(splitData[AVERAGE_INDEX]));
-			stats.setStandardDeviation(Double.parseDouble(splitData[STAND_DEV_INDEX]));
-			stats.setMedian(Double.parseDouble(splitData[MEDIAN_INDEX]));
-			stats.setVariance(Double.parseDouble(splitData[VARIANCE_INDEX]));
-			stats.setMin(Double.parseDouble(splitData[MIN_INDEX]));
-			stats.setMax(Double.parseDouble(splitData[MAX_INDEX]));
-			stats.setSumNegativeProfits(Double.parseDouble(splitData[NEGATIVE_PROFITS_INDEX]));
-			stats.setSumPositiveProfits(Double.parseDouble(splitData[POSITIVE_PROFITS_INDEX]));
-			stats.setCountNegativeProfits(Double.parseDouble(splitData[COUNT_NEGATIVE_INDEX]));
-			stats.setCountPositiveProfits(Double.parseDouble(splitData[COUNT_POSITIVE_INDEX]));
-		}
-
-		reader.close();
-		return stats;
-	}
+//	public BuySingalStatistics getBuySignalStatistics(final String path) throws IOException {
+//		BuySingalStatistics stats = new BuySingalStatistics();
+//
+//		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+//		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//
+//		String line = null;
+//
+//		while ((line = reader.readLine()) != null) {
+//			String[] splitData = line.split(",");
+//
+//			stats.setSumOfProfits(Double.parseDouble(splitData[PROFITS_SUM_INDEX]));
+//			stats.setSumOfPercentage(Double.parseDouble(splitData[PERCENTAGE_SUM_INDEX]));
+//			stats.setAverage(Double.parseDouble(splitData[AVERAGE_INDEX]));
+//			stats.setStandardDeviation(Double.parseDouble(splitData[STAND_DEV_INDEX]));
+//			stats.setMedian(Double.parseDouble(splitData[MEDIAN_INDEX]));
+//			stats.setVariance(Double.parseDouble(splitData[VARIANCE_INDEX]));
+//			stats.setMin(Double.parseDouble(splitData[MIN_INDEX]));
+//			stats.setMax(Double.parseDouble(splitData[MAX_INDEX]));
+//			stats.setSumNegativeProfits(Double.parseDouble(splitData[NEGATIVE_PROFITS_INDEX]));
+//			stats.setSumPositiveProfits(Double.parseDouble(splitData[POSITIVE_PROFITS_INDEX]));
+//			stats.setCountNegativeProfits(Double.parseDouble(splitData[COUNT_NEGATIVE_INDEX]));
+//			stats.setCountPositiveProfits(Double.parseDouble(splitData[COUNT_POSITIVE_INDEX]));
+//		}
+//
+//		reader.close();
+//		return stats;
+//	}
 
 	public StockTickerHistory readTickerData(final String path) throws ParseException {
 

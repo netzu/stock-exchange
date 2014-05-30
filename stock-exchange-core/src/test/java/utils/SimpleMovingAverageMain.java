@@ -1,4 +1,8 @@
-package indicators.movingaverage.simple;
+package utils;
+
+import indicators.movingaverage.simple.SimpleMovingAverageData;
+import indicators.movingaverage.simple.SimpleMovingAverageIndicator;
+import indicators.movingaverage.simple.SimpleMovingAverageSignals;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,7 +21,7 @@ public class SimpleMovingAverageMain {
 
 	private static final int PERIOD_FOR_MOVING_AVERAGE = 13;
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
+	public static void test(String[] args) throws ClassNotFoundException, SQLException, ParseException {
 
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
