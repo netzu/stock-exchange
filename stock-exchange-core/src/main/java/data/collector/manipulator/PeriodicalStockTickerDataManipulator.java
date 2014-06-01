@@ -8,6 +8,7 @@ import data.collector.StockTickerHistory;
 
 public abstract class PeriodicalStockTickerDataManipulator implements StockTickerCollectionManipulator {
 
+	public abstract boolean fromSamePeriod(final StockTicker first, final StockTicker second);
 	
 	public StockTickerHistory manipulate(final StockTickerHistory input) {
 		List<StockTicker>  dailyCollection = input.getStockTickerDataList();
@@ -37,10 +38,6 @@ public abstract class PeriodicalStockTickerDataManipulator implements StockTicke
 		return result;
 	}
 	
-	
-	public abstract boolean fromSamePeriod(final StockTicker first, final StockTicker second);
-
-
 	private void updatePeriodDataWithDailyData(final StockTicker aggragated, final StockTicker dailyData) {
 		
 		if(dailyData.getHigh() > aggragated.getHigh()){
@@ -52,8 +49,6 @@ public abstract class PeriodicalStockTickerDataManipulator implements StockTicke
 		}
 		
 		aggragated.setClose(dailyData.getClose());
-		aggragated.setVolumen(aggragated.getVolumen() + dailyData.getVolumen());
-		//aggragated.setDate(dailyData.getDate());
-	
+		aggragated.setVolumen(aggragated.getVolumen() + dailyData.getVolumen());	
 	}
 }

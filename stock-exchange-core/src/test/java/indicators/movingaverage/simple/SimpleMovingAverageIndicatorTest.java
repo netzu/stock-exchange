@@ -2,26 +2,24 @@ package indicators.movingaverage.simple;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
-import org.apache.commons.math3.util.Precision;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 import data.collector.StockTickerHistory;
+import utils.CompareSimpleMovingAverageLists;
 import utils.MocksForTests;
 
 public class SimpleMovingAverageIndicatorTest {
 	
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
 	final static String PATH_FLAT = new String("indicators/simpleMovingAverage/indicator/");
-	
+	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 	MocksForTests mock = new MocksForTests();
-	
+
 	/*
 	 * period is equal 0, exception should be thrown
 	 */
@@ -64,20 +62,18 @@ public class SimpleMovingAverageIndicatorTest {
 	 public void periodEqualOne() throws ParseException, IOException{
 		 
 		 StockTickerHistory tickerCollection =  mock.readTickerData(PATH_FLAT + "periodEqualOne_ticker.mst");
-		 List<SimpleMovingAverageData> expectedResults = mock.getAverageData(PATH_FLAT + "periodEqualOne_ExpectedResults");
+		 
+		 String expectedErrorMessage = "Simple moving avarage cannot be calculated if period is zero";
 		 
 		 int period = 1;
 		 
-		 try{
-			 SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
-			 List<SimpleMovingAverageData> currentResults = indicator.calculateSimpleMovingAverage(period, tickerCollection);
-			 
-			 assertTrue("Size of current list is wrong, expecting 13 got: " + currentResults.size(), currentResults.size() == 13);
-			 assertTrue("Two lists are not same", checkIfEquals(expectedResults, currentResults));
-			 
-		 }catch(Exception ex){
-			 fail("Exception when not expected: " + ex.getMessage());
-		 }
+	        try{
+	        	SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
+	        	indicator.calculateSimpleMovingAverage(period, tickerCollection);
+	        	fail("No exception has been found, expected: " + expectedErrorMessage);
+	        }catch(SimpleMovingAverageCalculationException ex){
+	        	assertTrue("Exception message is diffrent that expected. Expected: " + expectedErrorMessage + ". Got: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
+	        }
 	 }
 	 
 	 @Test
@@ -90,7 +86,7 @@ public class SimpleMovingAverageIndicatorTest {
 		 try{
 			 SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
 			 List<SimpleMovingAverageData> currentResults = indicator.calculateSimpleMovingAverage(period, tickerCollection);
-			 assertTrue("Two lists are not same", checkIfEquals(expectedResults, currentResults));			 
+			 assertTrue("Two lists are not same", CompareSimpleMovingAverageLists.compare(expectedResults, currentResults));			 
 		 }catch(Exception ex){
 			 fail("Exception when not expected: " + ex.getMessage());
 		 }
@@ -98,7 +94,7 @@ public class SimpleMovingAverageIndicatorTest {
 	 
 	 @Test
 	 public void checkIfProperValuesAreCalculated() throws ParseException, IOException{
-		 StockTickerHistory tickerCollection =  mock.readTickerData(PATH_FLAT + "checkIfProperValuesAreCalculated_ticker.mst");
+		 StockTickerHistory tickerCollection = mock.readTickerData(PATH_FLAT + "checkIfProperValuesAreCalculated_ticker.mst");
 		 List<SimpleMovingAverageData> expectedResults = mock.getAverageData(PATH_FLAT + "checkIfProperValuesAreCalculated_ExpectedResults");
 		 
 		 int period = 5;
@@ -109,24 +105,10 @@ public class SimpleMovingAverageIndicatorTest {
 			 int expectedSizeOfList = tickerCollection.getStockTickerDataList().size()-period+1;
 			 
 			 assertTrue("Size of current list is wrong: " + currentResults.size() + ", was expecting: " + expectedSizeOfList, currentResults.size()  == expectedSizeOfList);
-			 assertTrue(checkIfEquals(expectedResults, currentResults));
+			 assertTrue(CompareSimpleMovingAverageLists.compare(expectedResults, currentResults, 0.01));
 			 
 		 }catch(Exception ex){
 			 fail("Exception when not expected: " + ex.getMessage());
 		 }
-	 }
-
-	private boolean checkIfEquals(List<SimpleMovingAverageData> expectedResults, List<SimpleMovingAverageData> currentResults) {
-		try{
-			for(int i=0; i<expectedResults.size(); i++){
-				 if(!Precision.equalsIncludingNaN(expectedResults.get(i).getAverage(), currentResults.get(i).getAverage(), 0.01)){
-					 return false;
-				 }
-			 }
-		}catch(Exception ex){
-			return false;
-		}
-		return true;
-	}
-	 
+	 }	 
 }

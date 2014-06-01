@@ -30,7 +30,7 @@ public class SimpleMovingAverageIndicator {
 	 */
 	public List<SimpleMovingAverageData> calculateSimpleMovingAverage(int period, StockTickerHistory tickerCollection){
 		
-		if(period == 0){
+		if(period < 2){
 			throw new SimpleMovingAverageCalculationException("Simple moving avarage cannot be calculated if period is zero");
 		}
 		
