@@ -2,9 +2,11 @@ package data.collector;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.joda.time.DateTime;
 
 public class StockTickerHistory {
+
 	private List<StockTicker> stockTickerDataList = new ArrayList<StockTicker>();
 
 	public List<StockTicker> getStockTickerDataList() {
@@ -75,5 +77,33 @@ public class StockTickerHistory {
 		}
 		
 		return index;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((stockTickerDataList == null) ? 0 : stockTickerDataList
+						.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StockTickerHistory other = (StockTickerHistory) obj;
+		if (stockTickerDataList == null) {
+			if (other.stockTickerDataList != null)
+				return false;
+		} else if (!stockTickerDataList.equals(other.stockTickerDataList))
+			return false;
+		return true;
 	}
 }

@@ -118,6 +118,72 @@ public class StockTicker {
 		LOGGER.info(data);
 	}
 	
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(close);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result
+				+ ((dateFormater == null) ? 0 : dateFormater.hashCode());
+		temp = Double.doubleToLongBits(high);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(low);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(open);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result
+				+ ((stockName == null) ? 0 : stockName.hashCode());
+		temp = Double.doubleToLongBits(volumen);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StockTicker other = (StockTicker) obj;
+		if (Double.doubleToLongBits(close) != Double
+				.doubleToLongBits(other.close))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (dateFormater == null) {
+			if (other.dateFormater != null)
+				return false;
+		} else if (!dateFormater.equals(other.dateFormater))
+			return false;
+		if (Double.doubleToLongBits(high) != Double
+				.doubleToLongBits(other.high))
+			return false;
+		if (Double.doubleToLongBits(low) != Double.doubleToLongBits(other.low))
+			return false;
+		if (Double.doubleToLongBits(open) != Double
+				.doubleToLongBits(other.open))
+			return false;
+		if (stockName == null) {
+			if (other.stockName != null)
+				return false;
+		} else if (!stockName.equals(other.stockName))
+			return false;
+		if (Double.doubleToLongBits(volumen) != Double
+				.doubleToLongBits(other.volumen))
+			return false;
+		return true;
+	}
+
 	public static StockTicker copy(final StockTicker source) {
 		StockTicker copy = new StockTicker();
 		

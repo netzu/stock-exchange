@@ -8,7 +8,7 @@ import data.collector.StockTickerHistory;
 
 public abstract class PeriodicalStockTickerDataManipulator implements StockTickerCollectionManipulator {
 
-	public abstract boolean fromSamePeriod(final StockTicker first, final StockTicker second);
+	abstract boolean fromSamePeriod(final StockTicker first, final StockTicker second);
 	
 	public StockTickerHistory manipulate(final StockTickerHistory input) {
 		List<StockTicker>  dailyCollection = input.getStockTickerDataList();
