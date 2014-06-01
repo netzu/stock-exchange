@@ -2,6 +2,7 @@ package utils;
 
 import indicators.movingaverage.complex.AverageData;
 import indicators.movingaverage.simple.SimpleMovingAverageData;
+import indicators.williamsr.WilliamsRData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -65,6 +66,35 @@ public class MocksForTests {
 		reader.close();
 		return result;
 
+	}
+	
+	public List<WilliamsRData> getWillimasCollection(final String path) throws NumberFormatException, IOException{
+
+		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		final List<WilliamsRData> result = new ArrayList<WilliamsRData>();
+
+		String line = null;
+
+		while ((line = reader.readLine()) != null) {
+
+			String[] splitData = line.split(",");
+
+			if (splitData.length != 2) {
+				throw new IllegalStateException(
+						"Wrong data format, expected date<yyyyMMdd>,price<double>");
+			}
+
+			WilliamsRData williamsRData = new WilliamsRData();
+			williamsRData.setWilliamsR(Double.parseDouble(splitData[1]));
+			final DateTime date = dateFormater.parseDateTime(splitData[0]);
+			williamsRData.setDate(date);
+
+			result.add(williamsRData);
+		}
+
+		reader.close();
+		return result;
 	}
 
 	public List<DateTime> getBuysignal(final String path) throws IOException {
