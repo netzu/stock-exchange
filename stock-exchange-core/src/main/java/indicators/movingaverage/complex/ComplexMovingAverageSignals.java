@@ -11,7 +11,7 @@ import data.collector.StockTickerHistory;
 
 public class ComplexMovingAverageSignals {
 	
-	public List<DateTime> buysignal(final List<AverageData> averageData,  SimpleMovingAverageSignals simpleMovingAverageSignals, StockTickerHistory stockCollection) {
+	public List<DateTime> buysignal(final List<ComplexMovingAverageAverageData> averageData,  SimpleMovingAverageSignals simpleMovingAverageSignals, StockTickerHistory stockCollection) {
 		
 		List<DateTime> simpleBuy1 = simpleMovingAverageSignals.getBuySignal(averageData.get(0).getAverageData(), stockCollection);
 		List<DateTime> simpleBuy2 = simpleMovingAverageSignals.getBuySignal(averageData.get(1).getAverageData(), stockCollection);
@@ -28,7 +28,7 @@ public class ComplexMovingAverageSignals {
 		return result;
 	}
 	
-	public List<DateTime> generatSellSignals(final List<AverageData> averageData, SimpleMovingAverageSignals simpleMovingAverageSignals, StockTickerHistory stockCollection) {
+	public List<DateTime> generatSellSignals(final List<ComplexMovingAverageAverageData> averageData, SimpleMovingAverageSignals simpleMovingAverageSignals, StockTickerHistory stockCollection) {
 		
 		List<DateTime> simpleSell1 = simpleMovingAverageSignals.getSellSignals(averageData.get(0).getAverageData(), stockCollection);
 		List<DateTime> simpleSell2 = simpleMovingAverageSignals.getSellSignals(averageData.get(1).getAverageData(), stockCollection);

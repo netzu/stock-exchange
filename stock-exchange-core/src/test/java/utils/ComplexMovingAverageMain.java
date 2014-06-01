@@ -1,6 +1,6 @@
 package utils;
 
-import indicators.movingaverage.complex.AverageData;
+import indicators.movingaverage.complex.ComplexMovingAverageAverageData;
 import indicators.movingaverage.complex.CompexMovingAverageIndicator;
 import indicators.movingaverage.complex.ComplexMovingAverageSignals;
 import indicators.movingaverage.simple.SimpleMovingAverageSignals;
@@ -33,7 +33,7 @@ public class ComplexMovingAverageMain {
 		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
 		
 		CompexMovingAverageIndicator complexMovingAverageIndicator = new CompexMovingAverageIndicator();
-		List<AverageData> averageResults = complexMovingAverageIndicator.calculateComplexMovingAverage(PERIOD_FOR_FIRST_AVERAGE, PERIOD_FOR_SECOND_AVERAGE, PERIOD_FOR_THIRD_AVERAGE, stockCollectionForTicker);	
+		List<ComplexMovingAverageAverageData> averageResults = complexMovingAverageIndicator.calculateComplexMovingAverage(PERIOD_FOR_FIRST_AVERAGE, PERIOD_FOR_SECOND_AVERAGE, PERIOD_FOR_THIRD_AVERAGE, stockCollectionForTicker);	
 		
 		//something is totally wrong here
 		SimpleMovingAverageSignals averageSignals = new SimpleMovingAverageSignals();

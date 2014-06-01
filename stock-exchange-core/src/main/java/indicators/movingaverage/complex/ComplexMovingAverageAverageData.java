@@ -4,12 +4,12 @@ import indicators.movingaverage.simple.SimpleMovingAverageData;
 
 import java.util.List;
 
-public class AverageData {
+public class ComplexMovingAverageAverageData {
 	
 	private final int period;
 	private final List<SimpleMovingAverageData> averageData;
 	
-	public AverageData(final int period, final List<SimpleMovingAverageData> averageData) {
+	public ComplexMovingAverageAverageData(final int period, final List<SimpleMovingAverageData> averageData) {	
 		this.period = period;
 		this.averageData = averageData;
 	}

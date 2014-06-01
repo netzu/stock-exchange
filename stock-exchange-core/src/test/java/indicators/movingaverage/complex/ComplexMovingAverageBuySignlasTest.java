@@ -3,7 +3,7 @@ package indicators.movingaverage.complex;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import indicators.movingaverage.complex.AverageData;
+import indicators.movingaverage.complex.ComplexMovingAverageAverageData;
 import indicators.movingaverage.complex.ComplexMovingAverageSignals;
 import indicators.movingaverage.simple.SimpleMovingAverageData;
 import indicators.movingaverage.simple.SimpleMovingAverageSignals;
@@ -28,11 +28,11 @@ public class ComplexMovingAverageBuySignlasTest {
 	
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 	StockTickerHistory mockStockTickerHistory;
-	AverageData mockAverageData1;
-	AverageData mockAverageData2;
-	AverageData mockAverageData3;
+	ComplexMovingAverageAverageData mockAverageData1;
+	ComplexMovingAverageAverageData mockAverageData2;
+	ComplexMovingAverageAverageData mockAverageData3;
 	
-	List<AverageData> averageDataList;
+	List<ComplexMovingAverageAverageData> averageDataList;
 
 	List<SimpleMovingAverageData> simpleMovingAverageDataList1 = Mockito.mock(ArrayList.class);
 	List<SimpleMovingAverageData> simpleMovingAverageDataList2 = Mockito.mock(ArrayList.class);
@@ -44,9 +44,9 @@ public class ComplexMovingAverageBuySignlasTest {
 	public void setup() {
 		mockSimpleMovingAverageSignals = Mockito.mock(SimpleMovingAverageSignals.class);
 		mockStockTickerHistory = Mockito.mock(StockTickerHistory.class);
-		mockAverageData1 = Mockito.mock(AverageData.class);
-		mockAverageData2 = Mockito.mock(AverageData.class);
-		mockAverageData3 = Mockito.mock(AverageData.class);
+		mockAverageData1 = Mockito.mock(ComplexMovingAverageAverageData.class);
+		mockAverageData2 = Mockito.mock(ComplexMovingAverageAverageData.class);
+		mockAverageData3 = Mockito.mock(ComplexMovingAverageAverageData.class);
 		
 		Mockito.when(mockAverageData1.getAverageData()).thenReturn(simpleMovingAverageDataList1);
 		Mockito.when(mockAverageData2.getAverageData()).thenReturn(simpleMovingAverageDataList2);

@@ -9,13 +9,13 @@ import data.collector.StockTickerHistory;
 
 public class CompexMovingAverageIndicator {
 	
-	public List<AverageData> calculateComplexMovingAverage(int firstPeriod, int secondPeriod, int thirdPeriod, StockTickerHistory tickerCollection){
+	public List<ComplexMovingAverageAverageData> calculateComplexMovingAverage(int firstPeriod, int secondPeriod, int thirdPeriod, StockTickerHistory tickerCollection){
 
 		SimpleMovingAverageIndicator simpleIndicatore = new SimpleMovingAverageIndicator();
 		
-		AverageData averageData = new AverageData(firstPeriod, simpleIndicatore.calculateSimpleMovingAverage(firstPeriod, tickerCollection));
-		AverageData averageData2 = new AverageData(secondPeriod, simpleIndicatore.calculateSimpleMovingAverage(secondPeriod, tickerCollection));
-		AverageData averageData3 = new AverageData(thirdPeriod, simpleIndicatore.calculateSimpleMovingAverage(thirdPeriod, tickerCollection));
+		ComplexMovingAverageAverageData averageData = new ComplexMovingAverageAverageData(firstPeriod, simpleIndicatore.calculateSimpleMovingAverage(firstPeriod, tickerCollection));
+		ComplexMovingAverageAverageData averageData2 = new ComplexMovingAverageAverageData(secondPeriod, simpleIndicatore.calculateSimpleMovingAverage(secondPeriod, tickerCollection));
+		ComplexMovingAverageAverageData averageData3 = new ComplexMovingAverageAverageData(thirdPeriod, simpleIndicatore.calculateSimpleMovingAverage(thirdPeriod, tickerCollection));
 
 		return Arrays.asList(averageData, averageData2, averageData3);
 	}	
