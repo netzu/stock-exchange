@@ -15,6 +15,21 @@ public class WeeklyStockDataManipulatorTest {
 	MocksForTests mock = new MocksForTests();
 	
 	@Test
+	public void emptyStockTickerInput(){
+		StockTickerHistory inputTickerCollection = new StockTickerHistory();
+		StockTickerHistory expectedResults = new StockTickerHistory();
+		
+		try{
+			WeeklyStockDataManipulator manipulator = new WeeklyStockDataManipulator();
+			StockTickerHistory currentResults = manipulator.manipulate(inputTickerCollection);
+			
+			assertTrue(currentResults.equals(expectedResults));
+		}catch(Exception ex){
+			 fail("Exception when not expected: " + ex.getMessage());
+		}
+	}
+	
+	@Test
 	public void onlyOneDayInWeek() throws ParseException{
 		
 		StockTickerHistory inputTickerCollection = mock.readTickerData(PATH + "onlyOneDayInWeek_inputTickerCollection");
