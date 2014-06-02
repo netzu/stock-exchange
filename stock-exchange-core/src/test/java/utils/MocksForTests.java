@@ -1,6 +1,5 @@
 package utils;
 
-import indicators.movingaverage.complex.ComplexMovingAverageAverageData;
 import indicators.movingaverage.simple.SimpleMovingAverageData;
 import indicators.williamsr.WilliamsRData;
 

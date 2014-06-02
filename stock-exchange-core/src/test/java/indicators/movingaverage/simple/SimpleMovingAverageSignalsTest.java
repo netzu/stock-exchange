@@ -287,7 +287,7 @@ public class SimpleMovingAverageSignalsTest {
 //       
 //       assertFalse(sellSignal.isEmpty());       
 //       assertEquals(1, sellSignal.size());
-//       assertTrue(sellSignal.contains(dt));
+//      assertTrue(sellSignal.contains(dt));
    }
    
    

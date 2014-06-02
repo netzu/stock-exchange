@@ -21,7 +21,7 @@ public class DataFileReader {
 			String fileLine = reader.readLine();
 			
 			if(fileLine == null){
-				throw new IllegalStateException("Stock ticker is empty");
+				throw new StockDataReaderExcetion("File with socks data is empty");
 			}
 			
 			String exclude = "<TICKER>,<DTYYYYMMDD>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOL>";
