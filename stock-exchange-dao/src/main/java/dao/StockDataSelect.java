@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import data.collector.StockDataExtractor;
 import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
 
@@ -52,8 +53,9 @@ public class StockDataSelect {
 		ResultSet resultOfQuery = statement.executeQuery(); 
 		
 		while(resultOfQuery.next()){
-			StockTicker stockDataFromOneDay = new StockTicker();
-			stockDataFromOneDay.extractStockdata(resultOfQuery);
+			StockDataExtractor extractor = new StockDataExtractor();
+			
+			StockTicker stockDataFromOneDay = StockTicker.copy(extractor.extractFromQueryResults(resultOfQuery));
 			stockCollectionForTicker.add(stockDataFromOneDay);
 		}
 		
@@ -77,7 +79,8 @@ public class StockDataSelect {
 			return null;
 		}
 		
-		stockDataFromOneDay.extractStockdata(resultOfQuery);
+		StockDataExtractor extractor = new StockDataExtractor();
+		stockDataFromOneDay.copy(extractor.extractFromQueryResults(resultOfQuery));
 		
 		resultOfQuery.close();
 		statement.close();
@@ -102,7 +105,8 @@ public class StockDataSelect {
 			throw new IllegalStateException("No data when expected");
 		}
 		
-		stockDataFromOneDay.extractStockdata(resultOfQuery);
+		StockDataExtractor extractor = new StockDataExtractor();
+		stockDataFromOneDay.copy(extractor.extractFromQueryResults(resultOfQuery));
 		
 		resultOfQuery.close();
 		statement.close();

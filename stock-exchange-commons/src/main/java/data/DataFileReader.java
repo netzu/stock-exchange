@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 
+import data.collector.StockDataExtractor;
 import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
 
@@ -33,15 +34,16 @@ public class DataFileReader {
 			while(fileLine != null){
 				String[] data = fileLine.split(",");
 				
-				StockTicker stockDataFromOneDay = new StockTicker();
-				stockDataFromOneDay.extractStockdata(data);
+				StockDataExtractor extractor = new StockDataExtractor();
+				
+				StockTicker stockDataFromOneDay = StockTicker.copy(extractor.extractFromString(data));
 				stockTickerCollection.add(stockDataFromOneDay);
 				
 				fileLine = reader.readLine();
 			}
 			
 		} catch (final IOException ioe) {
-			ioe.printStackTrace();
+			throw ioe;
 		}finally{
 			if (null != reader) {
 				reader.close();
@@ -56,7 +58,7 @@ public class DataFileReader {
 			StockTickerHistory result = readStockData(tickerFile);
 			return result;
 		}catch(IOException ex){
-			throw new IllegalStateException();
+			throw new StockDataReaderExcetion(ex.getMessage());
 		}		
 	}
 }
