@@ -103,4 +103,16 @@ public class DataFileReaderTest {
 
 		assertTrue(currentResults.equals(expectedResults));
 	}
+	
+	@Test
+	public void fileWithEmptyLine() throws ParseException{
+		DataFileReader dataFileReader = new DataFileReader();
+		URL resource = this.getClass().getClassLoader().getResource("data/fileWithEmptyLine");
+		File filesWithoutHeader = new File(resource.getPath());
+
+		StockTickerHistory expectedResults = mock.readTickerData("data/fileWithEmptyLine");
+		StockTickerHistory currentResults = dataFileReader.getStockTickerCollection(filesWithoutHeader);
+
+		assertTrue(currentResults.equals(expectedResults));
+	}
 }
