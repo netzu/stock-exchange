@@ -96,8 +96,8 @@ public class StockTicker {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(Object obj) {//NOSONAR
+		if (this == obj)	//NOSONAR
 			return true;
 		if (obj == null)
 			return false;
