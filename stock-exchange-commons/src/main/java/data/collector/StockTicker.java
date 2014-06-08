@@ -1,6 +1,5 @@
 package data.collector;
 
-import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -16,9 +15,7 @@ public class StockTicker {
 	private double volumen;	
 	
 	private DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
-	
-	private static org.apache.log4j.Logger LOGGER = Logger.getLogger(StockTicker.class);
-	
+		
 	public String getStockName() {
 		return stockName;
 	}
@@ -107,8 +104,7 @@ public class StockTicker {
 		if (getClass() != obj.getClass())
 			return false;
 		StockTicker other = (StockTicker) obj;
-		if (Double.doubleToLongBits(close) != Double
-				.doubleToLongBits(other.close))
+		if (Double.doubleToLongBits(close) != Double.doubleToLongBits(other.close))
 			return false;
 		if (date == null) {
 			if (other.date != null)
@@ -120,21 +116,18 @@ public class StockTicker {
 				return false;
 		} else if (!dateFormater.equals(other.dateFormater))
 			return false;
-		if (Double.doubleToLongBits(high) != Double
-				.doubleToLongBits(other.high))
+		if (Double.doubleToLongBits(high) != Double.doubleToLongBits(other.high))
 			return false;
 		if (Double.doubleToLongBits(low) != Double.doubleToLongBits(other.low))
 			return false;
-		if (Double.doubleToLongBits(open) != Double
-				.doubleToLongBits(other.open))
+		if (Double.doubleToLongBits(open) != Double.doubleToLongBits(other.open))
 			return false;
 		if (stockName == null) {
 			if (other.stockName != null)
 				return false;
 		} else if (!stockName.equals(other.stockName))
 			return false;
-		if (Double.doubleToLongBits(volumen) != Double
-				.doubleToLongBits(other.volumen))
+		if (Double.doubleToLongBits(volumen) != Double.doubleToLongBits(other.volumen))
 			return false;
 		return true;
 	}

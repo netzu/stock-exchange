@@ -22,20 +22,7 @@ import data.collector.StockTickerHistory;
 
 public class MocksForTests {
 
-//	private static final int COUNT_POSITIVE_INDEX = 11;
-//	private static final int COUNT_NEGATIVE_INDEX = 10;
-//	private static final int POSITIVE_PROFITS_INDEX = 9;
-//	private static final int NEGATIVE_PROFITS_INDEX = 8;
-//	private static final int MAX_INDEX = 7;
-//	private static final int MIN_INDEX = 6;
-//	private static final int VARIANCE_INDEX = 5;
-//	private static final int MEDIAN_INDEX = 4;
-//	private static final int STAND_DEV_INDEX = 3;
-//	private static final int AVERAGE_INDEX = 2;
-//	private static final int PERCENTAGE_SUM_INDEX = 1;
-//	private static final int PROFITS_SUM_INDEX = 0;
-	private DateTimeFormatter dateFormater = DateTimeFormat
-			.forPattern("yyyyMMdd");
+	private DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 
 	public List<SimpleMovingAverageData> getAverageData(final String path) throws IOException {
 

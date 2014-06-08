@@ -78,7 +78,7 @@ public class DataFileReaderTest {
 		URL resource = this.getClass().getClassLoader().getResource("data/fileWithMultipleEntries");
 		File inputFile = new File(resource.getPath());
 
-		StockTickerHistory expectedResults = mock.readTickerData("data/fileWithMultipleEntries");
+		StockTickerHistory expectedResults = mock.readStockTickerHistory("data/fileWithMultipleEntries");
 		StockTickerHistory currentResults = reader.getStockTickerCollection(inputFile);
 
 		assertTrue(currentResults.equals(expectedResults));
@@ -98,7 +98,7 @@ public class DataFileReaderTest {
 		URL resource = this.getClass().getClassLoader().getResource("data/fileWithoutHeader");
 		File filesWithoutHeader = new File(resource.getPath());
 
-		StockTickerHistory expectedResults = mock.readTickerData("data/fileWithoutHeader");
+		StockTickerHistory expectedResults = mock.readStockTickerHistory("data/fileWithoutHeader");
 		StockTickerHistory currentResults = dataFileReader.getStockTickerCollection(filesWithoutHeader);
 
 		assertTrue(currentResults.equals(expectedResults));
@@ -110,7 +110,7 @@ public class DataFileReaderTest {
 		URL resource = this.getClass().getClassLoader().getResource("data/fileWithEmptyLine");
 		File filesWithoutHeader = new File(resource.getPath());
 
-		StockTickerHistory expectedResults = mock.readTickerData("data/fileWithEmptyLine");
+		StockTickerHistory expectedResults = mock.readStockTickerHistory("data/fileWithEmptyLine");
 		StockTickerHistory currentResults = dataFileReader.getStockTickerCollection(filesWithoutHeader);
 
 		assertTrue(currentResults.equals(expectedResults));
