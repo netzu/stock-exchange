@@ -22,6 +22,11 @@ public class StockTickerHistory {
 	}
 	
 	public List <StockTicker> subListOfCollection(int from, int to){
+		
+		if(from >= to){
+			throw new StockExchangeIllegalStateException("Cannot create sublist when FROM is greather or equal TO");
+		}
+		
 		List <StockTicker> subList = new ArrayList<StockTicker>();
 		
 		for(int i = from; i<to; i++){
@@ -56,11 +61,11 @@ public class StockTickerHistory {
 		int index = -1;
 		
 		if(stockTickerDataList.isEmpty()){
-			throw new IllegalStateException("Empty Stock Ticker Collection");
+			throw new StockExchangeIllegalStateException("Cannot find index for a ticker with given date for an empty ticker collection");
 		}
 		
 		if(date==null){
-			throw new IllegalArgumentException("Date is null!");
+			throw new StockExchangeIllegalStateException("Cannot find index for a ticker when date is null");
 		}
 		 
 		for(int i=0; i<this.stockTickerDataList.size();i++){
@@ -73,7 +78,7 @@ public class StockTickerHistory {
 		}
 		
 		if(index==-1){
-			throw new IllegalStateException("Could not find it");
+			throw new StockExchangeIllegalStateException("Could not find it");
 		}
 		
 		return index;
