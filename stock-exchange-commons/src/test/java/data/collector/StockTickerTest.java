@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
@@ -101,15 +100,45 @@ public class StockTickerTest {
 		
 		assertTrue(!fistTicker.equals(secondTicker));
 	}
-
-//	@Test
-//	public void equalsDiffrentDateTimeFormaters() throws IOException{
-//		
-//		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/diffrentDateTimeFormaters_firstTicker");
-//		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/diffrentDateTimeFormaters_secondTicker");;
-//		
-//		DateTimeFormatter dateFormater_second = DateTimeFormat.forPattern("yyyy-MM-dd");
-//		
-//		assertTrue("Two objects are equal, expected dates being diffrnet", !dateFormater.parseDateTime(fistTicker.getDate().toString()).equals(dateFormater_second.parseDateTime(secondTicker.getDate().toString())));
-//	}
+	
+	@Test
+	public void twoEqualObjects() throws IOException{
+		
+		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/twoEqualObjects");
+		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/twoEqualObjects");;
+		
+		assertTrue(fistTicker.equals(secondTicker));
+		assertTrue(secondTicker.equals(fistTicker));
+	}
+	
+	@Test
+	public void equalsDiffrentClasses() throws IOException{
+		
+		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");		
+		assertTrue(!fistTicker.equals(2.31));
+	}
+	
+	@Test
+	public void equalsNullDate() throws IOException{
+		
+		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");		
+		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");	
+		
+		secondTicker.setDate(null);
+		
+		assertTrue(!fistTicker.equals(secondTicker));
+		assertTrue(!secondTicker.equals(fistTicker));
+	}
+	
+	@Test
+	public void equalsNullStockName() throws IOException{
+		
+		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");		
+		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");	
+		
+		secondTicker.setStockName(null);
+		
+		assertTrue(!fistTicker.equals(secondTicker));
+		assertTrue(!secondTicker.equals(fistTicker));
+	}
 }
