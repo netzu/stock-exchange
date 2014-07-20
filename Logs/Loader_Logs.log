@@ -1,3 +1,0 @@
-04 Apr 2014 15:55:08,178 - INFO [main] DAO.DBConnection.getConnection(DBConnection.java:19) Connecting to MetastockDB
-04 Apr 2014 15:55:08,195 - INFO [main] database.creator.CreateMetastockDBSchema.CreateIndexIfNotExist(CreateMetastockDBSchema.java:53) INDEX on Daily_Stock_Info TABLE has been created
-04 Apr 2014 15:55:08,202 - INFO [main] download.MetastockDataDownloader.downloadFile(MetastockDataDownloader.java:37) Start downloading metastock file from network
