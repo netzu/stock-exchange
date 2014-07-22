@@ -53,7 +53,7 @@ public class CreateMetastockDBSchema {
 		}
     }    
 
-    public void createIfNotExist(){
+    public void createMetastockDBIfNotExist(){
         	createTableIfNotExist();
         	createIndexIfNotExist();
     }
