@@ -35,7 +35,14 @@ public class CreateMetastockDBSchemaTest {
 		
 		currentResults.next();
 		
+		int firstRowIndex = currentResults.getRow();
+			
 		assertEquals("Table do not exist", expectedTable, currentResults.getString(1));
+		
+		currentResults.last();
+		int lastRowIndex = currentResults.getRow();
+		
+		assertEquals("To many tables, what the hell?!", firstRowIndex, lastRowIndex);
 		
 		currentResults.close();
 		connection.close();
@@ -45,17 +52,17 @@ public class CreateMetastockDBSchemaTest {
 	}
 	
 	@Test
-	public void reateMetastockDBIfNotExist_TableExist(){
+	public void createMetastockDBIfNotExist_TableExist(){
 		
 	}
 	
 	@Test
-	public void reateMetastockDBIfNotExist_IndexNotExist(){
+	public void createMetastockDBIfNotExist_IndexNotExist(){
 		
 	}
 	
 	@Test
-	public void reateMetastockDBIfNotExist_IndexExist(){
+	public void createMetastockDBIfNotExist_IndexExist(){
 		
 	}
 	

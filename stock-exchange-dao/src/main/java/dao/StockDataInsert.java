@@ -36,15 +36,17 @@ public class StockDataInsert {
 
             if (notDuplicate == true) {
                 PreparedStatement insertDataStatement = prepareStatment(forStockDataFromOneDay);
+                try {
                 executeStatment(insertDataStatement);
+                } finally {
+                	if (insertDataStatement != null) {
+                		insertDataStatement.close();
+                	}
+                }
             } else{
                 continue;           	
             }
         }
-    }
-
-    public void closeConnection() throws SQLException {
-        connection.close();
     }
 
     private boolean checkIfNotDuplicateInformation(StockTicker stockDataFromOneDay) throws ClassNotFoundException, SQLException, ParseException {
@@ -73,19 +75,12 @@ public class StockDataInsert {
 	        return statement;
     	}catch(SQLException ex){
     		throw new IllegalStateException(ex);
-    	} finally {
-    		if(statement != null){
-    			try {
-    				statement.close();
-    			} catch (final SQLException sqle) {
-    				throw new IllegalStateException(sqle);
-    			}
-    		}
     	}
     }
 
     private void executeStatment(PreparedStatement statement) throws SQLException {
         statement.executeUpdate();
+        
     }
 }
 

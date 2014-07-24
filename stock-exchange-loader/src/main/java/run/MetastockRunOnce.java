@@ -26,13 +26,13 @@ public class MetastockRunOnce {
 									
 			CreateMetastockDBSchema metastockDBCreator = new CreateMetastockDBSchema(connection);
 			
-			MetastockDataDownloader downloader = new MetastockDataDownloader();
-			MetastockDataUnziper decompresser = new MetastockDataUnziper();
+//			MetastockDataDownloader downloader = new MetastockDataDownloader();
+//			MetastockDataUnziper decompresser = new MetastockDataUnziper();
 			MetastockDBUpdater recentdata = new MetastockDBUpdater(propertiesInstance);
 						
 			metastockDBCreator.createMetastockDBIfNotExist();
-			downloader.downloadData();
-			decompresser.unZipMetastockData();
+//			downloader.downloadData();
+//			decompresser.unZipMetastockData();
 			recentdata.refresh();
 			
 		} catch (Exception e) {
