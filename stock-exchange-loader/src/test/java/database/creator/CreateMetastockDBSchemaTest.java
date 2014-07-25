@@ -1,5 +1,6 @@
 package database.creator;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class CreateMetastockDBSchemaTest {
 		String expectedTable = "DAILY_STOCK_INFO";
 		
 		Class.forName("org.h2.Driver");  
-		Connection connection = DriverManager.getConnection("jdbc:h2:" + PATH + "CreateMetastockDBSchemaTest\\notExisting", "sa", "");
+		Connection connection = DriverManager.getConnection("jdbc:h2:" + PATH + "CreateMetastockDBSchemaTest\\notExistingTable", "sa", "");
 		
 		CreateMetastockDBSchema metastockDBSchema = new CreateMetastockDBSchema(connection);
 		metastockDBSchema.createMetastockDBIfNotExist();		
@@ -47,23 +48,31 @@ public class CreateMetastockDBSchemaTest {
 		currentResults.close();
 		connection.close();
 		
-		removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExisting.h2.db");
-		removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExisting.trace.db");
+		removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.h2.db");
+		removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.trace.db");
 	}
 	
-	@Test
-	public void createMetastockDBIfNotExist_TableExist(){
+	@Test 
+	public void CannotCreateTableException() throws ClassNotFoundException, SQLException{
 		
-	}
-	
-	@Test
-	public void createMetastockDBIfNotExist_IndexNotExist(){
+		String expectedError = "Could not create MetastockDB";
+
+		Class.forName("org.h2.Driver");  
+		Connection connection = DriverManager.getConnection("jdbc:h2:" + PATH + "CreateMetastockDBSchemaTest\\exceptionsTesting", "sa", "");
 		
-	}
-	
-	@Test
-	public void createMetastockDBIfNotExist_IndexExist(){
-		
+		connection.close();
+
+		try {
+			CreateMetastockDBSchema metastockDBSchema = new CreateMetastockDBSchema(connection);
+			metastockDBSchema.createMetastockDBIfNotExist();
+			fail("No excetion when expected");
+		} catch (createMetastockDBException e) {
+			assertEquals(expectedError, e.getMessage());
+		}finally{
+			removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.h2.db");
+			removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.trace.db");
+		}
+				
 	}
 	
 	private void removeFiles_CleanUp(String directory, String files){
@@ -72,7 +81,6 @@ public class CreateMetastockDBSchemaTest {
 		try {
 			Files.delete(path);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -35,7 +35,7 @@ public class CreateMetastockDBSchema {
 			log.trace("Daily_Stock_Info TABLE has been created");
 		} catch (SQLException e) {
 			log.trace("Could not create MetastockDB");
-			throw new IllegalStateException(e);
+			throw new createMetastockDBException("Could not create MetastockDB");
 		}
     }
     
@@ -49,7 +49,7 @@ public class CreateMetastockDBSchema {
 			log.info("INDEX on Daily_Stock_Info TABLE has been created");
 		} catch (SQLException e) {
 			log.info("Could not create INDEX on Metastock DB");
-			throw new IllegalStateException(e);
+			throw new createMetastockDBException("Could not create INDEX on Metastock DB");
 		}
     }    
 
