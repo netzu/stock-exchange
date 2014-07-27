@@ -1,7 +1,7 @@
 package utils;
 
-import indicators.movingaverage.complex.ComplexMovingAverageAverageData;
 import indicators.movingaverage.complex.CompexMovingAverageIndicator;
+import indicators.movingaverage.complex.ComplexMovingAverageAverageData;
 import indicators.movingaverage.complex.ComplexMovingAverageSignals;
 import indicators.movingaverage.simple.SimpleMovingAverageSignals;
 
@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+
+import org.junit.Test;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
@@ -22,7 +24,8 @@ public class ComplexMovingAverageMain {
 	private static final int PERIOD_FOR_SECOND_AVERAGE = 20;
 	private static final int PERIOD_FOR_FIRST_AVERAGE = 15;
 
-	public static void test(String[] args) throws ClassNotFoundException, SQLException, ParseException {
+	@Test
+	public void test() throws ClassNotFoundException, SQLException, ParseException {
 		
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
@@ -35,7 +38,6 @@ public class ComplexMovingAverageMain {
 		CompexMovingAverageIndicator complexMovingAverageIndicator = new CompexMovingAverageIndicator();
 		List<ComplexMovingAverageAverageData> averageResults = complexMovingAverageIndicator.calculateComplexMovingAverage(PERIOD_FOR_FIRST_AVERAGE, PERIOD_FOR_SECOND_AVERAGE, PERIOD_FOR_THIRD_AVERAGE, stockCollectionForTicker);	
 		
-		//something is totally wrong here
 		SimpleMovingAverageSignals averageSignals = new SimpleMovingAverageSignals();
 		
 		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();

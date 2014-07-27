@@ -22,7 +22,7 @@ public class DataFileReader {
 			String fileLine = reader.readLine();
 			
 			if(fileLine == null){
-				throw new StockDataReaderExcetion("File with socks data is empty");
+				throw new StockDataReaderException("File with socks data is empty");
 			}
 			
 			String exclude = "<TICKER>,<DTYYYYMMDD>,<OPEN>,<HIGH>,<LOW>,<CLOSE>,<VOL>";
@@ -58,7 +58,7 @@ public class DataFileReader {
 			StockTickerHistory result = readStockData(tickerFile);
 			return result;
 		}catch(IOException ex){
-			throw new StockDataReaderExcetion(ex.getMessage());
+			throw new StockDataReaderException(ex.getMessage());
 		}		
 	}
 }

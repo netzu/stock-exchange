@@ -6,6 +6,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class StockTicker {	
 	
+	private static final double DEFAULT_EPSILON = 0.001;
 	private String stockName;
 	private DateTime date;
 	private double open;
@@ -104,7 +105,7 @@ public class StockTicker {
 		if (getClass() != obj.getClass())
 			return false;
 		StockTicker other = (StockTicker) obj;
-		if (Double.doubleToLongBits(close) != Double.doubleToLongBits(other.close))
+		if (!areEqual(close, other.close, DEFAULT_EPSILON))
 			return false;
 		if (date == null) {
 			if (other.date != null)
@@ -116,22 +117,26 @@ public class StockTicker {
 				return false;
 		} else if (!dateFormater.equals(other.dateFormater))
 			return false;
-		if (Double.doubleToLongBits(high) != Double.doubleToLongBits(other.high))
+		if (!areEqual(high, other.high, DEFAULT_EPSILON))
 			return false;
-		if (Double.doubleToLongBits(low) != Double.doubleToLongBits(other.low))
+		if (!areEqual(low, other.low, DEFAULT_EPSILON))
 			return false;
-		if (Double.doubleToLongBits(open) != Double.doubleToLongBits(other.open))
+		if (!areEqual(open, other.open, DEFAULT_EPSILON))
 			return false;
 		if (stockName == null) {
 			if (other.stockName != null)
 				return false;
 		} else if (!stockName.equals(other.stockName))
 			return false;
-		if (Double.doubleToLongBits(volumen) != Double.doubleToLongBits(other.volumen))
+		if (!areEqual(volumen, other.volumen, DEFAULT_EPSILON))
 			return false;
 		return true;
 	}
 
+	private boolean areEqual(final double x1, final double x2, final double epsilon) {
+		return (Math.abs(x1 - x2) )<= epsilon;
+	}
+	
 	public static StockTicker copy(final StockTicker source) {
 		StockTicker copy = new StockTicker();
 		

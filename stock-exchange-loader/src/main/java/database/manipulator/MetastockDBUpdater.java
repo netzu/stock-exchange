@@ -35,12 +35,11 @@ public class MetastockDBUpdater {
 
 			for (final File tickerFile : allFilesInFolder.getListOfFiles()) {
 				StockTickerHistory stockList = dataReader.getStockTickerCollection(tickerFile);
-				LOGGER.info("Updated DB with " + tickerFile.getName());
-
+				
 				StockDataInsert upToDateStockDataDb = new StockDataInsert(connection);
-
 				upToDateStockDataDb.insertStockTickerDataCollectionWithoutDuplicates(stockList);
 
+				LOGGER.info("Updated DB with " + tickerFile.getName());
 			}
 			LOGGER.info("Metastock Database has been refreshed. ENJOY and WIN !");
 		} finally {

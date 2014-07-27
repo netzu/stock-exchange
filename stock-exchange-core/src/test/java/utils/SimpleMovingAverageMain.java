@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.junit.Test;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
@@ -21,7 +22,8 @@ public class SimpleMovingAverageMain {
 
 	private static final int PERIOD_FOR_MOVING_AVERAGE = 13;
 
-	public static void test(String[] args) throws ClassNotFoundException, SQLException, ParseException {
+	@Test
+	public void test() throws ClassNotFoundException, SQLException, ParseException {
 
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
@@ -37,9 +39,9 @@ public class SimpleMovingAverageMain {
 		List<DateTime> buySignals = signals.getBuySignal(simpleMovingAverageData, stockCollectionForTicker);
 		List<DateTime> sellSignals = signals.getSellSignals(simpleMovingAverageData, stockCollectionForTicker);
 		
-		buySignals.isEmpty();
-		sellSignals.isEmpty();
-		
-		System.out.print("Koniec");
+		//buySignals.isEmpty();
+		//sellSignals.isEmpty();
+
+		connection.close();
 	}
 }

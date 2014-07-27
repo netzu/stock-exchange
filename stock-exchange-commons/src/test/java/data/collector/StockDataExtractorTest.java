@@ -44,8 +44,7 @@ public class StockDataExtractorTest {
 		Mockito.when(resultSet.getDouble("volumen")).thenReturn(expectedTicker.getVolumen());
 
 		StockDataExtractor extractor = new StockDataExtractor();
-		StockTicker currentResults = extractor.extractFromQueryResults(resultSet);
-		
+		StockTicker currentResults = extractor.extractFromQueryResults(resultSet);		
 		
 		assertEquals("Ticker name was incorrect","Lena",currentResults.getStockName());
 		assertEquals("Date was incorrect", expectedTicker.getDate(),currentResults.getDate());

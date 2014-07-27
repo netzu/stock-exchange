@@ -51,7 +51,7 @@ public class DataFileReaderTest {
 		try {
 			dataFileReader.getStockTickerCollection(filesWithHeader);
 			fail("Exception not found when expected");
-		} catch (StockDataReaderExcetion ex) {
+		} catch (StockDataReaderException ex) {
 			assertTrue("Error message diffrent than expected: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
 		}
 	}
@@ -67,7 +67,7 @@ public class DataFileReaderTest {
 		try {
 			StockTickerHistory tickerHistory = dataFileReader.getStockTickerCollection(filesWithHeader);
 			assertTrue("StockTickerHistory is not empty as expected", tickerHistory.getStockTickerDataList().isEmpty());
-		} catch (StockDataReaderExcetion ex) {
+		} catch (StockDataReaderException ex) {
 			assertTrue("Error message diffrent than expected: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
 		}
 	}
@@ -84,7 +84,7 @@ public class DataFileReaderTest {
 		assertTrue(currentResults.equals(expectedResults));
 	}
 
-	@Test(expected=StockDataReaderExcetion.class)
+	@Test(expected=StockDataReaderException.class)
 	public void ioException() throws ParseException {
 		DataFileReader reader = new DataFileReader();
 		File inputFile = new File("/data/fakeFile");

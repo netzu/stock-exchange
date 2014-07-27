@@ -71,10 +71,9 @@ public class CreateMetastockDBSchemaTest {
 		}finally{
 			removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.h2.db");
 			removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.trace.db");
-		}
-				
+		}				
 	}
-	
+		
 	private void removeFiles_CleanUp(String directory, String files){
 		Path path = FileSystems.getDefault().getPath(directory, files);
 		
