@@ -20,6 +20,7 @@ import org.h2.command.dml.Select;
 import org.junit.Test;
 
 import utils.MockForCommonsTest;
+import utils.utilsForTest;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
@@ -36,9 +37,11 @@ public class MetastockDBUpdaterTest {
 	@Test
 	public void refresh() throws ClassNotFoundException, SQLException, ParseException{
 		
+		utilsForTest utils = new utilsForTest();
+		
 		StockTickerHistory expectedTickerCollection = mock.readStockTickerHistory("MetastockDBUpdaterTest/MetastockDBUpdaterTest/LENA.mst");
 		
-		final String propertiesPath = getResourcePath("MetastockDBUpdaterTest/MetastockDBUpdaterTest/StockExchange.properties");
+		final String propertiesPath = utils.getResourcePath("MetastockDBUpdaterTest/MetastockDBUpdaterTest/StockExchange.properties");
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance(propertiesPath);
 		MetastockDBUpdater updater = new MetastockDBUpdater(propertiesInstance);
 		
@@ -66,26 +69,7 @@ public class MetastockDBUpdaterTest {
 		}finally{
 			connection.close();
 			
-			removeFiles_CleanUp(PATH, "MetastockDBUpdaterTest_refresh.h2.db");
-		}
-	}
-	
-	private String getResourcePath(final String resourceName) {
-		URL resource = this.getClass().getClassLoader().getResource(resourceName);
-		if (resource == null) {
-			throw new IllegalArgumentException("Given resource name was not found");
-		}
-		
-		return resource.getPath();
-	}
-	
-	private void removeFiles_CleanUp(String directory, String files){
-		Path path = FileSystems.getDefault().getPath(directory, files);
-		
-		try {
-			Files.delete(path);
-		} catch (IOException e) {
-			e.printStackTrace();
+			utils.removeFiles_CleanUp(PATH, "MetastockDBUpdaterTest_refresh.h2.db");
 		}
 	}
 }

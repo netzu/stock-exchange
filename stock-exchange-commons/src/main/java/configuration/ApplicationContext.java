@@ -7,6 +7,7 @@ import java.io.InputStream;
 public class ApplicationContext {
 
 	static StockExchangeProperties properties;
+	static String currentPropertyFilePath;
 
 	public static StockExchangeProperties getPropertiesInstance() {
 		if (null == properties) {
@@ -18,7 +19,8 @@ public class ApplicationContext {
 	}
 	
 	public static StockExchangeProperties getPropertiesInstance(String propertiesFile) {
-		if (null == properties) {
+		if (currentPropertyFilePath == null || !currentPropertyFilePath.equals(propertiesFile)) {
+			currentPropertyFilePath = propertiesFile;
 			FileInputStream fis;
 			try {
 				fis = new FileInputStream(propertiesFile);

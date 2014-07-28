@@ -15,6 +15,8 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import utils.utilsForTest;
+
 public class CreateMetastockDBSchemaTest {
 	
 	private static final String PATH = "D:\\Workspace\\stock-exchange\\stock-exchange-loader\\src\\test\\resources\\";
@@ -48,8 +50,9 @@ public class CreateMetastockDBSchemaTest {
 		currentResults.close();
 		connection.close();
 		
-		removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.h2.db");
-		removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.trace.db");
+		utilsForTest utils = new utilsForTest();
+		utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.h2.db");
+		utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.trace.db");
 	}
 	
 	@Test 
@@ -69,18 +72,9 @@ public class CreateMetastockDBSchemaTest {
 		} catch (createMetastockDBException e) {
 			assertEquals(expectedError, e.getMessage());
 		}finally{
-			removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.h2.db");
-			removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.trace.db");
+			utilsForTest utils = new utilsForTest();
+			utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.h2.db");
+			utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.trace.db");
 		}				
-	}
-		
-	private void removeFiles_CleanUp(String directory, String files){
-		Path path = FileSystems.getDefault().getPath(directory, files);
-		
-		try {
-			Files.delete(path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

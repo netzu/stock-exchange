@@ -4,10 +4,13 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import utils.utilsForTest;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
@@ -15,10 +18,14 @@ import configuration.StockExchangeProperties;
 public class MetastockFilesCollectionTest {
 
 	@Test
-	public void getListOfFilesMSTOnly(){		
+	public void getListOfFilesMSTOnly(){
 		
-		StockExchangeProperties propertiesInstanceForTest = ApplicationContext.getPropertiesInstance("test.properties");
-		MetastockFilesCollection filesCollection = new MetastockFilesCollection(propertiesInstanceForTest);
+		utilsForTest utils = new utilsForTest();
+		
+		final String propertiesPath = utils.getResourcePath("MetastockFilesColectionTest/getListOfFilesMSTOnly/StockExchange.properties");
+		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance(propertiesPath);
+		
+		MetastockFilesCollection filesCollection = new MetastockFilesCollection(propertiesInstance);
 				
 		List<String> expectedFilesToBeFound = new ArrayList<String>();
 		expectedFilesToBeFound.add("ADB0415.mst");
