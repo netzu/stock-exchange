@@ -7,13 +7,14 @@ import org.joda.time.DateTime;
 import data.collector.StockTickerHistory;
 
 public class BuySignalHistogram {
+	
 	private final int size;
 	
 	public BuySignalHistogram(int size){
 		this.size = size;
 	}
 
-	public int[] dayWithFirstProfit(List<DateTime> buySignal, StockTickerHistory stockCollection){
+	public int[] histogramForDayWithFirstProfitBasedOnEndOfDay(List<DateTime> buySignal, StockTickerHistory stockCollection){
 		
 		int histogram[] = new int[size];
 		
