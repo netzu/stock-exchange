@@ -267,3 +267,8 @@ Error while creating file "C:/Users/turobos" [90062-174]
 27 lip 2014 19:10:08,507 - INFO [main] dao.DBConnection.getConnection(DBConnection.java:15) Connecting to MetastockDB
 27 lip 2014 19:10:09,225 - INFO [main] dao.DBConnection.getConnection(DBConnection.java:15) Connecting to MetastockDB
 27 lip 2014 19:10:09,741 - INFO [main] dao.DBConnection.getConnection(DBConnection.java:15) Connecting to MetastockDB
+28 lip 2014 07:26:20,914 - INFO [main] dao.DBConnection.getConnection(DBConnection.java:15) Connecting to MetastockDB
+28 lip 2014 07:26:42,529 - INFO [main] dao.DBConnection.getConnection(DBConnection.java:15) Connecting to MetastockDB
+14 wrz 2014 09:27:02,320 - INFO [main] dao.DBConnection.getConnection(DBConnection.java:15) Connecting to MetastockDB
+06 paü 2014 18:23:26,803 - INFO [main] dao.DBConnection.getConnection(DBConnection.java:15) Connecting to MetastockDB
+06 paü 2014 18:24:16,141 - INFO [main] dao.DBConnection.getConnection(DBConnection.java:15) Connecting to MetastockDB

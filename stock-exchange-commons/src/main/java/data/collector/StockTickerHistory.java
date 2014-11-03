@@ -97,18 +97,23 @@ public class StockTickerHistory {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj){
 			return true;
-		if (obj == null)
+			}
+		if (obj == null){
 			return false;
-		if (getClass() != obj.getClass())
+			}
+		if (getClass() != obj.getClass()){
 			return false;
+			}
 		StockTickerHistory other = (StockTickerHistory) obj;
 		if (stockTickerDataList == null) {
-			if (other.stockTickerDataList != null)
+			if (other.stockTickerDataList != null){
 				return false;
-		} else if (!stockTickerDataList.equals(other.stockTickerDataList))
+			}
+		} else if (!stockTickerDataList.equals(other.stockTickerDataList)){
 			return false;
+		}
 		return true;
 	}
 }

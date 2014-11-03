@@ -31,7 +31,7 @@ public class SingleBuySignalEffectiveness {
 	public List<Boolean> daysWithPositiveResults(int numberOfDays, DateTime buySignals, StockTickerHistory collection){
 		
 		if(numberOfDays==0){
-			throw new BuySignalEffectivenessException("Number days in test cannot be 0");
+			throw new BuySignalEffectivenessException("Number of days in test cannot be 0");
 		}
 		
 		if(collection.getStockTickerDataList().isEmpty()){
@@ -64,7 +64,7 @@ public class SingleBuySignalEffectiveness {
 	public List<Double> percentageGainPerDay(int numberOfDays, DateTime buySignals, StockTickerHistory collection){
 		
 		if(numberOfDays==0){
-			throw new BuySignalEffectivenessException("Number days in test cannot be 0");
+			throw new BuySignalEffectivenessException("Number of days in test cannot be 0");
 		}
 		
 		if(collection.getStockTickerDataList().isEmpty()){
