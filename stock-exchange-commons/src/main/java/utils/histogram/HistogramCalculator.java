@@ -50,6 +50,7 @@ public class HistogramCalculator<T> {
     public static class HistogramItem<T> {
 
         private final List<T> items;
+
         private final Predicate<T> predicate;
 
         private HistogramItem(final Predicate<T> predicate) {
@@ -63,6 +64,10 @@ public class HistogramCalculator<T> {
 
         private void addItem(final T item) {
             items.add(item);
+        }
+
+        public Predicate<T> getPredicate() {
+            return predicate;
         }
     }
 }
