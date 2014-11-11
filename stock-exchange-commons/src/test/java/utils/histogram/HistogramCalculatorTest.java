@@ -16,20 +16,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HistogramCalculatorTest {
 
 
-    private HistogramCalculator<Integer> histogramCalculator;
+    private DefaultHistogramCalculator<Integer> histogramCalculator;
 
 
     @Test
     public void resultSizeIsSameAsSizeOfPredicates() {
         setupHistogramCalculator(0, 10, 2);
 
-        Collection<HistogramCalculator.HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(1, 2));
+        Collection<HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(1, 2));
 
         assertThat(result).isNotNull();
         assertThat(result.isEmpty()).isFalse();
         assertThat(result.size()).isEqualTo(5);
-
-
     }
 
 
@@ -37,22 +35,22 @@ public class HistogramCalculatorTest {
     public void emptyInputDataCauseAllBucketsAreEmpty() {
         setupHistogramCalculator(0,10,2);
 
-        Collection<HistogramCalculator.HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Collections.<Integer>emptyList());
+        Collection<HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Collections.<Integer>emptyList());
 
 
         assertThat(result.isEmpty()).isFalse();
         assertThat(result.size()).isEqualTo(5);
 
-        for (final HistogramCalculator.HistogramItem<Integer> resultItem : result) {
+        for (final HistogramItem<Integer> resultItem : result) {
             assertThat(resultItem.getItems().isEmpty()).isTrue();
         }
     }
 
     @Test
     public void emptyBucketsCauseEmptyResult() {
-        final HistogramCalculator<Integer> histogramCalculator = new HistogramCalculator<Integer>(Collections.<Predicate<Integer>>emptyList());
+        final DefaultHistogramCalculator<Integer> histogramCalculator = new DefaultHistogramCalculator<Integer>(Collections.<Predicate<Integer>>emptyList());
 
-        Collection<HistogramCalculator.HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(1, 2, 3, 4, 5));
+        Collection<HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(1, 2, 3, 4, 5));
 
          assertThat(result.isEmpty()).isTrue();
 
@@ -61,7 +59,7 @@ public class HistogramCalculatorTest {
     @Test
     public void allBucketsHasSingleElement() {
         setupHistogramCalculator(0,10,2);
-        Collection<HistogramCalculator.HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(0, 3, 5, 6, 8));
+        Collection<HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(0, 3, 5, 6, 8));
 
         assertThat(result.size()).isEqualTo(5);
 
@@ -77,7 +75,7 @@ public class HistogramCalculatorTest {
     @Test
     public void multipleValuesInSameBucket() {
         setupHistogramCalculator(0,10,2);
-        Collection<HistogramCalculator.HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(0, 3, 1,4, 5, 6 ,8,9));
+        Collection<HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(0, 3, 1,4, 5, 6 ,8,9));
 
         assertThat(result.size()).isEqualTo(5);
 
@@ -95,7 +93,7 @@ public class HistogramCalculatorTest {
     public void itemsRejectedByAllBuckets() {
 
         setupHistogramCalculator(0,10,2);
-        Collection<HistogramCalculator.HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(0, 3, 1,4, 5, 6 ,8,9, 15 ,11,90));
+        Collection<HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(0, 3, 1,4, 5, 6 ,8,9, 15 ,11,90));
 
         assertThat(result.size()).isEqualTo(5);
 
@@ -114,11 +112,11 @@ public class HistogramCalculatorTest {
     public void alItemsNotMatchedToAnyBucket() {
 
         setupHistogramCalculator(0,10,2);
-        Collection<HistogramCalculator.HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(33,55,66,78,123,90));
+        Collection<HistogramItem<Integer>> result = histogramCalculator.calculateHistogram(Arrays.asList(33,55,66,78,123,90));
 
         assertThat(result.size()).isEqualTo(5);
 
-        for (final HistogramCalculator.HistogramItem<Integer> resultItem : result) {
+        for (final HistogramItem<Integer> resultItem : result) {
             assertThat(resultItem.getItems().isEmpty()).isTrue();
         }
 
@@ -126,8 +124,8 @@ public class HistogramCalculatorTest {
 
 
 
-    private void assertBucketSize(final Integer itemValue, final int expectedBucketSize, final Collection<HistogramCalculator.HistogramItem<Integer>> inputResult) {
-        for (final HistogramCalculator.HistogramItem<Integer> resultItem : inputResult) {
+    private void assertBucketSize(final Integer itemValue, final int expectedBucketSize, final Collection<HistogramItem<Integer>> inputResult) {
+        for (final HistogramItem<Integer> resultItem : inputResult) {
             if (resultItem.getPredicate().apply(itemValue)) {
                 assertThat(resultItem.getItems()).contains(itemValue);
                 assertThat(resultItem.getItems().size()).isEqualTo(expectedBucketSize);
@@ -138,7 +136,7 @@ public class HistogramCalculatorTest {
 
     private void setupHistogramCalculator(final int start, final int end, final int step) {
 
-        this.histogramCalculator = new HistogramCalculator<Integer>(createPredicatesBuckets(start, end, step));
+        this.histogramCalculator = new DefaultHistogramCalculator<Integer>(createPredicatesBuckets(start, end, step));
 
     }
 
