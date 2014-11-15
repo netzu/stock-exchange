@@ -15,7 +15,7 @@ package indicators.movingaverage.simple;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.collector.StockTicker;
+import data.collector.EODTick;
 import data.collector.StockTickerHistory;
 
 public class SimpleMovingAverageIndicator {	
@@ -34,15 +34,15 @@ public class SimpleMovingAverageIndicator {
 			throw new SimpleMovingAverageCalculationException("Simple moving avarage cannot be calculated if period is zero");
 		}
 		
-		if(tickerCollection.getStockTickerDataList().isEmpty()){
+		if(tickerCollection.getEODTickDataList().isEmpty()){
 			throw new SimpleMovingAverageCalculationException("Simple moving average cannot be calculated for ticker without now history");
 		}
 		
 		List<SimpleMovingAverageData> average = new ArrayList<SimpleMovingAverageData>();
 		
-		for(int i=0; i<tickerCollection.getStockTickerDataList().size()-period+1; i++){
+		for(int i=0; i<tickerCollection.getEODTickDataList().size()-period+1; i++){
 			
-			List <StockTicker> subList = tickerCollection.subListOfCollection(i, i+period);
+			List <EODTick> subList = tickerCollection.subListOfCollection(i, i+period);
 			
 			average.add(averageFromPeriod(subList));			
 		}
@@ -56,7 +56,7 @@ public class SimpleMovingAverageIndicator {
 	 * @param subList - a sublist for which the simple moving average need to be calculated
 	 * @return
 	 */
-	private static SimpleMovingAverageData averageFromPeriod(List <StockTicker> subList){
+	private static SimpleMovingAverageData averageFromPeriod(List <EODTick> subList){
 		
 		SimpleMovingAverageData averageFromPeriod = new SimpleMovingAverageData();
 		

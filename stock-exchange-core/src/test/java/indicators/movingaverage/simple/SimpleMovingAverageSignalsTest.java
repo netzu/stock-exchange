@@ -8,9 +8,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
-import utils.MocksForTests;
-import indicators.movingaverage.simple.SimpleMovingAverageData;
-import indicators.movingaverage.simple.SimpleMovingAverageSignals;
+import indicators.williamsr.TestBeans;
 
 import java.io.*;
 import java.text.ParseException;
@@ -29,7 +27,7 @@ public class SimpleMovingAverageSignalsTest {
 	final static String PATH_GROWING = new String("indicators/simpleMovingAverage/growingAverage/");
 	final static String PATH_DROPING = new String("indicators/simpleMovingAverage/dropingAverage/");
 	
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	
    @Test

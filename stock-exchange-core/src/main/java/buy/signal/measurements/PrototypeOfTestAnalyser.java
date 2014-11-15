@@ -1,8 +1,5 @@
 package buy.signal.measurements;
 
-import indicators.williamsr.BuySignalsGenerator;
-import indicators.williamsr.WilliamsRData;
-import indicators.williamsr.WilliamsRIndicator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import indicators.Signal;
+import indicators.williamsr.WilliamsRSignalsGenerator;
 import org.joda.time.DateTime;
 
 import utils.histogram.FirstDayWithProfitsHistogram;
@@ -51,32 +50,22 @@ public class PrototypeOfTestAnalyser {
 		for(int nameIndex = 0; nameIndex < listOfTcikerNames.size(); nameIndex++){
 			StockTickerHistory stockCollectionForTicker = metastockDB.getAllDataForStockTicker(listOfTcikerNames.get(nameIndex));
 			
-			if(stockCollectionForTicker.getStockTickerDataList().size() < WILLIAMS_PERIOD){
+			if(stockCollectionForTicker.getEODTickDataList().size() < WILLIAMS_PERIOD){
 				continue;
 			}
-			
-			//create WilliamsR Indicator
-			WilliamsRIndicator williamsRIndicator = new WilliamsRIndicator();
-			ArrayList<WilliamsRData> williamsRCollection = williamsRIndicator.calculateWilliamsR(WILLIAMS_PERIOD, stockCollectionForTicker);
-			
-			if(williamsRCollection.size() <= 2){
-				continue;
-			}
-			
-			//generate signals for buy
-			BuySignalsGenerator buySignals = new BuySignalsGenerator();
-			List <DateTime> buySignalsForWilliamsR = buySignals.generate(williamsRCollection);
-			
-			buySignalsCounter = buySignalsCounter + buySignalsForWilliamsR.size();
+
+            final WilliamsRSignalsGenerator signalGenerator = new WilliamsRSignalsGenerator(WILLIAMS_PERIOD);
+            List<Signal> signals = signalGenerator.buySignals(stockCollectionForTicker);
+            buySignalsCounter = buySignalsCounter + signals.size();
 			
 			ProfitsAnalyser analyser = new ProfitsAnalyser();
 			
 			//for each signal
-			for(int buySignalsIterator = 0; buySignalsIterator < buySignalsForWilliamsR.size(); buySignalsIterator++){
+			for(int buySignalsIterator = 0; buySignalsIterator < signals.size(); buySignalsIterator++){
 				
 				//calculate delta
 				PriceDelta delta = new PriceDelta();
-				DateTime signal = buySignalsForWilliamsR.get(buySignalsIterator);
+				DateTime signal = signals.get(buySignalsIterator).getDate();
 				
 				List<Double> deltaForWillimas  = delta.calculateInValue(signal, stockCollectionForTicker, TEST_RANGE);
 				

@@ -10,15 +10,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-import buy.signal.measurements.BiggestLoss;
-import buy.signal.measurements.PriceDeltaEmptyException;
-
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 
 public class BiggestLossTest {
 	
 	final static String PATH = new String("buySignalMeasurements/BiggestLossTest/");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 
 	@Test
 	public void emptyDelta() throws IOException{

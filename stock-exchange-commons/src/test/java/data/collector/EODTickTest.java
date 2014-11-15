@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import utils.MockForCommonsTest;
 
-public class StockTickerTest {
+public class EODTickTest {
 
 	MockForCommonsTest mock = new MockForCommonsTest();
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
@@ -18,8 +18,8 @@ public class StockTickerTest {
 	@Test
 	public void equalsDifferentHigh() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/differentHigh_firstTicker");
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/differentHigh_SecondTicker");
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/differentHigh_firstTicker");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/differentHigh_SecondTicker");
 		
 		assertTrue("Two objects are equal, expected High Value being diffrnet", !fistTicker.equals(secondTicker));
 		assertTrue("High value form first ticker diffrent than expected", fistTicker.getHigh() == 7.63);
@@ -29,8 +29,8 @@ public class StockTickerTest {
 	@Test
 	public void equalsDifferentLow() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/differentLow_firstTicker");
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/differentLow_SecondTicker");
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/differentLow_firstTicker");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/differentLow_SecondTicker");
 		
 		assertTrue("Two objects are equal, expected High Value being diffrnet", !fistTicker.equals(secondTicker));
 		assertTrue("Low value form first ticker diffrent than expected", fistTicker.getLow() == 6.99);
@@ -40,8 +40,8 @@ public class StockTickerTest {
 	@Test
 	public void equalsDifferentOpen() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/differentOpen_firstTicker");
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/differentOpen_SecondTicker");
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/differentOpen_firstTicker");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/differentOpen_SecondTicker");
 		
 		assertTrue("Two objects are equal, expected open value being diffrnet", !fistTicker.equals(secondTicker));
 		assertTrue("Open value form first ticker diffrent than expected", fistTicker.getOpen() == 13.45);
@@ -51,8 +51,8 @@ public class StockTickerTest {
 	@Test
 	public void equalsDifferentClose() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/differentClose_firstTicker");
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/differentClose_SecondTicker");
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/differentClose_firstTicker");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/differentClose_SecondTicker");
 		
 		assertTrue("Two objects are equal, expected Close value being diffrnet", !fistTicker.equals(secondTicker));
 		assertTrue("Close value form first ticker diffrent than expected", fistTicker.getClose() == 0.62);
@@ -62,8 +62,8 @@ public class StockTickerTest {
 	@Test
 	public void equalsDifferentVolumen() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/differentVolumen_firstTicker");
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/differentVolumen_SecondTicker");
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/differentVolumen_firstTicker");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/differentVolumen_SecondTicker");
 		
 		assertTrue("Two objects are equal, expected volumen value being diffrnet", !fistTicker.equals(secondTicker));
 		assertTrue("Volumen value form first ticker diffrent than expected", fistTicker.getVolumen() == 8471);
@@ -73,8 +73,8 @@ public class StockTickerTest {
 	@Test
 	public void equalsDifferentTickerName() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/differentTickerName_firstTicker");
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/differentTickerName_SecondTicker");
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/differentTickerName_firstTicker");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/differentTickerName_SecondTicker");
 		
 		assertTrue("Two objects are equal, expected Ticker Names being diffrnet", !fistTicker.equals(secondTicker));
 		assertTrue("Ticker Name value form first ticker diffrent than expected", fistTicker.getStockName().equals("Ticker_1"));
@@ -84,8 +84,8 @@ public class StockTickerTest {
 	@Test
 	public void equalsDifferentDates() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/equalsDifferentDates_firstTicker");
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/equalsDifferentDates_SecondTicker");
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/equalsDifferentDates_firstTicker");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/equalsDifferentDates_SecondTicker");
 		
 		assertTrue("Two objects are equal, expected dates being diffrnet", !fistTicker.equals(secondTicker));
 		assertTrue("Date form first ticker diffrent than expected", fistTicker.getDate().equals(dateFormater.parseDateTime(("20120319"))));
@@ -95,8 +95,8 @@ public class StockTickerTest {
 	@Test
 	public void equalsForNullObject() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/equalsForNullObject_firstTicker");
-		StockTicker secondTicker = null;
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/equalsForNullObject_firstTicker");
+		EODTick secondTicker = null;
 		
 		assertTrue(!fistTicker.equals(secondTicker));
 	}
@@ -104,8 +104,8 @@ public class StockTickerTest {
 	@Test
 	public void twoEqualObjects() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/twoEqualObjects");
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/twoEqualObjects");;
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/twoEqualObjects");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/twoEqualObjects");;
 		
 		assertTrue(fistTicker.equals(secondTicker));
 		assertTrue(secondTicker.equals(fistTicker));
@@ -114,15 +114,15 @@ public class StockTickerTest {
 	@Test
 	public void equalsDiffrentClasses() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");		
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");
 		assertTrue(!fistTicker.equals(2.31));
 	}
 	
 	@Test
 	public void equalsNullDate() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");		
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");	
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");
 		
 		secondTicker.setDate(null);
 		
@@ -133,8 +133,8 @@ public class StockTickerTest {
 	@Test
 	public void equalsNullStockName() throws IOException{
 		
-		StockTicker fistTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");		
-		StockTicker secondTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");	
+		EODTick fistTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");
+		EODTick secondTicker = mock.readStockTicker("data/collector/equals/equalsNullDate");
 		
 		secondTicker.setStockName(null);
 		

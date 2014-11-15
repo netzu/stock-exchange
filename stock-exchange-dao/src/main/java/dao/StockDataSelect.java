@@ -8,12 +8,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.collector.EODTick;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import data.collector.StockDataExtractor;
-import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
 
 public class StockDataSelect {
@@ -55,7 +55,7 @@ public class StockDataSelect {
 		while(resultOfQuery.next()){
 			StockDataExtractor extractor = new StockDataExtractor();
 			
-			StockTicker stockDataFromOneDay = StockTicker.copy(extractor.extractFromQueryResults(resultOfQuery));
+			EODTick stockDataFromOneDay = EODTick.copy(extractor.extractFromQueryResults(resultOfQuery));
 			stockCollectionForTicker.add(stockDataFromOneDay);
 		}
 		
@@ -64,8 +64,8 @@ public class StockDataSelect {
 		return stockCollectionForTicker;
 	}
 	
-	public StockTicker getDataForStocktickerFromOneDay(String stockTickerName, DateTime date) throws SQLException, ParseException{
-		StockTicker stockDataFromOneDay = new StockTicker();
+	public EODTick getDataForStocktickerFromOneDay(String stockTickerName, DateTime date) throws SQLException, ParseException{
+		EODTick stockDataFromOneDay = new EODTick();
 		
 		PreparedStatement statement = connection.prepareStatement(SELECT_DATA_FOR_TICKER_FROM_CERTAIN_DAY);
 		statement.setString(1, stockTickerName);
@@ -87,8 +87,8 @@ public class StockDataSelect {
 		return stockDataFromOneDay;
 	}
 	
-	public StockTicker getDataForStocktickerFromOneDay(String stockTickerName, String day) throws SQLException, ParseException{
-		StockTicker stockDataFromOneDay = new StockTicker();
+	public EODTick getDataForStocktickerFromOneDay(String stockTickerName, String day) throws SQLException, ParseException{
+		EODTick stockDataFromOneDay = new EODTick();
 		
 		DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 		DateTime date = dateFormater.parseDateTime(day);

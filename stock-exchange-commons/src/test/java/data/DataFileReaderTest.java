@@ -4,16 +4,15 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.text.ParseException;
 
+import data.collector.EODTick;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 import utils.MockForCommonsTest;
-import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
 
 public class DataFileReaderTest {
@@ -28,16 +27,16 @@ public class DataFileReaderTest {
 		File inputFile = new File(resource.getPath());
 
 		StockTickerHistory currentResults = dataFileReader.getStockTickerCollection(inputFile);
-		StockTicker ticker = currentResults.getStockTickerDataList().get(0);
+		EODTick ticker = currentResults.getEODTickDataList().get(0);
 
-		assertTrue("Size of the StockTicker is diffrent that expected(1), has " + currentResults.getStockTickerDataList().size(), currentResults.getStockTickerDataList().size() == 1);
-		assertTrue("StockTicker name than expected", ticker.getStockName().equals("Test"));
-		assertTrue("StockTicker Date diffrent than expected", ticker.getDate().equals(dateFormater.parseDateTime("20120315")));
-		assertTrue("StockTicker Open Value diffrent than expected", ticker.getOpen() == 15.51);
-		assertTrue("StockTicker Highest diffrent than expected", ticker.getHigh() == 7.9);
-		assertTrue("StockTicker Lowest diffrent than expected", ticker.getLow() == 7.54);
-		assertTrue("StockTicker Closed diffrent than expected", ticker.getClose() == 7.54);
-		assertTrue("StockTicker Volumen diffrent than expected", ticker.getVolumen() == 502);
+		assertTrue("Size of the EODTick is diffrent that expected(1), has " + currentResults.getEODTickDataList().size(), currentResults.getEODTickDataList().size() == 1);
+		assertTrue("EODTick name than expected", ticker.getStockName().equals("Test"));
+		assertTrue("EODTick Date diffrent than expected", ticker.getDate().equals(dateFormater.parseDateTime("20120315")));
+		assertTrue("EODTick Open Value diffrent than expected", ticker.getOpen() == 15.51);
+		assertTrue("EODTick Highest diffrent than expected", ticker.getHigh() == 7.9);
+		assertTrue("EODTick Lowest diffrent than expected", ticker.getLow() == 7.54);
+		assertTrue("EODTick Closed diffrent than expected", ticker.getClose() == 7.54);
+		assertTrue("EODTick Volumen diffrent than expected", ticker.getVolumen() == 502);
 	}
 
 	@Test
@@ -66,7 +65,7 @@ public class DataFileReaderTest {
 
 		try {
 			StockTickerHistory tickerHistory = dataFileReader.getStockTickerCollection(filesWithHeader);
-			assertTrue("StockTickerHistory is not empty as expected", tickerHistory.getStockTickerDataList().isEmpty());
+			assertTrue("StockTickerHistory is not empty as expected", tickerHistory.getEODTickDataList().isEmpty());
 		} catch (StockDataReaderException ex) {
 			assertTrue("Error message diffrent than expected: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
 		}

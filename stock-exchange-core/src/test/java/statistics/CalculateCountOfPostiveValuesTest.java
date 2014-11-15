@@ -12,14 +12,13 @@ import java.util.List;
 
 import org.junit.Test;
 
-import statistics.CalculateCountOfPostiveValues;
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateCountOfPostiveValuesTest {
 	
 	final static String PATH = new String("statistics/countOfPostiveValuesResources/");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {

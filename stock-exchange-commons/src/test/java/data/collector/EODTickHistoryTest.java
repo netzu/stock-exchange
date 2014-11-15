@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import utils.MockForCommonsTest;
 
-public class StockTickerHistoryTest {
+public class EODTickHistoryTest {
 	
 	MockForCommonsTest mock = new MockForCommonsTest();
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
@@ -21,10 +21,10 @@ public class StockTickerHistoryTest {
 	@Test
 	public void setStockTickerDataListTest() throws ParseException{
 		StockTickerHistory tickerCollection = mock.readStockTickerHistory("data/collector/tickerHistory/setStockTickerDataListTest");		
-		List<StockTicker> stockTickerDataList = new ArrayList<StockTicker>();
-		tickerCollection.setStockTickerDataList(stockTickerDataList);
+		List<EODTick> EODTickDataList = new ArrayList<EODTick>();
+		tickerCollection.setEODTickDataList(EODTickDataList);
 		
-		assertTrue(stockTickerDataList.equals(tickerCollection.getStockTickerDataList()));
+		assertTrue(EODTickDataList.equals(tickerCollection.getEODTickDataList()));
 	}
 	
 	@Test
@@ -32,7 +32,7 @@ public class StockTickerHistoryTest {
 		StockTickerHistory tickerCollection = mock.readStockTickerHistory("data/collector/tickerHistory/setStockTickerDataListTest");
 		
 		try{
-			List<StockTicker> stockTickerDataList = tickerCollection.subListOfCollection(4, 2);
+			List<EODTick> EODTickDataList = tickerCollection.subListOfCollection(4, 2);
 			fail("Exception not found when expected");
 		}catch(StockExchangeIllegalStateException ex){
 			String expectedErrorMessage = "Cannot create sublist when FROM is greather or equal TO";
@@ -45,8 +45,8 @@ public class StockTickerHistoryTest {
 		StockTickerHistory tickerCollection = mock.readStockTickerHistory("data/collector/tickerHistory/subListOfCollectionTest_Input");
 		
 		try{
-			List<StockTicker> currentResults = tickerCollection.subListOfCollection(2, 6);
-			List<StockTicker> expectedResults = mock.readStockTickerHistory("data/collector/tickerHistory/subListOfCollectionTest_Expected").getStockTickerDataList();
+			List<EODTick> currentResults = tickerCollection.subListOfCollection(2, 6);
+			List<EODTick> expectedResults = mock.readStockTickerHistory("data/collector/tickerHistory/subListOfCollectionTest_Expected").getEODTickDataList();
 			assertTrue(currentResults.equals(expectedResults));
 		}catch(Exception ex){
 			fail("Exception when not expected");
@@ -72,7 +72,7 @@ public class StockTickerHistoryTest {
 	public void findStockByDateWhenNullDate() throws ParseException{
 		
 		StockTickerHistory tickerCollection = new StockTickerHistory();
-		tickerCollection.setStockTickerDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getStockTickerDataList());
+		tickerCollection.setEODTickDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getEODTickDataList());
 		
 		try{
 			tickerCollection.findStockByDate(null);
@@ -87,7 +87,7 @@ public class StockTickerHistoryTest {
 	public void findStockByDateNotFound() throws ParseException{
 		
 		StockTickerHistory tickerCollection = new StockTickerHistory();
-		tickerCollection.setStockTickerDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getStockTickerDataList());
+		tickerCollection.setEODTickDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getEODTickDataList());
 		DateTime date = dateFormater.parseDateTime(("20100417"));
 		
 		try{
@@ -102,10 +102,10 @@ public class StockTickerHistoryTest {
 	@Test
 	public void findStockByDateFound() throws ParseException{
 		StockTickerHistory tickerCollection = new StockTickerHistory();
-		tickerCollection.setStockTickerDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getStockTickerDataList());
+		tickerCollection.setEODTickDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getEODTickDataList());
 		DateTime date = dateFormater.parseDateTime(("20100412"));
 		
-		StockTicker currentResult = tickerCollection.findStockByDate(date);
+		EODTick currentResult = tickerCollection.findStockByDate(date);
 		
 		assertTrue("Diffrent StockName than expected", currentResult.getStockName().equals("Test"));
 		assertTrue("Diffrent Date than expected", currentResult.getDate().equals(date));
@@ -133,7 +133,7 @@ public class StockTickerHistoryTest {
 	@Test
 	public void findStockIndexByDateIsNull() throws ParseException{
 		StockTickerHistory tickerCollection = new StockTickerHistory();
-		tickerCollection.setStockTickerDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getStockTickerDataList());
+		tickerCollection.setEODTickDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getEODTickDataList());
 		
 		try{
 			tickerCollection.findStockIndexByDate(null);
@@ -147,7 +147,7 @@ public class StockTickerHistoryTest {
 //	@Test
 //	public void findStockIndexByDateFound() throws ParseException{
 //		StockTickerHistory tickerCollection = new StockTickerHistory();
-//		tickerCollection.setStockTickerDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getStockTickerDataList());
+//		tickerCollection.setEODTickDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getEODTickDataList());
 //		DateTime date = dateFormater.parseDateTime(("20120319"));
 //		
 //		int expectedResult = 6;
@@ -163,7 +163,7 @@ public class StockTickerHistoryTest {
 	@Test
 	public void findStockIndexByDateNotFound() throws ParseException{
 		StockTickerHistory tickerCollection = new StockTickerHistory();
-		tickerCollection.setStockTickerDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getStockTickerDataList());
+		tickerCollection.setEODTickDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getEODTickDataList());
 		DateTime date = dateFormater.parseDateTime(("20120317"));
 		
 		try{

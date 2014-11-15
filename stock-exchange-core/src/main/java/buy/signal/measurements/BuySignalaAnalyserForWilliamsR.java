@@ -1,8 +1,6 @@
 package buy.signal.measurements;
 
-import indicators.williamsr.BuySignalsGenerator;
-import indicators.williamsr.WilliamsRData;
-import indicators.williamsr.WilliamsRIndicator;
+import indicators.Signal;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,6 +8,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import indicators.williamsr.WilliamsRSignalsGenerator;
 import org.joda.time.DateTime;
 
 import configuration.ApplicationContext;
@@ -29,23 +28,16 @@ public class BuySignalaAnalyserForWilliamsR {
 		
 		StockTickerHistory stockCollectionForTicker = metastockDB.getAllDataForStockTicker(ticker);
 		
-		if(stockCollectionForTicker.getStockTickerDataList().size() < WilliamsRFactor){
+		if(stockCollectionForTicker.getEODTickDataList().size() < WilliamsRFactor){
 			//continue;
 			//TBD
 		}
-		
-		WilliamsRIndicator williamsRIndicator = new WilliamsRIndicator();
-		ArrayList<WilliamsRData> williamsRCollection = williamsRIndicator.calculateWilliamsR(WilliamsRFactor, stockCollectionForTicker);
-		
-		if(williamsRCollection.size() <= 2){
-			//continue;
-			//TBD
-		}
-		
-		BuySignalsGenerator buySignals = new BuySignalsGenerator();
-		List <DateTime> buySignalsForWilliamsR = buySignals.generate(williamsRCollection);
-		
-		connection.close();
+
+        WilliamsRSignalsGenerator singalsGenerator = new WilliamsRSignalsGenerator(WilliamsRFactor);
+
+        List<Signal> signals = singalsGenerator.buySignals(stockCollectionForTicker);
+
+        connection.close();
 	}
 	
 	private void updateHistogramInputList(List<Double> deltaForWillimas, ArrayList<Integer> listOfDays){

@@ -13,14 +13,13 @@ import java.util.List;
 import org.apache.commons.math3.util.Precision;
 import org.junit.Test;
 
-import statistics.CalculateSumOfNegativeValues;
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateSumOfNegativeValuesTest {
 	
 	final static String PATH = new String("statistics/calculateSumOfNegativeValuesResources/");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {

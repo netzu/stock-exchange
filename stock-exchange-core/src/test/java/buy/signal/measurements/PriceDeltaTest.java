@@ -9,25 +9,20 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.login.FailedLoginException;
-
-import org.assertj.core.api.Condition;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
-import buy.signal.measurements.PriceDelta;
-
 import data.collector.StockTickerHistory;
 
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 
 public class PriceDeltaTest {
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
 	final static String PATH = new String("buySignalMeasurements/PriceDeltaTest/");
 	
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void signalNotFound() throws ParseException{

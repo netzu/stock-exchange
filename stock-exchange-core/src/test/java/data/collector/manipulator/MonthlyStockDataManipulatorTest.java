@@ -8,12 +8,12 @@ import java.text.ParseException;
 import org.junit.Test;
 
 import data.collector.StockTickerHistory;
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 
 public class MonthlyStockDataManipulatorTest {
 	
 	final static String PATH = new String("data/collectorManipulator/monthly/");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void onlyOneDayInMonth() throws ParseException{

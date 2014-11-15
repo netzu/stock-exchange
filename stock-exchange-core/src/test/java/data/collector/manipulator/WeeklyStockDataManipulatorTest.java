@@ -7,12 +7,12 @@ import java.text.ParseException;
 import org.junit.Test;
 
 import data.collector.StockTickerHistory;
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 
 public class WeeklyStockDataManipulatorTest {
 	
 	final static String PATH = new String("data/collectorManipulator/weekly/");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void emptyStockTickerInput(){

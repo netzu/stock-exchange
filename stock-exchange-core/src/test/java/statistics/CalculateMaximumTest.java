@@ -13,13 +13,12 @@ import java.util.List;
 import org.apache.commons.math3.util.Precision;
 import org.junit.Test;
 
-import statistics.CalculateMaximum;
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateMaximumTest {
 	final static String PATH = new String("statistics/calculateMaximumResources/");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 
 	@Test
 	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {

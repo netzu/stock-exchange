@@ -3,9 +3,9 @@ package indicators.williamsr;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.collector.EODTick;
 import org.joda.time.DateTime;
 
-import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
 
 /*
@@ -26,86 +26,95 @@ import data.collector.StockTickerHistory;
  */
 
 
-public class WilliamsRIndicator {
+class WilliamsRIndicator {
+
+    private final int daysNum;
+
+    WilliamsRIndicator(final int daysNum) {
+
+        this.daysNum = daysNum;
+    }
+
+
+
+    List<WilliamsRData> calculateWilliamsR(final StockTickerHistory tickerCollection) {
+
+        if(tickerCollection.getEODTickDataList().size()==0){
+            throw new WilliamsRCalculationException("Ticker's history data is empty");
+        }
+
+        if(daysNum <1){
+            throw new WilliamsRCalculationException("Period must be grather than 0");
+        }
+
+        if(tickerCollection.getEODTickDataList().size()<daysNum){
+            throw new WilliamsRCalculationException("Size of tickerCollection lowere than period");
+        }
+
+        StockTickerHistory subListFromGivenPeriod = new StockTickerHistory();
+        List<WilliamsRData> williamsR = new ArrayList<WilliamsRData>();
+
+        for (int i = 0; i<(tickerCollection.getEODTickDataList().size() - daysNum +1); i++){
+            List <EODTick> subList = tickerCollection.subListOfCollection(i, i + daysNum);
+            subListFromGivenPeriod.setEODTickDataList(subList);
+
+            williamsR.add(calculateSinglewilliamsR(subListFromGivenPeriod));
+        }
+
+        return williamsR;
+    }
 
 	private double getHighestHighFromPeriod(StockTickerHistory subCollection){
-		
-		double highest = subCollection.getStockTickerDataList().get(0).getHigh();
-		double temporaryHighest  = subCollection.getStockTickerDataList().get(0).getHigh();
-		
-		for(int i = 0; i<subCollection.getStockTickerDataList().size(); i++){
-			
-			temporaryHighest = subCollection.getStockTickerDataList().get(i).getHigh();
-			
+
+		double highest = subCollection.getEODTickDataList().get(0).getHigh();
+		double temporaryHighest  = subCollection.getEODTickDataList().get(0).getHigh();
+
+		for(int i = 0; i<subCollection.getEODTickDataList().size(); i++){
+
+			temporaryHighest = subCollection.getEODTickDataList().get(i).getHigh();
+
 			if(highest<temporaryHighest){
-				highest = temporaryHighest; 
+				highest = temporaryHighest;
 			}
 		}
-		
+
 		return highest;
 	}
-	
+
 	private double getLowestLowFromPeriod(StockTickerHistory subCollection){
-		
-		double lowest = subCollection.getStockTickerDataList().get(0).getLow();
-		double temporaryLowest = subCollection.getStockTickerDataList().get(0).getLow();
-		
-		for(int i = 0; i<subCollection.getStockTickerDataList().size(); i++){
-			
-			temporaryLowest = subCollection.getStockTickerDataList().get(i).getLow();
-			
+
+		double lowest = subCollection.getEODTickDataList().get(0).getLow();
+		double temporaryLowest = subCollection.getEODTickDataList().get(0).getLow();
+
+		for(int i = 0; i<subCollection.getEODTickDataList().size(); i++){
+
+			temporaryLowest = subCollection.getEODTickDataList().get(i).getLow();
+
 			if(lowest > temporaryLowest){
-				lowest = temporaryLowest; 
+				lowest = temporaryLowest;
 			}
 		}
-		
+
 		return lowest;
 	}
-	
+
 	private WilliamsRData calculateSinglewilliamsR(StockTickerHistory subCollection){
 		WilliamsRData data = new WilliamsRData();
-		
+
 		double highest = getHighestHighFromPeriod(subCollection);
 		double lowest = getLowestLowFromPeriod(subCollection);
-		
-		int period = subCollection.getStockTickerDataList().size()-1;
-		
-		DateTime date = subCollection.getStockTickerDataList().get(period).getDate();
-		double curentClose = subCollection.getStockTickerDataList().get(period).getClose();
-		
+
+		int period = subCollection.getEODTickDataList().size()-1;
+
+		DateTime date = subCollection.getEODTickDataList().get(period).getDate();
+		double curentClose = subCollection.getEODTickDataList().get(period).getClose();
+
 		data.setDate(date);
 		data.setWilliamsR(equationForWilliamsPercentage(highest, curentClose, lowest));
-		
-		return data;		
+
+		return data;
 	}
-	
-	public ArrayList<WilliamsRData> calculateWilliamsR(int period, StockTickerHistory tickercollection) {
-		
-		if(tickercollection.getStockTickerDataList().size()==0){
-			throw new WilliamsRCalculationException("Ticker's history data is empty");
-		}
-		
-		if(period<1){
-			throw new WilliamsRCalculationException("Period must be grather than 0");
-		}
-		
-		if(tickercollection.getStockTickerDataList().size()<period){
-			throw new WilliamsRCalculationException("Size of tickerCollection lowere than period");
-		}
-		
-		StockTickerHistory subListFromGivenPeriod = new StockTickerHistory();
-		ArrayList<WilliamsRData> williamsR = new ArrayList<WilliamsRData>();
-		
-		for (int i = 0; i<(tickercollection.getStockTickerDataList().size() - period +1); i++){
-			List <StockTicker> subList = tickercollection.subListOfCollection(i, i + period);
-			subListFromGivenPeriod.setStockTickerDataList(subList);
-			
-			williamsR.add(calculateSinglewilliamsR(subListFromGivenPeriod));
-		}
-		
-		return williamsR;
-	}
-	
+
 	private double equationForWilliamsPercentage(double highestHigh, double currentClose, double lowestLow){
 		double williamsR; 
 		

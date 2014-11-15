@@ -3,13 +3,13 @@ package indicators.williamsr;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
+import indicators.Signal;
 
-public class BuySignalsGenerator {
+class BuySignalsGenerator {
 
 	private static final int REVALUATION_TRESHOLD = -80;
 
-	public List<DateTime> generate(List<WilliamsRData> williamsRCollection) {
+	static List<Signal> generate(List<WilliamsRData> williamsRCollection) {
 		
 		if(williamsRCollection.isEmpty()){
 			throw new WilliamsRCalculationException("Cannot generate buy signal for empty williams R collection");
@@ -22,7 +22,7 @@ public class BuySignalsGenerator {
 		double previousWilliamsValue = williamsRCollection.get(0).getWilliamsR();
 		double currentWilliamsValue = williamsRCollection.get(1).getWilliamsR();
 
-		List<DateTime> buySignal = new ArrayList<DateTime>();
+		List<Signal> buySignal = new ArrayList<Signal>();
 
 		for(int i=1; i<williamsRCollection.size(); i++) {
 
@@ -30,7 +30,7 @@ public class BuySignalsGenerator {
 			currentWilliamsValue = williamsRCollection.get(i).getWilliamsR();
 			
 			if((previousWilliamsValue<=REVALUATION_TRESHOLD) && (currentWilliamsValue>REVALUATION_TRESHOLD)){
-				buySignal.add(williamsRCollection.get(i).getDate());
+				buySignal.add(new Signal(williamsRCollection.get(i).getDate()));
 			}
 		}
 		return buySignal;

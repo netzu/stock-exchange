@@ -10,12 +10,12 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 
 public class ComplexMovingAverageAverageDataTest {
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
 	final static String PATH = new String("indicators/complexMovingAverage/");	
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void getPeriodTest() throws IOException{

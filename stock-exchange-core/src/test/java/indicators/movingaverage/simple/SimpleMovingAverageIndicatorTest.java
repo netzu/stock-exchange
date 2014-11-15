@@ -12,13 +12,13 @@ import org.junit.Test;
 
 import data.collector.StockTickerHistory;
 import utils.CompareSimpleMovingAverageLists;
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 
 public class SimpleMovingAverageIndicatorTest {
 	
 	final static String PATH_FLAT = new String("indicators/simpleMovingAverage/indicator/");
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 
 	/*
 	 * period is equal 0, exception should be thrown
@@ -102,7 +102,7 @@ public class SimpleMovingAverageIndicatorTest {
 		 try{
 			 SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
 			 List<SimpleMovingAverageData> currentResults = indicator.calculateSimpleMovingAverage(period, tickerCollection);
-			 int expectedSizeOfList = tickerCollection.getStockTickerDataList().size()-period+1;
+			 int expectedSizeOfList = tickerCollection.getEODTickDataList().size()-period+1;
 			 
 			 assertTrue("Size of current list is wrong: " + currentResults.size() + ", was expecting: " + expectedSizeOfList, currentResults.size()  == expectedSizeOfList);
 			 assertTrue(CompareSimpleMovingAverageLists.compare(expectedResults, currentResults, 0.01));

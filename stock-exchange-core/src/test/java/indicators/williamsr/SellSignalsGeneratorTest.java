@@ -3,23 +3,24 @@ package indicators.williamsr;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+import configuration.Share;
+import data.collector.StockTickerHistory;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
+import utils.FileDataReader;
 
-import utils.MocksForTests;
+public class SellSignalsGeneratorTest extends TestBeans {
+	
+	final static String PATH = new String("indicators/williams/sellSignal/");
 
-public class SellSignalsGeneratorTest {
-	
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
-	final static String PATH = new String("indicators/williams/sellSignal/");	
-	MocksForTests mock = new MocksForTests();
-	
 	@Test
 	public void williamsCollectionIsEmpty() throws NumberFormatException, IOException{
 		String expectedErrorMessage = "Cannot generate sell signal for empty williams R collection";
@@ -39,7 +40,7 @@ public class SellSignalsGeneratorTest {
 		String expectedErrorMessage = "Cannot generate sell signal for williams R collection which has less than 2 elements";
 		
 		WilliamsRData data = new WilliamsRData();
-		data.setDate(dateFormater.parseDateTime("20100108"));
+		data.setDate(Share.COMMON_FORMATTER.parseDateTime("20100108"));
 		data.setWilliamsR(20.1);		
 		
 		List<WilliamsRData> williamsRCollection = new ArrayList<WilliamsRData>();
@@ -60,12 +61,11 @@ public class SellSignalsGeneratorTest {
 	 */
 	@Test
 	public void conditionsTrueTrue() throws NumberFormatException, IOException{
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "conditionsTrueTrue");
-		DateTime expectedBuyDate = dateFormater.parseDateTime("20100111");
-		
+		DateTime expectedBuyDate = Share.COMMON_FORMATTER.parseDateTime("20100111");
+
 		try{
 			SellSignalsGenerator sellSignal = new SellSignalsGenerator();
-			List<DateTime> currentResult = sellSignal.generate(williamsRCollection);
+			List<DateTime> currentResult = getCurrentResults(PATH + "conditionsTrueTrue");
 			assertTrue("Buy signal list contain more ellements than expected", currentResult.size() == 1);
 			assertTrue("Currently generated buySignal date diffretn than expected.", currentResult.get(0).equals(expectedBuyDate));
 		}catch(Exception ex){
@@ -79,11 +79,9 @@ public class SellSignalsGeneratorTest {
 	 */
 	@Test
 	public void conditionsTrueFalse() throws NumberFormatException, IOException{
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "conditionsTrueFalse");
-		
+
 		try{
-			SellSignalsGenerator sellSignal = new SellSignalsGenerator();
-			List<DateTime> currentResult = sellSignal.generate(williamsRCollection);
+			List<DateTime> currentResult = getCurrentResults(PATH + "conditionsTrueFalse");
 			assertTrue("Buy signal generated when not expected", currentResult.size() == 0);
 		}catch(Exception ex){
 			fail("Exception when not expected: " + ex.getMessage());
@@ -96,11 +94,9 @@ public class SellSignalsGeneratorTest {
 	 */
 	@Test
 	public void conditionsFalseFalse() throws NumberFormatException, IOException{
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "conditionsFalseFalse");
-		
+
 		try{
-			SellSignalsGenerator sellSignal = new SellSignalsGenerator();
-			List<DateTime> currentResult = sellSignal.generate(williamsRCollection);
+			List<DateTime> currentResult = getCurrentResults(PATH + "conditionsFalseFalse");
 			assertTrue("Buy signal generated when not expected", currentResult.size() == 0);
 		}catch(Exception ex){
 			fail("Exception when not expected: " + ex.getMessage());
@@ -113,11 +109,9 @@ public class SellSignalsGeneratorTest {
 	 */
 	@Test
 	public void conditionsFalseTrue() throws NumberFormatException, IOException{
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "conditionsFalseTrue");
-		
+
 		try{
-			SellSignalsGenerator buySignalsGenerator = new SellSignalsGenerator();
-			List<DateTime> currentResult = buySignalsGenerator.generate(williamsRCollection);
+			List<DateTime> currentResult = getCurrentResults(PATH + "conditionsFalseTrue");
 			assertTrue("Buy signal generated when not expected", currentResult.size() == 0);
 		}catch(Exception ex){
 			fail("Exception when not expected: " + ex.getMessage());
@@ -129,12 +123,10 @@ public class SellSignalsGeneratorTest {
 	 */
 	@Test
 	public void boundrValueAnalysis_previousWilliams_Equal_UndervaluationTreshold() throws NumberFormatException, IOException{
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "boundrValueAnalysis_previousWilliams_Equal_UndervaluationTresholld");
-		DateTime expectedBuyDate = dateFormater.parseDateTime("20100119");
+		DateTime expectedBuyDate = Share.COMMON_FORMATTER.parseDateTime("20100119");
 		
 		try{
-			SellSignalsGenerator sellSignal = new SellSignalsGenerator();
-			List<DateTime> currentResult = sellSignal.generate(williamsRCollection);
+			List<DateTime> currentResult = getCurrentResults(PATH + "boundrValueAnalysis_previousWilliams_Equal_UndervaluationTresholld");
 			assertTrue("Buy signal list contain more ellements than expected", currentResult.size() == 1);
 			assertTrue("Currently generated buySignal date diffretn than expected.", currentResult.get(0).equals(expectedBuyDate));
 		}catch(Exception ex){
@@ -147,11 +139,9 @@ public class SellSignalsGeneratorTest {
 	 */
 	@Test
 	public void boundrValueAnalysis_currentWilliams_Equal_UndervaluationTreshold() throws NumberFormatException, IOException{
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "boundrValueAnalysis_currentWilliams_Equal_UndervaluationTresholld");
-		
+
 		try{
-			SellSignalsGenerator sellSignal = new SellSignalsGenerator();
-			List<DateTime> currentResult = sellSignal.generate(williamsRCollection);
+			List<DateTime> currentResult = getCurrentResults(PATH + "boundrValueAnalysis_currentWilliams_Equal_UndervaluationTresholld");
 			assertTrue("Buy signal generated when not expected", currentResult.size() == 0);
 		}catch(Exception ex){
 			fail("Exception when not expected: " + ex.getMessage());
@@ -163,12 +153,10 @@ public class SellSignalsGeneratorTest {
 	 */
 	@Test
 	public void boundrValueAnalysis_currentWilliams_SmallerThan_UndervaluationTreshold() throws NumberFormatException, IOException{
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "boundrValueAnalysis_currentWilliams_SmallerThan_UndervaluationTreshold");
-		DateTime expectedBuyDate = dateFormater.parseDateTime("20100124");
+		DateTime expectedBuyDate = Share.COMMON_FORMATTER.parseDateTime("20100124");
 		
 		try{
-			SellSignalsGenerator sellSignal = new SellSignalsGenerator();
-			List<DateTime> currentResult = sellSignal.generate(williamsRCollection);
+			List<DateTime> currentResult = getCurrentResults(PATH + "boundrValueAnalysis_currentWilliams_SmallerThan_UndervaluationTreshold");
 			assertTrue("Buy signal list contain more ellements than expected", currentResult.size() == 1);
 			assertTrue("Currently generated buySignal date diffretn than expected.", currentResult.get(0).equals(expectedBuyDate));
 		}catch(Exception ex){
@@ -178,12 +166,10 @@ public class SellSignalsGeneratorTest {
 	
 	@Test
 	public void multipleSellSignalGenerated() throws NumberFormatException, IOException{
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "multipleSellSignalGenerated");
-		List<DateTime> expectedResult = mock.getBuysignal(PATH + "multipleSellSignalGenerated_expectedResults");
+		List<DateTime> expectedResult = FileDataReader.readData(new File(verifyGivenPath(PATH + "multipleSellSignalGenerated_expectedResults")), FileDataReader.DATE_FUNCTION);
 		
 		try{
-			SellSignalsGenerator sellSignal = new SellSignalsGenerator();
-			List<DateTime> currentResult = sellSignal.generate(williamsRCollection);
+			List<DateTime> currentResult = getCurrentResults(PATH + "multipleSellSignalGenerated");
 			assertTrue("Buy signal list contain more ellements than expected", currentResult.size() == expectedResult.size());
 			
 			boolean result = false;
@@ -202,4 +188,10 @@ public class SellSignalsGeneratorTest {
 			fail("Exception when not expected: " + ex.getMessage());
 		}
 	}
+
+    private List<DateTime> getCurrentResults(final String path) throws IOException {
+
+        WilliamsRSignalsGenerator williamsRSignalsGenerator = prepareSignalGenerator(path);
+        return Lists.transform(williamsRSignalsGenerator.sellSignals(new StockTickerHistory()), SIGNAL_TO_DATETIME);
+    }
 }

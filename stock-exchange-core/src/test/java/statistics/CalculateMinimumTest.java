@@ -13,14 +13,13 @@ import java.util.List;
 import org.apache.commons.math3.util.Precision;
 import org.junit.Test;
 
-import statistics.CalculateMinimum;
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateMinimumTest {
 
 	final static String PATH = new String("statistics/calculateMinimumResources/");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {

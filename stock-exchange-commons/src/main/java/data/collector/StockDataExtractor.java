@@ -19,9 +19,9 @@ public class StockDataExtractor {
 	
 	private DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 
-	public StockTicker extractFromString(String[] extractedStockDataFromOneDay) throws ParseException {	
+	public EODTick extractFromString(String[] extractedStockDataFromOneDay) throws ParseException {
 		
-		StockTicker exctractedData = new StockTicker();
+		EODTick exctractedData = new EODTick();
 		
 		exctractedData.setStockName(extractedStockDataFromOneDay[STOCK_NAME_INDEX]);
 		exctractedData.setDate(DateTime.parse(extractedStockDataFromOneDay[DATE_INDEX], dateFormater));
@@ -34,9 +34,9 @@ public class StockDataExtractor {
 		return exctractedData;
 	}
 	
-	public StockTicker extractFromQueryResults(ResultSet resultOfQuery) throws ParseException, SQLException {	
+	public EODTick extractFromQueryResults(ResultSet resultOfQuery) throws ParseException, SQLException {
 		
-		StockTicker exctractedData = new StockTicker();
+		EODTick exctractedData = new EODTick();
 		
 		exctractedData.setStockName(resultOfQuery.getString("ticker"));;		
 		exctractedData.setDate(new DateTime(resultOfQuery.getDate("date")));

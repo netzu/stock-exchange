@@ -13,13 +13,13 @@ import org.junit.Test;
 
 import data.collector.StockTickerHistory;
 import utils.CompareSimpleMovingAverageLists;
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 
 public class CompexMovingAverageIndicatorTest {
 	
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
 	final static String PATH = new String("indicators/complexMovingAverage/");	
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 
 	@Test
 	public void test() throws IOException, ParseException{

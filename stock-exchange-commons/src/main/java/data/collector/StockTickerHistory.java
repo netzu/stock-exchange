@@ -7,37 +7,28 @@ import org.joda.time.DateTime;
 
 public class StockTickerHistory {
 
-	private List<StockTicker> stockTickerDataList = new ArrayList<StockTicker>();
+	private List<EODTick> EODTickDataList = new ArrayList<EODTick>();
 
-	public List<StockTicker> getStockTickerDataList() {
-		return stockTickerDataList;
-	}
-
-	public void setStockTickerDataList(List<StockTicker> stockTickerDataList) {
-		this.stockTickerDataList = stockTickerDataList;
+	public List<EODTick> getEODTickDataList() {
+		return EODTickDataList;
 	}
 
-	public void add(StockTicker dailyStock) {
-		this.stockTickerDataList.add(dailyStock);		
+	public void setEODTickDataList(List<EODTick> EODTickDataList) {
+		this.EODTickDataList = EODTickDataList;
+	}
+
+	public void add(EODTick dailyStock) {
+		this.EODTickDataList.add(dailyStock);
 	}
 	
-	public List <StockTicker> subListOfCollection(int from, int to){
+	public List <EODTick> subListOfCollection(int from, int to){
 		
-		if(from >= to){
-			throw new StockExchangeIllegalStateException("Cannot create sublist when FROM is greather or equal TO");
-		}
-		
-		List <StockTicker> subList = new ArrayList<StockTicker>();
-		
-		for(int i = from; i<to; i++){
-			subList.add(stockTickerDataList.get(i));
-		}
-		return subList;
+		return this.EODTickDataList.subList(from, to);
 	}
 	
-	public StockTicker findStockByDate(DateTime date){
+	public EODTick findStockByDate(DateTime date){
 	
-		if(stockTickerDataList.isEmpty()){
+		if(EODTickDataList.isEmpty()){
 			throw new StockExchangeIllegalStateException("Cannot find stock by date if ticker's collection is empty");
 		}
 		
@@ -45,11 +36,11 @@ public class StockTickerHistory {
 			throw new StockExchangeIllegalStateException("Cannot find ticker by date if date is null");
 		}
 		 
-		for(int i=0; i<this.stockTickerDataList.size();i++){
-			DateTime current = stockTickerDataList.get(i).getDate();
+		for(int i=0; i<this.EODTickDataList.size();i++){
+			DateTime current = EODTickDataList.get(i).getDate();
 			
 			if(current.equals(date)){
-				return stockTickerDataList.get(i);
+				return EODTickDataList.get(i);
 			}
 		}
 		
@@ -60,7 +51,7 @@ public class StockTickerHistory {
 		
 		int index = -1;
 		
-		if(stockTickerDataList.isEmpty()){
+		if(EODTickDataList.isEmpty()){
 			throw new StockExchangeIllegalStateException("Cannot find index for a ticker with given date for an empty ticker collection");
 		}
 		
@@ -68,8 +59,8 @@ public class StockTickerHistory {
 			throw new StockExchangeIllegalStateException("Cannot find index for a ticker when date is null");
 		}
 		 
-		for(int i=0; i<this.stockTickerDataList.size();i++){
-			DateTime current = stockTickerDataList.get(i).getDate();
+		for(int i=0; i<this.EODTickDataList.size();i++){
+			DateTime current = EODTickDataList.get(i).getDate();
 			
 			if(current.equals(date)){
 				index = i;
@@ -90,7 +81,7 @@ public class StockTickerHistory {
 		int result = 1;
 		result = prime
 				* result
-				+ ((stockTickerDataList == null) ? 0 : stockTickerDataList
+				+ ((EODTickDataList == null) ? 0 : EODTickDataList
 						.hashCode());
 		return result;
 	}
@@ -107,11 +98,11 @@ public class StockTickerHistory {
 			return false;
 			}
 		StockTickerHistory other = (StockTickerHistory) obj;
-		if (stockTickerDataList == null) {
-			if (other.stockTickerDataList != null){
+		if (EODTickDataList == null) {
+			if (other.EODTickDataList != null){
 				return false;
 			}
-		} else if (!stockTickerDataList.equals(other.stockTickerDataList)){
+		} else if (!EODTickDataList.equals(other.EODTickDataList)){
 			return false;
 		}
 		return true;

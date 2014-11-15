@@ -18,11 +18,11 @@ public class BuySignalsGenerator {
 		
 		List<DateTime> buySignal = new ArrayList<DateTime>();
 		
-		int startPoint = stockCollection.getStockTickerDataList().size() - averageCollection.size();
+		int startPoint = stockCollection.getEODTickDataList().size() - averageCollection.size();
 		
 		for(int i=1; i<averageCollection.size(); i++){
-			previousClose = stockCollection.getStockTickerDataList().get(i-1+startPoint).getClose();
-			currentClose = stockCollection.getStockTickerDataList().get(i+startPoint).getClose();
+			previousClose = stockCollection.getEODTickDataList().get(i-1+startPoint).getClose();
+			currentClose = stockCollection.getEODTickDataList().get(i+startPoint).getClose();
 			
 			previousAverage = averageCollection.get(i-1).getAverage();
 			currentAverage = averageCollection.get(i).getAverage();

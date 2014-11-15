@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-public class StockTicker {	
+public class EODTick {
 	
 	private static final double DEFAULT_EPSILON = 0.001;
 	private String stockName;
@@ -104,7 +104,7 @@ public class StockTicker {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		StockTicker other = (StockTicker) obj;
+		EODTick other = (EODTick) obj;
 		if (!areEqual(close, other.close, DEFAULT_EPSILON))
 			return false;
 		if (date == null) {
@@ -137,8 +137,8 @@ public class StockTicker {
 		return (Math.abs(x1 - x2) )<= epsilon;
 	}
 	
-	public static StockTicker copy(final StockTicker source) {
-		StockTicker copy = new StockTicker();
+	public static EODTick copy(final EODTick source) {
+		EODTick copy = new EODTick();
 		
 		copy.setClose(source.getClose());
 		copy.setDate(new DateTime(source.getDate()));

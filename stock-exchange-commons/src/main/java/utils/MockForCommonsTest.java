@@ -12,7 +12,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import data.DataFileReader;
-import data.collector.StockTicker;
+import data.collector.EODTick;
 import data.collector.StockTickerHistory;
 
 public class MockForCommonsTest {
@@ -36,12 +36,12 @@ public class MockForCommonsTest {
 		return fileReader.getStockTickerCollection(new File(filePath));
 	}
 	
-	public StockTicker readStockTicker(final String path) throws IOException{
+	public EODTick readStockTicker(final String path) throws IOException{
 		
 		final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
 		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 		
-		StockTicker results = new StockTicker();		
+		EODTick results = new EODTick();
 
 		String line = null;
 

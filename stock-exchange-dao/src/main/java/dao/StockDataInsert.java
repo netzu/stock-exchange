@@ -1,6 +1,6 @@
 package dao;
 
-import data.collector.StockTicker;
+import data.collector.EODTick;
 import data.collector.StockTickerHistory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,10 +27,10 @@ public class StockDataInsert {
 
     public void insertStockTickerDataCollectionWithoutDuplicates(StockTickerHistory stockTickerCollection) throws SQLException, ClassNotFoundException, ParseException {
 
-        int collectionSize = stockTickerCollection.getStockTickerDataList().size();
+        int collectionSize = stockTickerCollection.getEODTickDataList().size();
 
         for (int iterator = 0; iterator < collectionSize; iterator++) {
-            StockTicker forStockDataFromOneDay = stockTickerCollection.getStockTickerDataList().get(iterator);
+            EODTick forStockDataFromOneDay = stockTickerCollection.getEODTickDataList().get(iterator);
 
             boolean notDuplicate = checkIfNotDuplicateInformation(forStockDataFromOneDay);
 
@@ -49,15 +49,15 @@ public class StockDataInsert {
         }
     }
 
-    private boolean checkIfNotDuplicateInformation(StockTicker stockDataFromOneDay) throws ClassNotFoundException, SQLException, ParseException {
+    private boolean checkIfNotDuplicateInformation(EODTick stockDataFromOneDay) throws ClassNotFoundException, SQLException, ParseException {
         StockDataSelect stock = new StockDataSelect(connection);
-        StockTicker dataForStocktickerFromOneDay = stock.getDataForStocktickerFromOneDay(stockDataFromOneDay.getStockName(), stockDataFromOneDay.getDate());
+        EODTick dataForStocktickerFromOneDay = stock.getDataForStocktickerFromOneDay(stockDataFromOneDay.getStockName(), stockDataFromOneDay.getDate());
 
         return null == dataForStocktickerFromOneDay;
 
     }
 
-    private PreparedStatement prepareStatment(StockTicker stockDataFromOneDay) {
+    private PreparedStatement prepareStatment(EODTick stockDataFromOneDay) {
         
     	PreparedStatement statement = null;
     	

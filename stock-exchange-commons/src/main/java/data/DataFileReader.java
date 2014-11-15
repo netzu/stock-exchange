@@ -6,8 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 
+import data.collector.EODTick;
 import data.collector.StockDataExtractor;
-import data.collector.StockTicker;
 import data.collector.StockTickerHistory;
 
 public class DataFileReader {
@@ -36,7 +36,7 @@ public class DataFileReader {
 				
 				StockDataExtractor extractor = new StockDataExtractor();
 				
-				StockTicker stockDataFromOneDay = StockTicker.copy(extractor.extractFromString(data));
+				EODTick stockDataFromOneDay = EODTick.copy(extractor.extractFromString(data));
 				stockTickerCollection.add(stockDataFromOneDay);
 				
 				fileLine = reader.readLine();

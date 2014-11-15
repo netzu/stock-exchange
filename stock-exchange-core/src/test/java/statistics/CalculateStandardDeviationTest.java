@@ -13,14 +13,13 @@ import java.util.List;
 import org.apache.commons.math3.util.Precision;
 import org.junit.Test;
 
-import statistics.CalculateStandardDeviation;
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 import data.collector.StockExchangeIllegalStateException;
 
 public class CalculateStandardDeviationTest {
 	
 	final static String PATH = new String("statistics/");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void testConstructorIsPrivate() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {

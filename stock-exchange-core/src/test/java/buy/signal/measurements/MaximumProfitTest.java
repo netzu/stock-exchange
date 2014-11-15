@@ -7,21 +7,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
-import buy.signal.measurements.MaximumProfit;
-import buy.signal.measurements.ProfitException;
-
-import data.collector.StockTickerHistory;
-
-import utils.MocksForTests;
+import indicators.williamsr.TestBeans;
 
 public class MaximumProfitTest {	
 	
 	final static String PATH = new String("buySignalMeasurements/MaximumProfitTest/");
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void emptyDelta() throws IOException{

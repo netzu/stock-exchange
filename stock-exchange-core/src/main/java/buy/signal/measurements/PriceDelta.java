@@ -18,9 +18,9 @@ public class PriceDelta {
 		int finishIndex = startingIndex + testRange;
 		
 		for(int i = startingIndex; i < finishIndex; i++){
-			if( i == stockCollection.getStockTickerDataList().size())
+			if( i == stockCollection.getEODTickDataList().size())
 				break;
-			double currentPrice = stockCollection.getStockTickerDataList().get(i).getClose();
+			double currentPrice = stockCollection.getEODTickDataList().get(i).getClose();
 			results.add(currentPrice - buyPrice);
 		}
 		

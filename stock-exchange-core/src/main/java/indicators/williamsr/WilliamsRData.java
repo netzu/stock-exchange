@@ -2,20 +2,20 @@ package indicators.williamsr;
 
 import org.joda.time.DateTime;
 
-public class WilliamsRData {	 
+class WilliamsRData {
 	 private DateTime date;
 	 private double williamsR;
 	 
-	public DateTime getDate() {
+	DateTime getDate() {
 		return date;
 	}
-	public void setDate(DateTime date) {
+	void setDate(DateTime date) {
 		this.date = date;
 	}
-	public double getWilliamsR() {
+	double getWilliamsR() {
 		return williamsR;
 	}
-	public void setWilliamsR(double williamsR) {
+	void setWilliamsR(double williamsR) {
 		this.williamsR = williamsR;
 	}
 }

@@ -1,74 +1,122 @@
 package indicators.williamsr;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import data.collector.StockTickerHistory;
+import indicators.Signal;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
-import utils.MocksForTests;
-
 public class WilliamsRSignalsTest {
 	
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
 	final static String PATH = new String("indicators/williams/signals/");	
-	MocksForTests mock = new MocksForTests();
+	TestBeans mock = new TestBeans();
 	
 	@Test
 	public void buySignal() throws NumberFormatException, IOException{
-		
-		WilliamsRSignals signals = new WilliamsRSignals();
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "williamsCollection");
-		List<DateTime> expectedResults = mock.getBuysignal(PATH + "buySignal_expectedResults");
-		
-		try{
-			List<DateTime> currentResults = signals.buySignals(williamsRCollection);
-			assertTrue("Buy signal list contain more ellements than expected", currentResults.size() == expectedResults.size());
-			
-			boolean result = false;
-			
-			for(int i=0; i<expectedResults.size(); i++){
-				if(!expectedResults.get(i).equals(currentResults.get(i))){
-					result = false;
-					fail("Currently generated sellSignal do not much to expected. Element " + i + "has " + currentResults.get(i) + ", expected: " + expectedResults.get(i));
-				}else{
-					result = true;
-				}
-			}
-			assertTrue("Currently generated sellSignal date diffretn than expected.", result);
-		}catch(Exception ex){
-			fail("Exception when not expected: " + ex.getMessage());
-		}
+
+        List<DateTime> currentResults = getBuySignals(PATH + "williamsCollection");
+
+        List<DateTime> expectedResults = mock.loadExpectedSignals(PATH + "buySignal_expectedResults");
+
+        assertThat(currentResults).hasSameSizeAs(expectedResults).containsAll(expectedResults);
+
 	}
 	
 	@Test
 	public void sellSignal() throws NumberFormatException, IOException{
-		WilliamsRSignals signals = new WilliamsRSignals();
-		List<WilliamsRData> williamsRCollection = mock.getWillimasCollection(PATH + "williamsCollection");
-		List<DateTime> expectedResults = mock.getBuysignal(PATH + "sellSignal_expectedResults");
+		List<DateTime> expectedResults = mock.loadExpectedSignals(PATH + "sellSignal_expectedResults");
 		
-		try{
-			List<DateTime> currentResults = signals.sellSignals(williamsRCollection);
-			assertTrue("Buy signal list contain more elements than expected - " + currentResults.size(), currentResults.size() == expectedResults.size());
+	    List<DateTime> currentResults = getSellSignals(PATH + "williamsCollection");
 
-			boolean result = false;
-
-			for(int i=0; i<expectedResults.size(); i++){
-				if(!expectedResults.get(i).equals(currentResults.get(i))){
-					result = false;
-					fail("Currently generated sellSignal do not much to expected. Element " + i + "has " + currentResults.get(i) + ", expected: " + expectedResults.get(i));
-				}else{
-					result = true;
-				}
-			}
-			assertTrue("Currently generated sellSignal date diffretn than expected.", result);
-		}catch(Exception ex){
-			fail("Exception when not expected: " + ex.getMessage());
-		}
+        assertThat(currentResults).hasSameSizeAs(expectedResults).containsAll(expectedResults);
 	}
+
+    private WilliamsRSignalsGenerator prepareGeneratorWithMockData(final String path, final int dayNum) throws IOException {
+
+
+
+        final InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		final List<WilliamsRData> result = Lists.newArrayList();
+
+		String line;
+
+		while ((line = reader.readLine()) != null) {
+
+			String[] splitData = line.split(",");
+
+			if (splitData.length != 2) {
+				throw new IllegalStateException(
+						"Wrong data format, expected date<yyyyMMdd>,price<double>");
+			}
+
+			WilliamsRData williamsRData = new WilliamsRData();
+			williamsRData.setWilliamsR(Double.parseDouble(splitData[1]));
+			final DateTime date = dateFormater.parseDateTime(splitData[0]);
+			williamsRData.setDate(date);
+
+			result.add(williamsRData);
+        }
+        final WilliamsRIndicator mockIndicator = mock(WilliamsRIndicator.class);
+        when(mockIndicator.calculateWilliamsR(any(StockTickerHistory.class))).thenReturn(result);
+
+        return new WilliamsRSignalsGenerator(dayNum) {
+
+            @Override
+            WilliamsRIndicator getIndicator() {
+
+                return mockIndicator;
+            }
+
+        };
+    }
+
+
+    private List<DateTime> getBuySignals(final String path) throws IOException {
+        WilliamsRSignalsGenerator williamsRSignalsGenerator = prepareGeneratorWithMockData(path ,5);
+
+        List<Signal> signals = williamsRSignalsGenerator.buySignals(new StockTickerHistory());
+
+        return Lists.transform(signals, new Function<Signal, DateTime>() {
+            @Override
+            public DateTime apply(Signal signal) {
+                return signal.getDate();
+            }
+        });
+
+    }
+
+    private List<DateTime> getSellSignals(final String path) throws IOException {
+        WilliamsRSignalsGenerator williamsRSignalsGenerator = prepareGeneratorWithMockData(path ,5);
+
+        List<Signal> signals = williamsRSignalsGenerator.sellSignals(new StockTickerHistory());
+
+        return Lists.transform(signals, new Function<Signal, DateTime>() {
+            @Override
+            public DateTime apply(Signal signal) {
+                return signal.getDate();
+            }
+        });
+
+    }
+
+
+
 }
