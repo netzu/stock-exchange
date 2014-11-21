@@ -3,10 +3,9 @@ package indicators.movingaverage.complex;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import indicators.movingaverage.complex.ComplexMovingAverageAverageData;
-import indicators.movingaverage.complex.ComplexMovingAverageSignals;
+
 import indicators.movingaverage.simple.SimpleMovingAverageData;
-import indicators.movingaverage.simple.SimpleMovingAverageSignals;
+import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -28,25 +27,25 @@ public class ComplexMovingAverageBuySignlasTest {
 	
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 	StockTickerHistory mockStockTickerHistory;
-	ComplexMovingAverageAverageData mockAverageData1;
-	ComplexMovingAverageAverageData mockAverageData2;
-	ComplexMovingAverageAverageData mockAverageData3;
+	ComplexMovingAverageSettings mockAverageData1;
+	ComplexMovingAverageSettings mockAverageData2;
+	ComplexMovingAverageSettings mockAverageData3;
 	
-	List<ComplexMovingAverageAverageData> averageDataList;
+	List<ComplexMovingAverageSettings> averageDataList;
 
 	List<SimpleMovingAverageData> simpleMovingAverageDataList1 = Mockito.mock(ArrayList.class);
 	List<SimpleMovingAverageData> simpleMovingAverageDataList2 = Mockito.mock(ArrayList.class);
 	List<SimpleMovingAverageData> simpleMovingAverageDataList3 = Mockito.mock(ArrayList.class);
 	
-	private SimpleMovingAverageSignals mockSimpleMovingAverageSignals;
+	private SimpleMovingAverageSignalsGenerator mockSimpleMovingAverageSignalsGenerator;
 	
 	@Before
 	public void setup() {
-		mockSimpleMovingAverageSignals = Mockito.mock(SimpleMovingAverageSignals.class);
+		mockSimpleMovingAverageSignalsGenerator = Mockito.mock(SimpleMovingAverageSignalsGenerator.class);
 		mockStockTickerHistory = Mockito.mock(StockTickerHistory.class);
-		mockAverageData1 = Mockito.mock(ComplexMovingAverageAverageData.class);
-		mockAverageData2 = Mockito.mock(ComplexMovingAverageAverageData.class);
-		mockAverageData3 = Mockito.mock(ComplexMovingAverageAverageData.class);
+		mockAverageData1 = Mockito.mock(ComplexMovingAverageSettings.class);
+		mockAverageData2 = Mockito.mock(ComplexMovingAverageSettings.class);
+		mockAverageData3 = Mockito.mock(ComplexMovingAverageSettings.class);
 		
 		Mockito.when(mockAverageData1.getAverageData()).thenReturn(simpleMovingAverageDataList1);
 		Mockito.when(mockAverageData2.getAverageData()).thenReturn(simpleMovingAverageDataList2);
@@ -64,9 +63,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20120303"));
 		setBuySignalsForThirdPeriod(buildFromString("20120303"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList,mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 		
 		assertFalse(buySignals.isEmpty()); 
 		Assert.assertTrue(buySignals.contains(buildFromString("20120303"))); 
@@ -80,9 +79,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20120303"));
 		setBuySignalsForThirdPeriod(new DateTime[0]);		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 		
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -95,9 +94,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(new DateTime[0]);
 		setBuySignalsForThirdPeriod(buildFromString("20110303"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 		
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -110,9 +109,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20151023"));
 		setBuySignalsForThirdPeriod(buildFromString("20151023"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -125,9 +124,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(new DateTime[0]);
 		setBuySignalsForThirdPeriod(new DateTime[0]);		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -140,9 +139,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(new DateTime[0]);
 		setBuySignalsForThirdPeriod(buildFromString("19990418"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -155,9 +154,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20080930"));
 		setBuySignalsForThirdPeriod(new DateTime[0]);		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -170,9 +169,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(new DateTime[0]);
 		setBuySignalsForThirdPeriod(new DateTime[0]);		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -185,9 +184,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20080930"));
 		setBuySignalsForThirdPeriod(buildFromString("20110709"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -200,9 +199,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20130913"));
 		setBuySignalsForThirdPeriod(buildFromString("20140224"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -215,9 +214,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20130913"));
 		setBuySignalsForThirdPeriod(buildFromString("20130913"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -230,9 +229,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20030913"));
 		setBuySignalsForThirdPeriod(buildFromString("20111227"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		Assert.assertTrue(buySignals.isEmpty()); 
 		assertEquals(0, buySignals.size());
@@ -244,9 +243,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20030913"),buildFromString("20140103"),buildFromString("20111019"),buildFromString("20121101"));
 		setBuySignalsForThirdPeriod(buildFromString("20111227"), buildFromString("20121101"), buildFromString("20140103"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		assertFalse(buySignals.isEmpty()); 
 		Assert.assertTrue(buySignals.contains(buildFromString("20121101"))); 
@@ -260,9 +259,9 @@ public class ComplexMovingAverageBuySignlasTest {
 		setBuySignalsForSecondPeriod(buildFromString("20030913"),buildFromString("20140103"),buildFromString("20111019"),buildFromString("20121101"));
 		setBuySignalsForThirdPeriod(buildFromString("20111227"), buildFromString("20121101"), buildFromString("20140103"));		
 		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
+		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignals, mockStockTickerHistory);
+		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
 
 		assertFalse(buySignals.isEmpty()); 
 		Assert.assertTrue(buySignals.contains(buildFromString("20121101"))); 
@@ -273,18 +272,18 @@ public class ComplexMovingAverageBuySignlasTest {
 	
 	private void setBuySignalsForFirstPeriod(final DateTime... dateTimes) {
 		ArrayList<DateTime> arrayList = new ArrayList<DateTime>(Arrays.asList(dateTimes));
-		Mockito.when(mockSimpleMovingAverageSignals.getBuySignal(simpleMovingAverageDataList1, mockStockTickerHistory)).thenReturn(arrayList);
+		Mockito.when(mockSimpleMovingAverageSignalsGenerator.getBuySignal(simpleMovingAverageDataList1, mockStockTickerHistory)).thenReturn(arrayList);
 	}
 	
 	
 	private void setBuySignalsForSecondPeriod(final DateTime... dateTimes) {
 		ArrayList<DateTime> arrayList = new ArrayList<DateTime>(Arrays.asList(dateTimes));
-		Mockito.when(mockSimpleMovingAverageSignals.getBuySignal(simpleMovingAverageDataList2, mockStockTickerHistory)).thenReturn(arrayList);
+		Mockito.when(mockSimpleMovingAverageSignalsGenerator.getBuySignal(simpleMovingAverageDataList2, mockStockTickerHistory)).thenReturn(arrayList);
 	}
 	
 	private void setBuySignalsForThirdPeriod(final DateTime... dateTimes) {
 		ArrayList<DateTime> arrayList = new ArrayList<DateTime>(Arrays.asList(dateTimes));
-		Mockito.when(mockSimpleMovingAverageSignals.getBuySignal(simpleMovingAverageDataList3, mockStockTickerHistory)).thenReturn(arrayList);
+		Mockito.when(mockSimpleMovingAverageSignalsGenerator.getBuySignal(simpleMovingAverageDataList3, mockStockTickerHistory)).thenReturn(arrayList);
 	}
 	
 	

@@ -17,7 +17,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 import utils.FileDataReader;
 
-public class SellSignalsGeneratorTest extends TestBeans {
+public class SimpleAverageSellSignalGeneratorTest extends TestBeans {
 	
 	final static String PATH = new String("indicators/williams/sellSignal/");
 

@@ -31,7 +31,7 @@ public class CompexMovingAverageIndicatorTest {
 		
 		try{
 			CompexMovingAverageIndicator indicator = new CompexMovingAverageIndicator();
-			List<ComplexMovingAverageAverageData> currentResults = indicator.calculateComplexMovingAverage(4, 5, 7, stockCollection);
+			List<ComplexMovingAverageSettings> currentResults = indicator.calculateComplexMovingAverage(4, 5, 7, stockCollection);
 			
 			assertTrue("First SimpleMovingAverage size is diffrent than expected",currentResults.get(0).getAverageData().size() == first.size());
 			assertTrue("Second SimpleMovingAverage size is diffrent than expected",currentResults.get(1).getAverageData().size() == second.size());

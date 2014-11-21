@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Test class for SimpleMovingAverageSignals functionality.
  */
-public class SimpleMovingAverageSignalsTest {
+public class SimpleMovingAverageSignalsGeneratorTest {
 
 
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
@@ -36,7 +36,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData = mock.getAverageData(PATH_FLAT + "test_001_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_001_ticker.mst");
        
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -54,7 +54,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_002_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_002_ticker.mst");
 
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -72,7 +72,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_003_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_003_ticker.mst");
 
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -92,7 +92,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_004_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_004_ticker.mst");
 
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -110,7 +110,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_005_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_005_ticker.mst");
 
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -130,7 +130,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_006_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_006_ticker.mst");
 
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -148,7 +148,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_007_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_007_ticker.mst");
 
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -167,7 +167,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_008_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_008_ticker.mst");
 
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -185,7 +185,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_009_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_009_ticker.mst");
 
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -203,7 +203,7 @@ public class SimpleMovingAverageSignalsTest {
         List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_010_average_data.txt");
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_010_ticker.mst");
 
-        SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
         List<DateTime> sellSignal = new ArrayList<DateTime>();
         List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -223,7 +223,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_011_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_011_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -246,7 +246,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_012_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_012_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -270,7 +270,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_013_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_013_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -295,7 +295,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_014_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_014_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -317,7 +317,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_015_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_015_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -341,7 +341,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_016_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_016_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -360,7 +360,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_017_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_017_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -378,7 +378,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_018_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_018_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -396,7 +396,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_019_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_019_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -414,7 +414,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_020_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_020_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -432,7 +432,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_021_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_021_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -450,7 +450,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_022_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_022_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -468,7 +468,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_023_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_023_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -486,7 +486,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_024_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_024_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -504,7 +504,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_025_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_025_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -522,7 +522,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_026_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_026_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -544,7 +544,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_027_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_027_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -562,7 +562,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_028_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_028_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -580,7 +580,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_029_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_029_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -598,7 +598,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_GROWING + "test_030_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_030_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -616,7 +616,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_031_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_031_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -634,7 +634,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_032_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_032_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -652,7 +652,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_033_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_033_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -670,7 +670,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_034_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_034_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -688,7 +688,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_035_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_035_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -706,7 +706,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_036_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_036_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -724,7 +724,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_037_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_037_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -743,7 +743,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_038_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_038_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -761,7 +761,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_039_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_039_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -779,7 +779,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_040_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_040_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -797,7 +797,7 @@ public class SimpleMovingAverageSignalsTest {
 	   List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_041_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_041_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -815,7 +815,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_042_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_042_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -833,7 +833,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_043_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_043_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -851,7 +851,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_044_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_044_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -873,7 +873,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_045_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_045_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        
        List<DateTime> sellSignal = new ArrayList<DateTime>();
        List<DateTime> buySignal = new ArrayList<DateTime>();
@@ -892,7 +892,7 @@ public class SimpleMovingAverageSignalsTest {
        List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_DROPING + "test_046_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_046_ticker.mst");
 
-       SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+       SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
        List<DateTime> buySignal = new ArrayList<DateTime>();
        buySignal = signals.getBuySignal(averageData, history);
        

@@ -2,7 +2,7 @@ package utils;
 
 import indicators.movingaverage.simple.SimpleMovingAverageData;
 import indicators.movingaverage.simple.SimpleMovingAverageIndicator;
-import indicators.movingaverage.simple.SimpleMovingAverageSignals;
+import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class SimpleMovingAverageMain {
 		
 		List<SimpleMovingAverageData> simpleMovingAverageData = indicator.calculateSimpleMovingAverage(PERIOD_FOR_MOVING_AVERAGE, stockCollectionForTicker);
 		
-		SimpleMovingAverageSignals signals = new SimpleMovingAverageSignals();
+		SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
 		
 		List<DateTime> buySignals = signals.getBuySignal(simpleMovingAverageData, stockCollectionForTicker);
 		List<DateTime> sellSignals = signals.getSellSignals(simpleMovingAverageData, stockCollectionForTicker);

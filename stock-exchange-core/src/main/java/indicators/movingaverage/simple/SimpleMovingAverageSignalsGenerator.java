@@ -2,7 +2,8 @@ package indicators.movingaverage.simple;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
+import indicators.Signal;
+import indicators.SignalsGenerator;
 
 import data.collector.StockTickerHistory;
 
@@ -26,15 +27,30 @@ import data.collector.StockTickerHistory;
  * 
  */
 
-public class SimpleMovingAverageSignals {
-	
-	public List<DateTime> getBuySignal(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
-		BuySignalsGenerator buySignals = new BuySignalsGenerator();
-		return buySignals.generate(averageCollection, stockCollection);
-	}
-	
-	public List<DateTime> getSellSignals(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
-		SellSignalsGenerator sellSignals = new SellSignalsGenerator();
-		return sellSignals.generate(averageCollection, stockCollection);
-	}
+public class SimpleMovingAverageSignalsGenerator implements SignalsGenerator {
+
+    private final int period;
+
+    public SimpleMovingAverageSignalsGenerator(final int period) {
+        this.period = period;
+    }
+
+
+    @Override
+    public List<Signal> buySignals(final StockTickerHistory stockTickerHistory) {
+        List<SimpleMovingAverageData> simpleMovingAverageDatas = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(this.period, stockTickerHistory);
+        SimpleAverageBuySignalGenerator buySignals = new SimpleAverageBuySignalGenerator();
+        return buySignals.generate(simpleMovingAverageDatas,stockTickerHistory);
+    }
+
+    @Override
+    public List<Signal> sellSignals(StockTickerHistory stockTickerHistory) {
+
+        List<SimpleMovingAverageData> simpleMovingAverageDatas = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(this.period, stockTickerHistory);
+        SimpleAverageSellSignalGenerator sellSignals = new SimpleAverageSellSignalGenerator();
+
+        return sellSignals.generate(simpleMovingAverageDatas, stockTickerHistory);
+    }
+
+
 }

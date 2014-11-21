@@ -19,7 +19,7 @@ import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 
-public class BuySignalsGeneratorTest extends TestBeans {
+public class SimpleAverageBuySignalGeneratorTest extends TestBeans {
 
     DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
     final static String PATH = new String("indicators/williams/buySignal/");

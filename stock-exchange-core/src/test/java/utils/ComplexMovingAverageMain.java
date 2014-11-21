@@ -1,9 +1,8 @@
 package utils;
 
-import indicators.movingaverage.complex.CompexMovingAverageIndicator;
-import indicators.movingaverage.complex.ComplexMovingAverageAverageData;
-import indicators.movingaverage.complex.ComplexMovingAverageSignals;
-import indicators.movingaverage.simple.SimpleMovingAverageSignals;
+import indicators.movingaverage.complex.ComplexMovingAverageSettings;
+import indicators.movingaverage.complex.ComplexMovingAverageSignalsGenerator;
+import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -34,16 +33,12 @@ public class ComplexMovingAverageMain {
 		
 		StockDataSelect ticker = new StockDataSelect(connection);
 		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker(tickerName);
-		
-		CompexMovingAverageIndicator complexMovingAverageIndicator = new CompexMovingAverageIndicator();
-		List<ComplexMovingAverageAverageData> averageResults = complexMovingAverageIndicator.calculateComplexMovingAverage(PERIOD_FOR_FIRST_AVERAGE, PERIOD_FOR_SECOND_AVERAGE, PERIOD_FOR_THIRD_AVERAGE, stockCollectionForTicker);	
-		
-		SimpleMovingAverageSignals averageSignals = new SimpleMovingAverageSignals();
-		
-		ComplexMovingAverageSignals signals = new ComplexMovingAverageSignals();
-		signals.buysignal(averageResults, averageSignals , stockCollectionForTicker);
-		
-		System.out.print("Koniec");
+
+        final ComplexMovingAverageSettings settings = new ComplexMovingAverageSettings(PERIOD_FOR_FIRST_AVERAGE, PERIOD_FOR_SECOND_AVERAGE, PERIOD_FOR_THIRD_AVERAGE);
+
+        ComplexMovingAverageSignalsGenerator generator = new ComplexMovingAverageSignalsGenerator(settings);
+        generator.buySignals(stockCollectionForTicker);
+
 
 	}
 
