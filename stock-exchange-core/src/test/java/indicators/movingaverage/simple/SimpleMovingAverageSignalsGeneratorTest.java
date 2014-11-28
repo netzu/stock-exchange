@@ -1,8 +1,11 @@
 package indicators.movingaverage.simple;
 
 import static org.junit.Assert.*;
+
+import com.google.common.collect.Lists;
 import data.collector.StockTickerHistory;
 
+import indicators.DateTimeFromSignal;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -22,10 +25,11 @@ public class SimpleMovingAverageSignalsGeneratorTest {
 
 
 	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
+    private static final int period = 5;
 	
-	final static String PATH_FLAT = new String("indicators/simpleMovingAverage/flatAverage/");
-	final static String PATH_GROWING = new String("indicators/simpleMovingAverage/growingAverage/");
-	final static String PATH_DROPING = new String("indicators/simpleMovingAverage/dropingAverage/");
+	final static String PATH_FLAT = "indicators/simpleMovingAverage/flatAverage/";
+	final static String PATH_GROWING = "indicators/simpleMovingAverage/growingAverage/";
+	final static String PATH_DROPING = "indicators/simpleMovingAverage/dropingAverage/";
 	
 	TestBeans mock = new TestBeans();
 	
@@ -38,11 +42,9 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
         
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
+        List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+        List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
                 
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
 
         assertTrue(buySignal.isEmpty());        
         assertTrue(sellSignal.isEmpty());        
@@ -55,14 +57,11 @@ public class SimpleMovingAverageSignalsGeneratorTest {
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_002_ticker.mst");
 
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-        
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
-        
-        assertTrue(buySignal.isEmpty());
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
+       assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());        
     }
    
@@ -73,13 +72,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_003_ticker.mst");
 
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-        
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
-        
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
         assertTrue(buySignal.isEmpty());
         //DateTime date = dateFormater.parseDateTime("20100128");
         //assertTrue(buySignal.contains(date));
@@ -93,14 +89,11 @@ public class SimpleMovingAverageSignalsGeneratorTest {
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_004_ticker.mst");
 
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-        
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
-        
-        assertTrue(buySignal.isEmpty());
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
+       assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
     }
    
@@ -111,14 +104,11 @@ public class SimpleMovingAverageSignalsGeneratorTest {
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_005_ticker.mst");
 
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-        
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
-        
-        assertTrue(buySignal.isEmpty());
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
+       assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
         //DateTime date = new DateTime("20100128");
         //assertTrue(sellSignal.contains(date));
@@ -131,14 +121,11 @@ public class SimpleMovingAverageSignalsGeneratorTest {
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_006_ticker.mst");
 
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-        
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
-        
-        assertTrue(buySignal.isEmpty());
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
+       assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
     }
    
@@ -149,14 +136,11 @@ public class SimpleMovingAverageSignalsGeneratorTest {
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_007_ticker.mst");
 
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-        
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
-        
-        assertTrue(buySignal.isEmpty());
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
+       assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
     }
 
@@ -168,14 +152,11 @@ public class SimpleMovingAverageSignalsGeneratorTest {
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_008_ticker.mst");
 
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-        
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
-        
-        assertTrue(buySignal.isEmpty());
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
+       assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
     }
    
@@ -186,14 +167,11 @@ public class SimpleMovingAverageSignalsGeneratorTest {
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_009_ticker.mst");
 
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-        
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
-        
-        assertTrue(buySignal.isEmpty());
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
+       assertTrue(buySignal.isEmpty());
         assertTrue(sellSignal.isEmpty());
     }
    
@@ -204,14 +182,11 @@ public class SimpleMovingAverageSignalsGeneratorTest {
         StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_010_ticker.mst");
 
         SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-        
-        List<DateTime> sellSignal = new ArrayList<DateTime>();
-        List<DateTime> buySignal = new ArrayList<DateTime>();
-        
-        sellSignal = signals.getSellSignals(averageData, history);
-        buySignal = signals.getBuySignal(averageData, history);
-        
-        assertTrue(buySignal.isEmpty());
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
+       assertTrue(buySignal.isEmpty());
         //DateTime date = new DateTime("20100330");
         //assertTrue(buySignal.contains(date));
         assertTrue(sellSignal.isEmpty());
@@ -220,17 +195,13 @@ public class SimpleMovingAverageSignalsGeneratorTest {
    @Test
    public void Test_011() throws IOException, ParseException {
 	   
-       List<SimpleMovingAverageData> averageData =  mock.getAverageData(PATH_FLAT + "test_011_average_data.txt");
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_011_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        DateTime dt = dateFormater.parseDateTime("20100409");
        
        assertFalse(buySignal.isEmpty());       
@@ -247,13 +218,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_012_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        //DateTime dt = dateFormater.parseDateTime("20100419");
        
@@ -271,13 +239,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_013_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
        
@@ -296,13 +261,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_014_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
       
        DateTime dt = dateFormater.parseDateTime("20100419");       
@@ -318,13 +280,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_FLAT + "test_015_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
 
        assertTrue(sellSignal.isEmpty());
@@ -342,13 +301,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_016_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
 
@@ -361,13 +317,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_017_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -379,13 +332,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_018_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -397,13 +347,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_019_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -415,13 +362,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_020_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -433,13 +377,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_021_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -451,13 +392,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_022_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -469,13 +407,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_023_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -487,13 +422,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_024_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -505,13 +437,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_025_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -523,12 +452,9 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_026_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
 
        DateTime dt = dateFormater.parseDateTime("20100409");
        assertFalse(buySignal.isEmpty()); 
@@ -545,13 +471,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_027_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -563,13 +486,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_028_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -581,13 +501,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_029_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -599,13 +516,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_GROWING + "test_030_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    } 
@@ -617,13 +531,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_031_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);;
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    } 
@@ -635,13 +546,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_032_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    } 
@@ -653,13 +561,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_033_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    } 
@@ -671,13 +576,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_034_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    } 
@@ -689,13 +591,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_035_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    } 
@@ -707,13 +606,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_036_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);;
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -725,13 +621,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_037_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -744,13 +637,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_038_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -762,13 +652,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_039_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -780,13 +667,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_040_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -798,13 +682,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_041_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -816,13 +697,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_042_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -834,13 +712,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_043_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -852,13 +727,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_044_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
       
        DateTime dt = dateFormater.parseDateTime("20100419");
@@ -874,13 +746,10 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_045_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       
-       List<DateTime> sellSignal = new ArrayList<DateTime>();
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       
-       sellSignal = signals.getSellSignals(averageData, history);
-       buySignal = signals.getBuySignal(averageData, history);
-       
+
+       List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        assertTrue(buySignal.isEmpty());
        assertTrue(sellSignal.isEmpty());
    }
@@ -893,9 +762,8 @@ public class SimpleMovingAverageSignalsGeneratorTest {
        StockTickerHistory history =  mock.readTickerData(PATH_DROPING + "test_046_ticker.mst");
 
        SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-       List<DateTime> buySignal = new ArrayList<DateTime>();
-       buySignal = signals.getBuySignal(averageData, history);
-       
+       List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
+
        DateTime dt = dateFormater.parseDateTime("20100419");
        assertEquals(1, buySignal.size());
        assertTrue(buySignal.contains(dt));

@@ -1,8 +1,8 @@
 package indicators.movingaverage.complex;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import data.collector.StockTickerHistory;
+import indicators.DateTimeFromSignal;
 import indicators.Signal;
 import indicators.SignalsGenerator;
 import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
@@ -59,7 +59,7 @@ public class ComplexMovingAverageSignalsGenerator implements SignalsGenerator {
 
     private List<DateTime> getRawSellDateTimeFromSimpleAverage(final int period, final StockTickerHistory stockTickerHistory) {
 
-        SimpleMovingAverageSignalsGenerator generator = new SimpleMovingAverageSignalsGenerator(period);
+        SimpleMovingAverageSignalsGenerator generator = getSimpleAverageGenerator(period);
 
         return Lists.transform(generator.sellSignals(stockTickerHistory), new DateTimeFromSignal());
 
@@ -67,18 +67,17 @@ public class ComplexMovingAverageSignalsGenerator implements SignalsGenerator {
 
     private List<DateTime> getRawBuyDateTimeFromSimpleAverage(final int period, final StockTickerHistory stockTickerHistory) {
 
-        SimpleMovingAverageSignalsGenerator generator = new SimpleMovingAverageSignalsGenerator(period);
+        SimpleMovingAverageSignalsGenerator generator = getSimpleAverageGenerator(period);
 
         return Lists.transform(generator.buySignals(stockTickerHistory), new DateTimeFromSignal());
 
     }
 
-    private static class DateTimeFromSignal implements Function<Signal, DateTime> {
 
-        @Override
-        public DateTime apply(final Signal signal) {
-            return signal.getDate();
-        }
+    protected SimpleMovingAverageSignalsGenerator getSimpleAverageGenerator(final int period) {
+
+        return new SimpleMovingAverageSignalsGenerator(period);
+
     }
 
 }

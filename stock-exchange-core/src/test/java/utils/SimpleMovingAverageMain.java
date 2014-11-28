@@ -1,5 +1,7 @@
 package utils;
 
+import com.google.common.collect.Lists;
+import indicators.DateTimeFromSignal;
 import indicators.movingaverage.simple.SimpleMovingAverageData;
 import indicators.movingaverage.simple.SimpleMovingAverageIndicator;
 import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
@@ -30,16 +32,14 @@ public class SimpleMovingAverageMain {
 		
 		StockDataSelect ticker = new StockDataSelect(connection);
 		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker("LENA");
-		SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();    	
-		
-		List<SimpleMovingAverageData> simpleMovingAverageData = indicator.calculateSimpleMovingAverage(PERIOD_FOR_MOVING_AVERAGE, stockCollectionForTicker);
-		
-		SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(period);
-		
-		List<DateTime> buySignals = signals.getBuySignal(simpleMovingAverageData, stockCollectionForTicker);
-		List<DateTime> sellSignals = signals.getSellSignals(simpleMovingAverageData, stockCollectionForTicker);
-		
-		//buySignals.isEmpty();
+
+
+		SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(PERIOD_FOR_MOVING_AVERAGE);
+
+        List<DateTime> sellSignal = Lists.transform(signals.sellSignals(stockCollectionForTicker), new DateTimeFromSignal());
+        List<DateTime> buySignal = Lists.transform(signals.buySignals(stockCollectionForTicker), new DateTimeFromSignal());
+
+        //buySignals.isEmpty();
 		//sellSignals.isEmpty();
 
 		connection.close();

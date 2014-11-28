@@ -31,8 +31,7 @@ public class SimpleMovingAverageIndicatorTest {
 	        String expectedErrorMessage = "Simple moving avarage cannot be calculated if period is zero";
 	        	        
 	        try{
-	        	SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
-	        	indicator.calculateSimpleMovingAverage(period, tickerCollection);
+                SimpleMovingAverageIndicator.calculateSimpleMovingAverage(period, tickerCollection);
 	        	fail("No exception has been found, expected: " + expectedErrorMessage);
 	        }catch(SimpleMovingAverageCalculationException ex){
 	        	assertTrue("Exception message is diffrent that expected. Expected: " + expectedErrorMessage + ". Got: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
@@ -50,8 +49,7 @@ public class SimpleMovingAverageIndicatorTest {
 	        String expectedErrorMessage = "Simple moving average cannot be calculated for ticker without now history";
 	        
 	        try{
-	        	SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
-	        	indicator.calculateSimpleMovingAverage(period, tickerCollection);
+                SimpleMovingAverageIndicator.calculateSimpleMovingAverage(period, tickerCollection);
 	        	fail("No exception has been found, expected: " + expectedErrorMessage);
 	        }catch(SimpleMovingAverageCalculationException ex){
 	        	assertTrue("Exception message is diffrent that expected. Expected: " + expectedErrorMessage + ". Got: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
@@ -68,8 +66,7 @@ public class SimpleMovingAverageIndicatorTest {
 		 int period = 1;
 		 
 	        try{
-	        	SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
-	        	indicator.calculateSimpleMovingAverage(period, tickerCollection);
+                SimpleMovingAverageIndicator.calculateSimpleMovingAverage(period, tickerCollection);
 	        	fail("No exception has been found, expected: " + expectedErrorMessage);
 	        }catch(SimpleMovingAverageCalculationException ex){
 	        	assertTrue("Exception message is diffrent that expected. Expected: " + expectedErrorMessage + ". Got: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
@@ -84,8 +81,7 @@ public class SimpleMovingAverageIndicatorTest {
 		 int period = 6;
 		 
 		 try{
-			 SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
-			 List<SimpleMovingAverageData> currentResults = indicator.calculateSimpleMovingAverage(period, tickerCollection);
+			 List<SimpleMovingAverageData> currentResults = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(period, tickerCollection);
 			 assertTrue("Two lists are not same", CompareSimpleMovingAverageLists.compare(expectedResults, currentResults));			 
 		 }catch(Exception ex){
 			 fail("Exception when not expected: " + ex.getMessage());
@@ -100,8 +96,7 @@ public class SimpleMovingAverageIndicatorTest {
 		 int period = 5;
 		 
 		 try{
-			 SimpleMovingAverageIndicator indicator = new SimpleMovingAverageIndicator();
-			 List<SimpleMovingAverageData> currentResults = indicator.calculateSimpleMovingAverage(period, tickerCollection);
+			 List<SimpleMovingAverageData> currentResults = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(period, tickerCollection);
 			 int expectedSizeOfList = tickerCollection.getEODTickDataList().size()-period+1;
 			 
 			 assertTrue("Size of current list is wrong: " + currentResults.size() + ", was expecting: " + expectedSizeOfList, currentResults.size()  == expectedSizeOfList);

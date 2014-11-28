@@ -1,298 +1,284 @@
 package indicators.movingaverage.complex;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-
-import indicators.movingaverage.simple.SimpleMovingAverageData;
-import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import com.google.common.collect.Lists;
+
+import configuration.Share;
 import data.collector.StockTickerHistory;
+import indicators.DateTimeFromSignal;
+import indicators.Signal;
+import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
 
 public class ComplexMovingAverageBuySignlasTest {
-	
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
-	StockTickerHistory mockStockTickerHistory;
-	ComplexMovingAverageSettings mockAverageData1;
-	ComplexMovingAverageSettings mockAverageData2;
-	ComplexMovingAverageSettings mockAverageData3;
-	
-	List<ComplexMovingAverageSettings> averageDataList;
 
-	List<SimpleMovingAverageData> simpleMovingAverageDataList1 = Mockito.mock(ArrayList.class);
-	List<SimpleMovingAverageData> simpleMovingAverageDataList2 = Mockito.mock(ArrayList.class);
-	List<SimpleMovingAverageData> simpleMovingAverageDataList3 = Mockito.mock(ArrayList.class);
-	
-	private SimpleMovingAverageSignalsGenerator mockSimpleMovingAverageSignalsGenerator;
-	
-	@Before
-	public void setup() {
-		mockSimpleMovingAverageSignalsGenerator = Mockito.mock(SimpleMovingAverageSignalsGenerator.class);
-		mockStockTickerHistory = Mockito.mock(StockTickerHistory.class);
-		mockAverageData1 = Mockito.mock(ComplexMovingAverageSettings.class);
-		mockAverageData2 = Mockito.mock(ComplexMovingAverageSettings.class);
-		mockAverageData3 = Mockito.mock(ComplexMovingAverageSettings.class);
-		
-		Mockito.when(mockAverageData1.getAverageData()).thenReturn(simpleMovingAverageDataList1);
-		Mockito.when(mockAverageData2.getAverageData()).thenReturn(simpleMovingAverageDataList2);
-		Mockito.when(mockAverageData3.getAverageData()).thenReturn(simpleMovingAverageDataList3);
-		
-		averageDataList = Arrays.asList(mockAverageData1, mockAverageData2, mockAverageData3);
-	}
-	
-	
-	
-	@Test
-	public void Test_1() throws IOException, ParseException {
+    private static final int FIRST_PERIOD = 1;
+    private static final int SECOND_PERIOD = 2;
+    private static final int THIRD_PERIOD = 3;
+    StockTickerHistory mockStockTickerHistory;
 
-		setBuySignalsForFirstPeriod(buildFromString("20120303"));
-		setBuySignalsForSecondPeriod(buildFromString("20120303"));
-		setBuySignalsForThirdPeriod(buildFromString("20120303"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
-		
-		assertFalse(buySignals.isEmpty()); 
-		Assert.assertTrue(buySignals.contains(buildFromString("20120303"))); 
-	    assertEquals(1, buySignals.size());		
-	}
-	
-	@Test
-	public void Test_2() throws IOException, ParseException {
+    private List<Signal> firstPeriodSignals = Lists.newArrayList();
+    private List<Signal> secondPeriodSignals = Lists.newArrayList();
+    private List<Signal> thirdPeriodSignals = Lists.newArrayList();
 
-		setBuySignalsForFirstPeriod(buildFromString("20120303"));
-		setBuySignalsForSecondPeriod(buildFromString("20120303"));
-		setBuySignalsForThirdPeriod(new DateTime[0]);		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
-		
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	@Test
-	public void Test_3() throws IOException, ParseException {
+    private SimpleMovingAverageSignalsGenerator mockSimpleMovingAverageSignalsGenerator;
+    private ComplexMovingAverageSignalsGenerator complexMovingAverageSignalsGenerator;
+    private ComplexMovingAverageSettings settings;
 
-		setBuySignalsForFirstPeriod(buildFromString("20110303"));
-		setBuySignalsForSecondPeriod(new DateTime[0]);
-		setBuySignalsForThirdPeriod(buildFromString("20110303"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
-		
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	@Test
-	public void Test_4() throws IOException, ParseException {
+    @Before
+    public void setup() {
+        settings = new ComplexMovingAverageSettings(FIRST_PERIOD, SECOND_PERIOD, THIRD_PERIOD);
+        mockSimpleMovingAverageSignalsGenerator = Mockito.mock(SimpleMovingAverageSignalsGenerator.class);
+        mockStockTickerHistory = Mockito.mock(StockTickerHistory.class);
+        when(mockSimpleMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory)).thenReturn(firstPeriodSignals, secondPeriodSignals, thirdPeriodSignals);
 
-		setBuySignalsForFirstPeriod(new DateTime[0]);
-		setBuySignalsForSecondPeriod(buildFromString("20151023"));
-		setBuySignalsForThirdPeriod(buildFromString("20151023"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+        complexMovingAverageSignalsGenerator = new ComplexMovingAverageSignalsGenerator(settings) {
 
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	@Test
-	public void Test_5() throws IOException, ParseException {
+            protected SimpleMovingAverageSignalsGenerator getSimpleAverageGenerator(final int period) {
 
-		setBuySignalsForFirstPeriod(buildFromString("20091007"));
-		setBuySignalsForSecondPeriod(new DateTime[0]);
-		setBuySignalsForThirdPeriod(new DateTime[0]);		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+                return mockSimpleMovingAverageSignalsGenerator;
 
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	@Test
-	public void Test_6() throws IOException, ParseException {
+            }
 
-		setBuySignalsForFirstPeriod(new DateTime[0]);
-		setBuySignalsForSecondPeriod(new DateTime[0]);
-		setBuySignalsForThirdPeriod(buildFromString("19990418"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+        };
 
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	@Test
-	public void Test_7() throws IOException, ParseException {
+    }
 
-		setBuySignalsForFirstPeriod(new DateTime[0]);
-		setBuySignalsForSecondPeriod(buildFromString("20080930"));
-		setBuySignalsForThirdPeriod(new DateTime[0]);		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+    @Test
+    public void Test_1() throws IOException, ParseException {
 
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	@Test
-	public void Test_8() throws IOException, ParseException {
+        setBuySignalsForFirstPeriod(buildFromString("20120303"));
+        setBuySignalsForSecondPeriod(buildFromString("20120303"));
+        setBuySignalsForThirdPeriod(buildFromString("20120303"));
 
-		setBuySignalsForFirstPeriod(new DateTime[0]);
-		setBuySignalsForSecondPeriod(new DateTime[0]);
-		setBuySignalsForThirdPeriod(new DateTime[0]);		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+        List<DateTime> buySignals =
+            Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory),
+                new DateTimeFromSignal());
 
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
+        assertFalse(buySignals.isEmpty());
+        Assert.assertTrue(buySignals.contains(buildFromString("20120303")));
+        assertEquals(1, buySignals.size());
+    }
 
-	@Test
-	public void Test_9() throws IOException, ParseException {
+    @Test
+    public void Test_2() throws IOException, ParseException {
 
-		setBuySignalsForFirstPeriod(buildFromString("20080930"));
-		setBuySignalsForSecondPeriod(buildFromString("20080930"));
-		setBuySignalsForThirdPeriod(buildFromString("20110709"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+        setBuySignalsForFirstPeriod(buildFromString("20120303"));
+        setBuySignalsForSecondPeriod(buildFromString("20120303"));
+        setBuySignalsForThirdPeriod(new DateTime[0]);
 
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	@Test
-	public void Test_10() throws IOException, ParseException {
+        List<DateTime> buySignals =
+            Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory),
+                new DateTimeFromSignal());
 
-		setBuySignalsForFirstPeriod(buildFromString("20140224"));
-		setBuySignalsForSecondPeriod(buildFromString("20130913"));
-		setBuySignalsForThirdPeriod(buildFromString("20140224"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
 
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	@Test
-	public void Test_11() throws IOException, ParseException {
+    @Test
+    public void Test_3() throws IOException, ParseException {
 
-		setBuySignalsForFirstPeriod(buildFromString("20140224"));
-		setBuySignalsForSecondPeriod(buildFromString("20130913"));
-		setBuySignalsForThirdPeriod(buildFromString("20130913"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+        setBuySignalsForFirstPeriod(buildFromString("20110303"));
+        setBuySignalsForSecondPeriod(new DateTime[0]);
+        setBuySignalsForThirdPeriod(buildFromString("20110303"));
 
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	@Test
-	public void Test_12() throws IOException, ParseException {
+        ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
 
-		setBuySignalsForFirstPeriod(buildFromString("20121101"));
-		setBuySignalsForSecondPeriod(buildFromString("20030913"));
-		setBuySignalsForThirdPeriod(buildFromString("20111227"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+        List<DateTime> buySignals =
+            Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory),
+                new DateTimeFromSignal());
 
-		Assert.assertTrue(buySignals.isEmpty()); 
-		assertEquals(0, buySignals.size());
-	}
-	
-	public void Test_13() throws IOException, ParseException {
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
 
-		setBuySignalsForFirstPeriod(buildFromString("20121101"));
-		setBuySignalsForSecondPeriod(buildFromString("20030913"),buildFromString("20140103"),buildFromString("20111019"),buildFromString("20121101"));
-		setBuySignalsForThirdPeriod(buildFromString("20111227"), buildFromString("20121101"), buildFromString("20140103"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+    @Test
+    public void Test_4() throws IOException, ParseException {
 
-		assertFalse(buySignals.isEmpty()); 
-		Assert.assertTrue(buySignals.contains(buildFromString("20121101"))); 
-	    assertEquals(1, buySignals.size());
-	}
-	
-	@Test
-	public void Test_14() throws IOException, ParseException {
+        setBuySignalsForFirstPeriod(new DateTime[0]);
+        setBuySignalsForSecondPeriod(buildFromString("20151023"));
+        setBuySignalsForThirdPeriod(buildFromString("20151023"));
 
-		setBuySignalsForFirstPeriod(buildFromString("20121101"), buildFromString("20140103"), buildFromString("19991221"));
-		setBuySignalsForSecondPeriod(buildFromString("20030913"),buildFromString("20140103"),buildFromString("20111019"),buildFromString("20121101"));
-		setBuySignalsForThirdPeriod(buildFromString("20111227"), buildFromString("20121101"), buildFromString("20140103"));		
-		
-		ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
-		
-		List<DateTime> buySignals = signals.buysignal(averageDataList, mockSimpleMovingAverageSignalsGenerator, mockStockTickerHistory);
+        List<DateTime> buySignals =
+            Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory),
+                new DateTimeFromSignal());
 
-		assertFalse(buySignals.isEmpty()); 
-		Assert.assertTrue(buySignals.contains(buildFromString("20121101"))); 
-		Assert.assertTrue(buySignals.contains(buildFromString("20140103"))); 
-	    assertEquals(2, buySignals.size());
-	}
-	
-	
-	private void setBuySignalsForFirstPeriod(final DateTime... dateTimes) {
-		ArrayList<DateTime> arrayList = new ArrayList<DateTime>(Arrays.asList(dateTimes));
-		Mockito.when(mockSimpleMovingAverageSignalsGenerator.getBuySignal(simpleMovingAverageDataList1, mockStockTickerHistory)).thenReturn(arrayList);
-	}
-	
-	
-	private void setBuySignalsForSecondPeriod(final DateTime... dateTimes) {
-		ArrayList<DateTime> arrayList = new ArrayList<DateTime>(Arrays.asList(dateTimes));
-		Mockito.when(mockSimpleMovingAverageSignalsGenerator.getBuySignal(simpleMovingAverageDataList2, mockStockTickerHistory)).thenReturn(arrayList);
-	}
-	
-	private void setBuySignalsForThirdPeriod(final DateTime... dateTimes) {
-		ArrayList<DateTime> arrayList = new ArrayList<DateTime>(Arrays.asList(dateTimes));
-		Mockito.when(mockSimpleMovingAverageSignalsGenerator.getBuySignal(simpleMovingAverageDataList3, mockStockTickerHistory)).thenReturn(arrayList);
-	}
-	
-	
-	DateTime buildFromString(final String strinDate) {
-		return dateFormater.parseDateTime(strinDate);
-	}
-	
-		   
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
 
-	
-	
+    @Test
+    public void Test_5() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(buildFromString("20091007"));
+        setBuySignalsForSecondPeriod(new DateTime[0]);
+        setBuySignalsForThirdPeriod(new DateTime[0]);
+
+        List<DateTime> buySignals =
+            Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory),
+                new DateTimeFromSignal());
+
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
+
+    @Test
+    public void Test_6() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(new DateTime[0]);
+        setBuySignalsForSecondPeriod(new DateTime[0]);
+        setBuySignalsForThirdPeriod(buildFromString("19990418"));
+
+        List<DateTime> buySignals =
+            Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory),
+                new DateTimeFromSignal());
+
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
+
+    @Test
+    public void Test_7() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(new DateTime[0]);
+        setBuySignalsForSecondPeriod(buildFromString("20080930"));
+        setBuySignalsForThirdPeriod(new DateTime[0]);
+
+        ComplexMovingAverageSignalsGenerator signals = new ComplexMovingAverageSignalsGenerator(settings);
+
+        List<DateTime> buySignals =
+            Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory),
+                new DateTimeFromSignal());
+
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
+
+    @Test
+    public void Test_8() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(new DateTime[0]);
+        setBuySignalsForSecondPeriod(new DateTime[0]);
+        setBuySignalsForThirdPeriod(new DateTime[0]);
+
+        List<DateTime> buySignals =
+            Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory),
+                new DateTimeFromSignal());
+
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
+
+    @Test
+    public void Test_9() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(buildFromString("20080930"));
+        setBuySignalsForSecondPeriod(buildFromString("20080930"));
+        setBuySignalsForThirdPeriod(buildFromString("20110709"));
+
+        List<DateTime> buySignals = Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory), new DateTimeFromSignal());
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
+
+    @Test
+    public void Test_10() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(buildFromString("20140224"));
+        setBuySignalsForSecondPeriod(buildFromString("20130913"));
+        setBuySignalsForThirdPeriod(buildFromString("20140224"));
+
+        List<DateTime> buySignals = Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory), new DateTimeFromSignal());
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
+
+    @Test
+    public void Test_11() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(buildFromString("20140224"));
+        setBuySignalsForSecondPeriod(buildFromString("20130913"));
+        setBuySignalsForThirdPeriod(buildFromString("20130913"));
+
+        List<DateTime> buySignals = Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory), new DateTimeFromSignal());
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
+
+    @Test
+    public void Test_12() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(buildFromString("20121101"));
+        setBuySignalsForSecondPeriod(buildFromString("20030913"));
+        setBuySignalsForThirdPeriod(buildFromString("20111227"));
+
+        List<DateTime> buySignals = Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory), new DateTimeFromSignal());
+        Assert.assertTrue(buySignals.isEmpty());
+        assertEquals(0, buySignals.size());
+    }
+
+    //TODO enable and check does it works
+    @Test
+    @Ignore("Marked as ignore because it was not annotated as test, turn on later")
+    public void Test_13() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(buildFromString("20121101"));
+        setBuySignalsForSecondPeriod(buildFromString("20030913"), buildFromString("20140103"), buildFromString("20111019"),
+            buildFromString("20121101"));
+        setBuySignalsForThirdPeriod(buildFromString("20111227"), buildFromString("20121101"), buildFromString("20140103"));
+
+        List<DateTime> buySignals = Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory), new DateTimeFromSignal());
+
+        assertFalse(buySignals.isEmpty());
+        Assert.assertTrue(buySignals.contains(buildFromString("20121101")));
+        assertEquals(1, buySignals.size());
+    }
+
+    @Test
+    public void Test_14() throws IOException, ParseException {
+
+        setBuySignalsForFirstPeriod(buildFromString("20121101"), buildFromString("20140103"), buildFromString("19991221"));
+        setBuySignalsForSecondPeriod(buildFromString("20030913"), buildFromString("20140103"), buildFromString("20111019"),
+            buildFromString("20121101"));
+        setBuySignalsForThirdPeriod(buildFromString("20111227"), buildFromString("20121101"), buildFromString("20140103"));
+
+        List<DateTime> buySignals = Lists.transform(complexMovingAverageSignalsGenerator.buySignals(mockStockTickerHistory), new DateTimeFromSignal());
+        assertFalse(buySignals.isEmpty());
+        Assert.assertTrue(buySignals.contains(buildFromString("20121101")));
+        Assert.assertTrue(buySignals.contains(buildFromString("20140103")));
+        assertEquals(2, buySignals.size());
+    }
+
+    private void setBuySignalsForFirstPeriod(final DateTime... dateTimes) {
+        firstPeriodSignals.clear();
+        firstPeriodSignals.addAll(Lists.transform(Lists.newArrayList(dateTimes), new DataTimeWrapperFunction()));
+    }
+
+    private void setBuySignalsForSecondPeriod(final DateTime... dateTimes) {
+        secondPeriodSignals.clear();
+        secondPeriodSignals.addAll(Lists.transform(Lists.newArrayList(dateTimes), new DataTimeWrapperFunction()));
+    }
+
+    private void setBuySignalsForThirdPeriod(final DateTime... dateTimes) {
+        thirdPeriodSignals.clear();
+        thirdPeriodSignals.addAll(Lists.transform(Lists.newArrayList(dateTimes), new DataTimeWrapperFunction()));
+    }
+
+    DateTime buildFromString(final String strinDate) {
+        return Share.COMMON_FORMATTER.parseDateTime(strinDate);
+    }
+
 }
