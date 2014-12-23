@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.h2.command.dml.Select;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import utils.MockForCommonsTest;
@@ -35,6 +36,7 @@ public class MetastockDBUpdaterTest {
 	MockForCommonsTest mock = new MockForCommonsTest();
 	
 	@Test
+    @Ignore("This is integration test")
 	public void refresh() throws ClassNotFoundException, SQLException, ParseException{
 		
 		utilsForTest utils = new utilsForTest();

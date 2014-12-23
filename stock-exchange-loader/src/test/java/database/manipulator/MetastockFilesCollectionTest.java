@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import utils.utilsForTest;
@@ -18,6 +19,7 @@ import configuration.StockExchangeProperties;
 public class MetastockFilesCollectionTest {
 
 	@Test
+    @Ignore("This is integration test")
 	public void getListOfFilesMSTOnly(){
 		
 		utilsForTest utils = new utilsForTest();
