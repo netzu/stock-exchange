@@ -22,7 +22,11 @@ public class StockTickerHistory {
 	}
 	
 	public List <EODTick> subListOfCollection(int from, int to){
-		
+
+        if (from > to) {
+            throw new StockExchangeIllegalStateException("Cannot create sublist when FROM is greather or equal TO");
+        }
+
 		return this.EODTickDataList.subList(from, to);
 	}
 	
