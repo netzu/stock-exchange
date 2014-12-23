@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import configuration.ApplicationContext;
@@ -25,6 +26,7 @@ public class SimpleMovingAverageMain {
 	private static final int PERIOD_FOR_MOVING_AVERAGE = 13;
 
 	@Test
+    @Ignore("This is not unit test more integration test")
 	public void test() throws ClassNotFoundException, SQLException, ParseException {
 
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();

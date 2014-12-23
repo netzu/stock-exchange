@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import configuration.ApplicationContext;
@@ -24,6 +25,7 @@ public class ComplexMovingAverageMain {
 	private static final int PERIOD_FOR_FIRST_AVERAGE = 15;
 
 	@Test
+    @Ignore("This is not unit test more integration test")
 	public void test() throws ClassNotFoundException, SQLException, ParseException {
 		
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
