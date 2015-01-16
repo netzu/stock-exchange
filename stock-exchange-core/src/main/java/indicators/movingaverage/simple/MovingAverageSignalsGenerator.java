@@ -27,11 +27,11 @@ import data.collector.StockTickerHistory;
  * 
  */
 
-public class SimpleMovingAverageSignalsGenerator implements SignalsGenerator {
+public class MovingAverageSignalsGenerator implements SignalsGenerator {
 
     private final int period;
 
-    public SimpleMovingAverageSignalsGenerator(final int period) {
+    public MovingAverageSignalsGenerator(final int period) {
         this.period = period;
     }
 
@@ -39,17 +39,16 @@ public class SimpleMovingAverageSignalsGenerator implements SignalsGenerator {
     @Override
     public List<Signal> buySignals(final StockTickerHistory stockTickerHistory) {
         List<SimpleMovingAverageData> simpleMovingAverageDatas = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(this.period, stockTickerHistory);
-        SimpleAverageBuySignalGenerator buySignals = new SimpleAverageBuySignalGenerator();
-        return buySignals.generate(simpleMovingAverageDatas,stockTickerHistory);
+        AverageDataSignalsAnalyzer analyzer = new AverageDataSignalsAnalyzer(new BuyDecisionChainFactory());
+        return analyzer.generate(simpleMovingAverageDatas,stockTickerHistory);
     }
 
     @Override
     public List<Signal> sellSignals(StockTickerHistory stockTickerHistory) {
 
         List<SimpleMovingAverageData> simpleMovingAverageDatas = SimpleMovingAverageIndicator.calculateSimpleMovingAverage(this.period, stockTickerHistory);
-        SimpleAverageSellSignalGenerator sellSignals = new SimpleAverageSellSignalGenerator();
-
-        return sellSignals.generate(simpleMovingAverageDatas, stockTickerHistory);
+        AverageDataSignalsAnalyzer analyzer = new AverageDataSignalsAnalyzer(new SellDecisionChainFactory());
+        return analyzer.generate(simpleMovingAverageDatas, stockTickerHistory);
     }
 
 

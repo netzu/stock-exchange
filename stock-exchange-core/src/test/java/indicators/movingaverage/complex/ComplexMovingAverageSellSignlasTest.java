@@ -9,18 +9,13 @@ import com.google.common.collect.Lists;
 import configuration.Share;
 import indicators.DateTimeFromSignal;
 import indicators.Signal;
-import indicators.movingaverage.simple.SimpleMovingAverageData;
-import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
+import indicators.movingaverage.simple.MovingAverageSignalsGenerator;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,22 +34,22 @@ public class ComplexMovingAverageSellSignlasTest {
     private List<Signal> secondPeriodSignals = Lists.newArrayList();
     private List<Signal> thirdPeriodSignals = Lists.newArrayList();
 
-    private SimpleMovingAverageSignalsGenerator mockSimpleMovingAverageSignalsGenerator;
+    private MovingAverageSignalsGenerator mockMovingAverageSignalsGenerator;
     private ComplexMovingAverageSignalsGenerator complexMovingAverageSignalsGenerator;
     private ComplexMovingAverageSettings settings;
 	
 	@Before
 	public void setup() {
         settings = new ComplexMovingAverageSettings(FIRST_PERIOD, SECOND_PERIOD, THIRD_PERIOD);
-        mockSimpleMovingAverageSignalsGenerator = Mockito.mock(SimpleMovingAverageSignalsGenerator.class);
+        mockMovingAverageSignalsGenerator = Mockito.mock(MovingAverageSignalsGenerator.class);
         mockStockTickerHistory = Mockito.mock(StockTickerHistory.class);
-        when(mockSimpleMovingAverageSignalsGenerator.sellSignals(mockStockTickerHistory)).thenReturn(firstPeriodSignals, secondPeriodSignals, thirdPeriodSignals);
+        when(mockMovingAverageSignalsGenerator.sellSignals(mockStockTickerHistory)).thenReturn(firstPeriodSignals, secondPeriodSignals, thirdPeriodSignals);
 
         complexMovingAverageSignalsGenerator = new ComplexMovingAverageSignalsGenerator(settings) {
 
-            protected SimpleMovingAverageSignalsGenerator getSimpleAverageGenerator(final int period) {
+            protected MovingAverageSignalsGenerator getSimpleAverageGenerator(final int period) {
 
-                return mockSimpleMovingAverageSignalsGenerator;
+                return mockMovingAverageSignalsGenerator;
 
             }
 

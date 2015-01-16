@@ -5,7 +5,7 @@ import data.collector.StockTickerHistory;
 import indicators.DateTimeFromSignal;
 import indicators.Signal;
 import indicators.SignalsGenerator;
-import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
+import indicators.movingaverage.simple.MovingAverageSignalsGenerator;
 import org.joda.time.DateTime;
 
 import java.util.List;
@@ -59,7 +59,7 @@ public class ComplexMovingAverageSignalsGenerator implements SignalsGenerator {
 
     private List<DateTime> getRawSellDateTimeFromSimpleAverage(final int period, final StockTickerHistory stockTickerHistory) {
 
-        SimpleMovingAverageSignalsGenerator generator = getSimpleAverageGenerator(period);
+        MovingAverageSignalsGenerator generator = getSimpleAverageGenerator(period);
 
         return Lists.transform(generator.sellSignals(stockTickerHistory), new DateTimeFromSignal());
 
@@ -67,16 +67,16 @@ public class ComplexMovingAverageSignalsGenerator implements SignalsGenerator {
 
     private List<DateTime> getRawBuyDateTimeFromSimpleAverage(final int period, final StockTickerHistory stockTickerHistory) {
 
-        SimpleMovingAverageSignalsGenerator generator = getSimpleAverageGenerator(period);
+        MovingAverageSignalsGenerator generator = getSimpleAverageGenerator(period);
 
         return Lists.transform(generator.buySignals(stockTickerHistory), new DateTimeFromSignal());
 
     }
 
 
-    protected SimpleMovingAverageSignalsGenerator getSimpleAverageGenerator(final int period) {
+    protected MovingAverageSignalsGenerator getSimpleAverageGenerator(final int period) {
 
-        return new SimpleMovingAverageSignalsGenerator(period);
+        return new MovingAverageSignalsGenerator(period);
 
     }
 

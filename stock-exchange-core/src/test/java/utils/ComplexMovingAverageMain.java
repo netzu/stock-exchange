@@ -2,12 +2,10 @@ package utils;
 
 import indicators.movingaverage.complex.ComplexMovingAverageSettings;
 import indicators.movingaverage.complex.ComplexMovingAverageSignalsGenerator;
-import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;

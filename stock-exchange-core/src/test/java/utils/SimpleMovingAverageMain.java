@@ -2,9 +2,7 @@ package utils;
 
 import com.google.common.collect.Lists;
 import indicators.DateTimeFromSignal;
-import indicators.movingaverage.simple.SimpleMovingAverageData;
-import indicators.movingaverage.simple.SimpleMovingAverageIndicator;
-import indicators.movingaverage.simple.SimpleMovingAverageSignalsGenerator;
+import indicators.movingaverage.simple.MovingAverageSignalsGenerator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -36,7 +34,7 @@ public class SimpleMovingAverageMain {
 		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker("LENA");
 
 
-		SimpleMovingAverageSignalsGenerator signals = new SimpleMovingAverageSignalsGenerator(PERIOD_FOR_MOVING_AVERAGE);
+		MovingAverageSignalsGenerator signals = new MovingAverageSignalsGenerator(PERIOD_FOR_MOVING_AVERAGE);
 
         List<DateTime> sellSignal = Lists.transform(signals.sellSignals(stockCollectionForTicker), new DateTimeFromSignal());
         List<DateTime> buySignal = Lists.transform(signals.buySignals(stockCollectionForTicker), new DateTimeFromSignal());

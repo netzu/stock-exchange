@@ -9,7 +9,13 @@ import java.util.List;
 /**
  * Created by mht on 20/11/14.
  */
-public abstract class AbstractSimpleAverageSignalGenerator {
+public class AverageDataSignalsAnalyzer {
+
+    private final DecisionChainFactory decisionChainFactory;
+
+    public AverageDataSignalsAnalyzer(final DecisionChainFactory decisionChainFactory) {
+        this.decisionChainFactory = decisionChainFactory;
+    }
 
 
     public List<Signal> generate(List<SimpleMovingAverageData> averageCollection, StockTickerHistory stockCollection){
@@ -29,7 +35,7 @@ public abstract class AbstractSimpleAverageSignalGenerator {
             previousAverage = averageCollection.get(i-1).getAverage();
             currentAverage = averageCollection.get(i).getAverage();
 
-            DecisionChain decisionChain = getDecisionChainFactory().createChain(currentClose, previousAverage, currentAverage, previousClose);
+            DecisionChain decisionChain = decisionChainFactory.createChain(currentClose, previousAverage, currentAverage, previousClose);
 
             if(decisionChain.evaluate()) {
                 sellSignal.add(new Signal(averageCollection.get(i).getDate()));
@@ -38,5 +44,4 @@ public abstract class AbstractSimpleAverageSignalGenerator {
         return sellSignal;
     }
 
-    public abstract DecisionChainFactory getDecisionChainFactory();
 }
