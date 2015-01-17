@@ -6,6 +6,7 @@ import indicators.DateTimeFromSignal;
 import indicators.Signal;
 import indicators.SignalsGenerator;
 import indicators.movingaverage.simple.MovingAverageSignalsGenerator;
+import indicators.movingaverage.simple.SimpleMovingAverageIndicator;
 import org.joda.time.DateTime;
 
 import java.util.List;
@@ -76,7 +77,7 @@ public class ComplexMovingAverageSignalsGenerator implements SignalsGenerator {
 
     protected MovingAverageSignalsGenerator getSimpleAverageGenerator(final int period) {
 
-        return new MovingAverageSignalsGenerator(period);
+        return new MovingAverageSignalsGenerator(period, new SimpleMovingAverageIndicator());
 
     }
 

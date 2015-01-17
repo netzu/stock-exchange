@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
+import indicators.movingaverage.simple.SimpleMovingAverageIndicator;
 import org.joda.time.DateTime;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class SimpleMovingAverageMain {
 		StockTickerHistory stockCollectionForTicker = ticker.getAllDataForStockTicker("LENA");
 
 
-		MovingAverageSignalsGenerator signals = new MovingAverageSignalsGenerator(PERIOD_FOR_MOVING_AVERAGE);
+		MovingAverageSignalsGenerator signals = new MovingAverageSignalsGenerator(PERIOD_FOR_MOVING_AVERAGE, new SimpleMovingAverageIndicator());
 
         List<DateTime> sellSignal = Lists.transform(signals.sellSignals(stockCollectionForTicker), new DateTimeFromSignal());
         List<DateTime> buySignal = Lists.transform(signals.buySignals(stockCollectionForTicker), new DateTimeFromSignal());

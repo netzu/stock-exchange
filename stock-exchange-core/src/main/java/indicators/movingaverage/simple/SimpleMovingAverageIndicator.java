@@ -18,9 +18,9 @@ import java.util.List;
 import data.collector.EODTick;
 import data.collector.StockTickerHistory;
 
-public final class SimpleMovingAverageIndicator {
+public class SimpleMovingAverageIndicator {
 
-    private SimpleMovingAverageIndicator() {
+    public SimpleMovingAverageIndicator() {
 
     }
 
@@ -32,7 +32,7 @@ public final class SimpleMovingAverageIndicator {
 	 * @return
 	 * 
 	 */
-	public static List<SimpleMovingAverageData> calculateSimpleMovingAverage(int period, StockTickerHistory tickerCollection){
+	public List<SimpleMovingAverageData> calculateSimpleMovingAverage(int period, StockTickerHistory tickerCollection){
 		
 		if(period < 2){
 			throw new SimpleMovingAverageCalculationException("Simple moving avarage cannot be calculated if period is zero");
