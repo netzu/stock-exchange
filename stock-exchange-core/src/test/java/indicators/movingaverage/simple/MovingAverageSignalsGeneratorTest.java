@@ -227,7 +227,7 @@ public class MovingAverageSignalsGeneratorTest {
        assertTrue(buySignal.isEmpty());
        //DateTime dt = dateFormater.parseDateTime("20100419");
        
-       //assertFalse(buySignal.isEmpty());       
+       //assertFalse(buySignal.isEmpty());
        //assertEquals(1, buySignal.size());
        //assertTrue(buySignal.contains(dt));
        

@@ -24,5 +24,6 @@ class SellDecisionChainFactory implements DecisionChainFactory {
         dc.add(currentAverageSmallerPreviousClose);
 
         return dc;
+
     }
 }
