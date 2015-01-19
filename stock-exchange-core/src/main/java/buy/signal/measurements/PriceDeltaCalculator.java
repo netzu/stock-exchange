@@ -6,9 +6,9 @@ import org.joda.time.DateTime;
 
 import data.collector.StockTickerHistory;
 
-public class PriceDelta {
+public class PriceDeltaCalculator {
 	
-	public static List<Double> calculateInValue(DateTime signal, StockTickerHistory stockCollection, int testRange){
+	public static List<Double> getDelta(DateTime signal, StockTickerHistory stockCollection, int testRange){
 		
 		ArrayList<Double> results = new ArrayList<Double>();
 

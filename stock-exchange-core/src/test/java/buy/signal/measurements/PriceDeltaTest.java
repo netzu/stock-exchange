@@ -31,10 +31,10 @@ public class PriceDeltaTest {
 		
 		String expectedErrorMessage = "Could not find it";
 		
-		PriceDelta priceDelta = new PriceDelta();
+		PriceDeltaCalculator priceDelta = new PriceDeltaCalculator();
 		
 		try{
-			List<Double> currentResults = priceDelta.calculateInValue(buySignal, stockCollection, 3);
+			List<Double> currentResults = priceDelta.getDelta(buySignal, stockCollection, 3);
 			fail("No exception has been found, expected" + expectedErrorMessage);
 		}catch(Exception ex){
 			assertTrue("Exception message is diffrent that expected. Expected: " + expectedErrorMessage + ". Got: " + ex.getMessage(), ex.getMessage().equals(expectedErrorMessage));
@@ -47,8 +47,8 @@ public class PriceDeltaTest {
 		StockTickerHistory stockCollection = mock.readTickerData(PATH + "signalOnTheLastDay");
 		DateTime buySignal = dateFormater.parseDateTime("20120314");
 		
-		PriceDelta priceDelta = new PriceDelta();
-		List<Double> currentResults = priceDelta.calculateInValue(buySignal, stockCollection, 3);
+		PriceDeltaCalculator priceDelta = new PriceDeltaCalculator();
+		List<Double> currentResults = priceDelta.getDelta(buySignal, stockCollection, 3);
 		
 		assertTrue(currentResults.isEmpty());
 	}
@@ -58,8 +58,8 @@ public class PriceDeltaTest {
 		StockTickerHistory stockCollection = mock.readTickerData(PATH + "signalOnTheLastDay");
 		DateTime buySignal = dateFormater.parseDateTime("20120304");
 		
-		PriceDelta priceDelta = new PriceDelta();
-		List<Double> currentResults = priceDelta.calculateInValue(buySignal, stockCollection, 0);
+		PriceDeltaCalculator priceDelta = new PriceDeltaCalculator();
+		List<Double> currentResults = priceDelta.getDelta(buySignal, stockCollection, 0);
 		
 		assertTrue(currentResults.isEmpty());
 	}
@@ -69,8 +69,8 @@ public class PriceDeltaTest {
 		StockTickerHistory stockCollection = mock.readTickerData(PATH + "rangeBiggerThanAvailableHistory");
 		DateTime buySignal = dateFormater.parseDateTime("20120312");
 		
-		PriceDelta priceDelta = new PriceDelta();
-		List<Double> currentResults = priceDelta.calculateInValue(buySignal, stockCollection, 20);
+		PriceDeltaCalculator priceDelta = new PriceDeltaCalculator();
+		List<Double> currentResults = priceDelta.getDelta(buySignal, stockCollection, 20);
 		
 		assertTrue("Current size: " + currentResults.size() + ", should be 2", currentResults.size() == 2);
 	}
@@ -83,8 +83,8 @@ public class PriceDeltaTest {
 		List<Double> expectedResults = new ArrayList<Double>();
 		expectedResults = mock.getListOfDoubles(PATH + "checkCorrectnessOfDeltaExpectedResults");
 		
-		PriceDelta priceDelta = new PriceDelta();
-		List<Double> currentResults = priceDelta.calculateInValue(buySignal, stockCollection, 6);
+		PriceDeltaCalculator priceDelta = new PriceDeltaCalculator();
+		List<Double> currentResults = priceDelta.getDelta(buySignal, stockCollection, 6);
 		
 		
 //		assertTrue(errorMessage, currentResults.size() == expectedResults.size());

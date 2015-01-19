@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 import indicators.Signal;
+import indicators.williamsr.WilliamsRCalculationException;
 import indicators.williamsr.WilliamsRSignalsGenerator;
 import org.joda.time.DateTime;
 
@@ -33,55 +34,48 @@ public class PrototypeOfTestAnalyser {
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, ParseException {
 		
+		//preparation
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
 		final Connection connection = new DBConnection().getConnection(propertiesInstance);
 		
 		StockDataSelect metastockDB = new StockDataSelect(connection);
 		
-		List<String> listOfTcikerNames = new ArrayList<String>();
-		listOfTcikerNames = metastockDB.getAllStockTickerNames();
+		//get list of all companies from stock exchange
+		List<String> listOfCompaniesNames = new ArrayList<String>();
+		listOfCompaniesNames = metastockDB.getAllStockTickerNames();
 		
-		ArrayList<Integer> listOfDays = new ArrayList<Integer>();
-		
-		int buySignalsCounter = 0;
-		
+		ArrayList<Integer> collectionOfPricesDifrences = new ArrayList<Integer>();
+		int buySignalsCounter = 0;		
 		
 		//for each ticker
-		for(int nameIndex = 0; nameIndex < listOfTcikerNames.size(); nameIndex++){
-			StockTickerHistory stockCollectionForTicker = metastockDB.getAllDataForStockTicker(listOfTcikerNames.get(nameIndex));
+		for(int nameIndex = 0; nameIndex < listOfCompaniesNames.size(); nameIndex++){
+			StockTickerHistory stockCollectionForTicker = metastockDB.getAllDataForStockTicker(listOfCompaniesNames.get(nameIndex));
 			
 			if(stockCollectionForTicker.getEODTickDataList().size() < WILLIAMS_PERIOD){
 				continue;
 			}
-
-            final WilliamsRSignalsGenerator signalGenerator = new WilliamsRSignalsGenerator(WILLIAMS_PERIOD);
-            List<Signal> signals = signalGenerator.buySignals(stockCollectionForTicker);
-            buySignalsCounter = buySignalsCounter + signals.size();
 			
-			ProfitsAnalyser analyser = new ProfitsAnalyser();
-			
-			//for each signal
-			for(int buySignalsIterator = 0; buySignalsIterator < signals.size(); buySignalsIterator++){
+			try{
+				final WilliamsRSignalsGenerator signalGenerator = new WilliamsRSignalsGenerator(WILLIAMS_PERIOD);
+	            List<Signal> buySignalsForTicker = signalGenerator.buySignals(stockCollectionForTicker);
+	            buySignalsCounter = buySignalsCounter + buySignalsForTicker.size();
 				
-				//calculate delta
-				PriceDelta delta = new PriceDelta();
-				DateTime signal = signals.get(buySignalsIterator).getDate();
+				//ProfitsAnalyser profitsAnalyser = new ProfitsAnalyser();
+	            PriceDeltaAnalyzer priceDeltaAnalyzer = new PriceDeltaAnalyzer();
+				collectionOfPricesDifrences.addAll(priceDeltaAnalyzer.analyze(stockCollectionForTicker, buySignalsForTicker, TEST_RANGE));
 				
-				List<Double> deltaForWillimas  = delta.calculateInValue(signal, stockCollectionForTicker, TEST_RANGE);
+			}catch(WilliamsRCalculationException error){
 				
-				//and if there was profit add number of a day with first profit to the list
-				if(deltaForWillimas.size() > 0){
-					if(analyser.getDayNumberWithFirstProfit(deltaForWillimas).isPresent()){		
-						listOfDays.add(analyser.getDayNumberWithFirstProfit(deltaForWillimas).get());
-					}
+				String expectedErrorMessage = "Cannot generate buy signal for williams R collection which has less than 2 elements";				
+				if(!error.getMessage().equals(expectedErrorMessage)){
+					throw error;
 				}
-				
-			}
+			}        		
 		}
 		
 		//create histogram
 		FirstDayWithProfitsHistogram histogram = FirstDayWithProfitsHistogram.createBuckets(TEST_RANGE);
-		Collection<HistogramItem<Integer>> histogramResults = histogram.calculateHistogram(listOfDays);
+		Collection<HistogramItem<Integer>> histogramResults = histogram.calculateHistogram(collectionOfPricesDifrences);
 		
 		int counter = 0;
 		
@@ -97,5 +91,4 @@ public class PrototypeOfTestAnalyser {
 		System.out.println("Sum: " + counter);
 		System.out.println("Total number of signals: " + buySignalsCounter);
 	}
-
 }
