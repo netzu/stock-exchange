@@ -46,7 +46,7 @@ public class PriceDeltaData {
 			
 			correctness = correctness + percentage;
 		}
-		
+		 
 		System.out.println("Correctness: " + correctness);
 	}
 	
