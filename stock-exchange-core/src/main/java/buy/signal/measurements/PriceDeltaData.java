@@ -33,21 +33,21 @@ public class PriceDeltaData {
 			counter = counter + item.getItems().size();
 		}
 		
-		System.out.println("histogramResults.size(): " + histogramResults.size());
+		//System.out.println("histogramResults.size(): " + histogramResults.size());
 		
-		System.out.println("Counter: "  + counter );
+		//System.out.println("Counter: "  + counter );
 		double correctness = 0;
 		 
 		for(HistogramItem<Integer> item : histogramResults){
 			double percentage = (double)item.getItems().size() / (double)totalNumerOfSignals;
 			double percentageOfProfits = (double)item.getItems().size() / (double)counter;
 			
-			System.out.println(item.getPredicate() + " , " + item.getItems().size() + ", " + percentage + ", " + percentageOfProfits);
+			//System.out.println(item.getPredicate() + " , " + item.getItems().size() + ", " + percentage + ", " + percentageOfProfits);
 			
 			correctness = correctness + percentage;
 		}
 		 
-		System.out.println("Correctness: " + correctness);
+		System.out.println(/*"Correctness: " + */correctness);
 	}
 	
 	public void printToExcel(ArrayList<Integer> collectionOfPricesDifrences, String PATH, String file){
