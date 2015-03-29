@@ -1,6 +1,7 @@
 package utils;
 
 import com.google.common.collect.Lists;
+
 import indicators.DateTimeFromSignal;
 import indicators.movingaverage.simple.MovingAverageSignalsGenerator;
 
@@ -10,14 +11,15 @@ import java.text.ParseException;
 import java.util.List;
 
 import indicators.movingaverage.simple.SimpleMovingAverageIndicator;
+import metastockDB.StockDataSelect;
+
 import org.joda.time.DateTime;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import dao.DBConnection;
-import dao.StockDataSelect;
+import creator.DBConnection;
 import data.collector.StockTickerHistory;
 
 public class SimpleMovingAverageMain {

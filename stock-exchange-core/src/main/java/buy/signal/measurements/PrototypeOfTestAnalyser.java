@@ -13,6 +13,7 @@ import indicators.movingaverage.simple.MovingAverageSignalsGenerator;
 import indicators.movingaverage.simple.SimpleMovingAverageIndicator;
 import indicators.williamsr.WilliamsRCalculationException;
 import indicators.williamsr.WilliamsRSignalsGenerator;
+import metastockDB.StockDataSelect;
 
 import org.joda.time.DateTime;
 
@@ -20,8 +21,7 @@ import utils.histogram.FirstDayWithProfitsHistogram;
 import utils.histogram.HistogramItem;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import dao.DBConnection;
-import dao.StockDataSelect;
+import creator.DBConnection;
 import data.collector.StockTickerHistory;
 
 public class PrototypeOfTestAnalyser {
@@ -55,8 +55,8 @@ public class PrototypeOfTestAnalyser {
 	}
 	
 private static void SimpleMovingAverageBuySignalAnalazer(StockDataSelect metastockDB, List<String> listOfCompaniesNames) throws SQLException, ParseException {
-		;
-		for(int i = 0; i<100; i++ ){
+		
+		for(int i = 0; i<50; i++ ){
 			
 			ArrayList<Integer> collectionOfPricesDifrences = new ArrayList<Integer>();
 			int buySignalsCounter = 0;
@@ -94,6 +94,8 @@ private static void SimpleMovingAverageBuySignalAnalazer(StockDataSelect metasto
 			
 		PriceDeltaData priceDeltaData = new PriceDeltaData("WiliamsR", Integer.toString(WILLIAMS_PERIOD+i), TEST_RANGE, buySignalsCounter, collectionOfPricesDifrences);
 		priceDeltaData.displayData(collectionOfPricesDifrences/*, "D:\\Workspace\\BuySignalAnalyzes\\", "BuySignlaAnalyzer.txt"*/);
+		
+		priceDeltaData.printToExcel(collectionOfPricesDifrences, "D:\\", "Wyniki.xls");
 		}
 	}
 

@@ -1,7 +1,8 @@
-package dao;
+package metastockDB;
 
 import data.collector.EODTick;
 import data.collector.StockTickerHistory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

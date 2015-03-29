@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import indicators.williamsr.WilliamsRSignalsGenerator;
+import metastockDB.StockDataSelect;
+
 import org.joda.time.DateTime;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import dao.DBConnection;
-import dao.StockDataSelect;
+import creator.DBConnection;
 import data.collector.StockTickerHistory;
 
 public class BuySignalaAnalyserForWilliamsR {

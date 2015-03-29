@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
+import metastockDB.CreateMetastockDBSchema;
+import metastockDB.StockDataSelect;
+
 import org.apache.log4j.Logger;
 import org.h2.command.dml.Select;
 import org.junit.Ignore;
@@ -22,13 +25,10 @@ import org.junit.Test;
 
 import utils.MockForCommonsTest;
 import utils.utilsForTest;
-
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import dao.StockDataSelect;
 import data.DataFileReader;
 import data.collector.StockTickerHistory;
-import database.creator.CreateMetastockDBSchema;
 
 public class MetastockDBUpdaterTest {
 	

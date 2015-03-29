@@ -1,7 +1,6 @@
 package database.creator;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -13,9 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import metastockDB.CreateMetastockDBSchema;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
+import creator.CreateTableException;
 import utils.utilsForTest;
 
 @Ignore("non unit test")
@@ -71,7 +73,7 @@ public class CreateMetastockDBSchemaTest {
 			CreateMetastockDBSchema metastockDBSchema = new CreateMetastockDBSchema(connection);
 			metastockDBSchema.createMetastockDBIfNotExist();
 			fail("No excetion when expected");
-		} catch (createMetastockDBException e) {
+		} catch (CreateTableException e) {
 			assertEquals(expectedError, e.getMessage());
 		}finally{
 			utilsForTest utils = new utilsForTest();

@@ -1,11 +1,13 @@
 package database.manipulator;
 
 import configuration.StockExchangeProperties;
-import dao.DBConnection;
-import dao.StockDataInsert;
 import data.DataFileReader;
 import data.collector.StockTickerHistory;
+import metastockDB.StockDataInsert;
+
 import org.apache.log4j.Logger;
+
+import creator.DBConnection;
 
 import java.io.File;
 import java.sql.Connection;

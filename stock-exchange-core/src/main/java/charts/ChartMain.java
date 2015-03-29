@@ -2,9 +2,9 @@ package charts;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import dao.DBConnection;
-import dao.StockDataSelect;
 import data.collector.StockTickerHistory;
+import metastockDB.StockDataSelect;
+
 import org.apache.log4j.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -17,6 +17,8 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.RefineryUtilities;
+
+import creator.DBConnection;
 
 import java.awt.*;
 import java.sql.Connection;
