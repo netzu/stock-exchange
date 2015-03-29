@@ -34,7 +34,7 @@ public class MetastockRunOnce {
 			metastockDBCreator.createMetastockDBIfNotExist();
 			downloader.downloadData();
 			decompresser.unZipMetastockData();
-			recentdata.refresh();
+			recentdata.refresh(connection);
 			
 		} catch (Exception e) {
 			LOGGER.error("Error occured when refreshing data",e);
