@@ -28,15 +28,14 @@ public class MetastockDBUpdaterTest {
 	public void refresh() throws ClassNotFoundException, SQLException, ParseException{
 		
 		utilsForTest utils = new utilsForTest();
-		
 		StockTickerHistory expectedTickerCollection = mock.readStockTickerHistory("MetastockDBUpdaterTest/MetastockDBUpdaterTest/LENA.mst");
 		
 		final String propertiesPath = utils.getResourcePath("MetastockDBUpdaterTest/MetastockDBUpdaterTest/StockExchange.properties");
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance(propertiesPath);
 		MetastockDBUpdater updater = new MetastockDBUpdater(propertiesInstance);
-		
+		String dbRootPath = utils.getResourcePath("MetastockDBUpdaterTest/MetastockDBUpdaterTest");
 		Class.forName("org.h2.Driver");  
-		Connection connection = DriverManager.getConnection("jdbc:h2:" + PATH + "MetastockDBUpdaterTest_refresh", "sa", "");
+		Connection connection = DriverManager.getConnection("jdbc:h2:" + dbRootPath + "MetastockDBUpdaterTest_refresh", "sa", "");
 		
 		CreateMetastockDBSchema creatSchema = new CreateMetastockDBSchema(connection);
 		creatSchema.createMetastockDBIfNotExist();
