@@ -17,7 +17,7 @@ import creator.CreateTableException;
 
 public class CreateMetastockDBSchemaTest {
 	
-	private static final String PATH = "D:\\Workspace\\stock-exchange\\stock-exchange-dao\\src\\test\\resources\\";
+	private static final String PATH = "D:\\Workspace\\stock-exchange\\stock-exchange-dao\\src\\test\\resources\\metastockDB\\";
 	private static final String LIST_OF_TABLES = "show tables;";
 
 	@Test
@@ -48,8 +48,11 @@ public class CreateMetastockDBSchemaTest {
 		currentResults.close();
 		connection.close();
 		
+		//File file =new File(PATH + "CreateMetastockDBSchemaTest\\);
+		
 		utilsForTest utils = new utilsForTest();
 		utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.h2.db");
+		//if((PATH + "CreateMetastockDBSchemaTest\\").)
 		utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.trace.db");
 	}
 	
