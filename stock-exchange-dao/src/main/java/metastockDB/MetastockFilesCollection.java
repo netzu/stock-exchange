@@ -22,6 +22,14 @@ public class MetastockFilesCollection {
 			}
 		};
 		
+		if (!storageFolder.exists()) {
+			throw new IllegalStateException(String.format("Storage path : %s doesn't exists", storageFolder.getAbsolutePath()));
+		}
+		
+		if (!storageFolder.isDirectory()) {
+			throw new IllegalStateException(String.format("Storage path : %s is not a folder", storageFolder.getAbsolutePath()));
+		}
+		
 		fileList = storageFolder.listFiles(ff);
 		
 		return fileList;
