@@ -17,7 +17,7 @@ import creator.CreateTableException;
 
 public class CreateMetastockDBSchemaTest {
 	
-	private static final String PATH = "D:\\Workspace\\stock-exchange\\stock-exchange-loader\\src\\test\\resources\\";
+	private static final String PATH = "D:\\Workspace\\stock-exchange\\stock-exchange-dao\\src\\test\\resources\\";
 	private static final String LIST_OF_TABLES = "show tables;";
 
 	@Test
