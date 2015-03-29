@@ -1,4 +1,4 @@
-package database.manipulator;
+package metastockDB;
 
 import java.io.File;
 import java.io.FileFilter;

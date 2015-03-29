@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import metastockDB.CreateMetastockDBSchema;
+import metastockDB.MetastockDBUpdater;
 
 import org.apache.log4j.Logger;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
 import creator.DBConnection;
-import database.manipulator.MetastockDBUpdater;
 import download.MetastockDataUnziper;
 import download.MetastockDataDownloader;
 

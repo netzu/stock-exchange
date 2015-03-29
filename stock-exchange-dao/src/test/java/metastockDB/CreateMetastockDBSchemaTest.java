@@ -1,26 +1,20 @@
-package database.creator;
+package metastockDB;
 
-import static org.junit.Assert.*;
 
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import metastockDB.CreateMetastockDBSchema;
-
-import org.junit.Ignore;
 import org.junit.Test;
 
-import creator.CreateTableException;
 import utils.utilsForTest;
+import creator.CreateTableException;
 
-@Ignore("non unit test")
 public class CreateMetastockDBSchemaTest {
 	
 	private static final String PATH = "D:\\Workspace\\stock-exchange\\stock-exchange-loader\\src\\test\\resources\\";

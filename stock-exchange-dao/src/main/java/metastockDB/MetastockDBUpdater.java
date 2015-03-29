@@ -1,18 +1,16 @@
-package database.manipulator;
-
-import configuration.StockExchangeProperties;
-import data.DataFileReader;
-import data.collector.StockTickerHistory;
-import metastockDB.StockDataInsert;
-
-import org.apache.log4j.Logger;
-
-import creator.DBConnection;
+package metastockDB;
 
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
+
+import org.apache.log4j.Logger;
+
+import configuration.StockExchangeProperties;
+import creator.DBConnection;
+import data.DataFileReader;
+import data.collector.StockTickerHistory;
 
 public class MetastockDBUpdater {
 
@@ -24,11 +22,11 @@ public class MetastockDBUpdater {
 
 	private static final Logger LOGGER = Logger.getLogger(MetastockDBUpdater.class);
 
-	public void refresh() throws ParseException, ClassNotFoundException, SQLException{
+	public void refresh(Connection connection) throws ParseException, ClassNotFoundException, SQLException{
 		
 		LOGGER.info("Updating DB with Metastock freshnesst info");
 		
-		final Connection connection = new DBConnection().getConnection(this.properties);
+		final Connection connection_local = connection;
 
 		try {
 			DataFileReader dataReader = new DataFileReader();
@@ -45,7 +43,7 @@ public class MetastockDBUpdater {
 			}
 			LOGGER.info("Metastock Database has been refreshed. ENJOY and WIN !");
 		} finally {
-			connection.close();	
+			//connection.close();	
 		}
 	}
 }

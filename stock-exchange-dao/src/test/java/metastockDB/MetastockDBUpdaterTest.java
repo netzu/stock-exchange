@@ -1,42 +1,30 @@
-package database.manipulator;
+package metastockDB;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
-import metastockDB.CreateMetastockDBSchema;
-import metastockDB.StockDataSelect;
-
-import org.apache.log4j.Logger;
-import org.h2.command.dml.Select;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import utils.MockForCommonsTest;
 import utils.utilsForTest;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import data.DataFileReader;
 import data.collector.StockTickerHistory;
 
 public class MetastockDBUpdaterTest {
 	
-	private static final String PATH = "D:\\Workspace\\stock-exchange\\stock-exchange-loader\\src\\test\\resources\\MetastockDBUpdaterTest\\MetastockDBUpdaterTest\\";
+	private static final String PATH = "D:\\workspace\\stock-exchange\\stock-exchange-dao\\src\\test\\resources\\metastockDB\\MetastockDBUpdaterTest\\MetastockDBUpdaterTest\\";
 	MockForCommonsTest mock = new MockForCommonsTest();
 	
 	@Test
-    @Ignore("This is integration test")
+    //@Ignore("This is integration test")
 	public void refresh() throws ClassNotFoundException, SQLException, ParseException{
 		
 		utilsForTest utils = new utilsForTest();
@@ -54,9 +42,9 @@ public class MetastockDBUpdaterTest {
 		creatSchema.createMetastockDBIfNotExist();
 		
 		try {
-			updater.refresh();
+			updater.refresh(connection);
 			
-			StockDataSelect select  =new StockDataSelect(connection);
+			StockDataSelect select = new StockDataSelect(connection);
 			List<String> tickerNameList= select.getAllStockTickerNames();
 			
 			assertEquals("Unexpected data found",1, tickerNameList.size());
@@ -69,8 +57,7 @@ public class MetastockDBUpdaterTest {
 		} catch (ParseException e) {
 			fail("Exception when not expected");
 		}finally{
-			connection.close();
-			
+			connection.close();			
 			utils.removeFiles_CleanUp(PATH, "MetastockDBUpdaterTest_refresh.h2.db");
 		}
 	}

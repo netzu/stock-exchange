@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import metastockDB.CreateMetastockDBSchema;
+import metastockDB.MetastockDBUpdater;
 
 import org.apache.log4j.Logger;
 import org.quartz.Job;
@@ -13,7 +14,6 @@ import org.quartz.JobExecutionException;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
 import creator.DBConnection;
-import database.manipulator.MetastockDBUpdater;
 
 public class QuartzJob implements Job {
 
