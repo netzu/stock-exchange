@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import creator.CreateTableException;
-import creator.TablesCreator;
+import creator.ExecuteSQLStatmentException;
+import creator.ExecuteSQLStatment;
 
 /*
  * Creates schema of DB with data from stock market
@@ -29,7 +29,7 @@ public class CreateMetastockDBSchema {
     }
     
     public void createMetastockDBIfNotExist(){
-    	TablesCreator.createTableIfNotExist(connection, CREATE_METASTOCK_TABLE, "MetastockDB");
-    	TablesCreator.createIndexIfNotExist(connection, CREATE_INDEX, "MetastockDB");
+    	ExecuteSQLStatment.execute(connection, CREATE_METASTOCK_TABLE);
+    	ExecuteSQLStatment.execute(connection, CREATE_INDEX);
     }
 }

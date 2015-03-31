@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import utils.utilsForTest;
-import creator.CreateTableException;
+import creator.ExecuteSQLStatmentException;
 
 public class CreateMetastockDBSchemaTest {
 	
@@ -59,7 +59,7 @@ public class CreateMetastockDBSchemaTest {
 	@Test 
 	public void CannotCreateTableException() throws ClassNotFoundException, SQLException{
 		
-		String expectedError = "Could not create MetastockDB";
+		String expectedError = "could not execute statment";
 
 		Class.forName("org.h2.Driver");  
 		Connection connection = DriverManager.getConnection("jdbc:h2:" + PATH + "CreateMetastockDBSchemaTest\\exceptionsTesting", "sa", "");
@@ -70,7 +70,7 @@ public class CreateMetastockDBSchemaTest {
 			CreateMetastockDBSchema metastockDBSchema = new CreateMetastockDBSchema(connection);
 			metastockDBSchema.createMetastockDBIfNotExist();
 			fail("No excetion when expected");
-		} catch (CreateTableException e) {
+		} catch (ExecuteSQLStatmentException e) {
 			assertEquals(expectedError, e.getMessage());
 		}finally{
 			utilsForTest utils = new utilsForTest();
