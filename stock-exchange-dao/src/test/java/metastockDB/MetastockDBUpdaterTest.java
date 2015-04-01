@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import utils.MockForCommonsTest;
@@ -24,7 +25,7 @@ public class MetastockDBUpdaterTest {
 	MockForCommonsTest mock = new MockForCommonsTest();
 	
 	@Test
-    //@Ignore("This is integration test")
+    @Ignore("This is integration test")
 	public void refresh() throws ClassNotFoundException, SQLException, ParseException{
 		
 		utilsForTest utils = new utilsForTest();

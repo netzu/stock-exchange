@@ -26,7 +26,4 @@ public class PriceDeltaCalculator {
 		
 		return results;		
 	}
-	
-	//public statisc List<Double> calculateInPercentage(DateTime signal, StockTickerHistory stockCollection, int testRange)
-
 }

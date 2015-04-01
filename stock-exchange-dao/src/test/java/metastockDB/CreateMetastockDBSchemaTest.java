@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import utils.utilsForTest;
@@ -21,6 +22,7 @@ public class CreateMetastockDBSchemaTest {
 	private static final String LIST_OF_TABLES = "show tables;";
 
 	@Test
+	@Ignore
 	public void createMetastockDBIfNotExist_TableNotExist() throws ClassNotFoundException, SQLException {
 		
 		String expectedTable = "DAILY_STOCK_INFO";
@@ -48,12 +50,10 @@ public class CreateMetastockDBSchemaTest {
 		currentResults.close();
 		connection.close();
 		
-		//File file =new File(PATH + "CreateMetastockDBSchemaTest\\);
-		
+	
 		utilsForTest utils = new utilsForTest();
-		utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.h2.db");
-		//if((PATH + "CreateMetastockDBSchemaTest\\").)
-		utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.trace.db");
+		//utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.h2.db");
+		//utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.trace.db");
 	}
 	
 	@Test 

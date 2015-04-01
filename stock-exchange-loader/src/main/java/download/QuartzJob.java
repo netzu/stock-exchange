@@ -13,7 +13,7 @@ import org.quartz.JobExecutionException;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import creator.DBConnection;
+import creator.MetastockDBConnection;
 
 public class QuartzJob implements Job {
 
@@ -27,7 +27,7 @@ public class QuartzJob implements Job {
 		
 		try {			
 			StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
-			connection = new DBConnection().getConnection(propertiesInstance);
+			connection = new MetastockDBConnection().getConnection(propertiesInstance);
 			
 			context.getMergedJobDataMap();
 						
@@ -40,7 +40,7 @@ public class QuartzJob implements Job {
 			metastockDBCreator.createMetastockDBIfNotExist();
 			downloader.downloadData();
 			decompresser.unZipMetastockData();
-			recentdata.refresh();
+			recentdata.refresh(connection);
 			
 		} catch (Exception e) {
 			LOGGER.error("Error occured when refreshing data",e);
@@ -54,8 +54,5 @@ public class QuartzJob implements Job {
 				throw new IllegalStateException(sqe);
 			}
 	    }
-		
-
 	}
-
 }

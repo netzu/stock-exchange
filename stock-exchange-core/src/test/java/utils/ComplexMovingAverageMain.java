@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import creator.DBConnection;
+import creator.MetastockDBConnection;
 import data.collector.StockTickerHistory;
 
 public class ComplexMovingAverageMain {
@@ -28,7 +28,7 @@ public class ComplexMovingAverageMain {
 	public void test() throws ClassNotFoundException, SQLException, ParseException {
 		
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
-		final Connection connection = new DBConnection().getConnection(propertiesInstance);
+		final Connection connection = new MetastockDBConnection().getConnection(propertiesInstance);
 
 		String tickerName = "LENA";
 		

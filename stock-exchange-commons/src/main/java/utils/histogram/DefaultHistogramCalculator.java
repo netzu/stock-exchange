@@ -31,8 +31,6 @@ public class DefaultHistogramCalculator<T> implements HistogramCalculator<T> {
                 }
             }
         }
-
-
         return result;
     }
 
@@ -42,10 +40,6 @@ public class DefaultHistogramCalculator<T> implements HistogramCalculator<T> {
         for (final Predicate<T> bucketDefinition : this.bucketPredicates) {
             result.add(new HistogramItem<T>(bucketDefinition));
         }
-
-
         return result;
-    }
-
-    
+    }    
 }

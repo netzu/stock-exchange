@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import creator.DBConnection;
+import creator.MetastockDBConnection;
 import download.MetastockDataUnziper;
 import download.MetastockDataDownloader;
 
@@ -23,7 +23,7 @@ public class MetastockRunOnce {
 		
 		try {			
 			StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
-			connection = new DBConnection().getConnection(propertiesInstance);
+			connection = new MetastockDBConnection().getConnection(propertiesInstance);
 									
 			CreateMetastockDBSchema metastockDBCreator = new CreateMetastockDBSchema(connection);
 			
@@ -34,7 +34,7 @@ public class MetastockRunOnce {
 			metastockDBCreator.createMetastockDBIfNotExist();
 			downloader.downloadData();
 			decompresser.unZipMetastockData();
-			recentdata.refresh();
+			recentdata.refresh(connection);
 			
 		} catch (Exception e) {
 			LOGGER.error("Error occured when refreshing data",e);
@@ -48,8 +48,6 @@ public class MetastockRunOnce {
 				throw new IllegalStateException(sqe);
 			}
 	    }
-		
-
 	}
 }
 

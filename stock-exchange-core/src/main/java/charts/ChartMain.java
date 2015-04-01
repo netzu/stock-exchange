@@ -18,7 +18,7 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.RefineryUtilities;
 
-import creator.DBConnection;
+import creator.MetastockDBConnection;
 
 import java.awt.*;
 import java.sql.Connection;
@@ -87,7 +87,7 @@ public class ChartMain extends ApplicationFrame {
     public static void main(String[] args) throws SQLException {
 
         StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
-        final Connection connection = new DBConnection().getConnection(propertiesInstance);
+        final Connection connection = new MetastockDBConnection().getConnection(propertiesInstance);
 
         StockTickerHistory collection = new StockTickerHistory();
 

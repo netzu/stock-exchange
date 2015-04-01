@@ -15,7 +15,7 @@ import org.joda.time.DateTime;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import creator.DBConnection;
+import creator.MetastockDBConnection;
 import data.collector.StockTickerHistory;
 
 public class BuySignalaAnalyserForWilliamsR {
@@ -23,7 +23,7 @@ public class BuySignalaAnalyserForWilliamsR {
 	public void updateHistogramForOneTicker(String ticker, DateTime signal, int WilliamsRFactor) throws ClassNotFoundException, SQLException, ParseException{
 		
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance();
-		final Connection connection = new DBConnection().getConnection(propertiesInstance);
+		final Connection connection = new MetastockDBConnection().getConnection(propertiesInstance);
 		
 		StockDataSelect metastockDB = new StockDataSelect(connection);
 		
