@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import signals.CreareSignalsTable;
+import signals.CreateSignalsTable;
 import creator.ExecuteSQLStatment;
 
 public class CreateWilliamRSettingsTable {
@@ -14,7 +14,7 @@ public class CreateWilliamRSettingsTable {
 	private Connection connection;
 	
 	private static final String WILLIAMR_SETTINGS = 
-			"CREATE TABLE IF NOT EXISTS WILLIAMR_SETTINGS (settings_id int NOT NULL AUTO_INCREMENT, indicator_id real, period real);";
+			"CREATE TABLE IF NOT EXISTS WILLIAMR_SETTINGS (settings_id int NOT NULL AUTO_INCREMENT, indicator_id int, period real);";
 	
 	private static final String CREATE_UNIQUE_INDEX = 
 			"CREATE UNIQUE INDEX index ON WILLIAMR_SETTINGS(indicator_id, period);";
