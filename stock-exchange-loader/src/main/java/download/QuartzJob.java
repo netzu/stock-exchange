@@ -13,7 +13,7 @@ import org.quartz.JobExecutionException;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import creator.MetastockDBConnection;
+import connection.MetastockDBConnection;
 
 public class QuartzJob implements Job {
 

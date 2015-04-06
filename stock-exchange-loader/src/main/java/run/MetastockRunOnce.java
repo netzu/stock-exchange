@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import creator.MetastockDBConnection;
+import connection.MetastockDBConnection;
 import download.MetastockDataUnziper;
 import download.MetastockDataDownloader;
 

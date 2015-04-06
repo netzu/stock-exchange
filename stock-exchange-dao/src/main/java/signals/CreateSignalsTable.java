@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.h2.engine.Database;
 
-import creator.ExecuteSQLStatment;
+import connection.ExecuteSQLStatment;
 
 public class CreateSignalsTable {
 

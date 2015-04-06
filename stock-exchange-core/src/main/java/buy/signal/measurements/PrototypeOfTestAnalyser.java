@@ -21,7 +21,7 @@ import utils.histogram.FirstDayWithProfitsHistogram;
 import utils.histogram.HistogramItem;
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import creator.MetastockDBConnection;
+import connection.MetastockDBConnection;
 import data.collector.StockTickerHistory;
 
 public class PrototypeOfTestAnalyser {

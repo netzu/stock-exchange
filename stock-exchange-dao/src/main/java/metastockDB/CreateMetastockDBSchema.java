@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import creator.ExecuteSQLStatmentException;
-import creator.ExecuteSQLStatment;
+import connection.ExecuteSQLStatment;
+import connection.ExecuteSQLStatmentException;
 
 /*
  * Creates schema of DB with data from stock market

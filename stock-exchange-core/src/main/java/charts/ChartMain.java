@@ -2,6 +2,7 @@ package charts;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
+import connection.MetastockDBConnection;
 import data.collector.StockTickerHistory;
 import metastockDB.StockDataSelect;
 
@@ -17,8 +18,6 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RectangleInsets;
 import org.jfree.ui.RefineryUtilities;
-
-import creator.MetastockDBConnection;
 
 import java.awt.*;
 import java.sql.Connection;

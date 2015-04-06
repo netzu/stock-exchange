@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import connection.ExecuteSQLStatmentException;
 import utils.utilsForTest;
-import creator.ExecuteSQLStatmentException;
 
 public class CreateMetastockDBSchemaTest {
 	

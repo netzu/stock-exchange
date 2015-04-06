@@ -8,7 +8,7 @@ import java.text.ParseException;
 import org.apache.log4j.Logger;
 
 import configuration.StockExchangeProperties;
-import creator.MetastockDBConnection;
+import connection.MetastockDBConnection;
 import data.DataFileReader;
 import data.collector.StockTickerHistory;
 

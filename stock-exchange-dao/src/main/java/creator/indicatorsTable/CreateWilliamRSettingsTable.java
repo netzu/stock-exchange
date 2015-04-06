@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import connection.ExecuteSQLStatment;
 import signals.CreateSignalsTable;
-import creator.ExecuteSQLStatment;
 
 public class CreateWilliamRSettingsTable {
 	

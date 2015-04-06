@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import creator.ExecuteSQLStatment;
+import connection.ExecuteSQLStatment;
 
 public class CreateSimpleMovingAvaregeSettingsTable {
 	

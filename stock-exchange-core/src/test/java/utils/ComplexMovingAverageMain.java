@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import configuration.ApplicationContext;
 import configuration.StockExchangeProperties;
-import creator.MetastockDBConnection;
+import connection.MetastockDBConnection;
 import data.collector.StockTickerHistory;
 
 public class ComplexMovingAverageMain {

@@ -1,4 +1,4 @@
-package creator;
+package connection;
 
 public class ExecuteSQLStatmentException extends RuntimeException {
 
