@@ -24,5 +24,4 @@ public class ExecuteSQLStatment {
 			throw new ExecuteSQLStatmentException("could not execute statment");
 		}
     }
-
 }

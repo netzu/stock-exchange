@@ -6,7 +6,8 @@ import java.util.Properties;
 public class StockExchangeProperties {
 
 	private static final String DRIVER = "db_connection.driver";
-	private static final String URL = "db_connection.url";
+	private static final String URL_PATH = "db_connection.url_path";
+	private static final String URL_DRIVER = "db_connection_url_driver";
 	private static final String USER = "db_connection.user";
 	private static final String PASSWORD = "db_connection.password";
 	private static final String PATH_TO_METASTOCK_DB = "db_connection.path";
@@ -57,8 +58,12 @@ public class StockExchangeProperties {
 		return this.properties.getProperty(DRIVER);
 	}
 
-	public String getDBUrl() {
-		return this.properties.getProperty(URL);
+	public String getDBUrlPath() {
+		return this.properties.getProperty(URL_PATH);
+	}
+	
+	public String getDBUrlDriver() {
+		return this.properties.getProperty(URL_DRIVER);
 	}
 
 	public String getDBUser() {

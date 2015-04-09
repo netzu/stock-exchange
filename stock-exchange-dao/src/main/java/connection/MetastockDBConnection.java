@@ -11,7 +11,7 @@ public class MetastockDBConnection {
 	public Connection getConnection(StockExchangeProperties properites) {		
 		try {  
             Class.forName(properites.getDBDriver());  
-            Connection connection = DriverManager.getConnection(properites.getDBUrl(), properites.getDBUser(), properites.getDBPassword());  
+            Connection connection = DriverManager.getConnection(properites.getDBUrlDriver().toString() + properites.getDBUrlPath().toString(), properites.getDBUser(), properites.getDBPassword());  
             LOGGER.info("Connecting to MetastockDB");
             return connection;
             } 
