@@ -15,7 +15,7 @@ public class ExecuteSQLStatment {
     	
 		try {
 			PreparedStatement statement = connection.prepareStatement(statementToExecute);
-			statement.executeUpdate();
+			statement.execute();
 			statement.close();
 			
 			log.trace("statment: " + statementToExecute + " has been executed properly");
