@@ -23,7 +23,7 @@ public class ExecuteSQLStatmentTest{
 		try{
 			Class.forName("org.h2.Driver");  
 			connection = DriverManager.getConnection("jdbc:h2:" + PATH + "TestDatabase", "sa", "");			
-			
+			ExecuteSQLStatment.execute(connection, STATEMENT_TO_EXECUTE);
 				
 			assertTrue(connection.isValid(0));
 			assertTrue(connection.getMetaData().getURL().equals("jdbc:h2:" + PATH + "TestDatabase"));
