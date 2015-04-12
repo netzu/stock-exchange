@@ -1,4 +1,4 @@
-package connection.MetastockDBConnectionTest;
+package connectionTest;
 
 import org.junit.Test;
 

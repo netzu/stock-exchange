@@ -1,14 +1,13 @@
 package connection;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
-import org.hamcrest.Condition.Step;
 import org.junit.Test;
 
 public class ExecuteSQLStatmentTest{
