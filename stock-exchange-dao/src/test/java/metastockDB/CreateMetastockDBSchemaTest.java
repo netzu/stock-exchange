@@ -1,8 +1,10 @@
 package metastockDB;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import connection.ExecuteSQLStatmentException;
+import org.junit.Ignore;
+import org.junit.Test;
+import utils.TestUtils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
-import connection.ExecuteSQLStatmentException;
-import utils.utilsForTest;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class CreateMetastockDBSchemaTest {
 	
@@ -51,9 +50,9 @@ public class CreateMetastockDBSchemaTest {
 		connection.close();
 		
 	
-		utilsForTest utils = new utilsForTest();
-		//utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.h2.db");
-		//utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.trace.db");
+		TestUtils utils = new TestUtils();
+		//utils.removeFilesCleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.h2.db");
+		//utils.removeFilesCleanUp(PATH + "CreateMetastockDBSchemaTest\\", "notExistingTable.trace.db");
 	}
 	
 	@Test 
@@ -73,9 +72,9 @@ public class CreateMetastockDBSchemaTest {
 		} catch (ExecuteSQLStatmentException e) {
 			assertEquals(expectedError, e.getMessage());
 		}finally{
-			utilsForTest utils = new utilsForTest();
-			utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.h2.db");
-			utils.removeFiles_CleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.trace.db");
+			TestUtils utils = new TestUtils();
+			utils.removeFilesCleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.h2.db");
+			utils.removeFilesCleanUp(PATH + "CreateMetastockDBSchemaTest\\", "exceptionsTesting.trace.db");
 		}				
 	}
 }

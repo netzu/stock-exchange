@@ -1,8 +1,12 @@
 package metastockDB;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import configuration.ApplicationContext;
+import configuration.StockExchangeProperties;
+import data.collector.StockTickerHistory;
+import org.junit.Ignore;
+import org.junit.Test;
+import utils.MockForCommonsTest;
+import utils.TestUtils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,14 +14,10 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
-import utils.MockForCommonsTest;
-import utils.utilsForTest;
-import configuration.ApplicationContext;
-import configuration.StockExchangeProperties;
-import data.collector.StockTickerHistory;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static paths.ResourcesUtils.getResourcePath;
 
 public class MetastockDBUpdaterTest {
 	
@@ -28,13 +28,12 @@ public class MetastockDBUpdaterTest {
     @Ignore("This is integration test")
 	public void refresh() throws ClassNotFoundException, SQLException, ParseException{
 		
-		utilsForTest utils = new utilsForTest();
 		StockTickerHistory expectedTickerCollection = mock.readStockTickerHistory("MetastockDBUpdaterTest/MetastockDBUpdaterTest/LENA.mst");
 		
-		final String propertiesPath = utils.getResourcePath("MetastockDBUpdaterTest/MetastockDBUpdaterTest/StockExchange.properties");
+		final String propertiesPath = getResourcePath("MetastockDBUpdaterTest/MetastockDBUpdaterTest/StockExchange.properties");
 		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance(propertiesPath);
 		MetastockDBUpdater updater = new MetastockDBUpdater(propertiesInstance);
-		String dbRootPath = utils.getResourcePath("MetastockDBUpdaterTest/MetastockDBUpdaterTest");
+		String dbRootPath = getResourcePath("MetastockDBUpdaterTest/MetastockDBUpdaterTest");
 		Class.forName("org.h2.Driver");  
 		Connection connection = DriverManager.getConnection("jdbc:h2:" + dbRootPath + "MetastockDBUpdaterTest_refresh", "sa", "");
 		
@@ -57,8 +56,9 @@ public class MetastockDBUpdaterTest {
 		} catch (ParseException e) {
 			fail("Exception when not expected");
 		}finally{
-			connection.close();			
-			utils.removeFiles_CleanUp(PATH, "MetastockDBUpdaterTest_refresh.h2.db");
+			connection.close();
+            final TestUtils utils = new TestUtils();
+			utils.removeFilesCleanUp(PATH, "MetastockDBUpdaterTest_refresh.h2.db");
 		}
 	}
 }

@@ -5,18 +5,16 @@ import java.util.Properties;
 
 public class StockExchangeProperties {
 
-	private static final String DRIVER = "db_connection.driver";
-	private static final String URL_PATH = "db_connection.url_path";
-	private static final String URL_DRIVER = "db_connection_url_driver";
-	private static final String USER = "db_connection.user";
-	private static final String PASSWORD = "db_connection.password";
-	private static final String PATH_TO_METASTOCK_DB = "db_connection.path";
-	private static final String NAME_FOR_METASTOCK_DB = "db_connection.name";
-	private static final String STORAGE = "file.central_storage_of_files";
-	private static final String LINK_TO_METASTOCK_DATA = "metastock.link";
-	private static final String DIR_FOR_METASTOCK_ZIPPED = "metastock.download_dir";
-	private static final String METASTOCK_FILE_NAME = "metastock.file_name";
-	private static final String METASTOCK_UNZIP_DIR = "metastock.dir_unzipped_files";
+    protected static final String DRIVER = "db_connection.driver";
+    protected static final String URL_PATH = "db_connection.url";
+    protected static final String URL_DRIVER = "db_connection.driver";
+    protected static final String USER = "db_connection.user";
+    protected static final String PASSWORD = "db_connection.password";
+	protected static final String STORAGE = "file.central_storage_of_files";
+    protected static final String LINK_TO_METASTOCK_DATA = "metastock.link";
+    protected static final String DIR_FOR_METASTOCK_ZIPPED = "metastock.download_dir";
+    protected static final String METASTOCK_FILE_NAME = "metastock.file_name";
+    protected static final String METASTOCK_UNZIP_DIR = "metastock.dir_unzipped_files";
 
 	private final Properties properties;
 
@@ -30,13 +28,10 @@ public class StockExchangeProperties {
 		}
 	}
 
-	public String getNameForMEtastockDB() {
-		return this.properties.getProperty(NAME_FOR_METASTOCK_DB);
-	}
+    public StockExchangeProperties(final Properties properties) {
+        this.properties = properties;
+    }
 
-	public String getPathToMetastockDB() {
-		return this.properties.getProperty(PATH_TO_METASTOCK_DB);
-	}
 
 	public String getMetastockUnzipDir() {
 		return this.properties.getProperty(METASTOCK_UNZIP_DIR);
@@ -79,4 +74,8 @@ public class StockExchangeProperties {
 
 		return storageLocation;
 	}
+
+    protected Properties getProperties() {
+        return this.properties;
+    }
 }

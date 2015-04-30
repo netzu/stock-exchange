@@ -1,31 +1,25 @@
 package metastockDB;
 
-import static org.junit.Assert.*;
+import configuration.StockExchangeProperties;
+import configuration.TestApplicationContext;
+import org.junit.Test;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import metastockDB.MetastockFilesCollection;
-
-import org.junit.Ignore;
-import org.junit.Test;
-
-import utils.utilsForTest;
-import configuration.ApplicationContext;
-import configuration.StockExchangeProperties;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static paths.ResourcesUtils.getResourcePath;
 
 public class MetastockFilesCollectionTest {
 
 	@Test
-    //@Ignore("This is integration test")
 	public void getListOfFilesMSTOnly(){
-		
-		utilsForTest utils = new utilsForTest();
-		
-		final String propertiesPath = utils.getResourcePath("metastockDB/MetastockFilesColectionTest/getListOfFilesMSTOnly/StockExchange.properties");
-		StockExchangeProperties propertiesInstance = ApplicationContext.getPropertiesInstance(propertiesPath);
+
+        final String propertiesPath =
+            getResourcePath("metastockDB/MetastockFilesColectionTest/getListOfFilesMSTOnly/StockExchange.properties");
+		StockExchangeProperties propertiesInstance = TestApplicationContext.getTestPropertiesInstance(propertiesPath);
 		
 		MetastockFilesCollection filesCollection = new MetastockFilesCollection(propertiesInstance);
 				
