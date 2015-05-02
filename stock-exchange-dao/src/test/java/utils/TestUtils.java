@@ -1,21 +1,15 @@
 package utils;
 
-import configuration.StockExchangeProperties;
-
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import configuration.StockExchangeProperties;
+
 public class TestUtils {
-
-
-
+	
     public StockExchangeProperties expandPaths(final StockExchangeProperties input) {
-        
-        
-        
         return null;
     }
 	

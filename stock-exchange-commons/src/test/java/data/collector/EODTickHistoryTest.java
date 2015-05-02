@@ -1,22 +1,21 @@
 package data.collector;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 import utils.MockForCommonsTest;
+import configuration.Share;
 
 public class EODTickHistoryTest {
 	
 	MockForCommonsTest mock = new MockForCommonsTest();
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 	
 	@Test
 	public void setStockTickerDataListTest() throws ParseException{
@@ -57,7 +56,7 @@ public class EODTickHistoryTest {
 	public void findStockByDateEmptyTicker(){
 		
 		StockTickerHistory tickerCollection = new StockTickerHistory();
-		DateTime date = dateFormater.parseDateTime(("20120319"));
+		DateTime date = Share.COMMON_FORMATTER.parseDateTime(("20120319"));
 		
 		try{
 			tickerCollection.findStockByDate(date);
@@ -88,7 +87,7 @@ public class EODTickHistoryTest {
 		
 		StockTickerHistory tickerCollection = new StockTickerHistory();
 		tickerCollection.setEODTickDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getEODTickDataList());
-		DateTime date = dateFormater.parseDateTime(("20100417"));
+		DateTime date = Share.COMMON_FORMATTER.parseDateTime(("20100417"));
 		
 		try{
 			tickerCollection.findStockByDate(date);
@@ -103,7 +102,7 @@ public class EODTickHistoryTest {
 	public void findStockByDateFound() throws ParseException{
 		StockTickerHistory tickerCollection = new StockTickerHistory();
 		tickerCollection.setEODTickDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getEODTickDataList());
-		DateTime date = dateFormater.parseDateTime(("20100412"));
+		DateTime date = Share.COMMON_FORMATTER.parseDateTime(("20100412"));
 		
 		EODTick currentResult = tickerCollection.findStockByDate(date);
 		
@@ -119,7 +118,7 @@ public class EODTickHistoryTest {
 	@Test
 	public void findStockIndexByDateTickerEmpty(){
 		StockTickerHistory tickerCollection = new StockTickerHistory();
-		DateTime date = dateFormater.parseDateTime(("20120319"));
+		DateTime date = Share.COMMON_FORMATTER.parseDateTime(("20120319"));
 		
 		try{
 			tickerCollection.findStockIndexByDate(date);
@@ -164,7 +163,7 @@ public class EODTickHistoryTest {
 	public void findStockIndexByDateNotFound() throws ParseException{
 		StockTickerHistory tickerCollection = new StockTickerHistory();
 		tickerCollection.setEODTickDataList(mock.readStockTickerHistory("data/collector/tickerHistory/findStockByDateNotFound").getEODTickDataList());
-		DateTime date = dateFormater.parseDateTime(("20120317"));
+		DateTime date = Share.COMMON_FORMATTER.parseDateTime(("20120317"));
 		
 		try{
 			tickerCollection.findStockIndexByDate(date);

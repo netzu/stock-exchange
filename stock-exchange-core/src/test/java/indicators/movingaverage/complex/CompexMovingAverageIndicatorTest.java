@@ -1,23 +1,19 @@
 package indicators.movingaverage.complex;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 import indicators.movingaverage.simple.SimpleMovingAverageData;
+import indicators.williamsr.TestBeans;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 import data.collector.StockTickerHistory;
-import utils.CompareSimpleMovingAverageLists;
-import indicators.williamsr.TestBeans;
 
 public class CompexMovingAverageIndicatorTest {
 	
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
 	final static String PATH = new String("indicators/complexMovingAverage/");	
 	TestBeans mock = new TestBeans();
 

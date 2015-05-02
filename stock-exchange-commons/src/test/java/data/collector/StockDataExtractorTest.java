@@ -1,6 +1,6 @@
 package data.collector;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -17,7 +15,6 @@ import utils.MockForCommonsTest;
 
 public class StockDataExtractorTest {
 	MockForCommonsTest mock = new MockForCommonsTest();
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 	
 	@Test
 	public void extractFromQueryResultsRTest() throws SQLException, ParseException{

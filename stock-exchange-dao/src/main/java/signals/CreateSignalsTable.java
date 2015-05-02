@@ -12,7 +12,7 @@ import connection.ExecuteSQLStatment;
 public class CreateSignalsTable {
 
 		private static final String SIGNALS = 
-				"CREATE TABLE IF NOT EXISTS SIGNALS (id int NOT NULL AUTO_INCREMENT, settings_id real, ticker_id real, buy_sell BOOLEAN , timestamp TIMESTAMP);";
+				"CREATE TABLE IF NOT EXISTS SIGNALS (id int NOT NULL AUTO_INCREMENT, settings_id int, ticker_id int, signal_date DATE, buy_sell BOOLEAN , timestamp TIMESTAMP);";
 		
 		private Connection connection;
 		

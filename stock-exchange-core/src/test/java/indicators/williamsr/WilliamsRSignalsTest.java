@@ -1,11 +1,10 @@
 package indicators.williamsr;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import indicators.Signal;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,18 +12,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.junit.Test;
+
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+
+import configuration.Share;
 import data.collector.StockTickerHistory;
-import indicators.Signal;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.junit.Test;
 
 public class WilliamsRSignalsTest {
 	
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
 	final static String PATH = new String("indicators/williams/signals/");	
 	TestBeans mock = new TestBeans();
 	
@@ -69,7 +67,7 @@ public class WilliamsRSignalsTest {
 
 			WilliamsRData williamsRData = new WilliamsRData();
 			williamsRData.setWilliamsR(Double.parseDouble(splitData[1]));
-			final DateTime date = dateFormater.parseDateTime(splitData[0]);
+			final DateTime date = Share.COMMON_FORMATTER.parseDateTime(splitData[0]);
 			williamsRData.setDate(date);
 
 			result.add(williamsRData);

@@ -1,19 +1,17 @@
 package data.collector;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 import utils.MockForCommonsTest;
+import configuration.Share;
 
 public class EODTickTest {
 
 	MockForCommonsTest mock = new MockForCommonsTest();
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
 	
 	@Test
 	public void equalsDifferentHigh() throws IOException{
@@ -88,8 +86,8 @@ public class EODTickTest {
 		EODTick secondTicker = mock.readStockTicker("data/collector/equals/equalsDifferentDates_SecondTicker");
 		
 		assertTrue("Two objects are equal, expected dates being diffrnet", !fistTicker.equals(secondTicker));
-		assertTrue("Date form first ticker diffrent than expected", fistTicker.getDate().equals(dateFormater.parseDateTime(("20120319"))));
-		assertTrue("Date value form second ticker diffrent than expected", secondTicker.getDate().equals(dateFormater.parseDateTime(("20120320"))));
+		assertTrue("Date form first ticker diffrent than expected", fistTicker.getDate().equals(Share.COMMON_FORMATTER.parseDateTime(("20120319"))));
+		assertTrue("Date value form second ticker diffrent than expected", secondTicker.getDate().equals(Share.COMMON_FORMATTER.parseDateTime(("20120320"))));
 	}
 	
 	@Test

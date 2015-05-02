@@ -1,6 +1,5 @@
 package connectionTest;
 
-import org.junit.Test;
 
 public class MetastockDBConnectionTest {
 

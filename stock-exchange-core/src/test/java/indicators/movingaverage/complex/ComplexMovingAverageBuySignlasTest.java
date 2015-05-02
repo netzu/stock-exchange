@@ -3,12 +3,14 @@ package indicators.movingaverage.complex;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.when;
+import indicators.DateTimeFromSignal;
+import indicators.Signal;
+import indicators.movingaverage.simple.MovingAverageSignalsGenerator;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
-import indicators.movingaverage.simple.MovingAverageSignalsGenerator;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,8 +22,6 @@ import com.google.common.collect.Lists;
 
 import configuration.Share;
 import data.collector.StockTickerHistory;
-import indicators.DateTimeFromSignal;
-import indicators.Signal;
 
 public class ComplexMovingAverageBuySignlasTest {
 

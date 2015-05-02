@@ -5,12 +5,8 @@ import indicators.movingaverage.simple.SimpleMovingAverageData;
 import java.util.List;
 
 import org.apache.commons.math3.util.Precision;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 public class CompareSimpleMovingAverageLists {
-	
-	static DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
 	
 	public static boolean compare(List<SimpleMovingAverageData> expectedResults, List<SimpleMovingAverageData> currentResults) {
 		try{

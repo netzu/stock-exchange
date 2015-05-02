@@ -4,9 +4,6 @@ package indicators.movingaverage.complex;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.when;
-
-import com.google.common.collect.Lists;
-import configuration.Share;
 import indicators.DateTimeFromSignal;
 import indicators.Signal;
 import indicators.movingaverage.simple.MovingAverageSignalsGenerator;
@@ -21,6 +18,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import com.google.common.collect.Lists;
+
+import configuration.Share;
 import data.collector.StockTickerHistory;
 
 public class ComplexMovingAverageSellSignlasTest {

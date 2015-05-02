@@ -1,20 +1,14 @@
 package indicators.movingaverage.complex;
 
-import static org.junit.Assert.*;
-import indicators.movingaverage.simple.SimpleMovingAverageData;
+import indicators.williamsr.TestBeans;
 
 import java.io.IOException;
-import java.util.List;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import indicators.williamsr.TestBeans;
-
 public class ComplexMovingAverageSettingsTest {
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");	
+
 	final static String PATH = new String("indicators/complexMovingAverage/");	
 	TestBeans mock = new TestBeans();
 	

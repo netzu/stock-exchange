@@ -1,31 +1,30 @@
 package indicators.movingaverage.simple;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import com.google.common.collect.Lists;
-import data.collector.StockTickerHistory;
-
 import indicators.DateTimeFromSignal;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.junit.Test;
-
 import indicators.williamsr.TestBeans;
 
-import java.io.*;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+
+import org.joda.time.DateTime;
+import org.junit.Test;
+
+import com.google.common.collect.Lists;
+
+import configuration.Share;
+import data.collector.StockTickerHistory;
 
 /**
  * Test class for SimpleMovingAverageSignals functionality.
  */
 public class MovingAverageSignalsGeneratorTest {
 
-
-	DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
     private static final int period = 5;
 	
 	final static String PATH_FLAT = "indicators/simpleMovingAverage/flatAverage/";
@@ -204,7 +203,7 @@ public class MovingAverageSignalsGeneratorTest {
        List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
        List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
 
-       DateTime dt = dateFormater.parseDateTime("20100409");
+       DateTime dt = Share.COMMON_FORMATTER.parseDateTime("20100409");
        
        assertFalse(buySignal.isEmpty());       
        assertEquals(1, buySignal.size());
@@ -269,7 +268,7 @@ public class MovingAverageSignalsGeneratorTest {
 
        assertTrue(buySignal.isEmpty());
       
-       DateTime dt = dateFormater.parseDateTime("20100419");       
+       DateTime dt = Share.COMMON_FORMATTER.parseDateTime("20100419");       
        assertFalse(sellSignal.isEmpty());       
        assertEquals(1, sellSignal.size());
        assertTrue(sellSignal.contains(dt));
@@ -458,7 +457,7 @@ public class MovingAverageSignalsGeneratorTest {
        List<DateTime> sellSignal = Lists.transform(signals.sellSignals(history), new DateTimeFromSignal());
        List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
 
-       DateTime dt = dateFormater.parseDateTime("20100409");
+       DateTime dt = Share.COMMON_FORMATTER.parseDateTime("20100409");
        assertFalse(buySignal.isEmpty()); 
        assertEquals(1, buySignal.size());
        assertTrue(buySignal.contains(dt));
@@ -735,7 +734,7 @@ public class MovingAverageSignalsGeneratorTest {
 
        assertTrue(buySignal.isEmpty());
       
-       DateTime dt = dateFormater.parseDateTime("20100419");
+       DateTime dt = Share.COMMON_FORMATTER.parseDateTime("20100419");
        assertFalse(sellSignal.isEmpty()); 
        assertEquals(1, sellSignal.size());
        assertTrue(sellSignal.contains(dt));
@@ -766,7 +765,7 @@ public class MovingAverageSignalsGeneratorTest {
        MovingAverageSignalsGenerator signals = new MovingAverageSignalsGenerator(period, prepareIndicator(history, averageData, period));
        List<DateTime> buySignal = Lists.transform(signals.buySignals(history), new DateTimeFromSignal());
 
-       DateTime dt = dateFormater.parseDateTime("20100419");
+       DateTime dt = Share.COMMON_FORMATTER.parseDateTime("20100419");
        assertEquals(1, buySignal.size());
        assertTrue(buySignal.contains(dt));
       

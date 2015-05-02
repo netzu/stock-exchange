@@ -14,6 +14,8 @@ import connection.ExecuteSQLStatmentException;
  */
 public class CreateMetastockDBSchema {
 	
+	private static org.apache.log4j.Logger LOG = Logger.getLogger(CreateMetastockDBSchema.class);
+	
 	private static final String CREATE_METASTOCK_TABLE = 
 			"CREATE TABLE IF NOT EXISTS Daily_Stock_Info(ticker CHAR(40), date DATE, open real, high real, low real, close real, volumen real);";
 	
@@ -21,8 +23,6 @@ public class CreateMetastockDBSchema {
 			"CREATE UNIQUE INDEX IF NOT EXISTS stock_id ON Daily_Stock_Info (ticker, date);";
 			 	
 	private Connection connection;
-
-    private static org.apache.log4j.Logger log = Logger.getLogger(CreateMetastockDBSchema.class);
 
     public CreateMetastockDBSchema(final Connection connection) throws ClassNotFoundException, SQLException {
         this.connection = connection;

@@ -1,27 +1,25 @@
 package indicators.williamsr;
 
-import com.google.common.collect.Lists;
-import configuration.Share;
-import data.collector.StockTickerHistory;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import org.junit.Test;
-import utils.FileDataReader;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
+import org.joda.time.DateTime;
+import org.junit.Test;
+
+import utils.FileDataReader;
+
+import com.google.common.collect.Lists;
+
+import configuration.Share;
+import data.collector.StockTickerHistory;
 
 public class SimpleAverageBuySignalGeneratorTest extends TestBeans {
 
-    DateTimeFormatter dateFormater = DateTimeFormat.forPattern("yyyyMMdd");
     final static String PATH = new String("indicators/williams/buySignal/");
 
     @Test
@@ -43,7 +41,7 @@ public class SimpleAverageBuySignalGeneratorTest extends TestBeans {
         String expectedErrorMessage = "Cannot generate buy signal for williams R collection which has less than 2 elements";
 
         WilliamsRData data = new WilliamsRData();
-        data.setDate(dateFormater.parseDateTime("20100108"));
+        data.setDate(Share.COMMON_FORMATTER.parseDateTime("20100108"));
         data.setWilliamsR(20.1);
 
         List<WilliamsRData> williamsRCollection = new ArrayList<WilliamsRData>();
