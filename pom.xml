@@ -6,6 +6,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	 <properties>
+        <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
+        <jacoco-maven-plugin.version>0.7.4.201502262128</jacoco-maven-plugin.version>
+    </properties>
+	
 	<repositories>
 		<repository>
 			<id>repo1</id>
@@ -16,6 +21,20 @@
 
 	<build>
 		<plugins>
+		<plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <destFile>${sonar.jacoco.reportPath}</destFile>
+                </configuration>
+        </plugin>
 		
 		<plugin>
 			<artifactId>maven-compiler-plugin</artifactId>
@@ -32,50 +51,7 @@
 			<artifactId>sonar-maven-plugin</artifactId>
 			<version>2.6</version>
 		</plugin>
-		
-		<!-- JUNIT TESTS -->
-		<plugin>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-surefire-plugin</artifactId>
-		    <version>2.7.2</version>
-		<configuration>
-			<argLine>-javaagent:${sonar.jacoco.jar}=destfile=${sonar.jacoco.reportPath},includes=com.*</argLine>
-			<includes>
-				<include>**/*.class</include>
-			</includes>
-			<excludedGroups>com.test.annotation.type.IntegrationTest</excludedGroups>
-		</configuration>
-		</plugin>
-		
-		<!-- INTEGRATION TESTS -->
-		<plugin>
-			<artifactId>maven-failsafe-plugin</artifactId>
-			<version>2.12</version>
-			<dependencies>
-				<dependency>
-					<groupId>org.apache.maven.surefire</groupId>
-					<artifactId>surefire-junit47</artifactId>
-					<version>2.12</version>
-				</dependency>
-			</dependencies>
-			<configuration>
-				<groups>com.test.annotation.type.IntegrationTest</groups>
-			</configuration>
-			<executions>
-				<execution>
-					<goals>
-						<goal>integration-test</goal>
-					</goals>
-					<configuration>
-						<argLine>-javaagent:${sonar.jacoco.jar}=destfile=${sonar.jacoco.itReportPath},includes=com.*</argLine>
-						<includes>
-							<include>**/*.class</include>
-						</includes>
-					</configuration>
-				</execution>
-			</executions>
-		</plugin>
-		
+				
 		<plugin>
 		    <groupId>org.pitest</groupId>
 		    <artifactId>pitest-maven</artifactId>
