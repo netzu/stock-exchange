@@ -6,3 +6,5 @@ loaderINFOLogger.log
 target/
 sonar-project.properties.txt
 *.log
+*.iml
+.idea/
