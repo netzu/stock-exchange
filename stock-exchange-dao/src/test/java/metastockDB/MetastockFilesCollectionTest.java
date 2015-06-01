@@ -1,28 +1,28 @@
 package metastockDB;
 
-import configuration.StockExchangeProperties;
-import configuration.TestApplicationContext;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static paths.ResourcesUtils.getResourcePath;
+import org.junit.Test;
+
+import configuration.StockExchangeProperties;
+import configuration.TestApplicationContext;
 
 public class MetastockFilesCollectionTest {
 
 	@Test
 	public void getListOfFilesMSTOnly(){
 
-        final String propertiesPath =
-            getResourcePath("metastockDB/MetastockFilesColectionTest/getListOfFilesMSTOnly/StockExchange.properties");
-		StockExchangeProperties propertiesInstance = TestApplicationContext.getTestPropertiesInstance(propertiesPath);
+        StockExchangeProperties propertiesInstance =
+            TestApplicationContext
+                .getTestPropertiesInstance("metastockDB/MetastockFilesColectionTest/getListOfFilesMSTOnly/StockExchange.properties");
+
+        MetastockFilesCollection filesCollection = new MetastockFilesCollection(propertiesInstance);
 		
-		MetastockFilesCollection filesCollection = new MetastockFilesCollection(propertiesInstance);
-				
 		List<String> expectedFilesToBeFound = new ArrayList<String>();
 		expectedFilesToBeFound.add("ADB0415.mst");
 		expectedFilesToBeFound.add("AMBRA.mst");

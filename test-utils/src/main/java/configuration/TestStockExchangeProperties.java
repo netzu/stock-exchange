@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import static paths.ResourcesUtils.getResourcePath;
@@ -67,7 +68,11 @@ public class TestStockExchangeProperties extends StockExchangeProperties {
         final String databaseFullPath = getResourcePath(pathToExpand);
         final Joiner joiner = Joiner.on(":").skipNulls();
 
-        return joiner.join(Iterables.limit(Lists.newArrayList(splitResult), splitResult.length - 1), databaseFullPath);
+        ArrayList<String> strings = Lists.newArrayList(Iterables.limit(Lists.newArrayList(splitResult), splitResult.length - 1));
+        strings.add(databaseFullPath);
+
+
+        return joiner.join(strings);
     }
 
 

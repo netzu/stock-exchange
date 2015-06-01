@@ -116,6 +116,7 @@
 		<module>stock-exchange-loader</module>
     <module>stock-exchange-commons</module>
     <module>test-utils</module>
+    <module>stock-exchange-db</module>
   </modules>
 
 
