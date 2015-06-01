@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
+//TODO wyjebac stad tego sztywnego patha
 public class CreateMetastockDBSchemaTest {
 	
 	private static final String PATH = "D:\\Workspace\\stock-exchange\\stock-exchange-dao\\src\\test\\resources\\metastockDB\\";
